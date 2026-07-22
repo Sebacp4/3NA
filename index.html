@@ -1255,9 +1255,8 @@
       @media (max-width: 991px) {
         html,
         body {
-          margin: 0 !important;
-          padding: 0 !important;
           background: #07090A !important;
+          background-color: #07090A !important;
         }
 
         #main-nav {
@@ -1267,42 +1266,35 @@
           right: 0 !important;
 
           width: 100% !important;
-          min-height: calc(74px + env(safe-area-inset-top)) !important;
 
           padding-top: calc(12px + env(safe-area-inset-top)) !important;
           padding-right: 24px !important;
           padding-bottom: 12px !important;
           padding-left: 24px !important;
-
           margin: 0 !important;
 
           background: #07090A !important;
+          background-color: #07090A !important;
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
 
           border-bottom: 1px solid var(--border-s) !important;
           z-index: 10000 !important;
-
           box-sizing: border-box !important;
         }
 
+        /* Block anything from showing above the header during overscroll / rubber-banding */
         #main-nav::before {
           content: "";
           position: absolute;
-          top: calc(-1 * env(safe-area-inset-top));
+          bottom: 100%;
           left: 0;
           right: 0;
-          height: env(safe-area-inset-top);
-          background: #07090A;
+          height: 100vh;
+          background: #07090A !important;
+          background-color: #07090A !important;
           pointer-events: none;
         }
-
-        #mobile-menu {
-          z-index: 9999 !important;
-        }
-
-        
-        
       }
     </style>
   </head>
