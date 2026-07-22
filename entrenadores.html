@@ -90,7 +90,7 @@ setPaused(event.data.paused);
 })();
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Entrenadores | 3NA Fitness Studio</title>
 <meta name="description" content="Conoce a los entrenadores de 3NA Fitness Studio en San Juan, explora sus especialidades, disponibilidad y solicita orientación para comenzar tu proceso.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1632,8 +1632,84 @@ min-height: 0 !important;
 .modal-close iconify-icon { font-size: 24px; pointer-events: none; }
 }
 </style>
-<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
+<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
+<style id="all-fonts-style-font-bricolage">
 .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+</style>
+<style id="mobile-header-fix">
+html,
+body {
+width: 100%;
+min-height: 100%;
+margin: 0 !important;
+padding: 0 !important;
+background: #07090A;
+}
+body {
+min-height: 100dvh;
+}
+@media (max-width: 991px) {
+#main-nav {
+position: fixed !important;
+top: 0 !important;
+left: 0 !important;
+right: 0 !important;
+width: 100% !important;
+margin: 0 !important;
+padding-top: max(10px, env(safe-area-inset-top)) !important;
+padding-right: 24px !important;
+padding-bottom: 10px !important;
+padding-left: 24px !important;
+background: rgba(7, 9, 10, 0.96) !important;
+z-index: 1000 !important;
+}
+#mobile-menu {
+top: var(--mobile-nav-height, 110px) !important;
+max-height: calc(100dvh - var(--mobile-nav-height, 110px)) !important;
+}
+}
+</style>
+<style id="mobile-menu-animation-fix">
+.mobile-menu {
+display: flex !important;
+position: fixed;
+top: var(--mobile-nav-height, 110px);
+left: 0;
+right: 0;
+z-index: 999;
+flex-direction: column;
+gap: 4px;
+padding: 24px 24px 32px;
+background: rgba(7, 9, 10, 0.97);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid var(--border-s);
+opacity: 0;
+visibility: hidden;
+pointer-events: none;
+transform: translateY(-16px);
+transform-origin: top center;
+transition: opacity 0.3s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.38s;
+max-height: calc(100dvh - var(--mobile-nav-height, 110px));
+overflow-y: auto;
+overscroll-behavior: contain;
+will-change: transform, opacity;
+}
+.mobile-menu.open {
+opacity: 1;
+visibility: visible;
+pointer-events: auto;
+transform: translateY(0);
+transition: opacity 0.3s ease, transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0s;
+}
+.mobile-menu a:hover, .mobile-menu a.nav-active {
+color: var(--text);
+}
+@media (min-width: 992px) {
+.mobile-menu {
+display: none !important;
+}
+}
 </style></head>
   <body class="">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
@@ -1644,11 +1720,19 @@ min-height: 0 !important;
 
       <div class="nav-links">
         <a href="index.html" data-i18n="nav.home" class="">Inicio</a>
-        <a href="sobre-nosotros.html" data-i18n="nav.about" class="">Sobre nosotros</a>
-        <a href="entrenadores.html" data-i18n="nav.trainers" class="nav-active">Entrenadores</a>
-        <a href="index.html#experiencia" data-i18n="nav.experience" class="">Experiencia</a>
+        <a href="sobre-nosotros.html" data-i18n="nav.about" class="">
+          Sobre nosotros
+        </a>
+        <a href="entrenadores.html" data-i18n="nav.trainers" class="nav-active">
+          Entrenadores
+        </a>
+        <a href="index.html#experiencia" data-i18n="nav.experience" class="">
+          Experiencia
+        </a>
         <a href="galeria.html" data-i18n="nav.gallery" class="">Galería</a>
-        <a href="index.html#membresias" data-i18n="nav.memberships" class="">Membresías</a>
+        <a href="index.html#membresias" data-i18n="nav.memberships" class="">
+          Membresías
+        </a>
       </div>
 
       <div class="nav-cta">
@@ -1658,10 +1742,12 @@ min-height: 0 !important;
           </button>
           <button type="button" class="lang-btn" data-lang="en">EN</button>
         </div>
-        <a href="index.html#cta" class="btn-nav" data-i18n="nav.contact">Contactar</a>
+        <a href="index.html#cta" class="btn-nav" data-i18n="nav.contact">
+          Contactar
+        </a>
       </div>
 
-      <button type="button" class="hamburger" id="hamburger" data-i18n-aria-label="nav.menuAria" aria-label="Abrir menú">
+      <button type="button" class="hamburger" id="hamburger" data-i18n-aria-label="nav.menuAria" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -1669,14 +1755,26 @@ min-height: 0 !important;
     </nav>
 
     <!-- Mobile menu -->
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="index.html#inicio" class="mobile-link" data-i18n="nav.home">Inicio</a>
-      <a href="index.html#estudio" class="mobile-link" data-i18n="nav.about">Sobre nosotros</a>
-      <a href="entrenadores.html" class="mobile-link nav-active" data-i18n="nav.trainers">Entrenadores</a>
-      <a href="index.html#experiencia" class="mobile-link" data-i18n="nav.experience">Experiencia</a>
-      <a href="index.html#galeria" class="mobile-link" data-i18n="nav.gallery">Galería</a>
-      <a href="index.html#membresias" class="mobile-link" data-i18n="nav.memberships">Membresías</a>
-      <a href="index.html#cta" class="mobile-link" data-i18n="nav.contact">Contactar</a>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="index.html" class="mobile-link" data-i18n="nav.home">Inicio</a>
+      <a href="index.html#estudio" class="mobile-link" data-i18n="nav.about">
+        Sobre nosotros
+      </a>
+      <a href="entrenadores.html" class="mobile-link nav-active" data-i18n="nav.trainers">
+        Entrenadores
+      </a>
+      <a href="index.html#experiencia" class="mobile-link" data-i18n="nav.experience">
+        Experiencia
+      </a>
+      <a href="index.html#galeria" class="mobile-link" data-i18n="nav.gallery">
+        Galería
+      </a>
+      <a href="index.html#membresias" class="mobile-link" data-i18n="nav.memberships">
+        Membresías
+      </a>
+      <a href="index.html#cta" class="mobile-link" data-i18n="nav.contact">
+        Contactar
+      </a>
       <div class="mobile-lang-row">
         <div class="lang-toggle" role="group" data-i18n-aria-label="lang.ariaLabel" aria-label="Cambiar idioma">
           <button type="button" class="lang-btn active" data-lang="es">
@@ -1695,11 +1793,19 @@ min-height: 0 !important;
       <div class="trainers-hero-wrap">
         <div class="trainers-hero-copy reveal visible">
           <h1 class="trainers-hero-title">
-            <span class="text-metallic" data-i18n="trainers.hero.headingLine1">ELIGE QUIÉN TE ACOMPAÑA</span>
-            <span class="text-neon" data-i18n="trainers.hero.headingLine2">EN TU PROGRESO</span>
+            <span class="text-metallic" data-i18n="trainers.hero.headingLine1">
+              ELIGE QUIÉN TE ACOMPAÑA
+            </span>
+            <span class="text-neon" data-i18n="trainers.hero.headingLine2">
+              EN TU PROGRESO
+            </span>
           </h1>
 
-          <p data-i18n="trainers.hero.desc" class="">Conoce a los entrenadores de 3NA Fitness Studio, descubre sus especialidades y encuentra la persona indicada para orientarte durante tu proceso.</p>
+          <p data-i18n="trainers.hero.desc" class="">
+            Conoce a los entrenadores de 3NA Fitness Studio, descubre sus
+            especialidades y encuentra la persona indicada para orientarte
+            durante tu proceso.
+          </p>
         </div>
       </div>
     </section>
@@ -1715,15 +1821,26 @@ min-height: 0 !important;
             Coming Soon
           </div>
           <div class="trainer-body">
-            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
-            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
-
-            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            <h3 class="trainer-name" data-i18n="trainers.card.name">
+              Nombre del entrenador
+            </h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">
+              Rol / Puesto por confirmar
             </div>
 
-            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+            </div>
+
+            <p class="trainer-desc" data-i18n="trainers.card.desc">
+              Descripción profesional (placeholder). Aquí irá un resumen corto
+              del enfoque del entrenador.
+            </p>
 
             <div class="trainer-availability">
               <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
@@ -1756,8 +1873,12 @@ min-height: 0 !important;
             </div>
 
             <div class="trainer-actions">
-              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
-              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">
+                Ver perfil
+              </button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
+                Solicitar orientación
+              </a>
             </div>
           </div>
         </article>
@@ -1768,13 +1889,24 @@ min-height: 0 !important;
             Coming Soon
           </div>
           <div class="trainer-body">
-            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
-            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
-            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            <h3 class="trainer-name" data-i18n="trainers.card.name">
+              Nombre del entrenador
+            </h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">
+              Rol / Puesto por confirmar
             </div>
-            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">
+              Descripción profesional (placeholder). Aquí irá un resumen corto
+              del enfoque del entrenador.
+            </p>
             <div class="trainer-availability">
               <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
               <div class="week-list" data-week="">
@@ -1805,8 +1937,12 @@ min-height: 0 !important;
               </div>
             </div>
             <div class="trainer-actions">
-              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
-              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">
+                Ver perfil
+              </button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
+                Solicitar orientación
+              </a>
             </div>
           </div>
         </article>
@@ -1817,13 +1953,24 @@ min-height: 0 !important;
             Coming Soon
           </div>
           <div class="trainer-body">
-            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
-            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
-            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            <h3 class="trainer-name" data-i18n="trainers.card.name">
+              Nombre del entrenador
+            </h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">
+              Rol / Puesto por confirmar
             </div>
-            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">
+              Descripción profesional (placeholder). Aquí irá un resumen corto
+              del enfoque del entrenador.
+            </p>
             <div class="trainer-availability">
               <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
               <div class="week-list" data-week="">
@@ -1854,8 +2001,12 @@ min-height: 0 !important;
               </div>
             </div>
             <div class="trainer-actions">
-              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
-              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">
+                Ver perfil
+              </button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
+                Solicitar orientación
+              </a>
             </div>
           </div>
         </article>
@@ -1866,13 +2017,24 @@ min-height: 0 !important;
             Coming Soon
           </div>
           <div class="trainer-body">
-            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
-            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
-            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            <h3 class="trainer-name" data-i18n="trainers.card.name">
+              Nombre del entrenador
+            </h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">
+              Rol / Puesto por confirmar
             </div>
-            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">
+              Descripción profesional (placeholder). Aquí irá un resumen corto
+              del enfoque del entrenador.
+            </p>
             <div class="trainer-availability">
               <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
               <div class="week-list" data-week="">
@@ -1903,8 +2065,12 @@ min-height: 0 !important;
               </div>
             </div>
             <div class="trainer-actions">
-              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
-              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">
+                Ver perfil
+              </button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
+                Solicitar orientación
+              </a>
             </div>
           </div>
         </article>
@@ -1915,13 +2081,24 @@ min-height: 0 !important;
             Coming Soon
           </div>
           <div class="trainer-body">
-            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
-            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
-            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            <h3 class="trainer-name" data-i18n="trainers.card.name">
+              Nombre del entrenador
+            </h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">
+              Rol / Puesto por confirmar
             </div>
-            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">
+              Descripción profesional (placeholder). Aquí irá un resumen corto
+              del enfoque del entrenador.
+            </p>
             <div class="trainer-availability">
               <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
               <div class="week-list" data-week="">
@@ -1952,8 +2129,12 @@ min-height: 0 !important;
               </div>
             </div>
             <div class="trainer-actions">
-              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
-              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">
+                Ver perfil
+              </button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
+                Solicitar orientación
+              </a>
             </div>
           </div>
         </article>
@@ -1964,13 +2145,24 @@ min-height: 0 !important;
             Coming Soon
           </div>
           <div class="trainer-body">
-            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
-            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
-            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
-              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            <h3 class="trainer-name" data-i18n="trainers.card.name">
+              Nombre del entrenador
+            </h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">
+              Rol / Puesto por confirmar
             </div>
-            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+              <span class="tag" data-i18n="trainers.tags.specialty">
+                Especialidad
+              </span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">
+              Descripción profesional (placeholder). Aquí irá un resumen corto
+              del enfoque del entrenador.
+            </p>
             <div class="trainer-availability">
               <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
               <div class="week-list" data-week="">
@@ -2001,8 +2193,12 @@ min-height: 0 !important;
               </div>
             </div>
             <div class="trainer-actions">
-              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
-              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">
+                Ver perfil
+              </button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
+                Solicitar orientación
+              </a>
             </div>
           </div>
         </article>
@@ -2011,12 +2207,21 @@ min-height: 0 !important;
 
     <section id="trainers-cta" class="">
       <div class="trainers-cta-inner reveal">
-        <span class="section-label" data-i18n="trainers.cta.label">TE AYUDAMOS A ELEGIR</span>
+        <span class="section-label" data-i18n="trainers.cta.label">
+          TE AYUDAMOS A ELEGIR
+        </span>
         <h2 class="trainers-cta-title">
-          <span class="text-metallic" data-i18n="trainers.cta.headingLine1">¿NO SABES QUÉ ENTRENADOR ES</span>
-          <span class="text-neon" data-i18n="trainers.cta.headingLine2">PARA TI?</span>
+          <span class="text-metallic" data-i18n="trainers.cta.headingLine1">
+            ¿NO SABES QUÉ ENTRENADOR ES
+          </span>
+          <span class="text-neon" data-i18n="trainers.cta.headingLine2">
+            PARA TI?
+          </span>
         </h2>
-        <p class="trainers-cta-desc" data-i18n="trainers.cta.desc">Cuéntanos tus objetivos y te ayudaremos a encontrar el entrenador que mejor se adapte a tus necesidades.</p>
+        <p class="trainers-cta-desc" data-i18n="trainers.cta.desc">
+          Cuéntanos tus objetivos y te ayudaremos a encontrar el entrenador que
+          mejor se adapte a tus necesidades.
+        </p>
         <a class="btn-primary wa-link" id="trainers-cta-wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20%5BNOMBRE%20DEL%20ENTRENADOR%5D." style="display:inline-flex; justify-content:center;">
           <span data-i18n="trainers.cta.btn">Recibir orientación</span>
           <iconify-icon icon="lucide:arrow-right" noobserver=""></iconify-icon>
@@ -2033,38 +2238,62 @@ min-height: 0 !important;
         <div class="modal-inner">
           <img class="modal-photo" id="modal-photo" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
           <div class="modal-content">
-            <div class="modal-kicker" data-i18n="trainers.modal.kicker">Perfil del entrenador</div>
+            <div class="modal-kicker" data-i18n="trainers.modal.kicker">
+              Perfil del entrenador
+            </div>
             <div class="modal-name text-metallic" id="modal-name">
               Nombre del entrenador
             </div>
-            <div class="modal-role" id="modal-role" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
-
-            <div class="modal-section">
-              <h4 data-i18n="trainers.modal.bioTitle">Biografía</h4>
-              <p data-i18n="trainers.modal.bio">Biografía completa (placeholder). Reemplazar con información real del entrenador.</p>
+            <div class="modal-role" id="modal-role" data-i18n="trainers.card.role">
+              Rol / Puesto por confirmar
             </div>
 
             <div class="modal-section">
-              <h4 data-i18n="trainers.modal.specialtiesTitle">Especialidades</h4>
+              <h4 data-i18n="trainers.modal.bioTitle">Biografía</h4>
+              <p data-i18n="trainers.modal.bio">
+                Biografía completa (placeholder). Reemplazar con información
+                real del entrenador.
+              </p>
+            </div>
+
+            <div class="modal-section">
+              <h4 data-i18n="trainers.modal.specialtiesTitle">
+                Especialidades
+              </h4>
               <ul>
-                <li data-i18n="trainers.modal.placeholderItem">(Placeholder) Especialidad / enfoque</li>
-                <li data-i18n="trainers.modal.placeholderItem">(Placeholder) Especialidad / enfoque</li>
+                <li data-i18n="trainers.modal.placeholderItem">
+                  (Placeholder) Especialidad / enfoque
+                </li>
+                <li data-i18n="trainers.modal.placeholderItem">
+                  (Placeholder) Especialidad / enfoque
+                </li>
               </ul>
             </div>
 
             <div class="modal-section">
               <h4 data-i18n="trainers.modal.experienceTitle">Experiencia</h4>
-              <p data-i18n="trainers.modal.experience">Experiencia (placeholder). No inventar años o historial; reemplazar con datos reales.</p>
+              <p data-i18n="trainers.modal.experience">
+                Experiencia (placeholder). No inventar años o historial;
+                reemplazar con datos reales.
+              </p>
             </div>
 
             <div class="modal-section">
               <h4 data-i18n="trainers.modal.certsTitle">Certificaciones</h4>
-              <p data-i18n="trainers.modal.certs">Certificaciones (placeholder). Reemplazar con las certificaciones reales.</p>
+              <p data-i18n="trainers.modal.certs">
+                Certificaciones (placeholder). Reemplazar con las
+                certificaciones reales.
+              </p>
             </div>
 
             <div class="modal-section">
-              <h4 data-i18n="trainers.modal.approachTitle">Enfoque de entrenamiento</h4>
-              <p data-i18n="trainers.modal.approach">Enfoque (placeholder). Reemplazar con la filosofía y metodología real.</p>
+              <h4 data-i18n="trainers.modal.approachTitle">
+                Enfoque de entrenamiento
+              </h4>
+              <p data-i18n="trainers.modal.approach">
+                Enfoque (placeholder). Reemplazar con la filosofía y metodología
+                real.
+              </p>
             </div>
 
             <div class="modal-section">
@@ -2099,7 +2328,9 @@ min-height: 0 !important;
 
             <div class="modal-actions">
               <a class="btn-primary" id="modal-request" target="_blank" rel="noopener noreferrer" href="#" style="display:inline-flex; justify-content:center;">
-                <span data-i18n="trainers.modal.requestBtn">Solicitar orientación</span>
+                <span data-i18n="trainers.modal.requestBtn">
+                  Solicitar orientación
+                </span>
                 <iconify-icon icon="lucide:message-circle" noobserver=""></iconify-icon>
               </a>
             </div>
@@ -2131,7 +2362,10 @@ min-height: 0 !important;
           <a href="#inicio" class="block mb-[18px]">
             <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_800w.png" alt="3NA Fitness Studio" class="md:w-[240px] md:mx-0 w-[200px] h-auto object-contain mr-auto ml-auto -translate-x-16 cursor-pointer" onclick="window.location.href='index.html'" role="button">
           </a>
-          <p data-i18n="footer.description" class="">Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.</p>
+          <p data-i18n="footer.description" class="">
+            Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu
+            ADN en un espacio diseñado para tu progreso.
+          </p>
           <div class="footer-social">
             <a href="https://www.instagram.com/3nafitnesstudio/" target="_blank" rel="noopener" aria-label="Instagram" class="">
               <iconify-icon icon="lucide:instagram" noobserver="" class=""></iconify-icon>
@@ -2142,15 +2376,21 @@ min-height: 0 !important;
         <div class="footer-col">
           <h4 data-i18n="footer.linksTitle" class="">Enlaces</h4>
           <ul class="">
-            <li class="cursor-pointer" onclick="window.location.href='index.html'" role="button"><a href="#inicio" data-i18n="nav.home">Inicio</a></li>
+            <li class="cursor-pointer" onclick="window.location.href='index.html'" role="button">
+              <a href="#inicio" data-i18n="nav.home">Inicio</a>
+            </li>
             <li class="">
-              <a href="#experiencia" data-i18n="nav.experience" class="">Experiencia</a>
+              <a href="#experiencia" data-i18n="nav.experience" class="">
+                Experiencia
+              </a>
             </li>
             <li class="">
               <a href="#galeria" data-i18n="nav.gallery" class="">Galería</a>
             </li>
             <li class="">
-              <a href="index.html#membresias" data-i18n="nav.memberships" class="">Membresías</a>
+              <a href="index.html#membresias" data-i18n="nav.memberships" class="">
+                Membresías
+              </a>
             </li>
             <li class="">
               <a href="#cta" data-i18n="nav.contact">Contactar</a>
@@ -2173,9 +2413,13 @@ min-height: 0 !important;
       </div>
 
       <div class="footer-bottom">
-        <span class="footer-copy" id="footer-copy">© 2026 3NA Fitness Studio. Todos los derechos reservados.</span>
+        <span class="footer-copy" id="footer-copy">
+          © 2026 3NA Fitness Studio. Todos los derechos reservados.
+        </span>
         <!-- TODO: Conectar URL de la página legal final aquí -->
-        <a href="#terms" class="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal-light)] transition-colors border border-[var(--border-s)] hover:border-[var(--border-t)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(45,212,191,0.06)] px-3 py-1.5 rounded-md" data-i18n="footer.terms">Términos de servicio</a>
+        <a href="#terms" class="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal-light)] transition-colors border border-[var(--border-s)] hover:border-[var(--border-t)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(45,212,191,0.06)] px-3 py-1.5 rounded-md" data-i18n="footer.terms">
+          Términos de servicio
+        </a>
         <span class="footer-credit">
           <span data-i18n="footer.credit">Página web diseñada por</span>
           <a href="#" target="_blank" rel="noopener">SC Web Studios</a>
@@ -2439,15 +2683,43 @@ min-height: 0 !important;
       const hamburger = document.getElementById('hamburger');
       const mobileMenu = document.getElementById('mobile-menu');
 
+      function syncMobileMenuPosition() {
+        const mainNav = document.getElementById('main-nav');
+
+        if (!mainNav || !mobileMenu || window.innerWidth >= 992) return;
+
+        const navHeight = Math.ceil(mainNav.getBoundingClientRect().height);
+
+        document.documentElement.style.setProperty(
+          '--mobile-nav-height',
+          navHeight + 'px'
+        );
+      }
+
       if (hamburger && mobileMenu) {
+        requestAnimationFrame(syncMobileMenuPosition);
+        window.addEventListener('load', syncMobileMenuPosition);
+        window.addEventListener('resize', syncMobileMenuPosition);
+
         hamburger.addEventListener('click', function () {
-          hamburger.classList.toggle('open');
-          mobileMenu.classList.toggle('open');
+          syncMobileMenuPosition();
+
+          const isOpening = !mobileMenu.classList.contains('open');
+
+          hamburger.classList.toggle('open', isOpening);
+          mobileMenu.classList.toggle('open', isOpening);
+
+          hamburger.setAttribute('aria-expanded', String(isOpening));
+          mobileMenu.setAttribute('aria-hidden', String(!isOpening));
         });
+
         document.querySelectorAll('.mobile-link').forEach(function (link) {
           link.addEventListener('click', function () {
             hamburger.classList.remove('open');
             mobileMenu.classList.remove('open');
+
+            hamburger.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
           });
         });
       }

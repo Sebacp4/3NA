@@ -90,7 +90,7 @@ setPaused(event.data.paused);
 })();
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>3NA Fitness Studio — Train Your DNA</title>
 <meta name="description" content="3NA Fitness Studio — Entrena tu ADN. Gimnasio premium en San Juan, Puerto Rico.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1166,12 +1166,89 @@ object-position: center center;
 }
 }
 </style>
+<style id="mobile-header-fix">
+html,
+body {
+width: 100%;
+min-height: 100%;
+margin: 0 !important;
+padding: 0 !important;
+background: #07090A;
+}
+body {
+min-height: 100dvh;
+}
+@media (max-width: 991px) {
+#main-nav {
+position: fixed !important;
+top: 0 !important;
+left: 0 !important;
+right: 0 !important;
+width: 100% !important;
+margin: 0 !important;
+padding-top: max(10px, env(safe-area-inset-top)) !important;
+padding-right: 24px !important;
+padding-bottom: 10px !important;
+padding-left: 24px !important;
+background: rgba(7, 9, 10, 0.96) !important;
+z-index: 1000 !important;
+}
+#mobile-menu {
+top: calc(53px + env(safe-area-inset-top)) !important;
+}
+}
+</style>
+<style id="mobile-menu-animation">
+.mobile-menu {
+display: flex !important;
+position: fixed;
+top: 53px;
+left: 0;
+right: 0;
+z-index: 999;
+flex-direction: column;
+gap: 4px;
+padding: 24px 24px 32px;
+background: rgba(7, 9, 10, 0.97);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid var(--border-s);
+opacity: 0;
+visibility: hidden;
+pointer-events: none;
+transform: translateY(-16px);
+transform-origin: top center;
+transition:
+opacity 0.3s ease,
+transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+visibility 0s linear 0.38s;
+max-height: calc(100dvh - 53px - env(safe-area-inset-top));
+overflow-y: auto;
+overscroll-behavior: contain;
+will-change: transform, opacity;
+}
+.mobile-menu.open {
+opacity: 1;
+visibility: visible;
+pointer-events: auto;
+transform: translateY(0);
+transition:
+opacity 0.3s ease,
+transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+visibility 0s linear 0s;
+}
+@media (min-width: 992px) {
+.mobile-menu {
+display: none !important;
+}
+}
+</style>
 <link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
 .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
 </style></head>
   <body class="">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
-    <nav class="" style="background: rgba(7, 9, 10, 0.92);" id="main-nav">
+    <nav class="" style="background: rgba(7, 9, 10, 0.72);" id="main-nav">
       <a href="#inicio" class="nav-logo">
         <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7df437ed-8951-4325-880e-6ea40980e94a_1600w.png" alt="3NA Fitness Studio" class="w-[140px] md:w-[145px] lg:w-[160px] h-auto object-contain">
       </a>
@@ -1195,7 +1272,7 @@ object-position: center center;
         <a href="#cta" class="btn-nav" data-i18n="nav.contact">Contactar</a>
       </div>
 
-      <button type="button" class="hamburger" id="hamburger" data-i18n-aria-label="nav.menuAria" aria-label="Abrir menú">
+      <button type="button" class="hamburger" id="hamburger" data-i18n-aria-label="nav.menuAria" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -1203,7 +1280,7 @@ object-position: center center;
     </nav>
 
     <!-- Mobile menu -->
-    <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
       <a href="#inicio" class="mobile-link" data-i18n="nav.home">Inicio</a>
       <a href="#about" class="mobile-link" data-i18n="nav.about">Sobre nosotros</a>
       <a href="entrenadores.html" class="mobile-link" data-i18n="nav.trainers">Entrenadores</a>
@@ -1232,12 +1309,12 @@ object-position: center center;
         </div>
 
         <h1 class="hero-headline">
-          <span class="line-1 text-left text-metallic" data-i18n="hero.titleLine1">ENTRENA</span>
-          <span class="line-2 text-left text-metallic" data-i18n="hero.titleLine2">TU</span>
-          <span class="line-3 text-left text-neon" data-i18n="hero.titleLine3">ADN</span>
+          <span class="line-1 text-metallic text-center" data-i18n="hero.titleLine1">ENTRENA</span>
+          <span class="line-2 text-metallic text-center" data-i18n="hero.titleLine2">TU</span>
+          <span class="line-3 text-neon text-center" data-i18n="hero.titleLine3">ADN</span>
         </h1>
 
-        <div class="hero-desc reveal visible">
+        <div class="hero-desc reveal text-center visible">
           <p data-i18n="hero.description" class="">Descubre una nueva manera de entrenar en San Juan. Equipos premium, un ambiente relajado y una experiencia cercana para que puedas enfocarte en tu progreso.</p>
           <div class="hero-actions">
             <a href="#estudio" class="btn-primary">
@@ -1245,7 +1322,7 @@ object-position: center center;
               <iconify-icon icon="lucide:arrow-right" noobserver="" class=""></iconify-icon>
             </a>
             <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20las%20membres%C3%ADas%2C%20horarios%20y%20servicios%20del%20gimnasio." class="btn-ghost wa-link" target="_blank" rel="noopener">
-              <iconify-icon icon="lucide:message-circle" noobserver=""></iconify-icon>
+              <iconify-icon icon="lucide:message-circle" noobserver="" class=""></iconify-icon>
               <span data-i18n="hero.whatsappBtn" class="">Escríbenos por WhatsApp</span>
             </a>
           </div>
@@ -1556,7 +1633,9 @@ object-position: center center;
         <div class="footer-col">
           <h4 data-i18n="footer.linksTitle">Enlaces</h4>
           <ul class="">
-            <li class=""><a href="#inicio" data-i18n="nav.home" class="">Inicio</a></li>
+            <li class="">
+              <a href="#inicio" data-i18n="nav.home" class="">Inicio</a>
+            </li>
             <li class="">
               <a href="#experiencia" data-i18n="nav.experience" class="">Experiencia</a>
             </li>
@@ -1867,13 +1946,22 @@ object-position: center center;
 
       if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', function () {
-          hamburger.classList.toggle('open');
-          mobileMenu.classList.toggle('open');
+          const isOpening = !mobileMenu.classList.contains('open');
+
+          hamburger.classList.toggle('open', isOpening);
+          mobileMenu.classList.toggle('open', isOpening);
+
+          hamburger.setAttribute('aria-expanded', String(isOpening));
+          mobileMenu.setAttribute('aria-hidden', String(!isOpening));
         });
+
         document.querySelectorAll('.mobile-link').forEach(function (link) {
           link.addEventListener('click', function () {
             hamburger.classList.remove('open');
             mobileMenu.classList.remove('open');
+
+            hamburger.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
           });
         });
       }

@@ -90,7 +90,7 @@ setPaused(event.data.paused);
 })();
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Sobre Nosotros | 3NA Fitness Studio</title>
 <meta name="description" content="Conoce la historia, misión, visión y valores de 3NA Fitness Studio, un gimnasio boutique en San Juan creado para ofrecer equipos premium, atención cercana y una experiencia diferente.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -501,8 +501,213 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
 .btn-primary, .btn-ghost { justify-content: center; }
 }
 </style>
-<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
+<style id="mobile-menu-official-override">
+/* Official homepage mobile menu behavior override (About page only) */
+:root {
+--mobile-nav-height: 74px;
+}
+.mobile-menu {
+display: flex !important;
+position: fixed !important;
+top: var(--mobile-nav-height) !important;
+left: 0;
+right: 0;
+z-index: 999;
+flex-direction: column;
+gap: 0 !important;
+padding: 0 24px 24px !important;
+background: rgba(7, 9, 10, 0.97);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid var(--border-s);
+opacity: 0;
+visibility: hidden;
+pointer-events: none;
+transform: translateY(-12px);
+transform-origin: top center;
+transition:
+opacity 0.3s ease,
+transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+visibility 0s linear 0.38s;
+max-height: calc(100dvh - var(--mobile-nav-height)) !important;
+overflow-y: auto;
+overscroll-behavior: contain;
+will-change: transform, opacity;
+}
+.mobile-menu.open {
+opacity: 1;
+visibility: visible;
+pointer-events: auto;
+transform: translateY(0);
+transition:
+opacity 0.3s ease,
+transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+visibility 0s linear 0s;
+}
+.mobile-menu > .mobile-link {
+display: block;
+margin: 0;
+font-size: 1rem;
+line-height: 1.4;
+color: var(--muted);
+letter-spacing: -0.02em;
+padding: 14px 0 !important;
+border-bottom: 1px solid var(--border-s);
+transition: color 0.2s;
+overflow-wrap: break-word;
+}
+.mobile-menu > .mobile-link:first-child {
+margin-top: 0 !important;
+padding-top: 0 !important;
+}
+.mobile-menu > .mobile-link:hover,
+.mobile-menu > .mobile-link.active {
+color: var(--text);
+}
+.mobile-lang-row {
+display: flex;
+justify-content: flex-start;
+padding-top: 20px;
+}
+@media (min-width: 992px) {
+.mobile-menu {
+display: none !important;
+}
+}
+</style>
+<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
+<style id="all-fonts-style-font-bricolage">
 .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+</style>
+<style>
+/* ─── Footer (Homepage official) ───────────────────────────────── */
+footer {
+background: var(--bg-0);
+border-top: 1px solid var(--border-s);
+padding: 64px 48px 36px;
+position: relative;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 1px;
+background: linear-gradient(
+90deg,
+transparent,
+rgba(45,212,191,0.25),
+transparent
+);
+}
+.footer-grid {
+display: grid;
+grid-template-columns: 1.5fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 56px;
+max-width: 1200px;
+margin-left: auto;
+margin-right: auto;
+}
+.footer-logo { }
+.footer-logo .logo-text { }
+.footer-brand p {
+font-size: 0.78rem;
+line-height: 1.65;
+color: var(--muted);
+font-weight: 300;
+max-width: 240px;
+}
+.footer-social {
+display: flex;
+gap: 10px;
+margin-top: 20px;
+}
+.footer-social a {
+width: 32px;
+height: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid var(--border-s);
+border-radius: 8px;
+color: var(--muted);
+transition:
+color 0.2s,
+border-color 0.2s,
+background 0.2s;
+font-size: 14px;
+background: rgba(255,255,255,0.02);
+}
+.footer-social a:hover {
+color: var(--teal-light);
+border-color: var(--border-t);
+background: rgba(45,212,191,0.06);
+}
+.footer-col h4 {
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--text);
+margin-bottom: 16px;
+}
+.footer-col ul {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.footer-col ul li a,
+.footer-col ul li span {
+font-size: 0.8rem;
+color: var(--muted);
+font-weight: 300;
+transition: color 0.2s;
+}
+.footer-col ul li a:hover {
+color: var(--text);
+}
+.footer-bottom {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding-top: 28px;
+border-top: 1px solid var(--border-s);
+max-width: 1200px;
+margin: 0 auto;
+gap: 12px;
+flex-wrap: wrap;
+}
+.footer-copy,
+.footer-credit {
+font-size: 0.75rem;
+color: var(--muted);
+font-weight: 300;
+}
+.footer-credit a {
+color: var(--teal);
+}
+@media (max-width: 991px) {
+.footer-grid {
+grid-template-columns: 1fr 1fr;
+gap: 32px;
+}
+.footer-bottom {
+flex-direction: column;
+text-align: center;
+justify-content: center;
+}
+}
+@media (max-width: 575px) {
+.footer-grid {
+grid-template-columns: 1fr;
+gap: 28px;
+}
+footer {
+padding: 40px 20px 24px;
+}
+}
 </style></head>
   <body class="">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
@@ -514,11 +719,21 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
       <div class="nav-links">
         <a href="index.html" data-i18n="nav.home" class="">Inicio</a>
         <!-- ACTIVE STATE HIGHLIGHTED HERE -->
-        <a href="sobre-nosotros.html" data-i18n="nav.about" class="active">Sobre nosotros</a>
-        <a href="entrenadores.html" data-i18n="nav.trainers" class="">Entrenadores</a>
-        <a href="index.html#experiencia" data-i18n="nav.experience">Experiencia</a>
-        <a href="index.html#galeria" data-i18n="nav.gallery" class="">Galería</a>
-        <a href="index.html#membresias" data-i18n="nav.memberships">Membresías</a>
+        <a href="sobre-nosotros.html" data-i18n="nav.about" class="active">
+          Sobre nosotros
+        </a>
+        <a href="entrenadores.html" data-i18n="nav.trainers" class="">
+          Entrenadores
+        </a>
+        <a href="index.html#experiencia" data-i18n="nav.experience">
+          Experiencia
+        </a>
+        <a href="index.html#galeria" data-i18n="nav.gallery" class="">
+          Galería
+        </a>
+        <a href="index.html#membresias" data-i18n="nav.memberships">
+          Membresías
+        </a>
       </div>
 
       <div class="nav-cta">
@@ -528,10 +743,12 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
           </button>
           <button type="button" class="lang-btn" data-lang="en">EN</button>
         </div>
-        <a href="index.html#cta" class="btn-nav" data-i18n="nav.contact">Contactar</a>
+        <a href="index.html#cta" class="btn-nav" data-i18n="nav.contact">
+          Contactar
+        </a>
       </div>
 
-      <button type="button" class="hamburger" id="hamburger" data-i18n-aria-label="nav.menuAria" aria-label="Abrir menú">
+      <button type="button" class="hamburger" id="hamburger" data-i18n-aria-label="nav.menuAria" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
         <span></span>
         <span></span>
         <span></span>
@@ -539,14 +756,26 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
     </nav>
 
     <!-- Mobile menu -->
-    <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
       <a href="index.html" class="mobile-link" data-i18n="nav.home">Inicio</a>
-      <a href="sobre-nosotros.html" class="mobile-link active" data-i18n="nav.about">Sobre nosotros</a>
-      <a href="entrenadores.html" class="mobile-link" data-i18n="nav.trainers">Entrenadores</a>
-      <a href="index.html#experiencia" class="mobile-link" data-i18n="nav.experience">Experiencia</a>
-      <a href="index.html#galeria" class="mobile-link" data-i18n="nav.gallery">Galería</a>
-      <a href="index.html#membresias" class="mobile-link" data-i18n="nav.memberships">Membresías</a>
-      <a href="index.html#cta" class="mobile-link" data-i18n="nav.contact">Contactar</a>
+      <a href="sobre-nosotros.html" class="mobile-link active" data-i18n="nav.about">
+        Sobre nosotros
+      </a>
+      <a href="entrenadores.html" class="mobile-link" data-i18n="nav.trainers">
+        Entrenadores
+      </a>
+      <a href="index.html#experiencia" class="mobile-link" data-i18n="nav.experience">
+        Experiencia
+      </a>
+      <a href="index.html#galeria" class="mobile-link" data-i18n="nav.gallery">
+        Galería
+      </a>
+      <a href="index.html#membresias" class="mobile-link" data-i18n="nav.memberships">
+        Membresías
+      </a>
+      <a href="index.html#cta" class="mobile-link" data-i18n="nav.contact">
+        Contactar
+      </a>
       <div class="mobile-lang-row">
         <div class="lang-toggle" role="group" data-i18n-aria-label="lang.ariaLabel" aria-label="Cambiar idioma">
           <button type="button" class="lang-btn active" data-lang="es">
@@ -566,15 +795,25 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
         <div class="reveal visible">
           <div class="flex items-center gap-3 mb-6">
             <div class="w-1.5 h-1.5 rounded-full bg-[var(--teal)] shadow-[0_0_8px_rgba(45,212,191,0.6)]"></div>
-            <span class="section-label m-0" data-i18n="about.heroLabel">NUESTRA HISTORIA</span>
+            <span class="section-label m-0" data-i18n="about.heroLabel">
+              NUESTRA HISTORIA
+            </span>
           </div>
 
           <h1 class="hero-headline mb-6">
-            <span class="block text-metallic text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.1] mb-2" data-i18n="about.heroHeadingLine1">MÁS QUE UN GIMNASIO</span>
-            <span class="block text-neon text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.1]" data-i18n="about.heroHeadingLine2">UNA NUEVA FORMA DE ENTRENAR</span>
+            <span class="block text-metallic text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.1] mb-2" data-i18n="about.heroHeadingLine1">
+              MÁS QUE UN GIMNASIO
+            </span>
+            <span class="block text-neon text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.1]" data-i18n="about.heroHeadingLine2">
+              UNA NUEVA FORMA DE ENTRENAR
+            </span>
           </h1>
 
-          <p class="text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light max-w-[480px]" data-i18n="about.heroDesc">3NA Fitness Studio nace con la visión de crear en San Juan un espacio diferente: moderno, cómodo y diseñado para que cada persona pueda entrenar con libertad, enfoque y confianza.</p>
+          <p class="text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light max-w-[480px]" data-i18n="about.heroDesc">
+            3NA Fitness Studio nace con la visión de crear en San Juan un
+            espacio diferente: moderno, cómodo y diseñado para que cada persona
+            pueda entrenar con libertad, enfoque y confianza.
+          </p>
         </div>
       </div>
     </header>
@@ -584,28 +823,51 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
       <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20 max-w-[1200px] mx-auto items-center">
         <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden border border-[var(--border-s)] shadow-[0_12px_48px_rgba(0,0,0,0.4)] reveal visible">
           <!-- Replace with the official portrait of the owner -->
-          <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Founder Portrait" class="w-full h-full object-cover filter saturate-50 contrast-[1.05]">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8cc46007-0d1e-4cb4-aaef-5f0646352dc6_800w.png" alt="Founder Portrait" class="w-full h-full object-cover">
           <div class="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-xl pointer-events-none"></div>
         </div>
 
         <div class="reveal">
-          <span class="section-label" data-i18n="about.ownerLabel">CONOCE AL FUNDADOR</span>
-          <h2 class="section-heading text-metallic !font-black !tracking-[-0.05em] mb-8" data-i18n="about.ownerHeading">La persona detrás de 3NA Fitness Studio</h2>
+          <span class="section-label" data-i18n="about.ownerLabel">
+            CONOCE AL FUNDADOR
+          </span>
+          <h2 class="section-heading text-metallic !font-black !tracking-[-0.05em] mb-8" data-i18n="about.ownerHeading">
+            La persona detrás de 3NA Fitness Studio
+          </h2>
 
           <div class="space-y-6 text-[0.9rem] leading-[1.8] text-[var(--muted)] font-light">
-            <h3 class="text-[1.2rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="about.ownerName">[Nombre del fundador]</h3>
+            <h3 class="text-[1.2rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="about.ownerName">
+              Nicolas Rivera Carrasquillo
+            </h3>
 
-            <p class="" data-i18n="about.ownerP1">Después de años participando en la creación y desarrollo de gimnasios para otras personas, nació el deseo de aplicar toda esa experiencia, conocimiento y dedicación en un proyecto propio.</p>
+            <p class="" data-i18n="about.ownerP1">
+              Después de años participando en la creación y desarrollo de
+              gimnasios para otras personas, nació el deseo de aplicar toda esa
+              experiencia, conocimiento y dedicación en un proyecto propio.
+            </p>
 
-            <p class="" data-i18n="about.ownerP2">3NA Fitness Studio representa una nueva etapa: un espacio construido con propósito, equipos premium y una visión enfocada en ayudar a las personas a entrenar no solo para verse mejor, sino para vivir con más fuerza, salud y calidad de vida.</p>
+            <p class="" data-i18n="about.ownerP2">
+              3NA Fitness Studio representa una nueva etapa: un espacio
+              construido con propósito, equipos premium y una visión enfocada en
+              ayudar a las personas a entrenar no solo para verse mejor, sino
+              para vivir con más fuerza, salud y calidad de vida.
+            </p>
 
-            <p class="" data-i18n="about.ownerP3">Su compromiso es crear una comunidad donde cada persona, sin importar su edad o condición física, pueda sentirse bienvenida, entrenar con confianza y continuar desarrollando su mejor versión.</p>
+            <p class="" data-i18n="about.ownerP3">
+              Su compromiso es crear una comunidad donde cada persona, sin
+              importar su edad o condición física, pueda sentirse bienvenida,
+              entrenar con confianza y continuar desarrollando su mejor versión.
+            </p>
           </div>
 
           <!-- Optional signature area -->
           <div class="mt-10 pt-8 border-t border-[var(--border-s)]">
-            <p class="font-bricolage text-[1.4rem] text-[var(--text)] italic opacity-80" data-i18n="about.ownerSignature">[Firma / Nombre del fundador]</p>
-            <p class="text-[0.75rem] text-[var(--teal)] uppercase tracking-widest mt-1" data-i18n="about.ownerPosition">Founder &amp; CEO</p>
+            <p class="font-bricolage text-[1.4rem] tracking-tight text-[var(--text)] italic opacity-80" data-i18n="about.ownerSignature">
+              Nicolas Rivera Carrasquillo
+            </p>
+            <p class="text-[0.75rem] text-[var(--teal)] uppercase tracking-widest mt-1" data-i18n="about.ownerPosition">
+              Founder &amp; CEO
+            </p>
           </div>
         </div>
       </div>
@@ -662,19 +924,33 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
           <div class="reveal concept-intro">
             <div class="inline-flex items-center gap-3 mb-6">
               <div class="w-1.5 h-1.5 rounded-full bg-[var(--teal)] shadow-[0_0_10px_rgba(45,212,191,0.55)]"></div>
-              <span class="text-metallic section-label" data-i18n="concept.label">EL CONCEPTO</span>
+              <span class="text-metallic section-label" data-i18n="concept.label">
+                EL CONCEPTO
+              </span>
             </div>
-            <h2 class="font-medium tracking-tight text-[clamp(1.8rem,3.2vw,2.3rem)] text-[var(--teal-light)]" style="text-shadow: 0 0 18px rgba(45,212,191,0.22)" data-i18n="concept.subtitle">EL ADN DEL RENDIMIENTO</h2>
+            <h2 class="font-medium tracking-tight text-[clamp(1.8rem,3.2vw,2.3rem)] text-[var(--teal-light)]" style="text-shadow: 0 0 18px rgba(45,212,191,0.22)" data-i18n="concept.subtitle">
+              EL ADN DEL RENDIMIENTO
+            </h2>
 
-            <p class="mt-6 text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light" data-i18n="concept.intro">El concepto central de 3NA Fitness Studio nace de una idea poderosa:</p>
+            <p class="mt-6 text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light" data-i18n="concept.intro">
+              El concepto central de 3NA Fitness Studio nace de una idea
+              poderosa:
+            </p>
 
             <p class="mt-4 text-[clamp(1.15rem,2.2vw,1.55rem)] leading-[1.55] text-[var(--text)] font-medium concept-highlight">
-              <span data-i18n="concept.highlightBefore">La evolución personal está en</span>
-              <span class="text-[var(--teal-light)]" style="text-shadow: 0 0 16px rgba(45,212,191,0.28);" data-i18n="concept.highlightEm">tu ADN</span>
+              <span data-i18n="concept.highlightBefore">
+                La evolución personal está en
+              </span>
+              <span class="text-[var(--teal-light)]" style="text-shadow: 0 0 16px rgba(45,212,191,0.28);" data-i18n="concept.highlightEm">
+                tu ADN
+              </span>
               <span data-i18n="concept.highlightAfter">.</span>
             </p>
 
-            <p class="mt-4 text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light" data-i18n="concept.support">El logotipo fue diseñado fusionando dos elementos que representan esta filosofía.</p>
+            <p class="mt-4 text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light" data-i18n="concept.support">
+              El logotipo fue diseñado fusionando dos elementos que representan
+              esta filosofía.
+            </p>
           </div>
         </div>
 
@@ -695,7 +971,9 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
           <div class="reveal concept-left lg:pt-[14px]">
             <div class="concept-block">
               <div class="flex items-baseline justify-between gap-4">
-                <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight" data-i18n="concept.dna.title">01. ADN</h3>
+                <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight" data-i18n="concept.dna.title">
+                  01. ADN
+                </h3>
                 <div class="concept-mini-rule"></div>
               </div>
 
@@ -706,7 +984,9 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
                 </li>
                 <li class="concept-bullet" style="--d:90ms">
                   <span class="concept-bullet-dot"></span>
-                  <span data-i18n="concept.dna.potential">Potencial humano</span>
+                  <span data-i18n="concept.dna.potential">
+                    Potencial humano
+                  </span>
                 </li>
                 <li class="concept-bullet" style="--d:180ms">
                   <span class="concept-bullet-dot"></span>
@@ -714,7 +994,10 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
                 </li>
               </ul>
 
-              <p class="mt-6 text-[0.92rem] leading-[1.75] text-[var(--muted)] font-light" data-i18n="concept.dna.description">Representa el origen, el potencial humano y la capacidad de evolución que todos llevamos dentro.</p>
+              <p class="mt-6 text-[0.92rem] leading-[1.75] text-[var(--muted)] font-light" data-i18n="concept.dna.description">
+                Representa el origen, el potencial humano y la capacidad de
+                evolución que todos llevamos dentro.
+              </p>
             </div>
 
             <!-- Mobile vertical connector -->
@@ -727,14 +1010,19 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
               <div aria-hidden="true" class="concept-logo-glow"></div>
               <img class="concept-logo" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_1600w.png" alt="3NA Fitness Studio" loading="lazy">
             </div>
-            <p class="mt-8 text-[0.92rem] leading-[1.8] text-[var(--muted)] font-light max-w-[420px] mx-auto" data-i18n="concept.union">La unión de estos dos símbolos crea una identidad visual única donde la genética y el entrenamiento se encuentran.</p>
+            <p class="mt-8 text-[0.92rem] leading-[1.8] text-[var(--muted)] font-light max-w-[420px] mx-auto" data-i18n="concept.union">
+              La unión de estos dos símbolos crea una identidad visual única
+              donde la genética y el entrenamiento se encuentran.
+            </p>
           </div>
 
           <!-- Right: Barbell -->
           <div class="reveal concept-right lg:pt-[14px]">
             <div class="concept-block">
               <div class="flex items-baseline justify-between gap-4">
-                <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight" data-i18n="concept.barbell.title">02. LA BARRA</h3>
+                <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight" data-i18n="concept.barbell.title">
+                  02. LA BARRA
+                </h3>
                 <div class="concept-mini-rule"></div>
               </div>
 
@@ -753,7 +1041,10 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
                 </li>
               </ul>
 
-              <p class="mt-6 text-[0.92rem] leading-[1.75] text-[var(--muted)] font-light" data-i18n="concept.barbell.description">Representa el esfuerzo, la disciplina y el trabajo necesarios para desbloquear ese potencial.</p>
+              <p class="mt-6 text-[0.92rem] leading-[1.75] text-[var(--muted)] font-light" data-i18n="concept.barbell.description">
+                Representa el esfuerzo, la disciplina y el trabajo necesarios
+                para desbloquear ese potencial.
+              </p>
             </div>
 
             <!-- Mobile vertical connector -->
@@ -763,15 +1054,22 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
 
         <!-- Bottom message + slogan -->
         <div class="mt-16 text-center max-w-[920px] mx-auto">
-          <p class="reveal concept-bottom text-[0.95rem] leading-[1.8] text-[rgba(240,242,242,0.78)] font-light" data-i18n="concept.closing">En 3NA Fitness Studio, cada entrenamiento es un paso hacia una mejor versión de ti mismo.</p>
-          <p class="reveal concept-bottom-strong mt-5 text-[1.05rem] md:text-[1.15rem] text-[var(--text)] font-medium tracking-tight" data-i18n="concept.statement">No se trata solo de levantar peso.</p>
+          <p class="reveal concept-bottom text-[0.95rem] leading-[1.8] text-[rgba(240,242,242,0.78)] font-light" data-i18n="concept.closing">
+            En 3NA Fitness Studio, cada entrenamiento es un paso hacia una mejor
+            versión de ti mismo.
+          </p>
+          <p class="reveal concept-bottom-strong mt-5 text-[1.05rem] md:text-[1.15rem] text-[var(--text)] font-medium tracking-tight" data-i18n="concept.statement">
+            No se trata solo de levantar peso.
+          </p>
 
           <div class="reveal concept-slogan-wrap mt-10">
             <div class="mx-auto max-w-[560px]" style="height:1px; background: linear-gradient(90deg, transparent, rgba(45,212,191,0.35), transparent);"></div>
             <div class="mt-8">
               <div class="text-[clamp(2.4rem,6.5vw,4.5rem)] leading-none tracking-[-0.05em] uppercase">
                 <span class="text-metallic block">TRAIN YOUR</span>
-                <span class="text-neon block" data-i18n="concept.slogan">DNA</span>
+                <span class="text-neon block" data-i18n="concept.slogan">
+                  DNA
+                </span>
               </div>
             </div>
           </div>
@@ -948,7 +1246,9 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
     <!-- ─── OUR STORY (TIMELINE) ─────────────────────────────────────── -->
     <section class="py-[100px] px-6 md:px-12 bg-[var(--bg-0)]">
       <div class="max-w-[800px] mx-auto text-center reveal">
-        <h2 class="section-heading text-metallic !font-black !tracking-[-0.05em]" data-i18n="about.timelineTitle">Cómo comenzó 3NA</h2>
+        <h2 class="section-heading text-metallic !font-black !tracking-[-0.05em]" data-i18n="about.timelineTitle">
+          Cómo comenzó 3NA
+        </h2>
       </div>
 
       <div class="timeline-container">
@@ -959,8 +1259,14 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
           <div class="font-bricolage text-[1.8rem] leading-none text-[var(--teal)] mb-3">
             01
           </div>
-          <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-2" data-i18n="about.stage1Title">La experiencia</h3>
-          <p class="text-[0.9rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.stage1Desc">Después de participar en la creación y desarrollo de múltiples gimnasios para otras personas, surgió el deseo de aplicar toda esa experiencia, conocimiento y dedicación en un proyecto propio.</p>
+          <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-2" data-i18n="about.stage1Title">
+            La experiencia
+          </h3>
+          <p class="text-[0.9rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.stage1Desc">
+            Después de participar en la creación y desarrollo de múltiples
+            gimnasios para otras personas, surgió el deseo de aplicar toda esa
+            experiencia, conocimiento y dedicación en un proyecto propio.
+          </p>
         </div>
 
         <div class="timeline-item reveal">
@@ -968,8 +1274,14 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
           <div class="font-bricolage text-[1.8rem] leading-none text-[var(--teal)] mb-3">
             02
           </div>
-          <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-2" data-i18n="about.stage2Title">El propósito</h3>
-          <p class="text-[0.9rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.stage2Desc">3NA Fitness Studio nace como una nueva etapa: un espacio creado con visión, experiencia y una comprensión profunda de lo que necesita un gimnasio para ofrecer calidad, comodidad y resultados.</p>
+          <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-2" data-i18n="about.stage2Title">
+            El propósito
+          </h3>
+          <p class="text-[0.9rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.stage2Desc">
+            3NA Fitness Studio nace como una nueva etapa: un espacio creado con
+            visión, experiencia y una comprensión profunda de lo que necesita un
+            gimnasio para ofrecer calidad, comodidad y resultados.
+          </p>
         </div>
 
         <div class="timeline-item reveal">
@@ -977,8 +1289,14 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
           <div class="font-bricolage text-[1.8rem] leading-none text-[var(--teal)] mb-3">
             03
           </div>
-          <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-2" data-i18n="about.stage3Title">Un proyecto propio</h3>
-          <p class="text-[0.9rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.stage3Desc">La meta fue construir un gimnasio sólido y sostenible que permitiera ofrecer una experiencia premium a sus miembros, mientras se desarrollaba un proyecto preparado para crecer a largo plazo.</p>
+          <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-2" data-i18n="about.stage3Title">
+            Un proyecto propio
+          </h3>
+          <p class="text-[0.9rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.stage3Desc">
+            La meta fue construir un gimnasio sólido y sostenible que permitiera
+            ofrecer una experiencia premium a sus miembros, mientras se
+            desarrollaba un proyecto preparado para crecer a largo plazo.
+          </p>
         </div>
 
         <div class="timeline-item reveal">
@@ -986,8 +1304,15 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
           <div class="font-bricolage text-[1.8rem] leading-none text-[var(--teal)] mb-3">
             04
           </div>
-          <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-2" data-i18n="about.stage4Title">El futuro</h3>
-          <p class="text-[0.9rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.stage4Desc">3NA cuenta con el espacio y el potencial necesarios para continuar expandiéndose. La visión es seguir desarrollando sus instalaciones, aumentar su capacidad y construir una comunidad fitness cada vez más completa.</p>
+          <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-2" data-i18n="about.stage4Title">
+            El futuro
+          </h3>
+          <p class="text-[0.9rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.stage4Desc">
+            3NA cuenta con el espacio y el potencial necesarios para continuar
+            expandiéndose. La visión es seguir desarrollando sus instalaciones,
+            aumentar su capacidad y construir una comunidad fitness cada vez más
+            completa.
+          </p>
         </div>
       </div>
     </section>
@@ -996,15 +1321,39 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
     <section class="py-[100px] px-6 md:px-12 bg-[var(--bg-1)] border-y border-[var(--border-s)]">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px] mx-auto">
         <div class="mv-card reveal">
-          <span class="section-label" data-i18n="about.missionLabel">Nuestra Misión</span>
-          <h3 class="text-[1.5rem] md:text-[1.8rem] text-[var(--text)] font-light tracking-tight mt-4 mb-6 leading-[1.3]" data-i18n="about.missionHeadline"><span class="text-[var(--teal-light)] font-medium">Inspirar</span> a las personas a entrenar con propósito, inteligencia y consistencia para construir una vida más fuerte, saludable y longeva.</h3>
-          <p class="text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light" data-i18n="about.missionDescription">En 3NA Fitness Studio creemos que el verdadero fitness nace desde el interior; por eso ayudamos a nuestros miembros a desarrollar su máximo potencial físico y mental mediante entrenamiento de calidad, atención personalizada y una comunidad que impulsa el crecimiento diario.</p>
+          <span class="section-label" data-i18n="about.missionLabel">
+            Nuestra Misión
+          </span>
+          <h3 class="text-[1.5rem] md:text-[1.8rem] text-[var(--text)] font-light tracking-tight mt-4 mb-6 leading-[1.3]" data-i18n="about.missionHeadline">
+            <span class="text-[var(--teal-light)] font-medium">Inspirar</span>
+            a las personas a entrenar con propósito, inteligencia y consistencia
+            para construir una vida más fuerte, saludable y longeva.
+          </h3>
+          <p class="text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light" data-i18n="about.missionDescription">
+            En 3NA Fitness Studio creemos que el verdadero fitness nace desde el
+            interior; por eso ayudamos a nuestros miembros a desarrollar su
+            máximo potencial físico y mental mediante entrenamiento de calidad,
+            atención personalizada y una comunidad que impulsa el crecimiento
+            diario.
+          </p>
         </div>
 
         <div class="mv-card reveal">
-          <span class="section-label" data-i18n="about.visionLabel">Nuestra Visión</span>
-          <h3 class="text-[1.5rem] md:text-[1.8rem] text-[var(--text)] font-light tracking-tight mt-4 mb-6 leading-[1.3]" data-i18n="about.visionHeadline"><span class="text-[var(--teal-light)] font-medium">Convertirnos</span> en la marca de entrenamiento más respetada de Puerto Rico y una referencia internacional en fitness inteligente,</h3>
-          <p class="text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light" data-i18n="about.visionDescription">donde la innovación, la excelencia en el servicio y el compromiso con la salud permitan que miles de personas vivan más fuertes, más sanas y con mayor calidad de vida.</p>
+          <span class="section-label" data-i18n="about.visionLabel">
+            Nuestra Visión
+          </span>
+          <h3 class="text-[1.5rem] md:text-[1.8rem] text-[var(--text)] font-light tracking-tight mt-4 mb-6 leading-[1.3]" data-i18n="about.visionHeadline">
+            <span class="text-[var(--teal-light)] font-medium">
+              Convertirnos
+            </span>
+            en la marca de entrenamiento más respetada de Puerto Rico y una
+            referencia internacional en fitness inteligente,
+          </h3>
+          <p class="text-[0.95rem] leading-[1.8] text-[var(--muted)] font-light" data-i18n="about.visionDescription">
+            donde la innovación, la excelencia en el servicio y el compromiso
+            con la salud permitan que miles de personas vivan más fuertes, más
+            sanas y con mayor calidad de vida.
+          </p>
         </div>
       </div>
     </section>
@@ -1012,39 +1361,60 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
     <!-- ─── VALUES SECTION ───────────────────────────────────────────── -->
     <section class="py-[100px] px-6 md:px-12 bg-[var(--bg-0)]">
       <div class="max-w-[1200px] mx-auto">
-        <h2 class="section-heading text-center text-metallic !font-black !tracking-[-0.05em] mb-16 reveal" data-i18n="about.valuesTitle">Los valores que nos definen</h2>
+        <h2 class="section-heading text-center text-metallic !font-black !tracking-[-0.05em] mb-16 reveal" data-i18n="about.valuesTitle">
+          Los valores que nos definen
+        </h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="p-8 bg-[rgba(255,255,255,0.01)] border border-[var(--border-s)] rounded-xl reveal">
             <div class="text-[0.8rem] font-bricolage text-[var(--teal)] mb-4 border border-[var(--border-t)] bg-[rgba(45,212,191,0.05)] inline-flex px-3 py-1 rounded-full">
               01
             </div>
-            <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-3" data-i18n="about.val1Title">Calidad</h3>
-            <p class="text-[0.85rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.val1Desc">Cuidamos cada detalle del espacio, los equipos y la experiencia de nuestros miembros.</p>
+            <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-3" data-i18n="about.val1Title">
+              Calidad
+            </h3>
+            <p class="text-[0.85rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.val1Desc">
+              Cuidamos cada detalle del espacio, los equipos y la experiencia de
+              nuestros miembros.
+            </p>
           </div>
 
           <div class="p-8 bg-[rgba(255,255,255,0.01)] border border-[var(--border-s)] rounded-xl reveal">
             <div class="text-[0.8rem] font-bricolage text-[var(--teal)] mb-4 border border-[var(--border-t)] bg-[rgba(45,212,191,0.05)] inline-flex px-3 py-1 rounded-full">
               02
             </div>
-            <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-3" data-i18n="about.val2Title">Cercanía</h3>
-            <p class="text-[0.85rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.val2Desc">Queremos que cada persona se sienta bienvenida, escuchada y valorada.</p>
+            <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-3" data-i18n="about.val2Title">
+              Cercanía
+            </h3>
+            <p class="text-[0.85rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.val2Desc">
+              Queremos que cada persona se sienta bienvenida, escuchada y
+              valorada.
+            </p>
           </div>
 
           <div class="p-8 bg-[rgba(255,255,255,0.01)] border border-[var(--border-s)] rounded-xl reveal">
             <div class="text-[0.8rem] font-bricolage text-[var(--teal)] mb-4 border border-[var(--border-t)] bg-[rgba(45,212,191,0.05)] inline-flex px-3 py-1 rounded-full">
               03
             </div>
-            <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-3" data-i18n="about.val3Title">Progreso</h3>
-            <p class="text-[0.85rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.val3Desc">Creemos en mejorar constantemente, dentro y fuera del gimnasio.</p>
+            <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-3" data-i18n="about.val3Title">
+              Progreso
+            </h3>
+            <p class="text-[0.85rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.val3Desc">
+              Creemos en mejorar constantemente, dentro y fuera del gimnasio.
+            </p>
           </div>
 
           <div class="p-8 bg-[rgba(255,255,255,0.01)] border border-[var(--border-s)] rounded-xl reveal">
             <div class="text-[0.8rem] font-bricolage text-[var(--teal)] mb-4 border border-[var(--border-t)] bg-[rgba(45,212,191,0.05)] inline-flex px-3 py-1 rounded-full">
               04
             </div>
-            <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-3" data-i18n="about.val4Title">Comunidad</h3>
-            <p class="text-[0.85rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.val4Desc">3NA es un espacio donde personas con diferentes metas pueden crecer juntas.</p>
+            <h3 class="text-[1.1rem] text-[var(--text)] font-medium mb-3" data-i18n="about.val4Title">
+              Comunidad
+            </h3>
+            <p class="text-[0.85rem] leading-[1.7] text-[var(--muted)] font-light" data-i18n="about.val4Desc">
+              3NA es un espacio donde personas con diferentes metas pueden
+              crecer juntas.
+            </p>
           </div>
         </div>
       </div>
@@ -1055,8 +1425,15 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
       <div class="absolute inset-0 z-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(45,212,191,0.03)_0%,transparent_100%)]"></div>
 
       <div class="relative z-10 mx-auto reveal max-w-[1100px]">
-        <h2 class="text-[1.2rem] md:text-[1.5rem] font-medium tracking-tight text-[var(--text)] mb-6" data-i18n="philosophy.title">¿Por qué 3NA?</h2>
-        <p class="text-[0.95rem] md:text-[1.05rem] leading-[1.8] text-[var(--muted)] font-light mb-12 max-w-[800px] mx-auto" data-i18n="philosophy.introduction">3NA nace de una filosofía sencilla: entrenar no solo para verse mejor, sino para vivir mejor. Train Your DNA significa desarrollar el potencial con el que naciste, fortaleciendo aquello que define cómo vives cada día.</p>
+        <h2 class="text-[1.2rem] md:text-[1.5rem] font-medium tracking-tight text-[var(--text)] mb-6" data-i18n="philosophy.title">
+          ¿Por qué 3NA?
+        </h2>
+        <p class="text-[0.95rem] md:text-[1.05rem] leading-[1.8] text-[var(--muted)] font-light mb-12 max-w-[800px] mx-auto" data-i18n="philosophy.introduction">
+          3NA nace de una filosofía sencilla: entrenar no solo para verse mejor,
+          sino para vivir mejor. Train Your DNA significa desarrollar el
+          potencial con el que naciste, fortaleciendo aquello que define cómo
+          vives cada día.
+        </p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 text-left w-full mx-auto">
           <div class="p-6 bg-[rgba(255,255,255,0.015)] border border-[var(--border-s)] rounded-xl relative overflow-hidden group hover:border-[rgba(45,212,191,0.2)] transition-colors">
@@ -1065,8 +1442,12 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
               <span class="w-1.5 h-1.5 rounded-full bg-[var(--teal)] shadow-[0_0_8px_rgba(45,212,191,0.6)]"></span>
               01
             </div>
-            <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="philosophy.bodyTitle">Entrena tu cuerpo</h3>
-            <p class="text-[0.85rem] leading-[1.6] text-[var(--muted)] font-light" data-i18n="philosophy.bodyText">Fuerza, movilidad y resistencia.</p>
+            <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="philosophy.bodyTitle">
+              Entrena tu cuerpo
+            </h3>
+            <p class="text-[0.85rem] leading-[1.6] text-[var(--muted)] font-light" data-i18n="philosophy.bodyText">
+              Fuerza, movilidad y resistencia.
+            </p>
           </div>
 
           <div class="p-6 bg-[rgba(255,255,255,0.015)] border border-[var(--border-s)] rounded-xl relative overflow-hidden group hover:border-[rgba(45,212,191,0.2)] transition-colors">
@@ -1075,8 +1456,12 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
               <span class="w-1.5 h-1.5 rounded-full bg-[var(--teal)] shadow-[0_0_8px_rgba(45,212,191,0.6)]"></span>
               02
             </div>
-            <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="philosophy.mindTitle">Entrena tu mente</h3>
-            <p class="text-[0.85rem] leading-[1.6] text-[var(--muted)] font-light" data-i18n="philosophy.mindText">Disciplina, hábitos y consistencia.</p>
+            <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="philosophy.mindTitle">
+              Entrena tu mente
+            </h3>
+            <p class="text-[0.85rem] leading-[1.6] text-[var(--muted)] font-light" data-i18n="philosophy.mindText">
+              Disciplina, hábitos y consistencia.
+            </p>
           </div>
 
           <div class="p-6 bg-[rgba(255,255,255,0.015)] border border-[var(--border-s)] rounded-xl relative overflow-hidden group hover:border-[rgba(45,212,191,0.2)] transition-colors">
@@ -1085,8 +1470,12 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
               <span class="w-1.5 h-1.5 rounded-full bg-[var(--teal)] shadow-[0_0_8px_rgba(45,212,191,0.6)]"></span>
               03
             </div>
-            <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="philosophy.healthTitle">Entrena tu salud</h3>
-            <p class="text-[0.85rem] leading-[1.6] text-[var(--muted)] font-light" data-i18n="philosophy.healthText">Prevención, bienestar y capacidad física.</p>
+            <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="philosophy.healthTitle">
+              Entrena tu salud
+            </h3>
+            <p class="text-[0.85rem] leading-[1.6] text-[var(--muted)] font-light" data-i18n="philosophy.healthText">
+              Prevención, bienestar y capacidad física.
+            </p>
           </div>
 
           <div class="p-6 bg-[rgba(255,255,255,0.015)] border border-[var(--border-s)] rounded-xl relative overflow-hidden group hover:border-[rgba(45,212,191,0.2)] transition-colors">
@@ -1095,14 +1484,26 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
               <span class="w-1.5 h-1.5 rounded-full bg-[var(--teal)] shadow-[0_0_8px_rgba(45,212,191,0.6)]"></span>
               04
             </div>
-            <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="philosophy.longevityTitle">Entrena tu longevidad</h3>
-            <p class="text-[0.85rem] leading-[1.6] text-[var(--muted)] font-light" data-i18n="philosophy.longevityText">Calidad de vida hoy y en el futuro.</p>
+            <h3 class="text-[1.05rem] text-[var(--text)] font-medium tracking-tight mb-2" data-i18n="philosophy.longevityTitle">
+              Entrena tu longevidad
+            </h3>
+            <p class="text-[0.85rem] leading-[1.6] text-[var(--muted)] font-light" data-i18n="philosophy.longevityText">
+              Calidad de vida hoy y en el futuro.
+            </p>
           </div>
         </div>
 
         <div class="max-w-[800px] mx-auto mb-16 px-4">
-          <p class="text-[1.05rem] md:text-[1.15rem] leading-[1.7] text-[var(--text)] font-medium mb-5" data-i18n="philosophy.manifesto">No entrenamos para impresionar. Entrenamos para movernos mejor, vivir con energía y estar preparados cuando la vida nos exija. Porque el verdadero progreso no se mide solamente por cómo luces, sino por cómo vives.</p>
-          <p class="text-[0.95rem] text-[var(--muted)] font-light" data-i18n="philosophy.closing">Train Your DNA no significa cambiar quién eres. Significa desarrollar todo el potencial con el que naciste.</p>
+          <p class="text-[1.05rem] md:text-[1.15rem] leading-[1.7] text-[var(--text)] font-medium mb-5" data-i18n="philosophy.manifesto">
+            No entrenamos para impresionar. Entrenamos para movernos mejor,
+            vivir con energía y estar preparados cuando la vida nos exija.
+            Porque el verdadero progreso no se mide solamente por cómo luces,
+            sino por cómo vives.
+          </p>
+          <p class="text-[0.95rem] text-[var(--muted)] font-light" data-i18n="philosophy.closing">
+            Train Your DNA no significa cambiar quién eres. Significa
+            desarrollar todo el potencial con el que naciste.
+          </p>
         </div>
 
         <div class="text-[clamp(3rem,8vw,6rem)] font-black leading-none tracking-[-0.05em] uppercase">
@@ -1116,7 +1517,9 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
     <section class="py-[100px] px-6 md:px-12 bg-[var(--bg-0)] border-t border-[var(--border-s)]">
       <div class="max-w-[1200px] mx-auto">
         <h2 class="section-heading text-metallic !font-black !tracking-[-0.05em] reveal">
-          <span data-i18n="about.galleryTitle" class="">Un vistazo a nuestra trayectoria</span>
+          <span data-i18n="about.galleryTitle" class="">
+            Un vistazo a nuestra trayectoria
+          </span>
         </h2>
 
         <div class="photo-story-grid reveal">
@@ -1157,22 +1560,35 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
           </div>
         </div>
 
-        <p class="hidden photo-swipe mt-5 text-[0.75rem] text-[var(--teal)] tracking-wider text-center" data-i18n="about.swipe">Desliza para ver más →</p>
+        <p class="hidden photo-swipe mt-5 text-[0.75rem] text-[var(--teal)] tracking-wider text-center" data-i18n="about.swipe">
+          Desliza para ver más →
+        </p>
       </div>
     </section>
 
     <!-- ─── FINAL CTA ────────────────────────────────────────────────── -->
     <section id="cta" class="">
-      <span class="section-label reveal block mb-4" data-i18n="about.ctaLabel">FORMA PARTE DE NUESTRA HISTORIA</span>
+      <span class="section-label reveal block mb-4" data-i18n="about.ctaLabel">
+        FORMA PARTE DE NUESTRA HISTORIA
+      </span>
       <h2 class="cta-headline reveal hero-headline mb-6">
-        <span class="text-metallic block text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.1] mb-2" data-i18n="about.ctaHeading1">TU PROGRESO TAMBIÉN</span>
-        <span class="text-neon block text-[clamp(2rem,5vw,4rem)] leading-[1.1]" data-i18n="about.ctaHeading2">ES PARTE DE 3NA</span>
+        <span class="text-metallic block text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.1] mb-2" data-i18n="about.ctaHeading1">
+          TU PROGRESO TAMBIÉN
+        </span>
+        <span class="text-neon block text-[clamp(2rem,5vw,4rem)] leading-[1.1]" data-i18n="about.ctaHeading2">
+          ES PARTE DE 3NA
+        </span>
       </h2>
-      <p class="reveal text-[0.95rem] text-[var(--muted)] font-light max-w-[460px] mx-auto mb-10 leading-[1.7]" data-i18n="about.ctaDesc">Conoce nuestro espacio, nuestra comunidad y una nueva manera de entrenar en San Juan.</p>
+      <p class="reveal text-[0.95rem] text-[var(--muted)] font-light max-w-[460px] mx-auto mb-10 leading-[1.7]" data-i18n="about.ctaDesc">
+        Conoce nuestro espacio, nuestra comunidad y una nueva manera de entrenar
+        en San Juan.
+      </p>
 
       <div class="flex flex-wrap items-center justify-center gap-4 reveal">
         <a href="entrenadores.html" class="btn-primary">
-          <span data-i18n="about.ctaBtn1" class="">Conoce a los entrenadores</span>
+          <span data-i18n="about.ctaBtn1" class="">
+            Conoce a los entrenadores
+          </span>
           <iconify-icon icon="lucide:arrow-right" noobserver="" class=""></iconify-icon>
         </a>
         <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20las%20membres%C3%ADas%2C%20horarios%20y%20servicios%20del%20gimnasio." class="btn-ghost wa-link" target="_blank" rel="noopener">
@@ -1183,13 +1599,16 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
     </section>
 
     <!-- ─── FOOTER ───────────────────────────────────────────────────── -->
-    <footer class="">
+    <footer>
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="block mb-[18px]">
-            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_800w.png" alt="3NA Fitness Studio" class="md:w-[240px] md:mx-0 w-[200px] h-auto object-contain mr-auto ml-auto -translate-x-16">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_1600w.png" alt="3NA Fitness Studio" class="md:w-[240px] md:mx-0 w-[200px] h-auto object-contain mr-auto ml-auto -translate-x-16">
           </a>
-          <p data-i18n="footer.description">Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.</p>
+          <p data-i18n="footer.description">
+            Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu
+            ADN en un espacio diseñado para tu progreso.
+          </p>
           <div class="footer-social">
             <a href="https://www.instagram.com/3nafitnesstudio/" target="_blank" rel="noopener" aria-label="Instagram">
               <iconify-icon icon="lucide:instagram" noobserver=""></iconify-icon>
@@ -1198,20 +1617,26 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
         </div>
 
         <div class="footer-col">
-          <h4 data-i18n="footer.linksTitle" class="">Enlaces</h4>
-          <ul class="">
-            <li class=""><a href="index.html" data-i18n="nav.home" class="">Inicio</a></li>
-            <li class="">
-              <a href="index.html#experiencia" data-i18n="nav.experience" class="">Experiencia</a>
+          <h4 data-i18n="footer.linksTitle">Enlaces</h4>
+          <ul>
+            <li>
+              <a href="index.html" data-i18n="nav.home">Inicio</a>
             </li>
-            <li class="">
-              <a href="galeria.html" data-i18n="nav.gallery" class="">Galería</a>
+            <li>
+              <a href="index.html#experiencia" data-i18n="nav.experience">
+                Experiencia
+              </a>
             </li>
-            <li class="">
-              <a href="index.html#membresias" data-i18n="nav.memberships" class="">Membresías</a>
+            <li>
+              <a href="galeria.html" data-i18n="nav.gallery">Galería</a>
             </li>
-            <li class="">
-              <a href="index.html#cta" data-i18n="nav.contact" class="">Contactar</a>
+            <li>
+              <a href="index.html#membresias" data-i18n="nav.memberships">
+                Membresías
+              </a>
+            </li>
+            <li>
+              <a href="index.html#cta" data-i18n="nav.contact">Contactar</a>
             </li>
           </ul>
         </div>
@@ -1229,8 +1654,12 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
       </div>
 
       <div class="footer-bottom">
-        <span class="footer-copy" id="footer-copy">© 2026 3NA Fitness Studio. Todos los derechos reservados.</span>
-        <a href="#terms" class="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal-light)] transition-colors border border-[var(--border-s)] hover:border-[var(--border-t)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(45,212,191,0.06)] px-3 py-1.5 rounded-md" data-i18n="footer.terms">Términos de servicio</a>
+        <span class="footer-copy" id="footer-copy">
+          © 2026 3NA Fitness Studio. Todos los derechos reservados.
+        </span>
+        <a href="#terms" class="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal-light)] transition-colors border border-[var(--border-s)] hover:border-[var(--border-t)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(45,212,191,0.06)] px-3 py-1.5 rounded-md" data-i18n="footer.terms">
+          Términos de servicio
+        </a>
         <span class="footer-credit">
           <span data-i18n="footer.credit">Página web diseñada por</span>
           <a href="#" target="_blank" rel="noopener">SC Web Studios</a>
@@ -1480,19 +1909,41 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
         setLanguage(saved === 'en' ? 'en' : 'es');
       })();
 
-      // ── Mobile hamburger ─────────────────────────────────────────
+      // ── Mobile hamburger (official homepage version) ─────────────
       const hamburger = document.getElementById('hamburger');
       const mobileMenu = document.getElementById('mobile-menu');
 
+      function syncMobileMenuPosition() {
+        const nav = document.getElementById('main-nav');
+        if (!nav || window.innerWidth >= 992) return;
+        const navHeight = Math.ceil(nav.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--mobile-nav-height', navHeight + 'px');
+      }
+
       if (hamburger && mobileMenu) {
+        requestAnimationFrame(syncMobileMenuPosition);
+        window.addEventListener('load', syncMobileMenuPosition);
+        window.addEventListener('resize', syncMobileMenuPosition);
+
         hamburger.addEventListener('click', function () {
-          hamburger.classList.toggle('open');
-          mobileMenu.classList.toggle('open');
+          syncMobileMenuPosition();
+
+          const isOpening = !mobileMenu.classList.contains('open');
+
+          hamburger.classList.toggle('open', isOpening);
+          mobileMenu.classList.toggle('open', isOpening);
+
+          hamburger.setAttribute('aria-expanded', String(isOpening));
+          mobileMenu.setAttribute('aria-hidden', String(!isOpening));
         });
+
         document.querySelectorAll('.mobile-link').forEach(function (link) {
           link.addEventListener('click', function () {
             hamburger.classList.remove('open');
             mobileMenu.classList.remove('open');
+
+            hamburger.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
           });
         });
       }
@@ -1583,19 +2034,19 @@ section, #cta { padding-left: 24px; padding-right: 24px; }
       (function(){
         if (typeof translations !== 'undefined') {
           Object.assign(translations.es, {
-            "about.ownerName": "[Nombre del fundador]",
+            "about.ownerName": "Nicolas Rivera Carrasquillo",
             "about.ownerP1": "Después de años participando en la creación y desarrollo de gimnasios para otras personas, nació el deseo de aplicar toda esa experiencia, conocimiento y dedicación en un proyecto propio.",
             "about.ownerP2": "3NA Fitness Studio representa una nueva etapa: un espacio construido con propósito, equipos premium y una visión enfocada en ayudar a las personas a entrenar no solo para verse mejor, sino para vivir con más fuerza, salud y calidad de vida.",
             "about.ownerP3": "Su compromiso es crear una comunidad donde cada persona, sin importar su edad o condición física, pueda sentirse bienvenida, entrenar con confianza y continuar desarrollando su mejor versión.",
-            "about.ownerSignature": "[Firma / Nombre del fundador]",
+            "about.ownerSignature": "Nicolas Rivera Carrasquillo",
             "about.ownerPosition": "Founder & CEO"
           });
           Object.assign(translations.en, {
-            "about.ownerName": "[Founder’s Name]",
+            "about.ownerName": "Nicolas Rivera Carrasquillo",
             "about.ownerP1": "After years of helping create and develop gyms for other people, the desire emerged to apply all that experience, knowledge, and dedication to a personal project.",
             "about.ownerP2": "3NA Fitness Studio represents a new chapter: a space built with purpose, premium equipment, and a vision focused on helping people train not only to look better, but to live with greater strength, health, and quality of life.",
             "about.ownerP3": "His commitment is to create a community where every person, regardless of age or fitness level, can feel welcome, train with confidence, and continue developing the best version of themselves.",
-            "about.ownerSignature": "[Signature / Founder’s Name]",
+            "about.ownerSignature": "Nicolas Rivera Carrasquillo",
             "about.ownerPosition": "Founder & CEO"
           });
           if (typeof currentLang !== 'undefined' && typeof setLanguage === 'function') {
