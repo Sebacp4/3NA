@@ -91,6 +91,7 @@ setPaused(event.data.paused);
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#07090A">
 <title>3NA Fitness Studio — Train Your DNA</title>
 <meta name="description" content="3NA Fitness Studio — Entrena tu ADN. Gimnasio premium en San Juan, Puerto Rico.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1204,35 +1205,6 @@ object-position: center center;
 }
 }
 </style>
-<style id="mobile-header-fix">
-html,
-body {
-width: 100%;
-min-height: 100%;
-margin: 0 !important;
-padding: 0 !important;
-background: #07090A;
-}
-body {
-min-height: 100dvh;
-}
-@media (max-width: 991px) {
-#main-nav {
-position: fixed !important;
-top: 0 !important;
-left: 0 !important;
-right: 0 !important;
-width: 100% !important;
-margin: 0 !important;
-padding-top: max(10px, env(safe-area-inset-top)) !important;
-padding-right: 24px !important;
-padding-bottom: 10px !important;
-padding-left: 24px !important;
-background: rgba(7, 9, 10, 0.96) !important;
-z-index: 1000 !important;
-}
-}
-</style>
 <style id="mobile-menu-animation">
 :root {
 --mobile-nav-height: 74px;
@@ -1331,6 +1303,48 @@ transition-duration: 0.01ms !important;
 <link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
 <style id="all-fonts-style-font-bricolage">
 .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+</style>
+<style id="ios-mobile-header-safe-area-fix">
+@media (max-width: 991px) {
+html,
+body {
+margin: 0 !important;
+padding: 0 !important;
+background: #07090A !important;
+}
+#main-nav {
+position: fixed !important;
+top: 0 !important;
+left: 0 !important;
+right: 0 !important;
+width: 100% !important;
+min-height: calc(74px + env(safe-area-inset-top)) !important;
+padding-top: calc(12px + env(safe-area-inset-top)) !important;
+padding-right: 24px !important;
+padding-bottom: 12px !important;
+padding-left: 24px !important;
+margin: 0 !important;
+background: #07090A !important;
+backdrop-filter: none !important;
+-webkit-backdrop-filter: none !important;
+border-bottom: 1px solid var(--border-s) !important;
+z-index: 10000 !important;
+box-sizing: border-box !important;
+}
+#main-nav::before {
+content: "";
+position: absolute;
+top: calc(-1 * env(safe-area-inset-top));
+left: 0;
+right: 0;
+height: env(safe-area-inset-top);
+background: #07090A;
+pointer-events: none;
+}
+#mobile-menu {
+z-index: 9999 !important;
+}
+}
 </style></head>
   <body class="">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
@@ -2276,81 +2290,80 @@ transition-duration: 0.01ms !important;
         });
       });
     </script>
-        
-        
-        <!-- Page blur transition -->
-        <script>
-          window.addEventListener('DOMContentLoaded', function () {
-                const root = document.documentElement;
-                const body = document.body;
-        
-                const prefersReducedMotion = window.matchMedia(
-                  '(prefers-reduced-motion: reduce)'
-                ).matches;
-        
-                const transitionDuration = prefersReducedMotion ? 0 : 400;
-        
-                function showPage() {
-                  root.classList.remove('page-exit');
-                  body.classList.remove('page-exit');
-        
-                  requestAnimationFrame(function () {
-                    root.classList.add('page-ready');
-                    body.classList.add('page-ready');
-                  });
-                }
-        
-                showPage();
-        
-                document.querySelectorAll('a[href]').forEach(function (link) {
-                  link.addEventListener('click', function (event) {
-                    if (
-                      event.defaultPrevented ||
-                      event.button !== 0 ||
-                      event.metaKey ||
-                      event.ctrlKey ||
-                      event.shiftKey ||
-                      event.altKey ||
-                      link.hasAttribute('download')
-                    ) {
-                      return;
-                    }
-        
-                    const url = new URL(link.href, window.location.href);
-        
-                    const isSameSite =
-                      url.origin === window.location.origin;
-        
-                    const isNewTab =
-                      link.target && link.target !== '_self';
-        
-                    const isSamePageHash =
-                      url.pathname === window.location.pathname &&
-                      url.search === window.location.search &&
-                      Boolean(url.hash);
-        
-                    if (!isSameSite || isNewTab || isSamePageHash) {
-                      return;
-                    }
-        
-                    event.preventDefault();
-        
-                    root.classList.remove('page-ready');
-                    body.classList.remove('page-ready');
-        
-                    root.classList.add('page-exit');
-                    body.classList.add('page-exit');
-        
-                    window.setTimeout(function () {
-                      window.location.href = url.href;
-                    }, transitionDuration);
-                  });
-                });
-        
-                window.addEventListener('pageshow', function () {
-                  showPage();
-                });
+
+    <!-- Page blur transition -->
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+            const root = document.documentElement;
+            const body = document.body;
+
+            const prefersReducedMotion = window.matchMedia(
+              '(prefers-reduced-motion: reduce)'
+            ).matches;
+
+            const transitionDuration = prefersReducedMotion ? 0 : 400;
+
+            function showPage() {
+              root.classList.remove('page-exit');
+              body.classList.remove('page-exit');
+
+              requestAnimationFrame(function () {
+                root.classList.add('page-ready');
+                body.classList.add('page-ready');
               });
-            </script>
-           
-          </body></html>
+            }
+
+            showPage();
+
+            document.querySelectorAll('a[href]').forEach(function (link) {
+              link.addEventListener('click', function (event) {
+                if (
+                  event.defaultPrevented ||
+                  event.button !== 0 ||
+                  event.metaKey ||
+                  event.ctrlKey ||
+                  event.shiftKey ||
+                  event.altKey ||
+                  link.hasAttribute('download')
+                ) {
+                  return;
+                }
+
+                const url = new URL(link.href, window.location.href);
+
+                const isSameSite =
+                  url.origin === window.location.origin;
+
+                const isNewTab =
+                  link.target && link.target !== '_self';
+
+                const isSamePageHash =
+                  url.pathname === window.location.pathname &&
+                  url.search === window.location.search &&
+                  Boolean(url.hash);
+
+                if (!isSameSite || isNewTab || isSamePageHash) {
+                  return;
+                }
+
+                event.preventDefault();
+
+                root.classList.remove('page-ready');
+                body.classList.remove('page-ready');
+
+                root.classList.add('page-exit');
+                body.classList.add('page-exit');
+
+                window.setTimeout(function () {
+                  window.location.href = url.href;
+                }, transitionDuration);
+              });
+            });
+
+            window.addEventListener('pageshow', function () {
+              showPage();
+            });
+          });
+    </script>
+  
+</body></html>
