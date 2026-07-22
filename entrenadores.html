@@ -1,0 +1,2563 @@
+<!DOCTYPE html>
+<html lang="es"><head><script id="aura-preview-performance-controller">
+(function() {
+if (window.__auraPreviewPerformanceController) return;
+const nativeRequestAnimationFrame = window.requestAnimationFrame
+? window.requestAnimationFrame.bind(window)
+: function(callback) { return window.setTimeout(function() { callback(Date.now()); }, 16); };
+const nativeCancelAnimationFrame = window.cancelAnimationFrame
+? window.cancelAnimationFrame.bind(window)
+: window.clearTimeout.bind(window);
+const nativeSetInterval = window.setInterval.bind(window);
+let paused = false;
+let nextFrameId = 1;
+const frameRecords = new Map();
+const pausedFrameCallbacks = new Map();
+const style = document.createElement('style');
+style.id = 'aura-preview-performance-style';
+style.textContent = [
+'html[data-aura-preview-paused="true"] *,',
+'html[data-aura-preview-paused="true"] *::before,',
+'html[data-aura-preview-paused="true"] *::after {',
+'  animation-play-state: paused !important;',
+'  transition-duration: 0s !important;',
+'  scroll-behavior: auto !important;',
+'}'
+].join('\n');
+document.head.appendChild(style);
+window.requestAnimationFrame = function(callback) {
+const frameId = nextFrameId++;
+if (paused) {
+pausedFrameCallbacks.set(frameId, callback);
+frameRecords.set(frameId, { paused: true });
+return frameId;
+}
+const nativeFrameId = nativeRequestAnimationFrame(function(timestamp) {
+frameRecords.delete(frameId);
+callback(timestamp);
+});
+frameRecords.set(frameId, { nativeFrameId: nativeFrameId });
+return frameId;
+};
+window.cancelAnimationFrame = function(frameId) {
+const record = frameRecords.get(frameId);
+pausedFrameCallbacks.delete(frameId);
+if (record && typeof record.nativeFrameId !== 'undefined') {
+nativeCancelAnimationFrame(record.nativeFrameId);
+}
+frameRecords.delete(frameId);
+};
+window.setInterval = function(callback, delay) {
+const args = Array.prototype.slice.call(arguments, 2);
+return nativeSetInterval(function() {
+if (paused) return;
+callback.apply(this, args);
+}, delay);
+};
+const flushPausedFrames = function() {
+const callbacks = Array.from(pausedFrameCallbacks.entries());
+pausedFrameCallbacks.clear();
+callbacks.forEach(function(entry) {
+const frameId = entry[0];
+const callback = entry[1];
+const nativeFrameId = nativeRequestAnimationFrame(function(timestamp) {
+frameRecords.delete(frameId);
+callback(timestamp);
+});
+frameRecords.set(frameId, { nativeFrameId: nativeFrameId });
+});
+};
+const setPaused = function(nextPaused) {
+const shouldPause = Boolean(nextPaused);
+if (paused === shouldPause) return;
+paused = shouldPause;
+document.documentElement.toggleAttribute('data-aura-preview-paused', paused);
+if (!paused) {
+flushPausedFrames();
+}
+};
+window.__auraPreviewPerformanceController = {
+setPaused: setPaused,
+get paused() {
+return paused;
+}
+};
+window.addEventListener('message', function(event) {
+if (event.source !== window.parent) return;
+if (!event.data || event.data.type !== 'aura-preview-performance-mode') return;
+setPaused(event.data.paused);
+});
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrenadores | 3NA Fitness Studio</title>
+<meta name="description" content="Conoce a los entrenadores de 3NA Fitness Studio en San Juan, explora sus especialidades, disponibilidad y solicita orientación para comenzar tu proceso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<style>
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--bg-0: #07090A;
+--bg-1: #0B0E10;
+--bg-2: #101416;
+--teal: #2DD4BF;
+--teal-light: #5EEAD4;
+--teal-deep: #14B8A6;
+--text: #f0f2f2;
+--muted: #8a9496;
+--glass: rgba(255,255,255,0.03);
+--border-t: rgba(45,212,191,0.15);
+--border-s: rgba(255,255,255,0.06);
+}
+html { scroll-behavior: smooth; }
+body {
+font-family: 'Inter', system-ui, -apple-system, sans-serif;
+background: var(--bg-0);
+color: var(--text);
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+/* ─── Grain overlay ────────────────────────────────────────── */
+body::before {
+content: '';
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 9998;
+opacity: 0.035;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size: 180px 180px;
+}
+/* ─── Scroll reveal ────────────────────────────────────────── */
+.reveal {
+opacity: 0;
+transform: translateY(24px);
+transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+/* ─── Typography helpers ───────────────────────────────────── */
+.text-grad {
+background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+.section-label {
+font-size: 0.72rem;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--teal);
+font-weight: 500;
+}
+.section-heading {
+font-size: clamp(1.8rem, 3vw, 2.2rem);
+font-weight: 200;
+letter-spacing: -0.04em;
+margin-top: 12px;
+}
+/* ─── NAV ──────────────────────────────────────────────────── */
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 1000;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 10px 48px;
+background: rgba(7,9,10,0.72);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border-bottom: 1px solid var(--border-s);
+transition: background 0.3s;
+}
+.nav-logo { display: inline-flex; align-items: baseline; gap: 8px; }
+.logo-text {
+font-family: 'Bebas Neue', sans-serif;
+font-weight: 400;
+letter-spacing: 0.12em;
+color: var(--text);
+line-height: 1;
+position: relative;
+}
+.nav-logo .logo-text { font-size: 1.5rem; }
+.logo-text::after {
+content: '';
+position: absolute;
+bottom: -3px;
+left: 0;
+width: 100%;
+height: 2.5px;
+border-radius: 2px;
+background: linear-gradient(90deg, var(--teal), var(--teal-light));
+}
+.logo-sub {
+font-size: 0.6rem;
+letter-spacing: 0.22em;
+color: var(--muted);
+text-transform: uppercase;
+}
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a {
+font-size: 0.82rem;
+font-weight: 400;
+color: var(--muted);
+letter-spacing: -0.01em;
+transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta { display: flex; align-items: center; gap: 16px; }
+.btn-nav {
+font-size: 0.8rem;
+font-weight: 500;
+padding: 8px 20px;
+border-radius: 999px;
+background: rgba(45,212,191,0.06);
+border: 1px solid var(--border-t);
+color: var(--teal-light);
+cursor: pointer;
+transition: background 0.2s, box-shadow 0.2s;
+box-shadow: 0 0 12px rgba(45,212,191,0.1);
+}
+.btn-nav:hover { background: rgba(45,212,191,0.12); box-shadow: 0 0 16px rgba(45,212,191,0.25); }
+/* Language toggle */
+.lang-toggle {
+display: flex;
+align-items: center;
+gap: 2px;
+padding: 3px;
+border-radius: 999px;
+border: 1px solid var(--border-s);
+background: rgba(255,255,255,0.03);
+}
+.lang-btn {
+font-size: 0.72rem;
+font-weight: 500;
+letter-spacing: 0.08em;
+padding: 5px 12px;
+border-radius: 999px;
+border: none;
+background: transparent;
+color: var(--muted);
+cursor: pointer;
+transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.lang-btn:hover { color: var(--text); }
+.lang-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.lang-btn.active {
+background: rgba(45,212,191,0.12);
+color: var(--teal-light);
+box-shadow: 0 0 12px rgba(45,212,191,0.2), inset 0 0 0 1px rgba(45,212,191,0.3);
+}
+/* Hamburger */
+.hamburger {
+display: none;
+flex-direction: column;
+gap: 5px;
+cursor: pointer;
+padding: 4px;
+background: none;
+border: none;
+}
+.hamburger span {
+display: block;
+width: 22px; height: 1.5px;
+background: var(--text);
+transition: transform 0.3s, opacity 0.3s;
+transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu {
+display: none;
+position: fixed;
+top: 53px; left: 0; right: 0;
+background: rgba(7,9,10,0.97);
+backdrop-filter: blur(20px);
+border-bottom: 1px solid var(--border-s);
+padding: 24px 24px 32px;
+z-index: 999;
+flex-direction: column;
+gap: 4px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+font-size: 1rem;
+color: var(--muted);
+letter-spacing: -0.02em;
+padding: 12px 0;
+border-bottom: 1px solid var(--border-s);
+transition: color 0.2s;
+overflow-wrap: break-word;
+}
+.mobile-menu a:hover { color: var(--text); }
+.mobile-lang-row {
+display: flex;
+justify-content: flex-start;
+padding-top: 20px;
+}
+/* ─── HERO ─────────────────────────────────────────────────── */
+#inicio {
+position: relative;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+overflow: hidden;
+}
+.hero-mesh {
+position: absolute;
+inset: 0;
+z-index: 0;
+background:
+radial-gradient(ellipse 80% 60% at 70% 40%, rgba(45,212,191,0.08) 0%, transparent 60%),
+radial-gradient(ellipse 60% 50% at 20% 70%, rgba(20,184,166,0.06) 0%, transparent 55%);
+}
+.hero-grid-lines {
+position: absolute;
+inset: 0;
+z-index: 0;
+background-image:
+linear-gradient(rgba(45,212,191,0.04) 1px, transparent 1px),
+linear-gradient(90deg, rgba(45,212,191,0.04) 1px, transparent 1px);
+background-size: 80px 80px;
+mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 60%, transparent 100%);
+}
+.hero-right {
+position: absolute;
+top: 0; right: 0; bottom: 0;
+width: 60%;
+z-index: 0;
+overflow: hidden;
+-webkit-mask-image:
+linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.7) 30%, black 50%),
+linear-gradient(to top, transparent 0%, black 25%);
+-webkit-mask-composite: destination-in;
+mask-image:
+linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 15%, rgba(0,0,0,0.7) 30%, black 50%),
+linear-gradient(to top, transparent 0%, black 25%);
+mask-composite: intersect;
+}
+.hero-right img {
+width: 100%; height: 100%;
+object-fit: cover;
+filter: saturate(0.85) contrast(1.1);
+}
+.hero-split {
+position: relative;
+z-index: 1;
+padding: 120px 48px 60px;
+max-width: 52%;
+}
+.hero-eyebrow {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 28px;
+}
+.hero-eyebrow-dot {
+width: 6px; height: 6px;
+border-radius: 50%;
+background: var(--teal);
+box-shadow: 0 0 8px rgba(45,212,191,0.6);
+animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+0%, 100% { box-shadow: 0 0 8px rgba(45,212,191,0.6); }
+50% { box-shadow: 0 0 16px rgba(45,212,191,0.9); }
+}
+.hero-eyebrow span {
+font-size: 0.72rem;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+color: var(--teal);
+font-weight: 500;
+}
+.hero-headline {
+font-size: clamp(3.2rem, 10vw, 9rem);
+font-weight: 200;
+letter-spacing: -0.04em;
+line-height: 0.92;
+text-transform: uppercase;
+margin-bottom: 28px;
+}
+.hero-headline .line-1, .hero-headline .line-2 { display: block; color: var(--text); }
+.hero-headline .line-3 {
+display: block;
+background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 60%, var(--teal) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+.hero-desc p {
+font-size: 0.88rem;
+line-height: 1.7;
+color: var(--muted);
+font-weight: 300;
+letter-spacing: -0.01em;
+max-width: 400px;
+margin-bottom: 28px;
+}
+.hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 14px 28px;
+font-size: 0.85rem;
+font-weight: 500;
+letter-spacing: 0.02em;
+cursor: pointer;
+border: none;
+color: #04201c;
+background: linear-gradient(135deg, var(--teal-deep), var(--teal));
+box-shadow: 0 4px 20px rgba(45,212,191,0.3), 0 0 0 1px rgba(94,234,212,0.2);
+transition: box-shadow 0.3s, transform 0.3s;
+}
+.btn-primary:hover {
+box-shadow: 0 8px 32px rgba(45,212,191,0.45);
+transform: translateY(-1px);
+}
+.btn-ghost {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+padding: 14px 24px;
+font-size: 0.85rem;
+font-weight: 400;
+color: var(--muted);
+background: rgba(255,255,255,0.03);
+border: 1px solid var(--border-s);
+cursor: pointer;
+transition: color 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
+backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+color: var(--text);
+border-color: rgba(45,212,191,0.2);
+background: rgba(45,212,191,0.04);
+box-shadow: 0 4px 24px rgba(45,212,191,0.1);
+}
+.btn-ghost iconify-icon { color: var(--teal); }
+/* ─── STUDIO INTRO ─────────────────────────────────────────── */
+#estudio {
+padding: 100px 48px;
+background:
+radial-gradient(ellipse 60% 50% at 80% 20%, rgba(45,212,191,0.04) 0%, transparent 70%),
+var(--bg-1);
+position: relative;
+}
+#estudio::before, #experiencia::before, #galeria::before, #membresias::before, #ubicacion::before, #faq::before, #cta::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--border-t), transparent);
+}
+.studio-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 64px;
+align-items: center;
+max-width: 1200px;
+margin: 0 auto;
+}
+.studio-copy p {
+font-size: 0.88rem;
+line-height: 1.75;
+color: var(--muted);
+font-weight: 300;
+margin-top: 20px;
+}
+.studio-img {
+position: relative;
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 0 12px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+}
+.studio-img::before {
+content: '';
+position: absolute;
+inset: 0;
+border-radius: 16px;
+padding: 1px;
+background: linear-gradient(160deg, rgba(45,212,191,0.35), transparent 50%);
+-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+pointer-events: none;
+z-index: 2;
+}
+.studio-img img { width: 100%; height: 380px; object-fit: cover; filter: saturate(0.85) contrast(1.08); }
+/* ─── BENEFITS ─────────────────────────────────────────────── */
+.benefits-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 20px;
+max-width: 1200px;
+margin: 56px auto 0;
+}
+.benefit-card {
+padding: 28px 24px;
+background: var(--glass);
+border: 1px solid var(--border-s);
+border-radius: 14px;
+backdrop-filter: blur(8px);
+transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.benefit-card:hover {
+border-color: var(--border-t);
+box-shadow: 0 8px 32px rgba(45,212,191,0.08);
+transform: translateY(-2px);
+}
+.benefit-icon {
+width: 40px; height: 40px;
+border-radius: 10px;
+background: rgba(45,212,191,0.08);
+border: 1px solid rgba(45,212,191,0.2);
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--teal);
+font-size: 18px;
+margin-bottom: 16px;
+}
+.benefit-card h3 {
+font-size: 0.95rem;
+font-weight: 500;
+letter-spacing: -0.02em;
+margin-bottom: 8px;
+}
+.benefit-card p {
+font-size: 0.78rem;
+line-height: 1.65;
+color: var(--muted);
+font-weight: 300;
+}
+/* ─── EXPERIENCE ───────────────────────────────────────────── */
+#experiencia {
+padding: 100px 48px;
+background: var(--bg-0);
+position: relative;
+}
+.exp-blocks { max-width: 1000px; margin: 56px auto 0; }
+.exp-block {
+display: grid;
+grid-template-columns: 160px 1fr;
+align-items: center;
+padding: 44px 16px;
+border-top: 1px solid var(--border-s);
+gap: 48px;
+transition: background 0.3s;
+}
+.exp-block:hover { background: rgba(45,212,191,0.015); }
+.exp-block:last-child { border-bottom: 1px solid var(--border-s); }
+.exp-num {
+font-size: clamp(3.5rem, 8vw, 6rem);
+font-weight: 700;
+color: transparent;
+-webkit-text-stroke: 1px rgba(45,212,191,0.35);
+line-height: 1;
+letter-spacing: -0.05em;
+}
+.exp-content h3 {
+font-size: 1.2rem;
+font-weight: 300;
+letter-spacing: -0.03em;
+margin-bottom: 12px;
+}
+.exp-content p {
+font-size: 0.85rem;
+line-height: 1.75;
+color: var(--muted);
+font-weight: 300;
+max-width: 580px;
+}
+/* ─── VIDEO ────────────────────────────────────────────────── */
+#video {
+padding: 0 48px 100px;
+background: var(--bg-0);
+}
+.video-frame {
+position: relative;
+max-width: 1100px;
+margin: 0 auto;
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 0 12px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+cursor: pointer;
+}
+.video-frame img {
+width: 100%;
+height: 420px;
+object-fit: cover;
+filter: saturate(0.75) brightness(0.6) contrast(1.1);
+transition: filter 0.4s;
+}
+.video-frame:hover img { filter: saturate(0.85) brightness(0.7) contrast(1.05); }
+.video-play {
+position: absolute;
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+width: 72px; height: 72px;
+border-radius: 50%;
+background: rgba(45,212,191,0.15);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(45,212,191,0.4);
+display: flex;
+align-items: center;
+justify-content: center;
+color: var(--teal-light);
+font-size: 26px;
+box-shadow: 0 0 40px rgba(45,212,191,0.3);
+transition: transform 0.3s, box-shadow 0.3s;
+}
+.video-frame:hover .video-play { transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 0 60px rgba(45,212,191,0.45); }
+.video-caption {
+position: absolute;
+bottom: 24px; left: 28px;
+z-index: 2;
+font-size: 0.82rem;
+color: var(--text);
+padding: 10px 16px;
+background: rgba(7,9,10,0.7);
+backdrop-filter: blur(16px);
+border: 1px solid var(--border-t);
+border-radius: 10px;
+}
+/* ─── GALLERY ──────────────────────────────────────────────── */
+#galeria {
+padding: 100px 48px;
+background: var(--bg-1);
+position: relative;
+}
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 16px;
+max-width: 1200px;
+margin: 56px auto 0;
+}
+.gallery-item {
+position: relative;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.04);
+}
+.gallery-item img {
+width: 100%;
+height: 260px;
+object-fit: cover;
+filter: saturate(0.8) contrast(1.08);
+transition: transform 0.5s, filter 0.5s;
+}
+.gallery-item:hover img { transform: scale(1.04); filter: saturate(1) contrast(1.05); }
+.gallery-swipe {
+display: none;
+margin-top: 20px;
+font-size: 0.75rem;
+color: var(--teal);
+letter-spacing: 0.06em;
+text-align: center;
+}
+/* ─── MEMBERSHIP ───────────────────────────────────────────── */
+#membresias {
+padding: 100px 48px;
+background: var(--bg-0);
+position: relative;
+text-align: center;
+}
+.membership-badge {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+font-size: 0.7rem;
+font-weight: 600;
+letter-spacing: 0.16em;
+padding: 6px 16px;
+border-radius: 999px;
+border: 1px solid var(--border-t);
+color: var(--teal-light);
+background: rgba(45,212,191,0.06);
+box-shadow: 0 0 20px rgba(45,212,191,0.12);
+margin-bottom: 24px;
+}
+.membership-badge .hero-eyebrow-dot { margin: 0; }
+#membresias h2 {
+font-size: clamp(2rem, 4vw, 3rem);
+font-weight: 200;
+letter-spacing: -0.04em;
+margin-bottom: 20px;
+}
+#membresias > p {
+font-size: 0.88rem;
+line-height: 1.7;
+color: var(--muted);
+font-weight: 300;
+max-width: 520px;
+margin: 0 auto 36px;
+}
+/* ─── LOCATION ─────────────────────────────────────────────── */
+#ubicacion {
+padding: 100px 48px;
+background: var(--bg-1);
+position: relative;
+}
+.location-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 64px;
+max-width: 1100px;
+margin: 56px auto 0;
+align-items: start;
+}
+.location-info h3 {
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--teal);
+margin-bottom: 16px;
+}
+.location-address {
+display: flex;
+align-items: flex-start;
+gap: 10px;
+font-size: 0.88rem;
+color: var(--text);
+line-height: 1.6;
+font-weight: 300;
+margin-bottom: 36px;
+}
+.location-address iconify-icon { color: var(--teal); font-size: 17px; margin-top: 2px; }
+.hours-row {
+display: flex;
+justify-content: space-between;
+padding: 12px 0;
+border-bottom: 1px solid var(--border-s);
+font-size: 0.84rem;
+font-weight: 300;
+}
+.hours-row span:first-child { color: var(--muted); }
+.hours-row span:last-child { color: var(--text); }
+.location-buttons {
+display: flex;
+flex-direction: column;
+gap: 12px;
+margin-top: 36px;
+}
+.btn-location {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+padding: 13px 24px;
+font-size: 0.84rem;
+font-weight: 500;
+border: 1px solid var(--border-t);
+background: rgba(45,212,191,0.04);
+color: var(--teal-light);
+cursor: pointer;
+transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn-location:hover {
+background: rgba(45,212,191,0.1);
+box-shadow: 0 4px 24px rgba(45,212,191,0.18);
+transform: translateY(-1px);
+}
+.location-map {
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 0 12px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04);
+position: relative;
+}
+.location-map img { width: 100%; height: 100%; min-height: 420px; object-fit: cover; filter: saturate(0.6) brightness(0.75); }
+/* ─── FAQ ──────────────────────────────────────────────────── */
+#faq {
+padding: 100px 48px;
+background: var(--bg-0);
+position: relative;
+}
+.faq-list { max-width: 800px; margin: 56px auto 0; }
+.faq-item {
+border-top: 1px solid var(--border-s);
+padding: 0 12px;
+margin: 0 -12px;
+overflow: hidden;
+border-radius: 4px;
+transition: background 0.3s;
+}
+.faq-item:last-child { border-bottom: 1px solid var(--border-s); }
+.faq-item:hover { background: rgba(45,212,191,0.015); }
+.faq-item.open { background: rgba(45,212,191,0.02); }
+.faq-question {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 22px 0;
+cursor: pointer;
+font-size: 0.9rem;
+font-weight: 400;
+color: var(--muted);
+transition: color 0.2s;
+gap: 16px;
+user-select: none;
+}
+.faq-question:hover { color: var(--text); }
+.faq-item.open .faq-question { color: var(--teal-light); }
+.faq-icon {
+width: 20px; height: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+font-size: 16px;
+color: var(--teal);
+transition: transform 0.3s;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faq-item.open .faq-answer { max-height: 300px; }
+.faq-answer-inner {
+padding: 0 0 24px;
+font-size: 0.84rem;
+line-height: 1.75;
+color: var(--muted);
+font-weight: 300;
+}
+/* ─── FINAL CTA ────────────────────────────────────────────── */
+#cta {
+padding: 120px 48px;
+background:
+radial-gradient(ellipse 70% 50% at 50% 50%, rgba(45,212,191,0.07) 0%, transparent 70%),
+var(--bg-1);
+position: relative;
+text-align: center;
+}
+.cta-headline {
+font-size: clamp(2.4rem, 7vw, 5.5rem);
+font-weight: 200;
+letter-spacing: -0.04em;
+text-transform: uppercase;
+line-height: 1;
+margin: 20px 0 20px;
+}
+#cta > p {
+font-size: 0.88rem;
+color: var(--muted);
+font-weight: 300;
+max-width: 460px;
+margin: 0 auto 36px;
+line-height: 1.7;
+}
+/* ─── FOOTER ───────────────────────────────────────────────── */
+footer {
+background: var(--bg-0);
+border-top: 1px solid var(--border-s);
+padding: 64px 48px 36px;
+position: relative;
+}
+footer::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, rgba(45,212,191,0.25), transparent);
+}
+.footer-grid {
+display: grid;
+grid-template-columns: 1.5fr 1fr 1fr;
+gap: 48px;
+margin-bottom: 56px;
+max-width: 1200px;
+margin-left: auto;
+margin-right: auto;
+}
+.footer-logo { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+.footer-logo .logo-text { font-size: 1.8rem; }
+.footer-brand p {
+font-size: 0.78rem;
+line-height: 1.65;
+color: var(--muted);
+font-weight: 300;
+max-width: 240px;
+}
+.footer-social { display: flex; gap: 10px; margin-top: 20px; }
+.footer-social a {
+width: 32px; height: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 1px solid var(--border-s);
+border-radius: 8px;
+color: var(--muted);
+transition: color 0.2s, border-color 0.2s, background 0.2s;
+font-size: 14px;
+background: rgba(255,255,255,0.02);
+}
+.footer-social a:hover {
+color: var(--teal-light);
+border-color: var(--border-t);
+background: rgba(45,212,191,0.06);
+}
+.footer-col h4 {
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--text);
+margin-bottom: 16px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a, .footer-col ul li span {
+font-size: 0.8rem;
+color: var(--muted);
+font-weight: 300;
+transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: var(--text); }
+.footer-bottom {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding-top: 28px;
+border-top: 1px solid var(--border-s);
+max-width: 1200px;
+margin: 0 auto;
+gap: 12px;
+flex-wrap: wrap;
+}
+.footer-copy, .footer-credit {
+font-size: 0.75rem;
+color: var(--muted);
+font-weight: 300;
+}
+.footer-credit a { color: var(--teal); }
+/* ─── FLOATING WHATSAPP ────────────────────────────────────── */
+.wa-float {
+position: fixed;
+bottom: 24px;
+right: 24px;
+z-index: 1001;
+width: 54px; height: 54px;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--teal-deep), var(--teal));
+display: flex;
+align-items: center;
+justify-content: center;
+color: #04201c;
+font-size: 26px;
+box-shadow: 0 8px 32px rgba(45,212,191,0.4);
+transition: transform 0.2s, box-shadow 0.2s;
+}
+.wa-float:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 12px 40px rgba(45,212,191,0.55); }
+/* ─── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 991px) {
+nav { padding: 10px 24px; }
+.nav-links, .nav-cta { display: none; }
+.hamburger { display: flex; }
+.hero-split { padding: 110px 24px 40px; max-width: 65%; }
+.hero-right { width: 55%; }
+#estudio, #experiencia, #galeria, #membresias, #ubicacion, #faq, #cta { padding-left: 24px; padding-right: 24px; padding-top: 80px; padding-bottom: 80px; }
+#video { padding: 0 24px 80px; }
+.studio-grid { grid-template-columns: 1fr; gap: 40px; }
+.benefits-grid { grid-template-columns: 1fr 1fr; }
+.exp-block { grid-template-columns: 90px 1fr; gap: 24px; }
+.gallery-grid {
+display: flex;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+-webkit-overflow-scrolling: touch;
+gap: 12px;
+padding-bottom: 8px;
+}
+.gallery-item { flex: 0 0 78%; scroll-snap-align: start; }
+.gallery-swipe { display: block; }
+.location-grid { grid-template-columns: 1fr; gap: 40px; }
+.location-map img { min-height: 280px; }
+.footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+.footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+}
+@media (max-width: 575px) {
+.hero-split { max-width: 100%; padding: 110px 20px 40px; }
+.hero-right { width: 100%; opacity: 0.3; }
+.hero-actions { flex-direction: column; align-items: stretch; }
+.btn-primary, .btn-ghost { justify-content: center; }
+.benefits-grid { grid-template-columns: 1fr; }
+.exp-block { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
+.video-frame img { height: 240px; }
+.footer-grid { grid-template-columns: 1fr; gap: 28px; }
+footer { padding: 40px 20px 24px; }
+}
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<style id="desktop-hero-styles">
+@media (min-width: 992px) {
+#inicio .hero-split img {
+width: 580px !important;
+object-position: left center !important;
+}
+#inicio .hero-headline .line-1,
+#inicio .hero-headline .line-2 {
+display: inline-block !important;
+}
+#inicio .hero-headline {
+font-size: clamp(3.2rem, 8vw, 8.5rem) !important;
+}
+#inicio .hero-split {
+max-width: 60% !important;
+}
+}
+</style>
+<style id="hero-industrial-styles">
+.hero-headline {
+font-weight: 900 !important;
+letter-spacing: -0.05em !important;
+}
+.text-metallic {
+background-image:
+radial-gradient(circle at 40px 25%, rgba(0,0,0,0.8) 1.5px, rgba(255,255,255,0.5) 3px, transparent 4px),
+radial-gradient(circle at 40px 75%, rgba(0,0,0,0.8) 1.5px, rgba(255,255,255,0.5) 3px, transparent 4px),
+repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 1px, transparent 1px, transparent 5px),
+repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 2px, transparent 2px, transparent 8px),
+linear-gradient(180deg, #f0f2f5 0%, #a8b0b8 40%, #596168 50%, #9ba3a9 100%) !important;
+background-size: 80px 100%, 80px 100%, 100% 100%, 100% 100%, 100% 100% !important;
+background-position: 0 0, 0 0, 0 0, 0 0, 0 0 !important;
+-webkit-background-clip: text !important;
+-webkit-text-fill-color: transparent !important;
+background-clip: text !important;
+color: transparent !important;
+filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.8)) !important;
+}
+.hero-headline .text-neon,
+.text-neon {
+color: #ffffff !important;
+background: none !important;
+-webkit-text-fill-color: #ffffff !important;
+text-shadow:
+0 0 5px #ffffff,
+0 0 10px #ffffff,
+0 0 20px var(--teal),
+0 0 40px var(--teal),
+0 0 60px var(--teal-deep),
+0 0 80px var(--teal-deep) !important;
+filter: drop-shadow(0px 0px 10px rgba(45,212,191,0.6)) !important;
+}
+#cta .text-neon {
+text-shadow:
+0 0 4px rgba(255,255,255,0.9),
+0 0 10px rgba(94,234,212,0.55),
+0 0 18px rgba(45,212,191,0.45),
+0 0 26px rgba(20,184,166,0.32) !important;
+filter: drop-shadow(0px 0px 8px rgba(45,212,191,0.45)) !important;
+}
+#cta .hero-headline {
+font-size: clamp(2.4rem, 7vw, 5.5rem) !important;
+line-height: 1 !important;
+margin: 20px 0 20px !important;
+text-transform: uppercase !important;
+font-weight: 900 !important;
+letter-spacing: -0.05em !important;
+}
+</style>
+<style id="mobile-benefits-styles">
+.benefits-swipe { display: none; }
+@media (max-width: 575px) {
+#estudio .benefits-grid {
+display: flex !important;
+overflow-x: auto !important;
+scroll-snap-type: x mandatory !important;
+-webkit-overflow-scrolling: touch !important;
+gap: 12px !important;
+margin-top: 32px !important;
+padding-bottom: 12px !important;
+scrollbar-width: none !important;
+}
+#estudio .benefits-grid::-webkit-scrollbar { display: none !important; }
+#estudio .benefits-grid > div.group {
+flex: 0 0 74vw !important;
+max-width: 275px !important;
+scroll-snap-align: start !important;
+min-height: 0 !important;
+height: auto !important;
+padding: 16px 18px !important;
+justify-content: flex-start !important;
+}
+#estudio .benefits-grid > div.group > .z-10 {
+margin-top: 0 !important;
+height: auto !important;
+justify-content: flex-start !important;
+}
+#estudio .benefits-grid h3 { font-size: 0.95rem !important; margin: 0 !important; }
+#estudio .benefits-grid .w-6 { width: 16px !important; margin-top: 4px !important; margin-bottom: 6px !important; }
+#estudio .benefits-grid p { font-size: 0.8rem !important; line-height: 1.45 !important; margin: 0 !important; }
+.benefits-swipe {
+display: block;
+margin-top: 16px;
+font-size: 0.75rem;
+color: var(--teal);
+letter-spacing: 0.06em;
+text-align: center;
+}
+#estudio { padding-bottom: 110px !important; }
+}
+</style>
+<style id="video-player-styles">
+.video-frame video {
+width: 100%;
+height: 420px;
+object-fit: cover;
+filter: saturate(0.75) brightness(0.6) contrast(1.1);
+transition: filter 0.4s;
+}
+.video-frame:hover video:not(.is-playing) {
+filter: saturate(0.85) brightness(0.7) contrast(1.05);
+}
+.video-frame video.is-playing {
+filter: none;
+}
+@media (max-width: 575px) {
+.video-frame video {
+height: 240px;
+}
+}
+</style>
+<style id="hero-mobile-image-styles">
+.hero-picture,
+.hero-main-image {
+width: 100%;
+height: 100%;
+display: block;
+}
+.hero-main-image {
+object-fit: cover;
+object-position: 72% center;
+}
+@media (max-width: 575px) {
+.hero-main-image {
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: center center;
+}
+}
+</style>
+<style id="trainers-page-styles">
+/* ─── TRAINERS PAGE ─────────────────────────────────────────── */
+#main-nav .nav-links a.nav-active,
+#mobile-menu a.nav-active {
+color: var(--text);
+position: relative;
+}
+#main-nav .nav-links a.nav-active::after {
+content: '';
+position: absolute;
+left: 0;
+bottom: -8px;
+width: 100%;
+height: 2px;
+border-radius: 999px;
+background: linear-gradient(90deg, var(--teal), var(--teal-light));
+opacity: 0.9;
+}
+body { overflow-x: hidden; }
+#trainers-hero {
+position: relative;
+min-height: 72vh;
+display: flex;
+align-items: center;
+overflow: hidden;
+background: var(--bg-0);
+}
+#trainers-hero::before {
+content: '';
+position: absolute;
+inset: 0;
+background:
+radial-gradient(ellipse 80% 60% at 70% 35%, rgba(45,212,191,0.09) 0%, transparent 60%),
+radial-gradient(ellipse 65% 55% at 20% 75%, rgba(20,184,166,0.06) 0%, transparent 60%);
+pointer-events: none;
+}
+.trainers-gridlines {
+position: absolute;
+inset: 0;
+background-image:
+linear-gradient(rgba(45,212,191,0.045) 1px, transparent 1px),
+linear-gradient(90deg, rgba(45,212,191,0.045) 1px, transparent 1px);
+background-size: 82px 82px;
+mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 70%, transparent 100%);
+pointer-events: none;
+}
+.trainers-hero-wrap {
+position: relative;
+z-index: 1;
+max-width: 1200px;
+margin: 0 auto;
+padding: 128px 48px 70px;
+display: grid;
+grid-template-columns: 1.05fr 0.95fr;
+gap: 64px;
+align-items: center;
+}
+.trainers-hero-copy p {
+font-size: 0.9rem;
+line-height: 1.75;
+color: var(--muted);
+font-weight: 300;
+max-width: 520px;
+margin-top: 18px;
+}
+.trainers-hero-title {
+margin-top: 14px;
+font-size: clamp(2.2rem, 5.4vw, 4.6rem);
+line-height: 0.98;
+text-transform: uppercase;
+letter-spacing: -0.05em;
+font-weight: 900;
+}
+.trainers-hero-title span { display: block; }
+.trainers-hero-media {
+position: relative;
+border-radius: 18px;
+overflow: hidden;
+background: rgba(255,255,255,0.02);
+border: 1px solid var(--border-s);
+box-shadow: 0 18px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03);
+min-height: 430px;
+}
+.trainers-hero-media::before {
+content: '';
+position: absolute;
+inset: 0;
+padding: 1px;
+background: linear-gradient(160deg, rgba(45,212,191,0.35), transparent 55%);
+-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+pointer-events: none;
+z-index: 2;
+border-radius: 18px;
+}
+.trainers-hero-media img {
+width: 100%;
+height: 100%;
+min-height: 430px;
+object-fit: cover;
+filter: saturate(0.8) brightness(0.65) contrast(1.12);
+transform: scale(1.02);
+}
+#trainers-section {
+position: relative;
+background: var(--bg-1);
+padding: 80px 48px 110px;
+}
+#trainers-section::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--border-t), transparent);
+}
+.filter-bar {
+max-width: 1200px;
+margin: 0 auto 34px;
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+align-items: center;
+}
+.filter-btn {
+appearance: none;
+border: 1px solid var(--border-s);
+background: rgba(255,255,255,0.02);
+color: var(--muted);
+padding: 10px 14px;
+border-radius: 999px;
+font-size: 0.78rem;
+letter-spacing: 0.04em;
+cursor: pointer;
+transition: color 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+backdrop-filter: blur(10px);
+}
+.filter-btn:hover {
+color: var(--text);
+border-color: rgba(45,212,191,0.18);
+background: rgba(45,212,191,0.04);
+}
+.filter-btn.active {
+color: var(--teal-light);
+border-color: rgba(45,212,191,0.45);
+background: rgba(45,212,191,0.10);
+box-shadow: 0 0 18px rgba(45,212,191,0.18), inset 0 0 0 1px rgba(45,212,191,0.22);
+}
+.trainers-grid {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 18px;
+}
+.trainer-card {
+position: relative;
+background: rgba(255,255,255,0.03);
+border: 1px solid var(--border-s);
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.trainer-card::after {
+content: '';
+position: absolute;
+inset: -1px;
+border-radius: 16px;
+pointer-events: none;
+opacity: 0;
+transition: opacity 0.25s ease;
+background: radial-gradient(1200px 420px at 30% 0%, rgba(45,212,191,0.18), transparent 40%);
+}
+.trainer-card:hover {
+transform: translateY(-3px);
+border-color: rgba(45,212,191,0.22);
+box-shadow: 0 18px 60px rgba(0,0,0,0.5), 0 0 28px rgba(45,212,191,0.08);
+}
+.trainer-card:hover::after { opacity: 1; }
+.trainer-photo {
+width: 100%;
+height: 240px;
+object-fit: cover;
+filter: saturate(0.82) brightness(0.7) contrast(1.1);
+background: rgba(255,255,255,0.02);
+}
+.trainer-body { padding: 18px 18px 16px; position: relative; z-index: 1; }
+.trainer-name {
+font-size: 1.15rem;
+font-weight: 600;
+letter-spacing: -0.02em;
+color: var(--text);
+}
+.trainer-title {
+margin-top: 6px;
+font-size: 0.82rem;
+color: var(--muted);
+font-weight: 300;
+letter-spacing: -0.01em;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tag {
+font-size: 0.72rem;
+padding: 6px 10px;
+border-radius: 999px;
+border: 1px solid rgba(45,212,191,0.22);
+background: rgba(45,212,191,0.07);
+color: var(--teal-light);
+letter-spacing: 0.02em;
+font-weight: 500;
+}
+.trainer-desc {
+margin-top: 12px;
+font-size: 0.84rem;
+line-height: 1.7;
+color: var(--muted);
+font-weight: 300;
+}
+.trainer-availability {
+margin-top: 16px;
+padding-top: 14px;
+border-top: 1px solid var(--border-s);
+}
+.trainer-availability h4 {
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(--text);
+opacity: 0.92;
+margin-bottom: 10px;
+}
+.week-list { display: grid; grid-template-columns: 1fr; gap: 6px; }
+.week-row {
+display: flex;
+justify-content: space-between;
+gap: 12px;
+font-size: 0.78rem;
+color: var(--muted);
+font-weight: 300;
+}
+.week-row span:first-child { color: rgba(240,242,242,0.82); }
+.trainer-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.btn-card {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 11px 12px;
+font-size: 0.8rem;
+border-radius: 12px;
+border: 1px solid var(--border-s);
+background: rgba(255,255,255,0.02);
+color: var(--text);
+cursor: pointer;
+transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+text-align: center;
+font-weight: 500;
+}
+.btn-card:hover {
+border-color: rgba(45,212,191,0.20);
+background: rgba(45,212,191,0.04);
+transform: translateY(-1px);
+box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+}
+.btn-card.primary {
+border-color: rgba(45,212,191,0.35);
+background: linear-gradient(135deg, rgba(20,184,166,0.22), rgba(45,212,191,0.14));
+color: var(--teal-light);
+box-shadow: 0 0 18px rgba(45,212,191,0.12);
+}
+.btn-card.primary:hover {
+background: linear-gradient(135deg, rgba(20,184,166,0.30), rgba(45,212,191,0.18));
+box-shadow: 0 0 26px rgba(45,212,191,0.18);
+}
+#trainers-cta {
+padding: 90px 48px;
+background: var(--bg-0);
+position: relative;
+text-align: center;
+}
+#trainers-cta::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(--border-t), transparent);
+}
+.trainers-cta-inner {
+max-width: 980px;
+margin: 0 auto;
+padding: 34px 24px;
+border-radius: 18px;
+background: radial-gradient(900px 420px at 50% 0%, rgba(45,212,191,0.09), transparent 60%), rgba(255,255,255,0.02);
+border: 1px solid rgba(255,255,255,0.06);
+box-shadow: 0 20px 70px rgba(0,0,0,0.55);
+overflow: hidden;
+position: relative;
+}
+.trainers-cta-inner::after {
+content: '';
+position: absolute;
+inset: 0;
+pointer-events: none;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+opacity: 0.18;
+transform: translateX(-40%);
+}
+.trainers-cta-inner:hover::after { transform: translateX(40%); transition: transform 1.2s ease; }
+.trainers-cta-title {
+margin-top: 12px;
+font-size: clamp(1.9rem, 4.8vw, 3.4rem);
+line-height: 1;
+text-transform: uppercase;
+letter-spacing: -0.05em;
+font-weight: 900;
+}
+.trainers-cta-desc {
+margin: 16px auto 26px;
+max-width: 560px;
+font-size: 0.9rem;
+color: var(--muted);
+line-height: 1.75;
+font-weight: 300;
+}
+/* Modal */
+.modal-overlay {
+position: fixed;
+inset: 0;
+z-index: 2000;
+display: none;
+align-items: center;
+justify-content: center;
+padding: 18px;
+background: rgba(0,0,0,0.68);
+backdrop-filter: blur(10px);
+}
+.modal-overlay.open { display: flex; }
+.modal {
+width: min(980px, 100%);
+max-height: min(86vh, 920px);
+overflow: auto;
+border-radius: 18px;
+border: 1px solid rgba(255,255,255,0.08);
+background: linear-gradient(180deg, rgba(16,20,22,0.92), rgba(7,9,10,0.96));
+box-shadow: 0 28px 90px rgba(0,0,0,0.68);
+position: relative;
+}
+.modal::before {
+content: '';
+position: absolute;
+inset: 0;
+padding: 1px;
+border-radius: 18px;
+background: linear-gradient(160deg, rgba(45,212,191,0.28), transparent 55%);
+-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+pointer-events: none;
+}
+.modal-inner {
+display: grid;
+grid-template-columns: 0.95fr 1.05fr;
+gap: 22px;
+padding: 18px;
+}
+.modal-photo {
+width: 100%;
+height: 100%;
+min-height: 420px;
+border-radius: 14px;
+object-fit: cover;
+filter: saturate(0.82) brightness(0.72) contrast(1.08);
+border: 1px solid rgba(255,255,255,0.06);
+background: rgba(255,255,255,0.02);
+}
+.modal-content { padding: 8px 6px 8px 0; }
+.modal-close {
+position: absolute;
+top: 12px;
+right: 12px;
+width: 40px;
+height: 40px;
+border-radius: 12px;
+border: 1px solid rgba(255,255,255,0.10);
+background: rgba(255,255,255,0.04);
+color: var(--text);
+cursor: pointer;
+transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+.modal-close:hover {
+transform: translateY(-1px);
+background: rgba(45,212,191,0.06);
+border-color: rgba(45,212,191,0.22);
+}
+.modal-kicker {
+font-size: 0.72rem;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--teal);
+font-weight: 500;
+}
+.modal-name {
+margin-top: 10px;
+font-size: 2rem;
+letter-spacing: -0.04em;
+font-weight: 700;
+color: var(--text);
+}
+.modal-role {
+margin-top: 8px;
+font-size: 0.9rem;
+color: var(--muted);
+font-weight: 300;
+}
+.modal-section {
+margin-top: 18px;
+padding-top: 14px;
+border-top: 1px solid rgba(255,255,255,0.06);
+}
+.modal-section h4 {
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: rgba(240,242,242,0.92);
+margin-bottom: 10px;
+}
+.modal-section p,
+.modal-section li {
+font-size: 0.86rem;
+line-height: 1.75;
+color: var(--muted);
+font-weight: 300;
+}
+.modal-section ul { padding-left: 18px; }
+.modal-actions { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+@media (max-width: 991px) {
+.trainers-hero-wrap { padding: 120px 24px 64px; grid-template-columns: 1fr; gap: 34px; }
+.trainers-hero-media { min-height: 320px; }
+.trainers-hero-media img { min-height: 320px; }
+#trainers-section { padding: 70px 24px 90px; }
+.trainers-grid { grid-template-columns: repeat(2, 1fr); }
+#trainers-cta { padding: 80px 24px; }
+.modal-inner { grid-template-columns: 1fr; }
+.modal-photo { min-height: 260px; }
+}
+@media (max-width: 575px) {
+.trainers-hero-wrap { padding: 115px 20px 56px; }
+.trainers-grid { grid-template-columns: 1fr; }
+}
+</style>
+<style id="trainers-mobile-hero-fix">
+@media (max-width: 575px) {
+.trainers-hero-media {
+display: none !important;
+}
+.trainers-hero-wrap {
+gap: 0 !important;
+padding-bottom: 32px !important;
+}
+#trainers-hero {
+min-height: 0 !important;
+}
+}
+</style>
+<style>
+.modal { isolation: isolate; }
+.modal-close { z-index: 100; display: flex; align-items: center; justify-content: center; }
+.modal-close:focus-visible { outline: 2px solid var(--teal-light); outline-offset: 2px; }
+@media (max-width: 575px) {
+.modal-overlay { align-items: flex-start; padding: 10px; overflow-y: auto; }
+.modal { width: 100%; max-height: calc(100dvh - 20px); overflow-y: auto; overscroll-behavior: contain; border-radius: 16px; }
+.modal-close { position: sticky; top: calc(10px + env(safe-area-inset-top)); margin: 10px 10px -54px auto; width: 46px; height: 46px; border-radius: 50%; z-index: 100; background: rgba(7, 9, 10, 0.94); color: var(--teal-light); border: 1px solid rgba(94, 234, 212, 0.55); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 18px rgba(45, 212, 191, 0.25); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.modal-close:hover, .modal-close:focus { border-color: rgba(94, 234, 212, 0.8); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 24px rgba(45, 212, 191, 0.4); transform: none; }
+.modal-close iconify-icon { font-size: 24px; pointer-events: none; }
+}
+</style>
+<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
+.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+</style></head>
+  <body class="">
+    <!-- ─── NAV ──────────────────────────────────────────────────────── -->
+    <nav id="main-nav" class="" style="background: rgba(7, 9, 10, 0.92);">
+      <a href="#inicio" class="nav-logo">
+        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_800w.png" alt="3NA Fitness Studio" class="w-[140px] md:w-[145px] lg:w-[160px] h-auto object-contain cursor-pointer" onclick="window.location.href='index.html'" role="button">
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html" data-i18n="nav.home" class="">Inicio</a>
+        <a href="sobre-nosotros.html" data-i18n="nav.about" class="">Sobre nosotros</a>
+        <a href="entrenadores.html" data-i18n="nav.trainers" class="nav-active">Entrenadores</a>
+        <a href="index.html#experiencia" data-i18n="nav.experience" class="">Experiencia</a>
+        <a href="galeria.html" data-i18n="nav.gallery" class="">Galería</a>
+        <a href="index.html#membresias" data-i18n="nav.memberships" class="">Membresías</a>
+      </div>
+
+      <div class="nav-cta">
+        <div class="lang-toggle" role="group" data-i18n-aria-label="lang.ariaLabel" aria-label="Cambiar idioma">
+          <button type="button" class="lang-btn active" data-lang="es">
+            ES
+          </button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="index.html#cta" class="btn-nav" data-i18n="nav.contact">Contactar</a>
+      </div>
+
+      <button type="button" class="hamburger" id="hamburger" data-i18n-aria-label="nav.menuAria" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html#inicio" class="mobile-link" data-i18n="nav.home">Inicio</a>
+      <a href="index.html#estudio" class="mobile-link" data-i18n="nav.about">Sobre nosotros</a>
+      <a href="entrenadores.html" class="mobile-link nav-active" data-i18n="nav.trainers">Entrenadores</a>
+      <a href="index.html#experiencia" class="mobile-link" data-i18n="nav.experience">Experiencia</a>
+      <a href="index.html#galeria" class="mobile-link" data-i18n="nav.gallery">Galería</a>
+      <a href="index.html#membresias" class="mobile-link" data-i18n="nav.memberships">Membresías</a>
+      <a href="index.html#cta" class="mobile-link" data-i18n="nav.contact">Contactar</a>
+      <div class="mobile-lang-row">
+        <div class="lang-toggle" role="group" data-i18n-aria-label="lang.ariaLabel" aria-label="Cambiar idioma">
+          <button type="button" class="lang-btn active" data-lang="es">
+            ES
+          </button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+    <section id="trainers-hero" class="">
+      <div class="hero-mesh"></div>
+      <div class="trainers-gridlines"></div>
+
+      <div class="trainers-hero-wrap">
+        <div class="trainers-hero-copy reveal visible">
+          <h1 class="trainers-hero-title">
+            <span class="text-metallic" data-i18n="trainers.hero.headingLine1">ELIGE QUIÉN TE ACOMPAÑA</span>
+            <span class="text-neon" data-i18n="trainers.hero.headingLine2">EN TU PROGRESO</span>
+          </h1>
+
+          <p data-i18n="trainers.hero.desc" class="">Conoce a los entrenadores de 3NA Fitness Studio, descubre sus especialidades y encuentra la persona indicada para orientarte durante tu proceso.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="trainers-section" class="">
+      <div class="trainers-grid" aria-label="Entrenadores" data-i18n-aria-label="trainers.grid.aria">
+        <!-- Reemplazar: foto, nombre, rol, tags, descripción y disponibilidad -->
+
+        <article class="trainer-card reveal visible" data-trainer-card="" data-trainer-name="Nombre del entrenador" data-tags="strength,muscle">
+          <!-- Reemplazar con foto real del entrenador -->
+          <img class="trainer-photo" src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=800&amp;q=80" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
+          <div class="absolute top-4 right-4 z-10 inline-flex items-center px-2.5 py-1 text-[0.65rem] font-semibold tracking-widest uppercase text-teal-400 bg-black/50 backdrop-blur-md border border-teal-500/30 rounded-full shadow-[0_0_15px_rgba(45,212,191,0.25)]">
+            Coming Soon
+          </div>
+          <div class="trainer-body">
+            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
+
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            </div>
+
+            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+
+            <div class="trainer-availability">
+              <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
+              <div class="week-list" data-week="">
+                <div class="week-row">
+                  <span data-i18n="trainers.week.mon">Lunes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.tue">Martes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.wed">Miércoles</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.thu">Jueves</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.fri">Viernes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.sat">Sábado</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="trainer-actions">
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trainer-card reveal visible" data-trainer-card="" data-trainer-name="Nombre del entrenador" data-tags="fatloss,beginners">
+          <img class="trainer-photo" src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=800&amp;q=80" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
+          <div class="absolute top-4 right-4 z-10 inline-flex items-center px-2.5 py-1 text-[0.65rem] font-semibold tracking-widest uppercase text-teal-400 bg-black/50 backdrop-blur-md border border-teal-500/30 rounded-full shadow-[0_0_15px_rgba(45,212,191,0.25)]">
+            Coming Soon
+          </div>
+          <div class="trainer-body">
+            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="trainer-availability">
+              <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
+              <div class="week-list" data-week="">
+                <div class="week-row">
+                  <span data-i18n="trainers.week.mon">Lunes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.tue">Martes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.wed">Miércoles</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.thu">Jueves</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.fri">Viernes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.sat">Sábado</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+              </div>
+            </div>
+            <div class="trainer-actions">
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trainer-card reveal visible" data-trainer-card="" data-trainer-name="Nombre del entrenador" data-tags="mobility,beginners">
+          <img class="trainer-photo" src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=800&amp;q=80" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
+          <div class="absolute top-4 right-4 z-10 inline-flex items-center px-2.5 py-1 text-[0.65rem] font-semibold tracking-widest uppercase text-teal-400 bg-black/50 backdrop-blur-md border border-teal-500/30 rounded-full shadow-[0_0_15px_rgba(45,212,191,0.25)]">
+            Coming Soon
+          </div>
+          <div class="trainer-body">
+            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="trainer-availability">
+              <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
+              <div class="week-list" data-week="">
+                <div class="week-row">
+                  <span data-i18n="trainers.week.mon">Lunes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.tue">Martes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.wed">Miércoles</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.thu">Jueves</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.fri">Viernes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.sat">Sábado</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+              </div>
+            </div>
+            <div class="trainer-actions">
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trainer-card reveal" data-trainer-card="" data-trainer-name="Nombre del entrenador" data-tags="strength,fatloss">
+          <img class="trainer-photo" src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=800&amp;q=80" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
+          <div class="absolute top-4 right-4 z-10 inline-flex items-center px-2.5 py-1 text-[0.65rem] font-semibold tracking-widest uppercase text-teal-400 bg-black/50 backdrop-blur-md border border-teal-500/30 rounded-full shadow-[0_0_15px_rgba(45,212,191,0.25)]">
+            Coming Soon
+          </div>
+          <div class="trainer-body">
+            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="trainer-availability">
+              <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
+              <div class="week-list" data-week="">
+                <div class="week-row">
+                  <span data-i18n="trainers.week.mon">Lunes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.tue">Martes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.wed">Miércoles</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.thu">Jueves</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.fri">Viernes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.sat">Sábado</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+              </div>
+            </div>
+            <div class="trainer-actions">
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trainer-card reveal" data-trainer-card="" data-trainer-name="Nombre del entrenador" data-tags="muscle,strength">
+          <img class="trainer-photo" src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=800&amp;q=80" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
+          <div class="absolute top-4 right-4 z-10 inline-flex items-center px-2.5 py-1 text-[0.65rem] font-semibold tracking-widest uppercase text-teal-400 bg-black/50 backdrop-blur-md border border-teal-500/30 rounded-full shadow-[0_0_15px_rgba(45,212,191,0.25)]">
+            Coming Soon
+          </div>
+          <div class="trainer-body">
+            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="trainer-availability">
+              <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
+              <div class="week-list" data-week="">
+                <div class="week-row">
+                  <span data-i18n="trainers.week.mon">Lunes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.tue">Martes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.wed">Miércoles</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.thu">Jueves</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.fri">Viernes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.sat">Sábado</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+              </div>
+            </div>
+            <div class="trainer-actions">
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="trainer-card reveal" data-trainer-card="" data-trainer-name="Nombre del entrenador" data-tags="mobility,fatloss">
+          <img class="trainer-photo" src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=800&amp;q=80" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
+          <div class="absolute top-4 right-4 z-10 inline-flex items-center px-2.5 py-1 text-[0.65rem] font-semibold tracking-widest uppercase text-teal-400 bg-black/50 backdrop-blur-md border border-teal-500/30 rounded-full shadow-[0_0_15px_rgba(45,212,191,0.25)]">
+            Coming Soon
+          </div>
+          <div class="trainer-body">
+            <h3 class="trainer-name" data-i18n="trainers.card.name">Nombre del entrenador</h3>
+            <div class="trainer-title" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
+            <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+              <span class="tag" data-i18n="trainers.tags.specialty">Especialidad</span>
+            </div>
+            <p class="trainer-desc" data-i18n="trainers.card.desc">Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.</p>
+            <div class="trainer-availability">
+              <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
+              <div class="week-list" data-week="">
+                <div class="week-row">
+                  <span data-i18n="trainers.week.mon">Lunes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.tue">Martes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.wed">Miércoles</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.thu">Jueves</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.fri">Viernes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.sat">Sábado</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+              </div>
+            </div>
+            <div class="trainer-actions">
+              <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">Ver perfil</button>
+              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">Solicitar orientación</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="trainers-cta" class="">
+      <div class="trainers-cta-inner reveal">
+        <span class="section-label" data-i18n="trainers.cta.label">TE AYUDAMOS A ELEGIR</span>
+        <h2 class="trainers-cta-title">
+          <span class="text-metallic" data-i18n="trainers.cta.headingLine1">¿NO SABES QUÉ ENTRENADOR ES</span>
+          <span class="text-neon" data-i18n="trainers.cta.headingLine2">PARA TI?</span>
+        </h2>
+        <p class="trainers-cta-desc" data-i18n="trainers.cta.desc">Cuéntanos tus objetivos y te ayudaremos a encontrar el entrenador que mejor se adapte a tus necesidades.</p>
+        <a class="btn-primary wa-link" id="trainers-cta-wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20%5BNOMBRE%20DEL%20ENTRENADOR%5D." style="display:inline-flex; justify-content:center;">
+          <span data-i18n="trainers.cta.btn">Recibir orientación</span>
+          <iconify-icon icon="lucide:arrow-right" noobserver=""></iconify-icon>
+        </a>
+      </div>
+    </section>
+
+    <!-- Modal: Trainer profile -->
+    <div class="modal-overlay" id="trainer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Perfil del entrenador" data-i18n-aria-label="trainers.modal.aria">
+      <div class="modal" role="document">
+        <button type="button" class="modal-close" id="trainer-modal-close" aria-label="Cerrar" data-i18n-aria-label="trainers.modal.closeAria">
+          <iconify-icon icon="lucide:x" noobserver=""></iconify-icon>
+        </button>
+        <div class="modal-inner">
+          <img class="modal-photo" id="modal-photo" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
+          <div class="modal-content">
+            <div class="modal-kicker" data-i18n="trainers.modal.kicker">Perfil del entrenador</div>
+            <div class="modal-name text-metallic" id="modal-name">
+              Nombre del entrenador
+            </div>
+            <div class="modal-role" id="modal-role" data-i18n="trainers.card.role">Rol / Puesto por confirmar</div>
+
+            <div class="modal-section">
+              <h4 data-i18n="trainers.modal.bioTitle">Biografía</h4>
+              <p data-i18n="trainers.modal.bio">Biografía completa (placeholder). Reemplazar con información real del entrenador.</p>
+            </div>
+
+            <div class="modal-section">
+              <h4 data-i18n="trainers.modal.specialtiesTitle">Especialidades</h4>
+              <ul>
+                <li data-i18n="trainers.modal.placeholderItem">(Placeholder) Especialidad / enfoque</li>
+                <li data-i18n="trainers.modal.placeholderItem">(Placeholder) Especialidad / enfoque</li>
+              </ul>
+            </div>
+
+            <div class="modal-section">
+              <h4 data-i18n="trainers.modal.experienceTitle">Experiencia</h4>
+              <p data-i18n="trainers.modal.experience">Experiencia (placeholder). No inventar años o historial; reemplazar con datos reales.</p>
+            </div>
+
+            <div class="modal-section">
+              <h4 data-i18n="trainers.modal.certsTitle">Certificaciones</h4>
+              <p data-i18n="trainers.modal.certs">Certificaciones (placeholder). Reemplazar con las certificaciones reales.</p>
+            </div>
+
+            <div class="modal-section">
+              <h4 data-i18n="trainers.modal.approachTitle">Enfoque de entrenamiento</h4>
+              <p data-i18n="trainers.modal.approach">Enfoque (placeholder). Reemplazar con la filosofía y metodología real.</p>
+            </div>
+
+            <div class="modal-section">
+              <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
+              <div class="week-list">
+                <div class="week-row">
+                  <span data-i18n="trainers.week.mon">Lunes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.tue">Martes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.wed">Miércoles</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.thu">Jueves</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.fri">Viernes</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+                <div class="week-row">
+                  <span data-i18n="trainers.week.sat">Sábado</span>
+                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-actions">
+              <a class="btn-primary" id="modal-request" target="_blank" rel="noopener noreferrer" href="#" style="display:inline-flex; justify-content:center;">
+                <span data-i18n="trainers.modal.requestBtn">Solicitar orientación</span>
+                <iconify-icon icon="lucide:message-circle" noobserver=""></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STUDIO INTRO + BENEFITS ──────────────────────────────────── -->
+
+    <!-- ─── EXPERIENCE ───────────────────────────────────────────────── -->
+
+    <!-- ─── VIDEO ────────────────────────────────────────────────────── -->
+
+    <!-- ─── GALLERY ──────────────────────────────────────────────────── -->
+
+    <!-- ─── MEMBERSHIP ───────────────────────────────────────────────── -->
+
+    <!-- ─── LOCATION ─────────────────────────────────────────────────── -->
+
+    <!-- ─── FAQ ──────────────────────────────────────────────────────── -->
+
+    <!-- ─── FINAL CTA ────────────────────────────────────────────────── -->
+
+    <!-- ─── FOOTER ───────────────────────────────────────────────────── -->
+    <footer class="">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#inicio" class="block mb-[18px]">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_800w.png" alt="3NA Fitness Studio" class="md:w-[240px] md:mx-0 w-[200px] h-auto object-contain mr-auto ml-auto -translate-x-16 cursor-pointer" onclick="window.location.href='index.html'" role="button">
+          </a>
+          <p data-i18n="footer.description" class="">Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/3nafitnesstudio/" target="_blank" rel="noopener" aria-label="Instagram" class="">
+              <iconify-icon icon="lucide:instagram" noobserver="" class=""></iconify-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.linksTitle" class="">Enlaces</h4>
+          <ul class="">
+            <li class="cursor-pointer" onclick="window.location.href='index.html'" role="button"><a href="#inicio" data-i18n="nav.home">Inicio</a></li>
+            <li class="">
+              <a href="#experiencia" data-i18n="nav.experience" class="">Experiencia</a>
+            </li>
+            <li class="">
+              <a href="#galeria" data-i18n="nav.gallery" class="">Galería</a>
+            </li>
+            <li class="">
+              <a href="index.html#membresias" data-i18n="nav.memberships" class="">Membresías</a>
+            </li>
+            <li class="">
+              <a href="#cta" data-i18n="nav.contact">Contactar</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.contactTitle">Contacto</h4>
+          <ul class="">
+            <li><a href="tel:+17877838020">+1 787-783-8020</a></li>
+            <li class="">
+              <a href="mailto:info@3nafitness.com" class="">
+                info@3nafitness.com
+              </a>
+            </li>
+            <li><span>1563 Ave. Américo Miranda, San Juan, PR</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy" id="footer-copy">© 2026 3NA Fitness Studio. Todos los derechos reservados.</span>
+        <!-- TODO: Conectar URL de la página legal final aquí -->
+        <a href="#terms" class="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal-light)] transition-colors border border-[var(--border-s)] hover:border-[var(--border-t)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(45,212,191,0.06)] px-3 py-1.5 rounded-md" data-i18n="footer.terms">Términos de servicio</a>
+        <span class="footer-credit">
+          <span data-i18n="footer.credit">Página web diseñada por</span>
+          <a href="#" target="_blank" rel="noopener">SC Web Studios</a>
+        </span>
+      </div>
+    </footer>
+
+    <!-- ─── FLOATING WHATSAPP ────────────────────────────────────────── -->
+    <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20las%20membres%C3%ADas%2C%20horarios%20y%20servicios%20del%20gimnasio." class="wa-float wa-link" target="_blank" rel="noopener" data-i18n-aria-label="float.whatsappAria" aria-label="Escríbenos por WhatsApp">
+      <iconify-icon icon="lucide:message-circle" noobserver="" class=""></iconify-icon>
+    </a>
+
+    <!-- ─── JAVASCRIPT ───────────────────────────────────────────────── -->
+    <script>
+      // ── Translations ─────────────────────────────────────────────
+      const translations = {
+        es: {
+          'lang.ariaLabel': 'Cambiar idioma',
+          'nav.home': 'Inicio',
+          'nav.about': 'Sobre nosotros',
+          'nav.trainers': 'Entrenadores',
+          'nav.experience': 'Experiencia',
+          'nav.gallery': 'Galería',
+          'nav.memberships': 'Membresías',
+          'nav.contact': 'Contactar',
+          'nav.menuAria': 'Abrir menú',
+
+          'trainers.hero.label': 'CONOCE AL EQUIPO',
+          'trainers.hero.headingLine1': 'ELIGE QUIÉN TE ACOMPAÑA',
+          'trainers.hero.headingLine2': 'EN TU PROGRESO',
+          'trainers.hero.desc': 'Conoce a los entrenadores de 3NA Fitness Studio, descubre sus especialidades y encuentra la persona indicada para orientarte durante tu proceso.',
+          'trainers.hero.imgAlt': 'Entrenadores en el gimnasio',
+
+          'trainers.filters.aria': 'Filtros de entrenadores',
+          'trainers.filters.all': 'Todos',
+          'trainers.filters.strength': 'Fuerza',
+          'trainers.filters.muscle': 'Ganancia muscular',
+          'trainers.filters.fatloss': 'Pérdida de grasa',
+          'trainers.filters.mobility': 'Movilidad',
+          'trainers.filters.beginners': 'Principiantes',
+
+          'trainers.grid.aria': 'Entrenadores',
+          'trainers.card.photoAlt': 'Foto del entrenador',
+          'trainers.card.name': 'Nombre del entrenador',
+          'trainers.card.role': 'Rol / Puesto por confirmar',
+          'trainers.card.specialtiesAria': 'Especialidades',
+          'trainers.tags.specialty': 'Especialidad',
+          'trainers.card.desc': 'Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.',
+          'trainers.availability.title': 'Disponibilidad',
+          'trainers.week.mon': 'Lunes',
+          'trainers.week.tue': 'Martes',
+          'trainers.week.wed': 'Miércoles',
+          'trainers.week.thu': 'Jueves',
+          'trainers.week.fri': 'Viernes',
+          'trainers.week.sat': 'Sábado',
+          'trainers.week.tbc': 'Por confirmar',
+          'trainers.card.viewProfile': 'Ver perfil',
+          'trainers.card.request': 'Solicitar orientación',
+
+          'trainers.cta.label': 'TE AYUDAMOS A ELEGIR',
+          'trainers.cta.headingLine1': '¿NO SABES QUÉ ENTRENADOR ES',
+          'trainers.cta.headingLine2': 'PARA TI?',
+          'trainers.cta.desc': 'Cuéntanos tus objetivos y te ayudaremos a encontrar el entrenador que mejor se adapte a tus necesidades.',
+          'trainers.cta.btn': 'Recibir orientación',
+
+          'trainers.modal.aria': 'Perfil del entrenador',
+          'trainers.modal.closeAria': 'Cerrar',
+          'trainers.modal.kicker': 'Perfil del entrenador',
+          'trainers.modal.bioTitle': 'Biografía',
+          'trainers.modal.bio': 'Biografía completa (placeholder). Reemplazar con información real del entrenador.',
+          'trainers.modal.specialtiesTitle': 'Especialidades',
+          'trainers.modal.placeholderItem': '(Placeholder) Especialidad / enfoque',
+          'trainers.modal.experienceTitle': 'Experiencia',
+          'trainers.modal.experience': 'Experiencia (placeholder). No inventar años o historial; reemplazar con datos reales.',
+          'trainers.modal.certsTitle': 'Certificaciones',
+          'trainers.modal.certs': 'Certificaciones (placeholder). Reemplazar con las certificaciones reales.',
+          'trainers.modal.approachTitle': 'Enfoque de entrenamiento',
+          'trainers.modal.approach': 'Enfoque (placeholder). Reemplazar con la filosofía y metodología real.',
+          'trainers.modal.requestBtn': 'Solicitar orientación',
+
+          'footer.description': 'Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.',
+          'footer.linksTitle': 'Enlaces',
+          'footer.contactTitle': 'Contacto',
+          'footer.credit': 'Página web diseñada por',
+          'footer.copyright': '© {year} 3NA Fitness Studio. Todos los derechos reservados.',
+          'footer.terms': 'Términos de servicio',
+          'float.whatsappAria': 'Escríbenos por WhatsApp'
+        },
+        en: {
+          'lang.ariaLabel': 'Change language',
+          'nav.home': 'Home',
+          'nav.about': 'About Us',
+          'nav.trainers': 'Trainers',
+          'nav.experience': 'Experience',
+          'nav.gallery': 'Gallery',
+          'nav.memberships': 'Memberships',
+          'nav.contact': 'Contact',
+          'nav.menuAria': 'Open menu',
+
+          'trainers.hero.label': 'MEET THE TEAM',
+          'trainers.hero.headingLine1': 'CHOOSE WHO GUIDES YOU',
+          'trainers.hero.headingLine2': 'THROUGH YOUR PROGRESS',
+          'trainers.hero.desc': 'Meet the trainers at 3NA Fitness Studio, explore their specialties, and find the right person to guide you through your fitness journey.',
+          'trainers.hero.imgAlt': 'Trainers at the gym',
+
+          'trainers.filters.aria': 'Trainer filters',
+          'trainers.filters.all': 'All',
+          'trainers.filters.strength': 'Strength',
+          'trainers.filters.muscle': 'Muscle Gain',
+          'trainers.filters.fatloss': 'Fat Loss',
+          'trainers.filters.mobility': 'Mobility',
+          'trainers.filters.beginners': 'Beginners',
+
+          'trainers.grid.aria': 'Trainers',
+          'trainers.card.photoAlt': 'Trainer photo',
+          'trainers.card.name': 'Trainer name',
+          'trainers.card.role': 'Position / Title to be confirmed',
+          'trainers.card.specialtiesAria': 'Specialties',
+          'trainers.tags.specialty': 'Specialty',
+          'trainers.card.desc': 'Professional description (placeholder). This will be a short summary of the trainer\'s approach.',
+          'trainers.availability.title': 'Availability',
+          'trainers.week.mon': 'Monday',
+          'trainers.week.tue': 'Tuesday',
+          'trainers.week.wed': 'Wednesday',
+          'trainers.week.thu': 'Thursday',
+          'trainers.week.fri': 'Friday',
+          'trainers.week.sat': 'Saturday',
+          'trainers.week.tbc': 'To be confirmed',
+          'trainers.card.viewProfile': 'View profile',
+          'trainers.card.request': 'Request guidance',
+
+          'trainers.cta.label': 'LET US HELP YOU CHOOSE',
+          'trainers.cta.headingLine1': 'NOT SURE WHICH TRAINER IS RIGHT',
+          'trainers.cta.headingLine2': 'FOR YOU?',
+          'trainers.cta.desc': 'Tell us about your goals and we will help you find the trainer who best fits your needs.',
+          'trainers.cta.btn': 'Get guidance',
+
+          'trainers.modal.aria': 'Trainer profile',
+          'trainers.modal.closeAria': 'Close',
+          'trainers.modal.kicker': 'Trainer profile',
+          'trainers.modal.bioTitle': 'Biography',
+          'trainers.modal.bio': 'Full biography (placeholder). Replace with the trainer\'s real information.',
+          'trainers.modal.specialtiesTitle': 'Specialties',
+          'trainers.modal.placeholderItem': '(Placeholder) Specialty / focus',
+          'trainers.modal.experienceTitle': 'Experience',
+          'trainers.modal.experience': 'Experience (placeholder). Do not invent years or history; replace with real details.',
+          'trainers.modal.certsTitle': 'Certifications',
+          'trainers.modal.certs': 'Certifications (placeholder). Replace with real certifications.',
+          'trainers.modal.approachTitle': 'Training approach',
+          'trainers.modal.approach': 'Approach (placeholder). Replace with real philosophy and methodology.',
+          'trainers.modal.requestBtn': 'Request guidance',
+
+          'footer.description': 'A premium fitness studio in San Juan, Puerto Rico. Train your DNA in a space designed for your progress.',
+          'footer.linksTitle': 'Links',
+          'footer.contactTitle': 'Contact',
+          'footer.credit': 'Website designed by',
+          'footer.copyright': '© {year} 3NA Fitness Studio. All rights reserved.',
+          'footer.terms': 'Terms of Service',
+          'float.whatsappAria': 'Message us on WhatsApp'
+        }
+      };
+
+      // ── WhatsApp / Trainers messaging ────────────────────────────
+      const WA_PHONE = '17876476721';
+
+      function buildTrainerWaUrl(lang, trainerName) {
+        const safeName = trainerName && trainerName.trim() ? trainerName.trim() : (lang === 'en' ? '[TRAINER NAME]' : '[NOMBRE DEL ENTRENADOR]');
+        const msg = (lang === 'en')
+          ? ('Hello 3NA Fitness Studio, I would like to receive guidance from ' + safeName + '.')
+          : ('Hola 3NA Fitness Studio, me gustaría recibir orientación con ' + safeName + '.');
+        return 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(msg);
+      }
+
+      // Keep legacy waUrls for other wa-link elements
+      const waUrls = {
+        es: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hola 3NA Fitness Studio, me interesa recibir información sobre las membresías, horarios y servicios del gimnasio.'),
+        en: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hello 3NA Fitness Studio, I would like information about gym memberships, hours, and services.')
+      };
+
+      // ── setLanguage ──────────────────────────────────────────────
+      let currentLang = 'es';
+
+      function setLanguage(language) {
+        const t = translations[language];
+        if (!t) return;
+        currentLang = language;
+        const year = new Date().getFullYear();
+
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          const key = el.getAttribute('data-i18n');
+          if (t[key] !== undefined) el.textContent = t[key].replace('{year}', year);
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+          const key = el.getAttribute('data-i18n-placeholder');
+          if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+        });
+
+        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+          const key = el.getAttribute('data-i18n-alt');
+          if (t[key] !== undefined) el.setAttribute('alt', t[key]);
+        });
+
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
+          const key = el.getAttribute('data-i18n-aria-label');
+          if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+        });
+
+        const copyEl = document.getElementById('footer-copy');
+        if (copyEl && t['footer.copyright']) copyEl.textContent = t['footer.copyright'].replace('{year}', year);
+
+        // Update CTA WhatsApp (generic guidance)
+        const ctaWa = document.getElementById('trainers-cta-wa');
+        if (ctaWa) ctaWa.setAttribute('href', buildTrainerWaUrl(currentLang, currentLang === 'en' ? '[TRAINER NAME]' : '[NOMBRE DEL ENTRENADOR]'));
+
+        // Update trainer card WhatsApp links with each card's name
+        document.querySelectorAll('[data-trainer-card]').forEach(function(card){
+          const nameEl = card.querySelector('.trainer-name');
+          const name = nameEl ? nameEl.textContent : (card.getAttribute('data-trainer-name') || '');
+          const wa = card.querySelector('.trainer-wa');
+          if (wa) wa.setAttribute('href', buildTrainerWaUrl(currentLang, name));
+        });
+
+        // Fallback: update any remaining wa-link (e.g., floating button)
+        document.querySelectorAll('.wa-link').forEach(function (link) {
+          if (link && link.id === 'trainers-cta-wa') return;
+          if (link && link.classList.contains('trainer-wa')) return;
+          link.setAttribute('href', waUrls[language]);
+        });
+
+        document.querySelectorAll('.lang-btn').forEach(function (btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === language);
+        });
+
+        document.documentElement.lang = language;
+        try { localStorage.setItem('3na-language', language); } catch (e) {}
+
+        // Optional SEO: update title/description on language change
+        if (language === 'en') {
+          document.title = 'Trainers | 3NA Fitness Studio';
+        } else {
+          document.title = 'Entrenadores | 3NA Fitness Studio';
+        }
+      }
+
+      // Bind all language buttons
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setLanguage(btn.getAttribute('data-lang'));
+        });
+      });
+
+      // Restore saved preference — default to Spanish
+      (function () {
+        let saved = null;
+        try { saved = localStorage.getItem('3na-language'); } catch (e) {}
+        setLanguage(saved === 'en' ? 'en' : 'es');
+      })();
+
+      // ── Mobile hamburger ─────────────────────────────────────────
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function () {
+          hamburger.classList.toggle('open');
+          mobileMenu.classList.toggle('open');
+        });
+        document.querySelectorAll('.mobile-link').forEach(function (link) {
+          link.addEventListener('click', function () {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+          });
+        });
+      }
+
+      // ── Nav scroll tint ──────────────────────────────────────────
+      const mainNav = document.getElementById('main-nav');
+      window.addEventListener('scroll', function () {
+        if (mainNav) {
+          mainNav.style.background = window.scrollY > 60 ? 'rgba(7,9,10,0.92)' : 'rgba(7,9,10,0.72)';
+        }
+      }, { passive: true });
+
+      // ── Reveal animations ────────────────────────────────────────
+      const revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+
+      // ── Trainers: filters ────────────────────────────────────────
+      (function(){
+        const bar = document.querySelector('.filter-bar');
+        const cards = Array.prototype.slice.call(document.querySelectorAll('[data-trainer-card]'));
+        if (!bar || !cards.length) return;
+
+        function setActive(btn){
+          bar.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.toggle('active', b===btn); });
+        }
+
+        function applyFilter(filter){
+          cards.forEach(function(card){
+            const tags = (card.getAttribute('data-tags') || '').split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+            const show = filter === 'all' ? true : tags.indexOf(filter) !== -1;
+            card.style.display = show ? '' : 'none';
+          });
+        }
+
+        bar.querySelectorAll('.filter-btn').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            setActive(btn);
+            applyFilter(btn.getAttribute('data-filter') || 'all');
+          });
+        });
+      })();
+
+      // ── Trainers: modal ──────────────────────────────────────────
+      (function(){
+        const modalOverlay = document.getElementById('trainer-modal');
+        const modalClose = document.getElementById('trainer-modal-close');
+        const modalName = document.getElementById('modal-name');
+        const modalRole = document.getElementById('modal-role');
+        const modalPhoto = document.getElementById('modal-photo');
+        const modalRequest = document.getElementById('modal-request');
+
+        if (!modalOverlay || !modalClose || !modalName || !modalRole || !modalPhoto || !modalRequest) return;
+
+        let lastFocus = null;
+
+        function openModal(fromCard){
+          lastFocus = document.activeElement;
+
+          const nameTextEl = fromCard.querySelector('.trainer-name');
+          const titleTextEl = fromCard.querySelector('.trainer-title');
+          const imgEl = fromCard.querySelector('img');
+
+          modalName.textContent = nameTextEl ? nameTextEl.textContent : '';
+          modalRole.textContent = titleTextEl ? titleTextEl.textContent : '';
+          if (imgEl && imgEl.getAttribute('src')) modalPhoto.setAttribute('src', imgEl.getAttribute('src'));
+
+          modalRequest.setAttribute('href', buildTrainerWaUrl(currentLang, modalName.textContent || ''));
+
+          modalOverlay.classList.add('open');
+          modalOverlay.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+
+          const modalPanel = modalOverlay.querySelector('.modal');
+          if (modalPanel) modalPanel.scrollTop = 0;
+
+          modalClose.focus();
+        }
+
+        function closeModal(){
+          modalOverlay.classList.remove('open');
+          modalOverlay.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+        }
+
+        document.querySelectorAll('[data-open-profile]').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            const card = btn.closest('[data-trainer-card]');
+            if (card) openModal(card);
+          });
+        });
+
+        modalClose.addEventListener('click', closeModal);
+
+        modalOverlay.addEventListener('click', function(e){
+          if (e.target === modalOverlay) closeModal();
+        });
+
+        window.addEventListener('keydown', function(e){
+          if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+        });
+      })();
+    </script>
+  
+</body></html>
