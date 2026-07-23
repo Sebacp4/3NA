@@ -2244,27 +2244,37 @@ transition-duration: 0.01ms !important;
       const hamburger = document.getElementById('hamburger');
       const mobileMenu = document.getElementById('mobile-menu');
 
-      function syncMobileMenuPosition() {
-        const mainNav = document.getElementById('main-nav');
-        const iosTopCover = document.getElementById('ios-top-cover');
-
-        if (!mainNav || !mobileMenu || window.innerWidth >= 992) {
-          return;
-        }
-
-        const navHeight = Math.ceil(
-          mainNav.getBoundingClientRect().height
-        );
-
-        document.documentElement.style.setProperty(
-          '--mobile-nav-height',
-          navHeight + 'px'
-        );
-
-        if (iosTopCover) {
-          iosTopCover.style.height = navHeight + 'px';
-        }
-      }
+    function syncMobileMenuPosition() {
+    const mainNav =
+    document.getElementById('main-nav');
+    
+    const mobileHeaderSpacer =
+    document.getElementById(
+    'mobile-header-spacer'
+    );
+    
+    if (
+    !mainNav ||
+    !mobileMenu ||
+    window.innerWidth >= 992
+    ) {
+    return;
+    }
+    
+    const navHeight = Math.ceil(
+    mainNav.getBoundingClientRect().height
+    );
+    
+    document.documentElement.style.setProperty(
+    '--mobile-nav-height',
+    navHeight + 'px'
+    );
+    
+    if (mobileHeaderSpacer) {
+    mobileHeaderSpacer.style.height =
+    navHeight + 'px';
+    }
+    }
 
       requestAnimationFrame(syncMobileMenuPosition);
       window.addEventListener('load', syncMobileMenuPosition);
@@ -2324,6 +2334,55 @@ transition-duration: 0.01ms !important;
         });
       }
 
+      // ── Mobile header hide/show on scroll ─────────────
+      let previousMobileScrollY =
+      window.scrollY;
+      
+      let mobileHeaderTicking = false;
+      
+      function updateMobileHeaderVisibility() {
+      const mobileMainNav =
+      document.getElementById('main-nav');
+      
+      if (
+      !mobileMainNav ||
+      window.innerWidth >= 992
+      ) {
+      return;
+      }
+      
+      const currentScrollY =
+      Math.max(window.scrollY, 0);
+      
+      const menuIsOpen =
+      document.body.classList.contains(
+      'mobile-menu-open'
+      );
+      
+      if (
+      menuIsOpen ||
+      currentScrollY < 40 ) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
+        mobileMainNav.classList.add( 'mobile-header-visible' ); previousMobileScrollY=currentScrollY; return; } const
+        scrollDifference=currentScrollY - previousMobileScrollY; if ( scrollDifference> 8 &&
+        currentScrollY > 120
+        ) {
+        mobileMainNav.classList.add(
+        'mobile-header-hidden'
+        );
+      
+        mobileMainNav.classList.remove(
+        'mobile-header-visible'
+        );
+        } else if (
+        scrollDifference < -8 ) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
+          mobileMainNav.classList.add( 'mobile-header-visible' ); } previousMobileScrollY=currentScrollY; }
+          window.addEventListener( 'scroll' , function () { if (mobileHeaderTicking) { return; } mobileHeaderTicking=true;
+          window.requestAnimationFrame( function () { updateMobileHeaderVisibility(); mobileHeaderTicking=false; } ); }, {
+          passive: true } ); window.addEventListener( 'pageshow' , function () { const
+          mobileMainNav=document.getElementById('main-nav'); if (!mobileMainNav) { return; }
+          mobileMainNav.classList.remove( 'mobile-header-hidden' ); mobileMainNav.classList.add( 'mobile-header-visible' ); }
+          );
+
       // ── Nav scroll tint ─────────────────────────
       const mainNav = document.getElementById('main-nav');
 
@@ -2374,6 +2433,8 @@ transition-duration: 0.01ms !important;
 
     <!-- Page blur transition -->
     <script>
+      document.documentElement.classList.add('page-ready');
+      document.body.classList.add('page-ready');
       window.addEventListener('DOMContentLoaded', function () {
             const root = document.documentElement;
             const body = document.body;
