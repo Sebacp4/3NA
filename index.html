@@ -92,6 +92,7 @@ setPaused(event.data.paused);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#07090A">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>3NA Fitness Studio — Train Your DNA</title>
 <meta name="description" content="3NA Fitness Studio — Entrena tu ADN. Gimnasio premium en San Juan, Puerto Rico.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1304,12 +1305,44 @@ transition-duration: 0.01ms !important;
 <style id="all-fonts-style-font-bricolage">
 .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
 </style>
-<style id="ios-mobile-header-safe-area-fix">
+<style id="ios-fixed-top-cover-fix">
+#ios-top-cover {
+display: none;
+}
 @media (max-width: 991px) {
+:root {
+--mobile-nav-height: 140px;
+}
 html,
 body {
+width: 100%;
+min-height: 100%;
+margin: 0 !important;
+padding: 0 !important;
 background: #07090A !important;
 background-color: #07090A !important;
+}
+html {
+overscroll-behavior-y: none;
+}
+#ios-top-cover {
+display: block !important;
+position: fixed !important;
+top: 0 !important;
+left: 0 !important;
+right: 0 !important;
+width: 100% !important;
+height: var(--mobile-nav-height, 140px) !important;
+margin: 0 !important;
+padding: 0 !important;
+background: #07090A !important;
+background-color: #07090A !important;
+z-index: 9999 !important;
+pointer-events: none !important;
+transform: translateZ(0);
+-webkit-transform: translateZ(0);
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
 }
 #main-nav {
 position: fixed !important;
@@ -1317,35 +1350,38 @@ top: 0 !important;
 left: 0 !important;
 right: 0 !important;
 width: 100% !important;
+min-height: calc(74px + env(safe-area-inset-top)) !important;
+margin: 0 !important;
 padding-top: calc(12px + env(safe-area-inset-top)) !important;
 padding-right: 24px !important;
 padding-bottom: 12px !important;
 padding-left: 24px !important;
-margin: 0 !important;
 background: #07090A !important;
 background-color: #07090A !important;
 backdrop-filter: none !important;
 -webkit-backdrop-filter: none !important;
 border-bottom: 1px solid var(--border-s) !important;
-z-index: 10000 !important;
 box-sizing: border-box !important;
+z-index: 10001 !important;
+isolation: isolate;
 }
-/* Block anything from showing above the header during overscroll / rubber-banding */
-#main-nav::before {
-content: "";
-position: absolute;
-bottom: 100%;
-left: 0;
-right: 0;
-height: 100vh;
-background: #07090A !important;
-background-color: #07090A !important;
-pointer-events: none;
+#mobile-menu {
+top: var(--mobile-nav-height, 140px) !important;
+height: calc(
+100dvh - var(--mobile-nav-height, 140px)
+) !important;
+z-index: 10000 !important;
+}
+}
+@media (min-width: 992px) {
+#ios-top-cover {
+display: none !important;
 }
 }
 </style></head>
   <body class="">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
+    <div id="ios-top-cover" aria-hidden="true"></div>
     <nav class="" style="background: rgba(7, 9, 10, 0.72);" id="main-nav">
       <a href="#inicio" class="nav-logo">
         <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7df437ed-8951-4325-880e-6ea40980e94a_1600w.png" alt="3NA Fitness Studio" class="w-[140px] md:w-[145px] lg:w-[160px] h-auto object-contain">
@@ -1940,7 +1976,7 @@ pointer-events: none;
 
     <!-- ─── JAVASCRIPT ───────────────────────────────────────────────── -->
     <script>
-      // ── Translations ─────────────────────────────────────────────
+      // ── Translations ──────────────────────────────────
       const translations = {
         es: {
           'lang.ariaLabel': 'Cambiar idioma',
@@ -2124,14 +2160,14 @@ pointer-events: none;
         }
       };
 
-      // ── WhatsApp URLs ──────────────────────────────────────────────
+      // ── WhatsApp URLs ────────────────────────────────
       const WA_PHONE = '17876476721';
       const waUrls = {
         es: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hola 3NA Fitness Studio, me interesa recibir información sobre las membresías, horarios y servicios del gimnasio.'),
         en: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hello 3NA Fitness Studio, I would like information about gym memberships, hours, and services.')
       };
 
-      // ── setLanguage ──────────────────────────────────────────────
+      // ── setLanguage ────────────────────────────────
       let currentLang = 'es';
 
       function setLanguage(language) {
@@ -2140,83 +2176,99 @@ pointer-events: none;
         currentLang = language;
         const year = new Date().getFullYear();
 
-        // Text content
         document.querySelectorAll('[data-i18n]').forEach(function (el) {
           const key = el.getAttribute('data-i18n');
           if (t[key] !== undefined) el.textContent = t[key].replace('{year}', year);
         });
 
-        // Placeholders
         document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
           const key = el.getAttribute('data-i18n-placeholder');
           if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
         });
 
-        // Image alt text
         document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
           const key = el.getAttribute('data-i18n-alt');
           if (t[key] !== undefined) el.setAttribute('alt', t[key]);
         });
 
-        // Aria labels
         document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
           const key = el.getAttribute('data-i18n-aria-label');
           if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
         });
 
-        // Dynamic copyright
         const copyEl = document.getElementById('footer-copy');
         if (copyEl) copyEl.textContent = t['footer.copyright'].replace('{year}', year);
 
-        // WhatsApp links
         document.querySelectorAll('.wa-link').forEach(function (link) {
           link.setAttribute('href', waUrls[language]);
         });
 
-        // Toggle active states (desktop + mobile stay in sync)
         document.querySelectorAll('.lang-btn').forEach(function (btn) {
           btn.classList.toggle('active', btn.getAttribute('data-lang') === language);
         });
 
-        // Document language + persistence
         document.documentElement.lang = language;
         try { localStorage.setItem('3na-language', language); } catch (e) {}
       }
 
-      // Bind all language buttons (desktop + mobile)
       document.querySelectorAll('.lang-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
           setLanguage(btn.getAttribute('data-lang'));
         });
       });
 
-      // Restore saved preference — default to Spanish, no browser detection
       (function () {
         let saved = null;
         try { saved = localStorage.getItem('3na-language'); } catch (e) {}
         setLanguage(saved === 'en' ? 'en' : 'es');
       })();
 
-      // ── Mobile hamburger ─────────────────────────────────────────
+      // ── Mobile hamburger ──────────────────────────
       const hamburger = document.getElementById('hamburger');
       const mobileMenu = document.getElementById('mobile-menu');
 
       function syncMobileMenuPosition() {
         const mainNav = document.getElementById('main-nav');
+        const iosTopCover = document.getElementById('ios-top-cover');
 
-        if (!mainNav || !mobileMenu || window.innerWidth >= 992) return;
+        if (!mainNav || !mobileMenu || window.innerWidth >= 992) {
+          return;
+        }
 
-        const navHeight = Math.ceil(mainNav.getBoundingClientRect().height);
+        const navHeight = Math.ceil(
+          mainNav.getBoundingClientRect().height
+        );
 
         document.documentElement.style.setProperty(
           '--mobile-nav-height',
           navHeight + 'px'
         );
+
+        if (iosTopCover) {
+          iosTopCover.style.height = navHeight + 'px';
+        }
       }
 
       requestAnimationFrame(syncMobileMenuPosition);
       window.addEventListener('load', syncMobileMenuPosition);
       window.addEventListener('resize', syncMobileMenuPosition);
+      window.addEventListener('orientationchange', function () {
+        window.setTimeout(syncMobileMenuPosition, 150);
+      });
+
+      const observedMobileNav =
+        document.getElementById('main-nav');
+
+      if (
+        observedMobileNav &&
+        'ResizeObserver' in window
+      ) {
+        const mobileNavObserver = new ResizeObserver(function () {
+          syncMobileMenuPosition();
+        });
+
+        mobileNavObserver.observe(observedMobileNav);
+      }
 
       if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', function () {
@@ -2255,15 +2307,29 @@ pointer-events: none;
         });
       }
 
-      // ── Nav scroll tint ──────────────────────────────────────────
+      // ── Nav scroll tint ─────────────────────────
       const mainNav = document.getElementById('main-nav');
-      window.addEventListener('scroll', function () {
-        if (mainNav) {
-          mainNav.style.background = window.scrollY > 60 ? 'rgba(7,9,10,0.92)' : 'rgba(7,9,10,0.72)';
-        }
-      }, { passive: true });
 
-      // ── Reveal animations ────────────────────────────────────────
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (!mainNav) return;
+
+          if (window.innerWidth < 992) {
+            mainNav.style.background = '#07090A';
+            mainNav.style.backgroundColor = '#07090A';
+            return;
+          }
+
+          mainNav.style.background =
+            window.scrollY > 60
+              ? 'rgba(7,9,10,0.92)'
+              : 'rgba(7,9,10,0.72)';
+        },
+        { passive: true }
+      );
+
+      // ── Reveal animations ───────────────────────
       const revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
@@ -2275,7 +2341,7 @@ pointer-events: none;
 
       document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
 
-      // ── FAQ accordion (language-safe: state lives on the item) ───
+      // ── FAQ accordion ──────────────────────────
       document.querySelectorAll('.faq-question').forEach(function (question) {
         question.addEventListener('click', function () {
           const item = question.closest('.faq-item');

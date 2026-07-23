@@ -92,6 +92,7 @@ setPaused(event.data.paused);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#07090A">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>Sobre Nosotros | 3NA Fitness Studio</title>
 <meta name="description" content="Conoce la historia, misión, visión y valores de 3NA Fitness Studio, un gimnasio boutique en San Juan creado para ofrecer equipos premium, atención cercana y una experiencia diferente.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -769,8 +770,14 @@ padding: 40px 20px 24px;
 }
 }
 </style>
-<style id="ios-safari-top-cover-fix">
+<style id="ios-fixed-top-cover-fix">
+#ios-top-cover {
+display: none;
+}
 @media (max-width: 991px) {
+:root {
+--mobile-nav-height: 140px;
+}
 html,
 body {
 width: 100%;
@@ -778,21 +785,29 @@ min-height: 100%;
 margin: 0 !important;
 padding: 0 !important;
 background: #07090A !important;
+background-color: #07090A !important;
 }
 html {
-background: #07090A !important;
+overscroll-behavior-y: none;
 }
-html::before {
-content: "";
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-width: 100%;
-height: calc(110px + env(safe-area-inset-top));
-background: #07090A;
-z-index: 9999;
-pointer-events: none;
+#ios-top-cover {
+display: block !important;
+position: fixed !important;
+top: 0 !important;
+left: 0 !important;
+right: 0 !important;
+width: 100% !important;
+height: var(--mobile-nav-height, 140px) !important;
+margin: 0 !important;
+padding: 0 !important;
+background: #07090A !important;
+background-color: #07090A !important;
+z-index: 9999 !important;
+pointer-events: none !important;
+transform: translateZ(0);
+-webkit-transform: translateZ(0);
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
 }
 #main-nav {
 position: fixed !important;
@@ -800,40 +815,42 @@ top: 0 !important;
 left: 0 !important;
 right: 0 !important;
 width: 100% !important;
-min-height: calc(74px + env(safe-area-inset-top)) !important;
+min-height: calc(
+74px + env(safe-area-inset-top)
+) !important;
 margin: 0 !important;
-padding-top: calc(12px + env(safe-area-inset-top)) !important;
+padding-top: calc(
+12px + env(safe-area-inset-top)
+) !important;
 padding-right: 24px !important;
 padding-bottom: 12px !important;
 padding-left: 24px !important;
 background: #07090A !important;
+background-color: #07090A !important;
 backdrop-filter: none !important;
 -webkit-backdrop-filter: none !important;
 border-bottom: 1px solid var(--border-s) !important;
 box-sizing: border-box !important;
-z-index: 10000 !important;
-}
-#main-nav::before {
-content: "";
-position: absolute;
-top: calc(-1 * env(safe-area-inset-top));
-left: 0;
-right: 0;
-height: env(safe-area-inset-top);
-background: #07090A;
-pointer-events: none;
+z-index: 10001 !important;
+isolation: isolate;
 }
 #mobile-menu {
-z-index: 9999 !important;
+top: var(--mobile-nav-height, 140px) !important;
+height: calc(
+100dvh - var(--mobile-nav-height, 140px)
+) !important;
+z-index: 10000 !important;
 }
-#about-hero {
-margin-top: 0 !important;
-padding-top: var(--mobile-nav-height, 110px) !important;
+}
+@media (min-width: 992px) {
+#ios-top-cover {
+display: none !important;
 }
 }
 </style></head>
   <body class="">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
+    <div id="ios-top-cover" aria-hidden="true"></div>
     <nav id="main-nav" style="background: rgba(7, 9, 10, 0.92);" class="">
       <a href="index.html" class="nav-logo">
         <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_800w.png" alt="3NA Fitness Studio" class="w-[140px] md:w-[145px] lg:w-[160px] h-auto object-contain cursor-pointer" onclick="window.location.href='index.html'" role="button">
@@ -1803,7 +1820,7 @@ padding-top: var(--mobile-nav-height, 110px) !important;
 
     <!-- ─── JAVASCRIPT ───────────────────────────────────────────────── -->
     <script>
-      // ── Translations ─────────────────────────────────────────────
+      // ── Translations ─────────────────────────────
       const translations = {
         es: {
           'lang.ariaLabel': 'Cambiar idioma',
@@ -1985,14 +2002,14 @@ padding-top: var(--mobile-nav-height, 110px) !important;
         }
       };
 
-      // ── WhatsApp URLs ──────────────────────────────────────────────
+      // ── WhatsApp URLs ───────────────────────────────
       const WA_PHONE = '17876476721';
       const waUrls = {
         es: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hola 3NA Fitness Studio, me interesa recibir información sobre las membresías, horarios y servicios del gimnasio.'),
         en: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hello 3NA Fitness Studio, I would like information about gym memberships, hours, and services.')
       };
 
-      // ── setLanguage ──────────────────────────────────────────────
+      // ── setLanguage ─────────────────────────────
       let currentLang = 'es';
 
       function setLanguage(language) {
@@ -2043,18 +2060,65 @@ padding-top: var(--mobile-nav-height, 110px) !important;
       const mobileMenu = document.getElementById('mobile-menu');
 
       function syncMobileMenuPosition() {
-        const mainNav = document.getElementById('main-nav');
-        if (!mainNav || !mobileMenu || window.innerWidth >= 992) return;
-        const navHeight = Math.ceil(mainNav.getBoundingClientRect().height);
+        const mainNav =
+          document.getElementById('main-nav');
+
+        const iosTopCover =
+          document.getElementById('ios-top-cover');
+
+        if (
+          !mainNav ||
+          !mobileMenu ||
+          window.innerWidth >= 992
+        ) {
+          return;
+        }
+
+        const navHeight = Math.ceil(
+          mainNav.getBoundingClientRect().height
+        );
+
         document.documentElement.style.setProperty(
           '--mobile-nav-height',
           navHeight + 'px'
         );
+
+        if (iosTopCover) {
+          iosTopCover.style.height =
+            navHeight + 'px';
+        }
       }
 
       requestAnimationFrame(syncMobileMenuPosition);
       window.addEventListener('load', syncMobileMenuPosition);
       window.addEventListener('resize', syncMobileMenuPosition);
+
+      window.addEventListener(
+        'orientationchange',
+        function () {
+          window.setTimeout(
+            syncMobileMenuPosition,
+            150
+          );
+        }
+      );
+
+      const observedMobileNav =
+        document.getElementById('main-nav');
+
+      if (
+        observedMobileNav &&
+        'ResizeObserver' in window
+      ) {
+        const mobileNavObserver =
+          new ResizeObserver(function () {
+            syncMobileMenuPosition();
+          });
+
+        mobileNavObserver.observe(
+          observedMobileNav
+        );
+      }
 
       if (hamburger && mobileMenu) {
         hamburger.addEventListener('click', function () {
@@ -2093,15 +2157,34 @@ padding-top: var(--mobile-nav-height, 110px) !important;
         });
       }
 
-      // ── Nav scroll tint ──────────────────────────────────────────
-      const mainNav = document.getElementById('main-nav');
-      window.addEventListener('scroll', function () {
-        if (mainNav) {
-          mainNav.style.background = window.scrollY > 60 ? 'rgba(7,9,10,0.92)' : 'rgba(7,9,10,0.72)';
-        }
-      }, { passive: true });
+      // ── Nav scroll tint ───────────────────────────
+      const mainNav =
+        document.getElementById('main-nav');
 
-      // ── Reveal animations ────────────────────────────────────────
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (!mainNav) return;
+
+          if (window.innerWidth < 992) {
+            mainNav.style.background =
+              '#07090A';
+
+            mainNav.style.backgroundColor =
+              '#07090A';
+
+            return;
+          }
+
+          mainNav.style.background =
+            window.scrollY > 60
+              ? 'rgba(7,9,10,0.92)'
+              : 'rgba(7,9,10,0.72)';
+        },
+        { passive: true }
+      );
+
+      // ── Reveal animations ───────────────────────────
       const revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
@@ -2113,7 +2196,7 @@ padding-top: var(--mobile-nav-height, 110px) !important;
 
       document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
 
-      // ── Concept section premium triggers (once) ───────────────────
+      // ── Concept section premium triggers (once) ───────────────
       (function () {
         const section = document.getElementById('concepto-3na');
         if (!section) return;
