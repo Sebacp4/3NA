@@ -99,8 +99,8 @@ setPaused(event.data.paused);
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1">
 <link rel="manifest" href="/site.webmanifest?v=1">
 <meta name="apple-mobile-web-app-title" content="3NA Fitness Studio">
-<title>3NA Fitness Studio — Train Your DNA</title>
-<meta name="description" content="3NA Fitness Studio — Entrena tu ADN. Gimnasio premium en San Juan, Puerto Rico.">
+<title>3NA Fitness Studio — Gimnasio Premium en San Juan</title>
+<meta name="description" content="Descubre 3NA Fitness Studio en San Juan: equipos premium, áreas de fuerza, cardio y movilidad, y un ambiente moderno diseñado para ayudarte a progresar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
@@ -1400,6 +1400,180 @@ transform: none !important;
 transition-duration: 0.01ms !important;
 }
 }
+</style>
+<style id="offers-responsive-styles">
+.plan-card:hover{border-color:var(--border-t);box-shadow:0 8px 32px rgba(45,212,191,0.12);transform:translateY(-2px);}#membresias .offers-group{text-align:left;}@media (max-width:991px){#membresias .offers-groups{grid-template-columns:1fr;}#membresias .reveal[style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr 1fr !important;}}@media (max-width:575px){#membresias .reveal[style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr 1fr !important;}}
+</style>
+<style id="offers-mobile-fix-styles">
+#membresias { overflow-x: hidden; }
+@media (max-width: 991px) {
+#membresias { padding-left: 16px !important; padding-right: 16px !important; overflow-x: hidden !important; }
+#membresias, #membresias * { box-sizing: border-box; }
+#membresias > div { max-width: 100% !important; }
+#membresias .offers-groups {
+display: flex !important;
+flex-direction: column !important;
+gap: 20px !important;
+grid-template-columns: none !important;
+width: 100% !important;
+max-width: 100% !important;
+}
+#membresias .offers-group {
+width: 100% !important;
+max-width: 680px !important;
+min-width: 0 !important;
+margin-left: auto !important;
+margin-right: auto !important;
+padding: 18px !important;
+}
+#membresias .plan-card {
+width: 100% !important;
+max-width: 100% !important;
+min-width: 0 !important;
+padding: 18px !important;
+}
+#membresias .plan-card ul { min-width: 0 !important; }
+#membresias .offers-group h3, #membresias .plan-card > div:first-child {
+overflow-wrap: anywhere !important;
+word-break: normal !important;
+white-space: normal !important;
+}
+#membresias .offer-wa { width: 100% !important; min-height: 48px !important; justify-content: center !important; }
+#membresias .reveal[style*="grid-template-columns:repeat(4"] { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+}
+@media (max-width: 575px) {
+#membresias { padding-left: 16px !important; padding-right: 16px !important; }
+#membresias > div { width: 100% !important; box-sizing: border-box !important; }
+#membresias .offers-groups { gap: 24px !important; }
+#membresias .offers-group {
+padding: 18px 14px !important;
+display: grid !important;
+grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+gap: 12px !important;
+align-items: start !important;
+}
+#membresias .offers-group > div[style*="position:absolute"] {
+position: static !important;
+display: inline-block !important;
+margin-bottom: 8px !important;
+grid-column: 1 / -1 !important;
+width: fit-content !important;
+}
+#membresias .offers-group > h3 {
+grid-column: 1 / -1 !important;
+font-size: 1.15rem !important;
+margin-bottom: 0 !important;
+}
+#membresias .offers-group > p {
+grid-column: 1 / -1 !important;
+margin-bottom: 4px !important;
+}
+#membresias .plan-card {
+padding: 14px 12px !important;
+margin: 0 !important;
+display: flex !important;
+flex-direction: column !important;
+height: 100% !important;
+}
+#membresias .plan-card:not(:last-child) {
+grid-column: span 1 !important;
+}
+#membresias .plan-card:last-child {
+grid-column: 1 / -1 !important;
+padding: 18px 16px !important;
+}
+#membresias .offers-group > h3,
+#membresias .plan-card > div {
+overflow-wrap: anywhere !important;
+word-break: normal !important;
+white-space: normal !important;
+}
+#membresias .plan-card [data-i18n="offers.bestValue"] {
+position: static !important;
+display: inline-block !important;
+margin-bottom: 8px !important;
+font-size: 0.55rem !important;
+padding: 3px 8px !important;
+width: fit-content !important;
+}
+#membresias .plan-card:not(:last-child) > div[data-i18n^="offers.p."] {
+font-size: 0.68rem !important;
+}
+#membresias .plan-card:not(:last-child) > div[style*="2.4rem"] {
+font-size: 1.8rem !important;
+margin: 4px 0 10px !important;
+}
+#membresias .plan-card:not(:last-child) > div[style*="2.4rem"] span {
+font-size: 0.75rem !important;
+}
+#membresias .plan-card:not(:last-child) ul {
+margin-bottom: 12px !important;
+gap: 6px !important;
+flex-grow: 1 !important;
+}
+#membresias .plan-card:not(:last-child) li {
+font-size: 0.72rem !important;
+align-items: flex-start !important;
+}
+#membresias .plan-card:not(:last-child) li iconify-icon {
+font-size: 14px !important;
+margin-top: 2px !important;
+}
+#membresias .plan-card .offer-wa {
+width: 100% !important;
+justify-content: center !important;
+margin-top: auto !important;
+}
+#membresias .plan-card:not(:last-child) .offer-wa {
+min-height: 44px !important;
+padding: 8px 10px !important;
+font-size: 0.78rem !important;
+}
+#membresias .plan-card:last-child .offer-wa {
+min-height: 48px !important;
+padding: 11px 20px !important;
+}
+#membresias .reveal[style*="justify-content:space-between"] {
+flex-direction: column !important;
+align-items: stretch !important;
+text-align: center !important;
+}
+#membresias .reveal[style*="justify-content:space-between"] > div {
+min-width: 0 !important;
+text-align: center !important;
+}
+#membresias .reveal[style*="justify-content:space-between"] > div > div {
+justify-content: center !important;
+}
+#membresias .reveal[style*="justify-content:space-between"] .offer-wa {
+width: 100% !important;
+}
+#membresias .reveal[style*="grid-template-columns:repeat(4"] {
+grid-template-columns: 1fr 1fr !important;
+gap: 10px !important;
+}
+#membresias .reveal[style*="grid-template-columns:repeat(4"] > div {
+min-width: 0 !important;
+padding: 16px 10px !important;
+text-align: center !important;
+}
+#membresias p[style*="offers.final"],
+#membresias .text-metallic[data-i18n="offers.final"] {
+text-align: center !important;
+overflow-wrap: anywhere !important;
+}
+}
+@media (max-width: 359px) {
+#membresias .offers-group {
+grid-template-columns: 1fr !important;
+}
+#membresias .plan-card:not(:last-child) {
+grid-column: 1 / -1 !important;
+}
+#membresias .reveal[style*="grid-template-columns:repeat(4"] {
+grid-template-columns: 1fr !important;
+}
+}
 </style></head>
   <body class="">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
@@ -1728,21 +1902,404 @@ transition-duration: 0.01ms !important;
     </section>
 
     <!-- ─── MEMBERSHIP ───────────────────────────────────────────────── -->
-    <section class="" id="membresias">
-      <h2 class="reveal text-metallic !font-black !tracking-[-0.05em]">
-        <span data-i18n="membership.heading" class="">Membresías</span>
-      </h2>
-      <p class="reveal" data-i18n="membership.description">
-        Estamos preparando planes de membresía diseñados para adaptarse a tu
-        estilo de vida. Escríbenos y sé de los primeros en conocer todos los
-        detalles.
-      </p>
-      <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20las%20membres%C3%ADas%2C%20horarios%20y%20servicios%20del%20gimnasio." class="btn-primary wa-link reveal" target="_blank" rel="noopener" style="display:inline-flex;">
-        <iconify-icon icon="lucide:message-circle" noobserver="" class=""></iconify-icon>
-        <span data-i18n="membership.whatsappBtn" class="">
-          Escríbenos por WhatsApp
+    <section class="" id="membresias" style="text-align: center;">
+      <div style="max-width:1200px;margin:0 auto;">
+        <div class="membership-badge reveal">
+          <span class="hero-eyebrow-dot"></span>
+          <span data-i18n="offers.limited">Tiempo limitado</span>
+        </div>
+        <span class="section-label reveal" data-i18n="offers.label" style="display:block;">
+          Membresías
         </span>
-      </a>
+        <h2 class="reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="offers.heading">
+          Ofertas de apertura
+        </h2>
+        <p class="reveal" data-i18n="offers.description">
+          Aprovecha nuestros precios especiales de pre-apertura y Grand Opening
+          antes de que entren en vigor las tarifas regulares.
+        </p>
+
+        <div class="reveal mx-auto flex flex-col sm:flex-row w-full max-w-[680px] rounded-[16px] border border-[var(--border-t)] bg-gradient-to-b from-[rgba(45,212,191,0.06)] to-[rgba(255,255,255,0.02)] shadow-[0_0_32px_rgba(45,212,191,0.1)] p-[18px] sm:p-[24px] mt-[32px] sm:mt-[38px] mb-[36px] sm:mb-[48px] text-left backdrop-blur-md">
+          <div class="flex items-start gap-4 flex-1">
+            <div class="w-10 h-10 rounded-lg bg-[rgba(45,212,191,0.1)] border border-[rgba(45,212,191,0.2)] flex items-center justify-center text-[var(--teal)] text-[20px] flex-shrink-0 mt-1">
+              <iconify-icon icon="lucide:calendar-check"></iconify-icon>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[0.7rem] uppercase tracking-[0.1em] text-[var(--teal)] font-semibold mb-1" data-i18n="offers.g1.title">
+                PRE-APERTURA
+              </span>
+              <span class="text-[0.95rem] font-bold text-[var(--text)] leading-snug" data-i18n="offers.g1.subtitle">
+                Válido hasta el 14 de agosto
+              </span>
+            </div>
+          </div>
+          <div class="w-full sm:w-[1px] h-[1px] sm:h-auto bg-[var(--border-s)] my-4 sm:my-0 sm:mx-6 flex-shrink-0"></div>
+          <div class="flex items-start gap-4 flex-1">
+            <div class="w-10 h-10 rounded-lg bg-[rgba(45,212,191,0.1)] border border-[rgba(45,212,191,0.2)] flex items-center justify-center text-[var(--teal)] text-[20px] flex-shrink-0 mt-1">
+              <iconify-icon icon="lucide:party-popper"></iconify-icon>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[0.7rem] uppercase tracking-[0.1em] text-[var(--teal)] font-semibold mb-1" data-i18n="offers.g2.title">
+                GRAND OPENING
+              </span>
+              <span class="text-[0.95rem] font-bold text-[var(--text)] leading-snug" data-i18n="offers.g2.subtitle">
+                Solo 15 y 16 de agosto
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:left;" class="offers-groups">
+          <div class="reveal offers-group" style="position:relative;padding:24px;border-radius:16px;border:1px solid var(--border-t);background:linear-gradient(180deg,rgba(45,212,191,0.05),rgba(255,255,255,0.02));box-shadow:0 0 32px rgba(45,212,191,0.1);">
+            <div style="position:absolute;top:16px;right:16px;font-size:0.62rem;font-weight:600;letter-spacing:0.12em;padding:5px 12px;border-radius:999px;border:1px solid var(--border-t);color:var(--teal-light);background:rgba(45,212,191,0.1);" data-i18n="offers.limitedBadge">
+              Tiempo limitado
+            </div>
+            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g1.title">
+              PRE-APERTURA
+            </h3>
+            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g1.subtitle">
+              Válido hasta el 14 de agosto
+            </p>
+
+            <div class="plan-card" style="position:relative;padding:22px 20px;border-radius:12px;border:1px solid var(--border-t);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="position:absolute;top:-10px;left:20px;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:4px 12px;border-radius:999px;color:#04201c;background:linear-gradient(135deg,var(--teal-deep),var(--teal));box-shadow:0 0 16px rgba(45,212,191,0.4);" data-i18n="offers.bestValue">
+                Mejor valor
+              </div>
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;margin-top:4px;" data-i18n="offers.p.12full">
+                12 meses — pago total
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $349
+              </div>
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.12months">
+                    12 meses de membresía
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.firstOpen">
+                    Primer pago el día de apertura
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.maint">
+                    Mantenimiento anual: $52
+                  </span>
+                </li>
+              </ul>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="pre12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+
+            <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full">
+                6 meses — pago total
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $199
+              </div>
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.maint">
+                    Mantenimiento anual: $52
+                  </span>
+                </li>
+              </ul>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="pre6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+
+            <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.monthly">
+                Mensual
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $36.95
+                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">
+                  / mes
+                </span>
+              </div>
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.debit">
+                    Débito directo obligatorio
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.contract">
+                    Contrato de 12 meses
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.firstOpen">
+                    Primer pago el día de apertura
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.maint">
+                    Mantenimiento anual: $52
+                  </span>
+                </li>
+              </ul>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="preM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal offers-group" style="padding:24px;border-radius:16px;border:1px solid var(--border-s);background:var(--glass);">
+            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g2.title">
+              GRAND OPENING
+            </h3>
+            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g2.subtitle">
+              Solo 15 y 16 de agosto
+            </p>
+
+            <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.12full">
+                12 meses — pago total
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $399
+              </div>
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.maint">
+                    Mantenimiento anual: $52
+                  </span>
+                </li>
+              </ul>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="go12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+
+            <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full">
+                6 meses — pago total
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $224
+              </div>
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.maint">
+                    Mantenimiento anual: $52
+                  </span>
+                </li>
+              </ul>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="go6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+
+            <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.monthly">
+                Mensual
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $39.95
+                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">
+                  / mes
+                </span>
+              </div>
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.debit">
+                    Débito directo obligatorio
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.contract">
+                    Contrato de 12 meses
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.maint">
+                    Mantenimiento anual: $52
+                  </span>
+                </li>
+              </ul>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="goM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal offers-group" style="padding:24px;border-radius:16px;border:1px solid var(--border-s);background:var(--glass);">
+            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g3.title">
+              DESPUÉS DEL 16 DE AGOSTO
+            </h3>
+            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g3.subtitle">
+              Tarifas regulares
+            </p>
+
+            <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.regMonthly">
+                Mensual regular
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $44.95
+                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">
+                  / mes
+                </span>
+              </div>
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.debit">
+                    Débito directo obligatorio
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.contract">
+                    Contrato de 12 meses
+                  </span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.enroll">Matrícula: $49</span>
+                </li>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                  <span data-i18n="offers.f.maint">
+                    Mantenimiento anual: $52
+                  </span>
+                </li>
+              </ul>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="regM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+
+            <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full">
+                6 meses — pago total
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $259
+              </div>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="reg6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;margin-top:4px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+
+            <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.12full">
+                12 meses — pago total
+              </div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+                $469
+              </div>
+              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="reg12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;margin-top:4px;">
+                <iconify-icon icon="lucide:message-circle"></iconify-icon>
+                <span data-i18n="offers.cta">Me interesa</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:28px;padding:28px 32px;border-radius:16px;border:1px solid var(--border-t);background:linear-gradient(120deg,rgba(45,212,191,0.06),rgba(255,255,255,0.02));box-shadow:0 0 32px rgba(45,212,191,0.1);display:flex;flex-wrap:wrap;align-items:center;gap:24px;text-align:left;justify-content:space-between;">
+          <div style="flex:1;min-width:240px;">
+            <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
+              <h3 class="text-metallic" style="font-size:1.3rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.oneday.title">
+                ONE DAY PASS
+              </h3>
+              <span style="font-size:1.9rem;font-weight:900;color:var(--text);">
+                $12
+              </span>
+            </div>
+            <p style="font-size:0.84rem;line-height:1.6;color:var(--muted);font-weight:300;margin-top:8px;max-width:560px;" data-i18n="offers.oneday.desc">
+              Acceso completo por un día. Si ese mismo día te inscribes, los $12
+              se acreditan a la matrícula o al primer pago.
+            </p>
+          </div>
+          <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="oneday" target="_blank" rel="noopener" style="display:inline-flex;justify-content:center;padding:13px 26px;flex-shrink:0;">
+            <iconify-icon icon="lucide:ticket"></iconify-icon>
+            <span data-i18n="offers.oneday.cta">Quiero mi One Day Pass</span>
+          </a>
+        </div>
+
+        <div class="reveal" style="margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);">
+            <iconify-icon icon="lucide:dumbbell" style="color:var(--teal);font-size:22px;"></iconify-icon>
+            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat1">
+              Equipos premium
+            </span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);">
+            <iconify-icon icon="lucide:sparkles" style="color:var(--teal);font-size:22px;"></iconify-icon>
+            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat2">
+              Ambiente moderno
+            </span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);">
+            <iconify-icon icon="lucide:heart-handshake" style="color:var(--teal);font-size:22px;"></iconify-icon>
+            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat3">
+              Atención real
+            </span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);">
+            <iconify-icon icon="lucide:trending-up" style="color:var(--teal);font-size:22px;"></iconify-icon>
+            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat4">
+              Resultados reales
+            </span>
+          </div>
+        </div>
+
+        <p class="reveal text-metallic" style="margin-top:44px;font-size:clamp(1.4rem,3vw,2rem);font-weight:900;letter-spacing:-0.04em;" data-i18n="offers.final">
+          No es solo un gimnasio, es tu ADN en acción.
+        </p>
+      </div>
     </section>
 
     <!-- ─── LOCATION ─────────────────────────────────────────────────── -->
@@ -1999,326 +2556,338 @@ transition-duration: 0.01ms !important;
 
     <!-- ─── JAVASCRIPT ───────────────────────────────────────────────── -->
     <script>
-      // ── Translations ──────────────────────────────────
-      const translations = {
-        es: {
-          'lang.ariaLabel': 'Cambiar idioma',
-          'nav.home': 'Inicio',
-          'nav.about': 'Sobre nosotros',
-          'nav.trainers': 'Entrenadores',
-          'nav.experience': 'Experiencia',
-          'nav.gallery': 'Galería',
-          'nav.memberships': 'Membresías',
-          'nav.contact': 'Contactar',
-          'nav.menuAria': 'Abrir menú',
-          'hero.titleLine1': 'ENTRENA',
-          'hero.titleLine2': 'TU',
-          'hero.titleLine3': 'ADN',
-          'hero.description': 'Descubre una nueva manera de entrenar en San Juan. Equipos premium, un ambiente relajado y una experiencia cercana para que puedas enfocarte en tu progreso.',
-          'hero.primaryBtn': 'Conoce el estudio',
-          'hero.whatsappBtn': 'Escríbenos por WhatsApp',
-          'hero.imgAlt': 'Atleta entrenando en el gimnasio',
-          'studio.label': 'El Estudio',
-          'studio.heading': 'Un espacio diseñado para tu progreso',
-          'studio.paragraph1': '3NA Fitness Studio nace con una idea clara: entrenar no debería sentirse como una obligación. Creamos un espacio moderno en San Juan donde el equipo, el ambiente y la atención están pensados para que disfrutes cada sesión.',
-          'studio.paragraph2': 'Aquí no hay multitudes ni distracciones. Solo tú, tus metas y todo lo que necesitas para alcanzarlas.',
-          'studio.imgAlt': 'Interior del estudio con equipos premium',
-          'benefits.premium.title': 'Equipos premium',
-          'benefits.premium.desc': 'Máquinas y pesos libres de última generación, seleccionados para un entrenamiento seguro y efectivo.',
-          'benefits.ambience.title': 'Ambiente relajado',
-          'benefits.ambience.desc': 'Un espacio tranquilo y sin aglomeraciones donde puedes entrenar a tu ritmo, sin presión.',
-          'benefits.attention.title': 'Atención cercana',
-          'benefits.attention.desc': 'Un trato personal y humano. Aquí no eres un número: conocemos tu nombre y tus metas.',
-          'benefits.community.title': 'Comunidad real',
-          'benefits.community.desc': 'Personas como tú que buscan progresar en un ambiente positivo y motivador.',
-          'experience.label': 'La Experiencia',
-          'experience.heading': 'Así se entrena en 3NA',
-          'experience.block1.title': 'Entrena a tu ritmo',
-          'experience.block1.desc': 'Olvídate de esperar por máquinas o sentirte observado. Nuestro espacio está diseñado para que entrenes con libertad y te concentres en lo que importa: tu progreso.',
-          'experience.block2.title': 'Espacios pensados para ti',
-          'experience.block2.desc': 'Cada área del estudio fue planificada con intención: zonas de fuerza, cardio y movilidad organizadas para que tu sesión fluya de principio a fin.',
-          'experience.block3.title': 'Progreso que se siente',
-          'experience.block3.desc': 'Con el ambiente correcto y las herramientas correctas, los resultados llegan. Ven a descubrir de lo que eres capaz cuando entrenas en el lugar indicado.',
-          'video.caption': 'Un vistazo dentro de 3NA',
-          'video.imgAlt': 'Recorrido en video por el estudio',
-          'gallery.label': 'Galería',
-          'gallery.heading': 'Conoce el estudio',
-          'gallery.swipe': 'Desliza para ver más →',
-          'gallery.viewFull': 'Ver galería completa',
-          'gallery.alt1': 'Área de pesas libres',
-          'gallery.alt2': 'Zona de cardio',
-          'gallery.alt3': 'Entrenamiento funcional',
-          'gallery.alt4': 'Máquinas de fuerza',
-          'gallery.alt5': 'Área de movilidad',
-          'gallery.alt6': 'Espacio de estiramiento',
-          'membership.status': 'PRÓXIMAMENTE',
-          'membership.heading': 'Membresías',
-          'membership.description': 'Estamos preparando planes de membresía diseñados para adaptarse a tu estilo de vida. Escríbenos y sé de los primeros en conocer todos los detalles.',
-          'membership.whatsappBtn': 'Escríbenos por WhatsApp',
-          'location.label': 'Ubicación',
-          'location.heading': 'Visítanos en San Juan',
-          'location.addressLabel': 'Dirección',
-          'location.hoursLabel': 'Horario',
-          'location.hours.weekdays': 'Lunes a Viernes',
-          'location.hours.saturday': 'Sábado',
-          'location.hours.sunday': 'Domingo',
-          'location.hours.closed': 'Cerrado',
-          'location.btnMaps': 'Abrir en Google Maps',
-          'location.btnCall': 'Llamar al gimnasio',
-          'location.btnWhatsapp': 'WhatsApp',
-          'location.mapAlt': 'Mapa de la ubicación del estudio',
-          'faq.label': 'Preguntas Frecuentes',
-          'faq.heading': 'Resolvemos tus dudas',
-          'faq.question1': '¿Cuándo abre 3NA Fitness Studio?',
-          'faq.answer1': 'Estamos en la etapa final de preparación del estudio. Escríbenos por WhatsApp y te avisaremos tan pronto tengamos la fecha oficial de apertura, junto con ofertas exclusivas de preapertura.',
-          'faq.question2': '¿Qué incluirá la membresía?',
-          'faq.answer2': 'Las membresías incluirán acceso completo a todas las áreas del estudio: fuerza, cardio y movilidad. Pronto anunciaremos los planes disponibles con todos los detalles y precios.',
-          'faq.question3': '¿Necesito experiencia previa para entrenar?',
-          'faq.answer3': 'Para nada. 3NA está diseñado para todos los niveles, desde principiantes hasta atletas avanzados. Nuestro ambiente relajado es perfecto para dar tus primeros pasos con confianza.',
-          'faq.question4': '¿Hay estacionamiento disponible?',
-          'faq.answer4': 'Sí, contamos con estacionamiento conveniente cerca del estudio para que llegar a entrenar sea fácil y sin complicaciones.',
-          'faq.question5': '¿Ofrecerán entrenamiento personal?',
-          'faq.answer5': 'Sí, tendremos opciones de entrenamiento personal con profesionales certificados. Contáctanos por WhatsApp para más información sobre disponibilidad y precios.',
-          'cta.headingLine1': '¿Listo para entrenar',
-          'cta.headingLine2': 'tu ADN?',
-          'cta.description': 'Escríbenos hoy y sé de los primeros en formar parte de la comunidad 3NA. Tu mejor versión te está esperando.',
-          'cta.whatsappBtn': 'Escríbenos por WhatsApp',
-          'footer.description': 'Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.',
-          'footer.linksTitle': 'Enlaces',
-          'footer.contactTitle': 'Contacto',
-          'footer.credit': 'Página web diseñada por',
-          'footer.copyright': '© {year} 3NA Fitness Studio. Todos los derechos reservados.',
-          'footer.terms': 'Términos de servicio',
-          'float.whatsappAria': 'Escríbenos por WhatsApp'
-        },
-        en: {
-          'lang.ariaLabel': 'Change language',
-          'nav.home': 'Home',
-          'nav.about': 'About Us',
-          'nav.trainers': 'Trainers',
-          'nav.experience': 'Experience',
-          'nav.gallery': 'Gallery',
-          'nav.memberships': 'Memberships',
-          'nav.contact': 'Contact',
-          'nav.menuAria': 'Open menu',
-          'hero.titleLine1': 'TRAIN',
-          'hero.titleLine2': 'YOUR',
-          'hero.titleLine3': 'DNA',
-          'hero.description': 'Discover a new way to train in San Juan. Premium equipment, a relaxed environment, and a more personal experience designed to help you focus on your progress.',
-          'hero.primaryBtn': 'Explore the studio',
-          'hero.whatsappBtn': 'Message us on WhatsApp',
-          'hero.imgAlt': 'Athlete training at the gym',
-          'studio.label': 'The Studio',
-          'studio.heading': 'A space designed for your progress',
-          'studio.paragraph1': '3NA Fitness Studio was born from a clear idea: training should never feel like a chore. We created a modern space in San Juan where the equipment, the atmosphere, and the service are all designed so you can enjoy every session.',
-          'studio.paragraph2': 'No crowds, no distractions. Just you, your goals, and everything you need to reach them.',
-          'studio.imgAlt': 'Studio interior with premium equipment',
-          'benefits.premium.title': 'Premium equipment',
-          'benefits.premium.desc': 'State-of-the-art machines and free weights, carefully selected for safe and effective training.',
-          'benefits.ambience.title': 'Relaxed atmosphere',
-          'benefits.ambience.desc': 'A calm, uncrowded space where you can train at your own pace, free of pressure.',
-          'benefits.attention.title': 'Personal attention',
-          'benefits.attention.desc': 'A warm, human approach. You are not just a number here — we know your name and your goals.',
-          'benefits.community.title': 'A real community',
-          'benefits.community.desc': 'People like you looking to make progress in a positive, motivating environment.',
-          'experience.label': 'The Experience',
-          'experience.heading': 'This is how you train at 3NA',
-          'experience.block1.title': 'Train at your own pace',
-          'experience.block1.desc': 'Forget waiting for machines or feeling watched. Our space is designed so you can train freely and focus on what matters most: your progress.',
-          'experience.block2.title': 'Spaces designed for you',
-          'experience.block2.desc': 'Every area of the studio was planned with intention: strength, cardio, and mobility zones organized so your session flows from start to finish.',
-          'experience.block3.title': 'Progress you can feel',
-          'experience.block3.desc': 'With the right environment and the right tools, results follow. Come discover what you are capable of when you train in the right place.',
-          'video.caption': 'A look inside 3NA',
-          'video.imgAlt': 'Video tour of the studio',
-          'gallery.label': 'Gallery',
-          'gallery.heading': 'Take a look inside',
-          'gallery.swipe': 'Swipe to see more →',
-          'gallery.viewFull': 'View full gallery',
-          'gallery.alt1': 'Free weights area',
-          'gallery.alt2': 'Cardio zone',
-          'gallery.alt3': 'Functional training',
-          'gallery.alt4': 'Strength machines',
-          'gallery.alt5': 'Mobility area',
-          'gallery.alt6': 'Stretching space',
-          'membership.status': 'COMING SOON',
-          'membership.heading': 'Memberships',
-          'membership.description': 'We are preparing membership plans designed to fit your lifestyle. Message us and be among the first to get all the details.',
-          'membership.whatsappBtn': 'Message us on WhatsApp',
-          'location.label': 'Location',
-          'location.heading': 'Visit us in San Juan',
-          'location.addressLabel': 'Address',
-          'location.hoursLabel': 'Hours',
-          'location.hours.weekdays': 'Monday to Friday',
-          'location.hours.saturday': 'Saturday',
-          'location.hours.sunday': 'Sunday',
-          'location.hours.closed': 'Closed',
-          'location.btnMaps': 'Open in Google Maps',
-          'location.btnCall': 'Call the gym',
-          'location.btnWhatsapp': 'WhatsApp',
-          'location.mapAlt': 'Map of the studio location',
-          'faq.label': 'Frequently Asked Questions',
-          'faq.heading': 'Your questions, answered',
-          'faq.question1': 'When does 3NA Fitness Studio open?',
-          'faq.answer1': 'We are in the final stage of preparing the studio. Message us on WhatsApp and we will let you know as soon as we have the official opening date, along with exclusive pre-opening offers.',
-          'faq.question2': 'What will the membership include?',
-          'faq.answer2': 'Memberships will include full access to every area of the studio: strength, cardio, and mobility. We will announce the available plans with full details and pricing soon.',
-          'faq.question3': 'Do I need previous experience to train?',
-          'faq.answer3': 'Not at all. 3NA is designed for every level, from beginners to advanced athletes. Our relaxed environment is the perfect place to take your first steps with confidence.',
-          'faq.question4': 'Is parking available?',
-          'faq.answer4': 'Yes, we have convenient parking near the studio so getting to your workout is easy and hassle-free.',
-          'faq.question5': 'Will you offer personal training?',
-          'faq.answer5': 'Yes, we will offer personal training options with certified professionals. Contact us on WhatsApp for more information about availability and pricing.',
-          'cta.headingLine1': 'READY TO TRAIN',
-          'cta.headingLine2': 'YOUR DNA?',
-          'cta.description': 'Message us today and be among the first to join the 3NA community. Your best self is waiting.',
-          'cta.whatsappBtn': 'Message us on WhatsApp',
-          'footer.description': 'A premium fitness studio in San Juan, Puerto Rico. Train your DNA in a space designed for your progress.',
-          'footer.linksTitle': 'Links',
-          'footer.contactTitle': 'Contact',
-          'footer.credit': 'Website designed by',
-          'footer.copyright': '© {year} 3NA Fitness Studio. All rights reserved.',
-          'footer.terms': 'Terms of Service',
-          'float.whatsappAria': 'Message us on WhatsApp'
+        // ── Translations ──────────────────────────────────
+        const translations = {
+          es: {
+            'lang.ariaLabel': 'Cambiar idioma',
+            'nav.home': 'Inicio',
+            'nav.about': 'Sobre nosotros',
+            'nav.trainers': 'Entrenadores',
+            'nav.experience': 'Experiencia',
+            'nav.gallery': 'Galería',
+            'nav.memberships': 'Membresías',
+            'nav.contact': 'Contactar',
+            'nav.menuAria': 'Abrir menú',
+            'hero.titleLine1': 'ENTRENA',
+            'hero.titleLine2': 'TU',
+            'hero.titleLine3': 'ADN',
+            'hero.description': 'Descubre una nueva manera de entrenar en San Juan. Equipos premium, un ambiente relajado y una experiencia cercana para que puedas enfocarte en tu progreso.',
+            'hero.primaryBtn': 'Conoce el estudio',
+            'hero.whatsappBtn': 'Escríbenos por WhatsApp',
+            'hero.imgAlt': 'Atleta entrenando en el gimnasio',
+            'studio.label': 'El Estudio',
+            'studio.heading': 'Un espacio diseñado para tu progreso',
+            'studio.paragraph1': '3NA Fitness Studio nace con una idea clara: entrenar no debería sentirse como una obligación. Creamos un espacio moderno en San Juan donde el equipo, el ambiente y la atención están pensados para que disfrutes cada sesión.',
+            'studio.paragraph2': 'Aquí no hay multitudes ni distracciones. Solo tú, tus metas y todo lo que necesitas para alcanzarlas.',
+            'studio.imgAlt': 'Interior del estudio con equipos premium',
+            'benefits.premium.title': 'Equipos premium',
+            'benefits.premium.desc': 'Máquinas y pesos libres de última generación, seleccionados para un entrenamiento seguro y efectivo.',
+            'benefits.ambience.title': 'Ambiente relajado',
+            'benefits.ambience.desc': 'Un espacio tranquilo y sin aglomeraciones donde puedes entrenar a tu ritmo, sin presión.',
+            'benefits.attention.title': 'Atención cercana',
+            'benefits.attention.desc': 'Un trato personal y humano. Aquí no eres un número: conocemos tu nombre y tus metas.',
+            'benefits.community.title': 'Comunidad real',
+            'benefits.community.desc': 'Personas como tú que buscan progresar en un ambiente positivo y motivador.',
+            'experience.label': 'La Experiencia',
+            'experience.heading': 'Así se entrena en 3NA',
+            'experience.block1.title': 'Entrena a tu ritmo',
+            'experience.block1.desc': 'Olvídate de esperar por máquinas o sentirte observado. Nuestro espacio está diseñado para que entrenes con libertad y te concentres en lo que importa: tu progreso.',
+            'experience.block2.title': 'Espacios pensados para ti',
+            'experience.block2.desc': 'Cada área del estudio fue planificada con intención: zonas de fuerza, cardio y movilidad organizadas para que tu sesión fluya de principio a fin.',
+            'experience.block3.title': 'Progreso que se siente',
+            'experience.block3.desc': 'Con el ambiente correcto y las herramientas correctas, los resultados llegan. Ven a descubrir de lo que eres capaz cuando entrenas en el lugar indicado.',
+            'video.caption': 'Un vistazo dentro de 3NA',
+            'video.imgAlt': 'Recorrido en video por el estudio',
+            'gallery.label': 'Galería',
+            'gallery.heading': 'Conoce el estudio',
+            'gallery.swipe': 'Desliza para ver más →',
+            'gallery.viewFull': 'Ver galería completa',
+            'gallery.alt1': 'Área de pesas libres',
+            'gallery.alt2': 'Zona de cardio',
+            'gallery.alt3': 'Entrenamiento funcional',
+            'gallery.alt4': 'Máquinas de fuerza',
+            'gallery.alt5': 'Área de movilidad',
+            'gallery.alt6': 'Espacio de estiramiento',
+            'membership.status': 'PRÓXIMAMENTE',
+            'membership.heading': 'Membresías',
+            'membership.description': 'Estamos preparando planes de membresía diseñados para adaptarse a tu estilo de vida. Escríbenos y sé de los primeros en conocer todos los detalles.',
+            'membership.whatsappBtn': 'Escríbenos por WhatsApp',
+            'location.label': 'Ubicación',
+            'location.heading': 'Visítanos en San Juan',
+            'location.addressLabel': 'Dirección',
+            'location.hoursLabel': 'Horario',
+            'location.hours.weekdays': 'Lunes a Viernes',
+            'location.hours.saturday': 'Sábado',
+            'location.hours.sunday': 'Domingo',
+            'location.hours.closed': 'Cerrado',
+            'location.btnMaps': 'Abrir en Google Maps',
+            'location.btnCall': 'Llamar al gimnasio',
+            'location.btnWhatsapp': 'WhatsApp',
+            'location.mapAlt': 'Mapa de la ubicación del estudio',
+            'faq.label': 'Preguntas Frecuentes',
+            'faq.heading': 'Resolvemos tus dudas',
+            'faq.question1': '¿Cuándo abre 3NA Fitness Studio?',
+            'faq.answer1': 'Estamos en la etapa final de preparación del estudio. Escríbenos por WhatsApp y te avisaremos tan pronto tengamos la fecha oficial de apertura, junto con ofertas exclusivas de preapertura.',
+            'faq.question2': '¿Qué incluirá la membresía?',
+            'faq.answer2': 'Las membresías incluirán acceso completo a todas las áreas del estudio: fuerza, cardio y movilidad. Pronto anunciaremos los planes disponibles con todos los detalles y precios.',
+            'faq.question3': '¿Necesito experiencia previa para entrenar?',
+            'faq.answer3': 'Para nada. 3NA está diseñado para todos los niveles, desde principiantes hasta atletas avanzados. Nuestro ambiente relajado es perfecto para dar tus primeros pasos con confianza.',
+            'faq.question4': '¿Hay estacionamiento disponible?',
+            'faq.answer4': 'Sí, contamos con estacionamiento conveniente cerca del estudio para que llegar a entrenar sea fácil y sin complicaciones.',
+            'faq.question5': '¿Ofrecerán entrenamiento personal?',
+            'faq.answer5': 'Sí, tendremos opciones de entrenamiento personal con profesionales certificados. Contáctanos por WhatsApp para más información sobre disponibilidad y precios.',
+            'cta.headingLine1': '¿Listo para entrenar',
+            'cta.headingLine2': 'tu ADN?',
+            'cta.description': 'Escríbenos hoy y sé de los primeros en formar parte de la comunidad 3NA. Tu mejor versión te está esperando.',
+            'cta.whatsappBtn': 'Escríbenos por WhatsApp',
+            'footer.description': 'Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.',
+            'footer.linksTitle': 'Enlaces',
+            'footer.contactTitle': 'Contacto',
+            'footer.credit': 'Página web diseñada por',
+            'footer.copyright': '© {year} 3NA Fitness Studio. Todos los derechos reservados.',
+            'footer.terms': 'Términos de servicio',
+            'float.whatsappAria': 'Escríbenos por WhatsApp'
+          },
+          en: {
+            'lang.ariaLabel': 'Change language',
+            'nav.home': 'Home',
+            'nav.about': 'About Us',
+            'nav.trainers': 'Trainers',
+            'nav.experience': 'Experience',
+            'nav.gallery': 'Gallery',
+            'nav.memberships': 'Memberships',
+            'nav.contact': 'Contact',
+            'nav.menuAria': 'Open menu',
+            'hero.titleLine1': 'TRAIN',
+            'hero.titleLine2': 'YOUR',
+            'hero.titleLine3': 'DNA',
+            'hero.description': 'Discover a new way to train in San Juan. Premium equipment, a relaxed environment, and a more personal experience designed to help you focus on your progress.',
+            'hero.primaryBtn': 'Explore the studio',
+            'hero.whatsappBtn': 'Message us on WhatsApp',
+            'hero.imgAlt': 'Athlete training at the gym',
+            'studio.label': 'The Studio',
+            'studio.heading': 'A space designed for your progress',
+            'studio.paragraph1': '3NA Fitness Studio was born from a clear idea: training should never feel like a chore. We created a modern space in San Juan where the equipment, the atmosphere, and the service are all designed so you can enjoy every session.',
+            'studio.paragraph2': 'No crowds, no distractions. Just you, your goals, and everything you need to reach them.',
+            'studio.imgAlt': 'Studio interior with premium equipment',
+            'benefits.premium.title': 'Premium equipment',
+            'benefits.premium.desc': 'State-of-the-art machines and free weights, carefully selected for safe and effective training.',
+            'benefits.ambience.title': 'Relaxed atmosphere',
+            'benefits.ambience.desc': 'A calm, uncrowded space where you can train at your own pace, free of pressure.',
+            'benefits.attention.title': 'Personal attention',
+            'benefits.attention.desc': 'A warm, human approach. You are not just a number here — we know your name and your goals.',
+            'benefits.community.title': 'A real community',
+            'benefits.community.desc': 'People like you looking to make progress in a positive, motivating environment.',
+            'experience.label': 'The Experience',
+            'experience.heading': 'This is how you train at 3NA',
+            'experience.block1.title': 'Train at your own pace',
+            'experience.block1.desc': 'Forget waiting for machines or feeling watched. Our space is designed so you can train freely and focus on what matters most: your progress.',
+            'experience.block2.title': 'Spaces designed for you',
+            'experience.block2.desc': 'Every area of the studio was planned with intention: strength, cardio, and mobility zones organized so your session flows from start to finish.',
+            'experience.block3.title': 'Progress you can feel',
+            'experience.block3.desc': 'With the right environment and the right tools, results follow. Come discover what you are capable of when you train in the right place.',
+            'video.caption': 'A look inside 3NA',
+            'video.imgAlt': 'Video tour of the studio',
+            'gallery.label': 'Gallery',
+            'gallery.heading': 'Take a look inside',
+            'gallery.swipe': 'Swipe to see more →',
+            'gallery.viewFull': 'View full gallery',
+            'gallery.alt1': 'Free weights area',
+            'gallery.alt2': 'Cardio zone',
+            'gallery.alt3': 'Functional training',
+            'gallery.alt4': 'Strength machines',
+            'gallery.alt5': 'Mobility area',
+            'gallery.alt6': 'Stretching space',
+            'membership.status': 'COMING SOON',
+            'membership.heading': 'Memberships',
+            'membership.description': 'We are preparing membership plans designed to fit your lifestyle. Message us and be among the first to get all the details.',
+            'membership.whatsappBtn': 'Message us on WhatsApp',
+            'location.label': 'Location',
+            'location.heading': 'Visit us in San Juan',
+            'location.addressLabel': 'Address',
+            'location.hoursLabel': 'Hours',
+            'location.hours.weekdays': 'Monday to Friday',
+            'location.hours.saturday': 'Saturday',
+            'location.hours.sunday': 'Sunday',
+            'location.hours.closed': 'Closed',
+            'location.btnMaps': 'Open in Google Maps',
+            'location.btnCall': 'Call the gym',
+            'location.btnWhatsapp': 'WhatsApp',
+            'location.mapAlt': 'Map of the studio location',
+            'faq.label': 'Frequently Asked Questions',
+            'faq.heading': 'Your questions, answered',
+            'faq.question1': 'When does 3NA Fitness Studio open?',
+            'faq.answer1': 'We are in the final stage of preparing the studio. Message us on WhatsApp and we will let you know as soon as we have the official opening date, along with exclusive pre-opening offers.',
+            'faq.question2': 'What will the membership include?',
+            'faq.answer2': 'Memberships will include full access to every area of the studio: strength, cardio, and mobility. We will announce the available plans with full details and pricing soon.',
+            'faq.question3': 'Do I need previous experience to train?',
+            'faq.answer3': 'Not at all. 3NA is designed for every level, from beginners to advanced athletes. Our relaxed environment is the perfect place to take your first steps with confidence.',
+            'faq.question4': 'Is parking available?',
+            'faq.answer4': 'Yes, we have convenient parking near the studio so getting to your workout is easy and hassle-free.',
+            'faq.question5': 'Will you offer personal training?',
+            'faq.answer5': 'Yes, we will offer personal training options with certified professionals. Contact us on WhatsApp for more information about availability and pricing.',
+            'cta.headingLine1': 'READY TO TRAIN',
+            'cta.headingLine2': 'YOUR DNA?',
+            'cta.description': 'Message us today and be among the first to join the 3NA community. Your best self is waiting.',
+            'cta.whatsappBtn': 'Message us on WhatsApp',
+            'footer.description': 'A premium fitness studio in San Juan, Puerto Rico. Train your DNA in a space designed for your progress.',
+            'footer.linksTitle': 'Links',
+            'footer.contactTitle': 'Contact',
+            'footer.credit': 'Website designed by',
+            'footer.copyright': '© {year} 3NA Fitness Studio. All rights reserved.',
+            'footer.terms': 'Terms of Service',
+            'float.whatsappAria': 'Message us on WhatsApp'
+          }
+        };
+
+        // ── WhatsApp URLs ────────────────────────────────
+        const WA_PHONE = '17876476721';
+        const waUrls = {
+          es: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hola 3NA Fitness Studio, me interesa recibir información sobre las membresías, horarios y servicios del gimnasio.'),
+          en: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hello 3NA Fitness Studio, I would like information about gym memberships, hours, and services.')
+        };
+
+        // ── setLanguage ────────────────────────────────
+        let currentLang = 'es';
+
+        function setLanguage(language) {
+          const t = translations[language];
+          if (!t) return;
+          currentLang = language;
+          const year = new Date().getFullYear();
+
+          document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            const key = el.getAttribute('data-i18n');
+            if (t[key] !== undefined) el.textContent = t[key].replace('{year}', year);
+          });
+
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+          });
+
+          document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+            const key = el.getAttribute('data-i18n-alt');
+            if (t[key] !== undefined) el.setAttribute('alt', t[key]);
+          });
+
+          document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
+            const key = el.getAttribute('data-i18n-aria-label');
+            if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+          });
+
+          const copyEl = document.getElementById('footer-copy');
+          if (copyEl) copyEl.textContent = t['footer.copyright'].replace('{year}', year);
+
+          document.querySelectorAll('.wa-link').forEach(function (link) {
+            link.setAttribute('href', waUrls[language]);
+          });
+
+          document.querySelectorAll('.lang-btn').forEach(function (btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === language);
+          });
+
+          document.documentElement.lang = language;
+          try { localStorage.setItem('3na-language', language); } catch (e) {}
         }
-      };
-
-      // ── WhatsApp URLs ────────────────────────────────
-      const WA_PHONE = '17876476721';
-      const waUrls = {
-        es: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hola 3NA Fitness Studio, me interesa recibir información sobre las membresías, horarios y servicios del gimnasio.'),
-        en: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hello 3NA Fitness Studio, I would like information about gym memberships, hours, and services.')
-      };
-
-      // ── setLanguage ────────────────────────────────
-      let currentLang = 'es';
-
-      function setLanguage(language) {
-        const t = translations[language];
-        if (!t) return;
-        currentLang = language;
-        const year = new Date().getFullYear();
-
-        document.querySelectorAll('[data-i18n]').forEach(function (el) {
-          const key = el.getAttribute('data-i18n');
-          if (t[key] !== undefined) el.textContent = t[key].replace('{year}', year);
-        });
-
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
-          const key = el.getAttribute('data-i18n-placeholder');
-          if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
-        });
-
-        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
-          const key = el.getAttribute('data-i18n-alt');
-          if (t[key] !== undefined) el.setAttribute('alt', t[key]);
-        });
-
-        document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
-          const key = el.getAttribute('data-i18n-aria-label');
-          if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
-        });
-
-        const copyEl = document.getElementById('footer-copy');
-        if (copyEl) copyEl.textContent = t['footer.copyright'].replace('{year}', year);
-
-        document.querySelectorAll('.wa-link').forEach(function (link) {
-          link.setAttribute('href', waUrls[language]);
-        });
 
         document.querySelectorAll('.lang-btn').forEach(function (btn) {
-          btn.classList.toggle('active', btn.getAttribute('data-lang') === language);
+          btn.addEventListener('click', function () {
+            setLanguage(btn.getAttribute('data-lang'));
+          });
         });
 
-        document.documentElement.lang = language;
-        try { localStorage.setItem('3na-language', language); } catch (e) {}
-      }
+        (function () {
+          let saved = null;
+          try { saved = localStorage.getItem('3na-language'); } catch (e) {}
+          setLanguage(saved === 'en' ? 'en' : 'es');
+        })();
 
-      document.querySelectorAll('.lang-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          setLanguage(btn.getAttribute('data-lang'));
-        });
-      });
+        // ── Mobile hamburger ──────────────────────────
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-      (function () {
-        let saved = null;
-        try { saved = localStorage.getItem('3na-language'); } catch (e) {}
-        setLanguage(saved === 'en' ? 'en' : 'es');
-      })();
+      function syncMobileMenuPosition() {
+      const mainNav =
+      document.getElementById('main-nav');
 
-      // ── Mobile hamburger ──────────────────────────
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobile-menu');
-
-    function syncMobileMenuPosition() {
-    const mainNav =
-    document.getElementById('main-nav');
-    
-    const mobileHeaderSpacer =
-    document.getElementById(
-    'mobile-header-spacer'
-    );
-    
-    if (
-    !mainNav ||
-    !mobileMenu ||
-    window.innerWidth >= 992
-    ) {
-    return;
-    }
-    
-    const navHeight = Math.ceil(
-    mainNav.getBoundingClientRect().height
-    );
-    
-    document.documentElement.style.setProperty(
-    '--mobile-nav-height',
-    navHeight + 'px'
-    );
-    
-    if (mobileHeaderSpacer) {
-    mobileHeaderSpacer.style.height =
-    navHeight + 'px';
-    }
-    }
-
-      requestAnimationFrame(syncMobileMenuPosition);
-      window.addEventListener('load', syncMobileMenuPosition);
-      window.addEventListener('resize', syncMobileMenuPosition);
-      window.addEventListener('orientationchange', function () {
-        window.setTimeout(syncMobileMenuPosition, 150);
-      });
-
-      const observedMobileNav =
-        document.getElementById('main-nav');
+      const mobileHeaderSpacer =
+      document.getElementById(
+      'mobile-header-spacer'
+      );
 
       if (
-        observedMobileNav &&
-        'ResizeObserver' in window
+      !mainNav ||
+      !mobileMenu ||
+      window.innerWidth >= 992
       ) {
-        const mobileNavObserver = new ResizeObserver(function () {
-          syncMobileMenuPosition();
-        });
-
-        mobileNavObserver.observe(observedMobileNav);
+      return;
       }
 
-      if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', function () {
-          syncMobileMenuPosition();
+      const navHeight = Math.ceil(
+      mainNav.getBoundingClientRect().height
+      );
 
-          const isOpening = !mobileMenu.classList.contains('open');
+      document.documentElement.style.setProperty(
+      '--mobile-nav-height',
+      navHeight + 'px'
+      );
 
-          hamburger.classList.toggle('open', isOpening);
-          mobileMenu.classList.toggle('open', isOpening);
-          document.body.classList.toggle('mobile-menu-open', isOpening);
+      if (mobileHeaderSpacer) {
+      mobileHeaderSpacer.style.height =
+      navHeight + 'px';
+      }
+      }
 
-          hamburger.setAttribute('aria-expanded', String(isOpening));
-          mobileMenu.setAttribute('aria-hidden', String(!isOpening));
+        requestAnimationFrame(syncMobileMenuPosition);
+        window.addEventListener('load', syncMobileMenuPosition);
+        window.addEventListener('resize', syncMobileMenuPosition);
+        window.addEventListener('orientationchange', function () {
+          window.setTimeout(syncMobileMenuPosition, 150);
         });
 
-        document.querySelectorAll('.mobile-link').forEach(function (link) {
-          link.addEventListener('click', function () {
+        const observedMobileNav =
+          document.getElementById('main-nav');
+
+        if (
+          observedMobileNav &&
+          'ResizeObserver' in window
+        ) {
+          const mobileNavObserver = new ResizeObserver(function () {
+            syncMobileMenuPosition();
+          });
+
+          mobileNavObserver.observe(observedMobileNav);
+        }
+
+        if (hamburger && mobileMenu) {
+          hamburger.addEventListener('click', function () {
+            syncMobileMenuPosition();
+
+            const isOpening = !mobileMenu.classList.contains('open');
+
+            hamburger.classList.toggle('open', isOpening);
+            mobileMenu.classList.toggle('open', isOpening);
+            document.body.classList.toggle('mobile-menu-open', isOpening);
+
+            hamburger.setAttribute('aria-expanded', String(isOpening));
+            mobileMenu.setAttribute('aria-hidden', String(!isOpening));
+          });
+
+          document.querySelectorAll('.mobile-link').forEach(function (link) {
+            link.addEventListener('click', function () {
+              hamburger.classList.remove('open');
+              mobileMenu.classList.remove('open');
+              document.body.classList.remove('mobile-menu-open');
+
+              hamburger.setAttribute('aria-expanded', 'false');
+              mobileMenu.setAttribute('aria-hidden', 'true');
+            });
+          });
+
+          window.addEventListener('keydown', function (event) {
+            if (event.key !== 'Escape') return;
+
             hamburger.classList.remove('open');
             mobileMenu.classList.remove('open');
             document.body.classList.remove('mobile-menu-open');
@@ -2326,115 +2895,103 @@ transition-duration: 0.01ms !important;
             hamburger.setAttribute('aria-expanded', 'false');
             mobileMenu.setAttribute('aria-hidden', 'true');
           });
-        });
+        }
 
-        window.addEventListener('keydown', function (event) {
-          if (event.key !== 'Escape') return;
+        // ── Mobile header hide/show on scroll ─────────────
+        let previousMobileScrollY =
+        window.scrollY;
 
-          hamburger.classList.remove('open');
-          mobileMenu.classList.remove('open');
-          document.body.classList.remove('mobile-menu-open');
+        let mobileHeaderTicking = false;
 
-          hamburger.setAttribute('aria-expanded', 'false');
-          mobileMenu.setAttribute('aria-hidden', 'true');
-        });
-      }
+        function updateMobileHeaderVisibility() {
+        const mobileMainNav =
+        document.getElementById('main-nav');
 
-      // ── Mobile header hide/show on scroll ─────────────
-      let previousMobileScrollY =
-      window.scrollY;
-      
-      let mobileHeaderTicking = false;
-      
-      function updateMobileHeaderVisibility() {
-      const mobileMainNav =
-      document.getElementById('main-nav');
-      
-      if (
-      !mobileMainNav ||
-      window.innerWidth >= 992
-      ) {
-      return;
-      }
-      
-      const currentScrollY =
-      Math.max(window.scrollY, 0);
-      
-      const menuIsOpen =
-      document.body.classList.contains(
-      'mobile-menu-open'
-      );
-      
-      if (
-      menuIsOpen ||
-      currentScrollY < 40 ) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
-        mobileMainNav.classList.add( 'mobile-header-visible' ); previousMobileScrollY=currentScrollY; return; } const
-        scrollDifference=currentScrollY - previousMobileScrollY; if ( scrollDifference> 8 &&
-        currentScrollY > 120
+        if (
+        !mobileMainNav ||
+        window.innerWidth >= 992
         ) {
-        mobileMainNav.classList.add(
-        'mobile-header-hidden'
+        return;
+        }
+
+        const currentScrollY =
+        Math.max(window.scrollY, 0);
+
+        const menuIsOpen =
+        document.body.classList.contains(
+        'mobile-menu-open'
         );
-      
-        mobileMainNav.classList.remove(
-        'mobile-header-visible'
-        );
-        } else if (
-        scrollDifference < -8 ) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
-          mobileMainNav.classList.add( 'mobile-header-visible' ); } previousMobileScrollY=currentScrollY; }
-          window.addEventListener( 'scroll' , function () { if (mobileHeaderTicking) { return; } mobileHeaderTicking=true;
-          window.requestAnimationFrame( function () { updateMobileHeaderVisibility(); mobileHeaderTicking=false; } ); }, {
-          passive: true } ); window.addEventListener( 'pageshow' , function () { const
-          mobileMainNav=document.getElementById('main-nav'); if (!mobileMainNav) { return; }
-          mobileMainNav.classList.remove( 'mobile-header-hidden' ); mobileMainNav.classList.add( 'mobile-header-visible' ); }
+
+        if (
+        menuIsOpen ||
+        currentScrollY < 40 ) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
+          mobileMainNav.classList.add( 'mobile-header-visible' ); previousMobileScrollY=currentScrollY; return; } const
+          scrollDifference=currentScrollY - previousMobileScrollY; if ( scrollDifference> 8 &&
+          currentScrollY > 120
+          ) {
+          mobileMainNav.classList.add(
+          'mobile-header-hidden'
           );
 
-      // ── Nav scroll tint ─────────────────────────
-      const mainNav = document.getElementById('main-nav');
+          mobileMainNav.classList.remove(
+          'mobile-header-visible'
+          );
+          } else if (
+          scrollDifference < -8 ) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
+            mobileMainNav.classList.add( 'mobile-header-visible' ); } previousMobileScrollY=currentScrollY; }
+            window.addEventListener( 'scroll' , function () { if (mobileHeaderTicking) { return; } mobileHeaderTicking=true;
+            window.requestAnimationFrame( function () { updateMobileHeaderVisibility(); mobileHeaderTicking=false; } ); }, {
+            passive: true } ); window.addEventListener( 'pageshow' , function () { const
+            mobileMainNav=document.getElementById('main-nav'); if (!mobileMainNav) { return; }
+            mobileMainNav.classList.remove( 'mobile-header-hidden' ); mobileMainNav.classList.add( 'mobile-header-visible' ); }
+            );
 
-      window.addEventListener(
-        'scroll',
-        function () {
-          if (!mainNav) return;
+        // ── Nav scroll tint ─────────────────────────
+        const mainNav = document.getElementById('main-nav');
 
-          if (window.innerWidth < 992) {
-            mainNav.style.background = '#07090A';
-            mainNav.style.backgroundColor = '#07090A';
-            return;
-          }
+        window.addEventListener(
+          'scroll',
+          function () {
+            if (!mainNav) return;
 
-          mainNav.style.background =
-            window.scrollY > 60
-              ? 'rgba(7,9,10,0.92)'
-              : 'rgba(7,9,10,0.72)';
-        },
-        { passive: true }
-      );
+            if (window.innerWidth < 992) {
+              mainNav.style.background = '#07090A';
+              mainNav.style.backgroundColor = '#07090A';
+              return;
+            }
 
-      // ── Reveal animations ───────────────────────
-      const revealObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
+            mainNav.style.background =
+              window.scrollY > 60
+                ? 'rgba(7,9,10,0.92)'
+                : 'rgba(7,9,10,0.72)';
+          },
+          { passive: true }
+        );
 
-      document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
-
-      // ── FAQ accordion ──────────────────────────
-      document.querySelectorAll('.faq-question').forEach(function (question) {
-        question.addEventListener('click', function () {
-          const item = question.closest('.faq-item');
-          if (!item) return;
-          const isOpen = item.classList.contains('open');
-          document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
-            openItem.classList.remove('open');
+        // ── Reveal animations ───────────────────────
+        const revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
           });
-          if (!isOpen) item.classList.add('open');
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+
+        // ── FAQ accordion ──────────────────────────
+        document.querySelectorAll('.faq-question').forEach(function (question) {
+          question.addEventListener('click', function () {
+            const item = question.closest('.faq-item');
+            if (!item) return;
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+              openItem.classList.remove('open');
+            });
+            if (!isOpen) item.classList.add('open');
+          });
         });
-      });
     </script>
 
     <!-- Page blur transition -->
@@ -2512,6 +3069,10 @@ transition-duration: 0.01ms !important;
               showPage();
             });
           });
+    </script>
+
+    <script>
+      (function(){var msgs={es:{pre12:'Hola 3NA Fitness Studio, me interesa la oferta de pre-apertura de 12 meses por $349.',pre6:'Hola 3NA Fitness Studio, me interesa la oferta de pre-apertura de 6 meses por $199.',preM:'Hola 3NA Fitness Studio, me interesa la oferta mensual de pre-apertura por $36.95 al mes.',go12:'Hola 3NA Fitness Studio, me interesa la oferta de Grand Opening de 12 meses por $399.',go6:'Hola 3NA Fitness Studio, me interesa la oferta de Grand Opening de 6 meses por $224.',goM:'Hola 3NA Fitness Studio, me interesa la oferta mensual de Grand Opening por $39.95 al mes.',regM:'Hola 3NA Fitness Studio, me interesa la membresía mensual regular de $44.95 al mes.',reg6:'Hola 3NA Fitness Studio, me interesa el plan regular de 6 meses por $259.',reg12:'Hola 3NA Fitness Studio, me interesa el plan regular de 12 meses por $469.',oneday:'Hola 3NA Fitness Studio, me interesa el One Day Pass de $12.'},en:{pre12:'Hello 3NA Fitness Studio, I am interested in the 12-month pre-opening offer for $349.',pre6:'Hello 3NA Fitness Studio, I am interested in the 6-month pre-opening offer for $199.',preM:'Hello 3NA Fitness Studio, I am interested in the monthly pre-opening offer for $36.95 per month.',go12:'Hello 3NA Fitness Studio, I am interested in the 12-month Grand Opening offer for $399.',go6:'Hello 3NA Fitness Studio, I am interested in the 6-month Grand Opening offer for $224.',goM:'Hello 3NA Fitness Studio, I am interested in the monthly Grand Opening offer for $39.95 per month.',regM:'Hello 3NA Fitness Studio, I am interested in the regular monthly membership for $44.95 per month.',reg6:'Hello 3NA Fitness Studio, I am interested in the regular 6-month plan for $259.',reg12:'Hello 3NA Fitness Studio, I am interested in the regular 12-month plan for $469.',oneday:'Hello 3NA Fitness Studio, I am interested in the $12 One Day Pass.'}};var offerT={es:{'offers.limited':'Tiempo limitado','offers.label':'Membresías','offers.heading':'Ofertas de apertura','offers.description':'Aprovecha nuestros precios especiales de pre-apertura y Grand Opening antes de que entren en vigor las tarifas regulares.','offers.date1':'Pre-apertura válida hasta el 14 de agosto','offers.date2':'Grand Opening: 15 y 16 de agosto','offers.limitedBadge':'Tiempo limitado','offers.bestValue':'Mejor valor','offers.g1.title':'PRE-APERTURA','offers.g1.subtitle':'Válido hasta el 14 de agosto','offers.g2.title':'GRAND OPENING','offers.g2.subtitle':'Solo 15 y 16 de agosto','offers.g3.title':'DESPUÉS DEL 16 DE AGOSTO','offers.g3.subtitle':'Tarifas regulares','offers.p.12full':'12 meses — pago total','offers.p.6full':'6 meses — pago total','offers.p.monthly':'Mensual','offers.p.regMonthly':'Mensual regular','offers.perMonth':'/ mes','offers.f.12months':'12 meses de membresía','offers.f.noEnroll':'Sin matrícula','offers.f.firstOpen':'Primer pago el día de apertura','offers.f.maint':'Mantenimiento anual: $52','offers.f.debit':'Débito directo obligatorio','offers.f.contract':'Contrato de 12 meses','offers.f.enroll':'Matrícula: $49','offers.cta':'Me interesa','offers.oneday.title':'ONE DAY PASS','offers.oneday.desc':'Acceso completo por un día. Si ese mismo día te inscribes, los $12 se acreditan a la matrícula o al primer pago.','offers.oneday.cta':'Quiero mi One Day Pass','offers.feat1':'Equipos premium','offers.feat2':'Ambiente moderno','offers.feat3':'Atención real','offers.feat4':'Resultados reales','offers.final':'No es solo un gimnasio, es tu ADN en acción.'},en:{'offers.limited':'Limited time','offers.label':'Memberships','offers.heading':'Opening Offers','offers.description':'Take advantage of our special pre-opening and Grand Opening pricing before regular membership rates begin.','offers.date1':'Pre-opening valid through August 14','offers.date2':'Grand Opening: August 15 and 16','offers.limitedBadge':'Limited time','offers.bestValue':'Best value','offers.g1.title':'PRE-OPENING','offers.g1.subtitle':'Valid through August 14','offers.g2.title':'GRAND OPENING','offers.g2.subtitle':'August 15 and 16 only','offers.g3.title':'AFTER AUGUST 16','offers.g3.subtitle':'Regular rates','offers.p.12full':'12 months — full payment','offers.p.6full':'6 months — full payment','offers.p.monthly':'Monthly','offers.p.regMonthly':'Regular monthly','offers.perMonth':'/ month','offers.f.12months':'12 months of membership','offers.f.noEnroll':'No enrollment fee','offers.f.firstOpen':'First payment due on opening day','offers.f.maint':'Annual maintenance: $52','offers.f.debit':'Direct debit required','offers.f.contract':'12-month contract','offers.f.enroll':'Enrollment fee: $49','offers.cta':"I'm interested",'offers.oneday.title':'ONE DAY PASS','offers.oneday.desc':'Full access for one day. If you sign up that same day, the $12 will be credited toward the enrollment fee or first payment.','offers.oneday.cta':'I want a One Day Pass','offers.feat1':'Premium equipment','offers.feat2':'Modern environment','offers.feat3':'Real support','offers.feat4':'Real results','offers.final':"It's not just a gym — it's your DNA in action."}};if(window.translations){Object.assign(window.translations.es,offerT.es);Object.assign(window.translations.en,offerT.en);}function applyOffers(lang){var t=offerT[lang]||offerT.es;document.querySelectorAll('#membresias [data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(t[k]!==undefined)el.textContent=t[k];});var m=msgs[lang]||msgs.es;document.querySelectorAll('.offer-wa').forEach(function(a){var k=a.getAttribute('data-wa-key');if(m[k])a.setAttribute('href','https://wa.me/17876476721?text='+encodeURIComponent(m[k]));});}var initLang='es';try{var s=localStorage.getItem('3na-language');if(s==='en')initLang='en';}catch(e){}applyOffers(document.documentElement.lang||initLang);document.querySelectorAll('.lang-btn').forEach(function(btn){btn.addEventListener('click',function(){applyOffers(btn.getAttribute('data-lang'));});});})();
     </script>
   
 </body></html>
