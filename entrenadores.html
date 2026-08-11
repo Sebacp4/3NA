@@ -2058,7 +2058,7 @@ object-position: center top !important;
               <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">
                 Ver perfil
               </button>
-              <a class="btn-card primary trainer-wa" data-wa-es="Hola 3NA Fitness Studio, me gustaría recibir orientación y conocer más sobre los servicios de entrenamiento con Valarian Hollingsworth Santana." data-wa-en="Hello 3NA Fitness Studio, I would like guidance and more information about training services with Valarian Hollingsworth Santana." href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20y%20conocer%20m%C3%A1s%20sobre%20los%20servicios%20de%20entrenamiento%20con%20Valarian%20Hollingsworth%20Santana." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
+              <a class="btn-card primary trainer-wa" data-wa-es="Hola Valarian, vi tu perfil en la página de 3NA Fitness Studio y me gustaría recibir más información sobre tus servicios de entrenamiento personal y cómo podrías ayudarme con mis objetivos." data-wa-en="Hello Valarian, I saw your profile on the 3NA Fitness Studio website and I would like more information about your personal training services and how you could help me with my fitness goals." href="https://wa.me/19393273505?text=Hola%20Valarian%2C%20vi%20tu%20perfil%20en%20la%20p%C3%A1gina%20de%203NA%20Fitness%20Studio%20y%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20tus%20servicios%20de%20entrenamiento%20personal%20y%20c%C3%B3mo%20podr%C3%ADas%20ayudarme%20con%20mis%20objetivos." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request" data-wa-num="19393273505" data-t-es="Solicitar orientación" data-t-en="Request Guidance">
                 Solicitar orientación
               </a>
             </div>
@@ -3210,121 +3210,122 @@ object-position: center top !important;
 
     <script id="trainer-profiles-script">
       (function(){
-        var WA_NUM = '17876476721';
-        var modal = document.getElementById('trainer-modal');
-        if (!modal) return;
+              var WA_NUM = '17876476721';
+              var modal = document.getElementById('trainer-modal');
+              if (!modal) return;
 
-        var PROFILES = {
-          valarian: {
-            es: {
-              name: 'Valarian Hollingsworth Santana',
-              role: 'Entrenador Personal Certificado | Coach de Alto Rendimiento',
-              bio: 'Entrenador Personal Certificado por el Departamento de Recreación y Deportes (DRD), especializado en desarrollar fuerza, rendimiento deportivo y composición corporal mediante programas de entrenamiento personalizados.<br><br>Mi enfoque está dirigido a maximizar el potencial físico de cada persona, combinando entrenamiento basado en evidencia, disciplina y una planificación estratégica. Trabajo con personas de todos los niveles, desde quienes buscan mejorar su condición física hasta atletas que desean llevar su rendimiento al siguiente nivel.<br><br>Mi compromiso es ofrecer un entrenamiento profesional que genere resultados medibles y sostenibles.',
-              specialties: ['Preparación de jóvenes atletas de alto rendimiento','Hipertrofia (desarrollo de masa muscular)','Fuerza y potencia','Pérdida de grasa corporal','Acondicionamiento físico','Entrenamiento funcional','Programación personalizada','Coaching de rendimiento'],
-              experience: 'Desde 2025 me desempeño como entrenador personal, diseñando programas de entrenamiento personalizados para mejorar la fuerza, la composición corporal y el rendimiento deportivo. Mi experiencia incluye el trabajo con clientes de distintos niveles de condición física, utilizando metodologías enfocadas en la progresión, la técnica y el desarrollo integral del atleta.',
-              certs: 'Entrenador Personal Certificado<br>Departamento de Recreación y Deportes (DRD)',
-              approach: 'El alto rendimiento comienza con una planificación inteligente. Cada programa es diseñado según los objetivos, capacidades y necesidades específicas del atleta o cliente, priorizando una ejecución técnica correcta, la progresión constante y el desarrollo físico a largo plazo.<br><br>Creo en entrenar con propósito, disciplina y consistencia para construir un cuerpo fuerte, resistente y preparado para cualquier desafío, ya sea mejorar la salud, aumentar el rendimiento deportivo o alcanzar una transformación física.',
-              week: [['Lunes','3:00 PM – 7:00 PM'],['Martes','3:00 PM – 7:00 PM'],['Miércoles','3:00 PM – 7:00 PM'],['Jueves','3:00 PM – 7:00 PM'],['Viernes','3:00 PM – 7:00 PM'],['Sábado','7:00 AM – 11:00 AM']],
-              wa: 'Hola 3NA Fitness Studio, me gustaría recibir orientación y conocer más sobre los servicios de entrenamiento con Valarian Hollingsworth Santana.',
-              requestBtn: 'Solicitar orientación'
-            },
-            en: {
-              name: 'Valarian Hollingsworth Santana',
-              role: 'Certified Personal Trainer | High Performance Coach',
-              bio: 'Certified Personal Trainer through the Puerto Rico Department of Recreation and Sports (DRD), specializing in developing strength, athletic performance, and body composition through personalized training programs.<br><br>My approach focuses on maximizing each person’s physical potential by combining evidence-based training, discipline, and strategic planning. I work with people at every level, from individuals looking to improve their overall fitness to athletes who want to take their performance to the next level.<br><br>My commitment is to provide professional training that produces measurable and sustainable results.',
-              specialties: ['High-performance youth athlete preparation','Hypertrophy and muscle development','Strength and power','Body fat reduction','Physical conditioning','Functional training','Personalized programming','Performance coaching'],
-              experience: 'Since 2025, I have worked as a personal trainer designing personalized training programs to improve strength, body composition, and athletic performance. My experience includes working with clients of different fitness levels using methodologies focused on progression, technique, and overall athlete development.',
-              certs: 'Certified Personal Trainer<br>Puerto Rico Department of Recreation and Sports (DRD)',
-              approach: 'High performance begins with intelligent planning. Each program is designed according to the athlete’s or client’s specific goals, abilities, and needs, prioritizing proper technical execution, consistent progression, and long-term physical development.<br><br>I believe in training with purpose, discipline, and consistency to build a strong, resilient body prepared for any challenge, whether the goal is improving health, increasing athletic performance, or achieving a physical transformation.',
-              week: [['Monday','3:00 PM – 7:00 PM'],['Tuesday','3:00 PM – 7:00 PM'],['Wednesday','3:00 PM – 7:00 PM'],['Thursday','3:00 PM – 7:00 PM'],['Friday','3:00 PM – 7:00 PM'],['Saturday','7:00 AM – 11:00 AM']],
-              wa: 'Hello 3NA Fitness Studio, I would like guidance and more information about training services with Valarian Hollingsworth Santana.',
-              requestBtn: 'Request guidance'
-            }
-          }
-        };
+              var PROFILES = {
+                valarian: {
+                  phone: '19393273505',
+                  es: {
+                    name: 'Valarian Hollingsworth Santana',
+                    role: 'Entrenador Personal Certificado | Coach de Alto Rendimiento',
+                    bio: 'Entrenador Personal Certificado por el Departamento de Recreación y Deportes (DRD), especializado en desarrollar fuerza, rendimiento deportivo y composición corporal mediante programas de entrenamiento personalizados.<br><br>Mi enfoque está dirigido a maximizar el potencial físico de cada persona, combinando entrenamiento basado en evidencia, disciplina y una planificación estratégica. Trabajo con personas de todos los niveles, desde quienes buscan mejorar su condición física hasta atletas que desean llevar su rendimiento al siguiente nivel.<br><br>Mi compromiso es ofrecer un entrenamiento profesional que genere resultados medibles y sostenibles.',
+                    specialties: ['Preparación de jóvenes atletas de alto rendimiento','Hipertrofia (desarrollo de masa muscular)','Fuerza y potencia','Pérdida de grasa corporal','Acondicionamiento físico','Entrenamiento funcional','Programación personalizada','Coaching de rendimiento'],
+                    experience: 'Desde 2025 me desempeño como entrenador personal, diseñando programas de entrenamiento personalizados para mejorar la fuerza, la composición corporal y el rendimiento deportivo. Mi experiencia incluye el trabajo con clientes de distintos niveles de condición física, utilizando metodologías enfocadas en la progresión, la técnica y el desarrollo integral del atleta.',
+                    certs: 'Entrenador Personal Certificado<br>Departamento de Recreación y Deportes (DRD)',
+                    approach: 'El alto rendimiento comienza con una planificación inteligente. Cada programa es diseñado según los objetivos, capacidades y necesidades específicas del atleta o cliente, priorizando una ejecución técnica correcta, la progresión constante y el desarrollo físico a largo plazo.<br><br>Creo en entrenar con propósito, disciplina y consistencia para construir un cuerpo fuerte, resistente y preparado para cualquier desafío, ya sea mejorar la salud, aumentar el rendimiento deportivo o alcanzar una transformación física.',
+                    week: [['Lunes','3:00 PM – 7:00 PM'],['Martes','3:00 PM – 7:00 PM'],['Miércoles','3:00 PM – 7:00 PM'],['Jueves','3:00 PM – 7:00 PM'],['Viernes','3:00 PM – 7:00 PM'],['Sábado','7:00 AM – 11:00 AM']],
+                    wa: 'Hola Valarian, vi tu perfil en la página de 3NA Fitness Studio y me gustaría recibir más información sobre tus servicios de entrenamiento personal y cómo podrías ayudarme con mis objetivos.',
+                    requestBtn: 'Solicitar orientación'
+                  },
+                  en: {
+                    name: 'Valarian Hollingsworth Santana',
+                    role: 'Certified Personal Trainer | High Performance Coach',
+                    bio: 'Certified Personal Trainer through the Puerto Rico Department of Recreation and Sports (DRD), specializing in developing strength, athletic performance, and body composition through personalized training programs.<br><br>My approach focuses on maximizing each person’s physical potential by combining evidence-based training, discipline, and strategic planning. I work with people at every level, from individuals looking to improve their overall fitness to athletes who want to take their performance to the next level.<br><br>My commitment is to provide professional training that produces measurable and sustainable results.',
+                    specialties: ['High-performance youth athlete preparation','Hypertrophy and muscle development','Strength and power','Body fat reduction','Physical conditioning','Functional training','Personalized programming','Performance coaching'],
+                    experience: 'Since 2025, I have worked as a personal trainer designing personalized training programs to improve strength, body composition, and athletic performance. My experience includes working with clients of different fitness levels using methodologies focused on progression, technique, and overall athlete development.',
+                    certs: 'Certified Personal Trainer<br>Puerto Rico Department of Recreation and Sports (DRD)',
+                    approach: 'High performance begins with intelligent planning. Each program is designed according to the athlete’s or client’s specific goals, abilities, and needs, prioritizing proper technical execution, consistent progression, and long-term physical development.<br><br>I believe in training with purpose, discipline, and consistency to build a strong, resilient body prepared for any challenge, whether the goal is improving health, increasing athletic performance, or achieving a physical transformation.',
+                    week: [['Monday','3:00 PM – 7:00 PM'],['Tuesday','3:00 PM – 7:00 PM'],['Wednesday','3:00 PM – 7:00 PM'],['Thursday','3:00 PM – 7:00 PM'],['Friday','3:00 PM – 7:00 PM'],['Saturday','7:00 AM – 11:00 AM']],
+                    wa: 'Hello Valarian, I saw your profile on the 3NA Fitness Studio website and I would like more information about your personal training services and how you could help me with my fitness goals.',
+                    requestBtn: 'Request Guidance'
+                  }
+                }
+              };
 
-        var ids = ['modal-bio','modal-specialties','modal-experience','modal-certs','modal-approach','modal-availability'];
-        var defaults = {};
-        ids.forEach(function(id){ var el = document.getElementById(id); if (el) defaults[id] = el.innerHTML; });
+              var ids = ['modal-bio','modal-specialties','modal-experience','modal-certs','modal-approach','modal-availability'];
+              var defaults = {};
+              ids.forEach(function(id){ var el = document.getElementById(id); if (el) defaults[id] = el.innerHTML; });
 
-        function getLang(){ return (document.documentElement.lang === 'en') ? 'en' : 'es'; }
+              function getLang(){ return (document.documentElement.lang === 'en') ? 'en' : 'es'; }
 
-        function waUrl(msg){ return 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(msg); }
+              function waUrl(msg, num){ return 'https://wa.me/' + (num || WA_NUM) + '?text=' + encodeURIComponent(msg); }
 
-        function applyTrainerText(lang){
-          document.querySelectorAll('[data-t-es]').forEach(function(el){
-            var v = el.getAttribute(lang === 'en' ? 'data-t-en' : 'data-t-es');
-            if (v) el.textContent = v;
-          });
-          document.querySelectorAll('[data-wa-es]').forEach(function(el){
-            var m = el.getAttribute(lang === 'en' ? 'data-wa-en' : 'data-wa-es');
-            if (m) el.setAttribute('href', waUrl(m));
-          });
-        }
+              function applyTrainerText(lang){
+                document.querySelectorAll('[data-t-es]').forEach(function(el){
+                  var v = el.getAttribute(lang === 'en' ? 'data-t-en' : 'data-t-es');
+                  if (v) el.textContent = v;
+                });
+                document.querySelectorAll('[data-wa-es]').forEach(function(el){
+                  var m = el.getAttribute(lang === 'en' ? 'data-wa-en' : 'data-wa-es');
+                  if (m) el.setAttribute('href', waUrl(m, el.getAttribute('data-wa-num')));
+                });
+              }
 
-        function renderProfile(key, lang){
-          var p = PROFILES[key] && PROFILES[key][lang];
-          if (!p) return;
-          var nameEl = document.getElementById('modal-name');
-          var roleEl = document.getElementById('modal-role');
-          if (nameEl) nameEl.textContent = p.name;
-          if (roleEl) roleEl.textContent = p.role;
-          var bio = document.getElementById('modal-bio');
-          if (bio) bio.innerHTML = p.bio;
-          var spec = document.getElementById('modal-specialties');
-          if (spec) spec.innerHTML = p.specialties.map(function(s){ return '<li>' + s + '</li>'; }).join('');
-          var exp = document.getElementById('modal-experience');
-          if (exp) exp.innerHTML = p.experience;
-          var certs = document.getElementById('modal-certs');
-          if (certs) certs.innerHTML = p.certs;
-          var appr = document.getElementById('modal-approach');
-          if (appr) appr.innerHTML = p.approach;
-          var week = document.getElementById('modal-availability');
-          if (week) week.innerHTML = p.week.map(function(r){ return '<div class="week-row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('');
-          var req = document.getElementById('modal-request');
-          if (req) {
-            req.setAttribute('href', waUrl(p.wa));
-            var sp = req.querySelector('span');
-            if (sp) sp.textContent = p.requestBtn;
-          }
-        }
+              function renderProfile(key, lang){
+                var p = PROFILES[key] && PROFILES[key][lang];
+                if (!p) return;
+                var nameEl = document.getElementById('modal-name');
+                var roleEl = document.getElementById('modal-role');
+                if (nameEl) nameEl.textContent = p.name;
+                if (roleEl) roleEl.textContent = p.role;
+                var bio = document.getElementById('modal-bio');
+                if (bio) bio.innerHTML = p.bio;
+                var spec = document.getElementById('modal-specialties');
+                if (spec) spec.innerHTML = p.specialties.map(function(s){ return '<li>' + s + '</li>'; }).join('');
+                var exp = document.getElementById('modal-experience');
+                if (exp) exp.innerHTML = p.experience;
+                var certs = document.getElementById('modal-certs');
+                if (certs) certs.innerHTML = p.certs;
+                var appr = document.getElementById('modal-approach');
+                if (appr) appr.innerHTML = p.approach;
+                var week = document.getElementById('modal-availability');
+                if (week) week.innerHTML = p.week.map(function(r){ return '<div class="week-row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('');
+                var req = document.getElementById('modal-request');
+                if (req) {
+                  req.setAttribute('href', waUrl(p.wa, PROFILES[key].phone));
+                  var sp = req.querySelector('span');
+                  if (sp) sp.textContent = p.requestBtn;
+                }
+              }
 
-        function restoreDefaults(lang){
-          ids.forEach(function(id){
-            var el = document.getElementById(id);
-            if (el && typeof defaults[id] === 'string') el.innerHTML = defaults[id];
-          });
-          if (typeof baseSetLanguage === 'function') baseSetLanguage(lang);
-        }
+              function restoreDefaults(lang){
+                ids.forEach(function(id){
+                  var el = document.getElementById(id);
+                  if (el && typeof defaults[id] === 'string') el.innerHTML = defaults[id];
+                });
+                if (typeof baseSetLanguage === 'function') baseSetLanguage(lang);
+              }
 
-        var baseSetLanguage = window.setLanguage;
-        if (typeof baseSetLanguage === 'function') {
-          window.setLanguage = function(l){
-            baseSetLanguage(l);
-            var lang = (l === 'en') ? 'en' : 'es';
-            applyTrainerText(lang);
-            var key = modal.getAttribute('data-active-profile');
-            if (key) renderProfile(key, lang);
-          };
-        }
+              var baseSetLanguage = window.setLanguage;
+              if (typeof baseSetLanguage === 'function') {
+                window.setLanguage = function(l){
+                  baseSetLanguage(l);
+                  var lang = (l === 'en') ? 'en' : 'es';
+                  applyTrainerText(lang);
+                  var key = modal.getAttribute('data-active-profile');
+                  if (key) renderProfile(key, lang);
+                };
+              }
 
-        document.querySelectorAll('[data-open-profile]').forEach(function(btn){
-          btn.addEventListener('click', function(){
-            var card = btn.closest('[data-trainer-card]');
-            var key = card ? card.getAttribute('data-trainer-profile') : null;
-            var lang = getLang();
-            if (key && PROFILES[key]) {
-              modal.setAttribute('data-active-profile', key);
-              renderProfile(key, lang);
-            } else {
-              modal.removeAttribute('data-active-profile');
-              restoreDefaults(lang);
-            }
-          });
-        });
+              document.querySelectorAll('[data-open-profile]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  var card = btn.closest('[data-trainer-card]');
+                  var key = card ? card.getAttribute('data-trainer-profile') : null;
+                  var lang = getLang();
+                  if (key && PROFILES[key]) {
+                    modal.setAttribute('data-active-profile', key);
+                    renderProfile(key, lang);
+                  } else {
+                    modal.removeAttribute('data-active-profile');
+                    restoreDefaults(lang);
+                  }
+                });
+              });
 
-        applyTrainerText(getLang());
-      })();
+              applyTrainerText(getLang());
+            })();
     </script>
   
 </body></html>
