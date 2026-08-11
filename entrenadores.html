@@ -1678,10 +1678,6 @@ min-height: 0 !important;
 .modal-close iconify-icon { font-size: 24px; pointer-events: none; }
 }
 </style>
-<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
-<style id="all-fonts-style-font-bricolage">
-.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
-</style>
 <style id="mobile-menu-animation">
 :root {
 --mobile-nav-height: 74px;
@@ -1867,8 +1863,36 @@ transform: none !important;
 transition-duration: 0.01ms !important;
 }
 }
+</style>
+<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
+<style id="all-fonts-style-font-bricolage">
+.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+</style>
+<style id="valarian-photo-styles">
+@media (min-width: 992px) {
+.trainer-photo.valarian-photo {
+height: 310px !important;
+object-fit: cover !important;
+object-position: center 18% !important;
+}
+}
+@media (min-width: 576px) and (max-width: 991px) {
+.trainer-photo.valarian-photo {
+height: 300px !important;
+object-fit: cover !important;
+object-position: center top !important;
+}
+}
+@media (max-width: 575px) {
+.trainer-photo.valarian-photo {
+height: auto !important;
+aspect-ratio: 4 / 3 !important;
+object-fit: cover !important;
+object-position: center top !important;
+}
+}
 </style></head>
-  <body class="">
+  <body class="page-ready">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
     <nav id="main-nav" class="" style="background: rgba(7, 9, 10, 0.92);">
       <a href="#inicio" class="nav-logo">
@@ -1971,32 +1995,33 @@ transition-duration: 0.01ms !important;
       <div class="trainers-grid" aria-label="Entrenadores" data-i18n-aria-label="trainers.grid.aria">
         <!-- Reemplazar: foto, nombre, rol, tags, descripción y disponibilidad -->
 
-        <article class="trainer-card reveal visible" data-trainer-card="" data-trainer-name="Nombre del entrenador" data-tags="strength,muscle">
-          <!-- Reemplazar con foto real del entrenador -->
-          <img class="trainer-photo" src="https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?w=800&amp;q=80" data-i18n-alt="trainers.card.photoAlt" alt="Foto del entrenador" loading="lazy">
-          <div class="absolute top-4 right-4 z-10 inline-flex items-center px-2.5 py-1 text-[0.65rem] font-semibold tracking-widest uppercase text-teal-400 bg-black/50 backdrop-blur-md border border-teal-500/30 rounded-full shadow-[0_0_15px_rgba(45,212,191,0.25)]">
-            Coming Soon
-          </div>
+        <article class="trainer-card reveal visible" data-trainer-card="" data-trainer-profile="valarian" data-trainer-name="Valarian Hollingsworth Santana" data-tags="strength,muscle,fatloss">
+          <img class="trainer-photo valarian-photo" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/034aaf8d-4b99-4ea2-94a7-27cec2af4138_800w.jpg" alt="Valarian Hollingsworth Santana" loading="lazy">
           <div class="trainer-body">
-            <h3 class="trainer-name" data-i18n="trainers.card.name">
-              Nombre del entrenador
-            </h3>
-            <div class="trainer-title" data-i18n="trainers.card.role">
-              Rol / Puesto por confirmar
+            <h3 class="trainer-name">Valarian Hollingsworth Santana</h3>
+            <div class="trainer-title" data-t-es="Entrenador Personal Certificado | Coach de Alto Rendimiento" data-t-en="Certified Personal Trainer | High Performance Coach">
+              Entrenador Personal Certificado | Coach de Alto Rendimiento
             </div>
 
             <div class="tag-row" aria-label="Especialidades" data-i18n-aria-label="trainers.card.specialtiesAria">
-              <span class="tag" data-i18n="trainers.tags.specialty">
-                Especialidad
+              <span class="tag" data-t-es="Alto Rendimiento" data-t-en="High Performance">
+                Alto Rendimiento
               </span>
-              <span class="tag" data-i18n="trainers.tags.specialty">
-                Especialidad
+              <span class="tag" data-t-es="Fuerza" data-t-en="Strength">
+                Fuerza
+              </span>
+              <span class="tag" data-t-es="Hipertrofia" data-t-en="Hypertrophy">
+                Hipertrofia
+              </span>
+              <span class="tag" data-t-es="Pérdida de Grasa" data-t-en="Fat Loss">
+                Pérdida de Grasa
               </span>
             </div>
 
-            <p class="trainer-desc" data-i18n="trainers.card.desc">
-              Descripción profesional (placeholder). Aquí irá un resumen corto
-              del enfoque del entrenador.
+            <p class="trainer-desc" data-t-es="Entrenador Personal Certificado especializado en fuerza, rendimiento deportivo y composición corporal mediante programas personalizados y entrenamiento basado en evidencia." data-t-en="Certified Personal Trainer specializing in strength, athletic performance, and body composition through personalized programming and evidence-based training.">
+              Entrenador Personal Certificado especializado en fuerza,
+              rendimiento deportivo y composición corporal mediante programas
+              personalizados y entrenamiento basado en evidencia.
             </p>
 
             <div class="trainer-availability">
@@ -2004,27 +2029,27 @@ transition-duration: 0.01ms !important;
               <div class="week-list" data-week="">
                 <div class="week-row">
                   <span data-i18n="trainers.week.mon">Lunes</span>
-                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                  <span>3:00 PM – 7:00 PM</span>
                 </div>
                 <div class="week-row">
                   <span data-i18n="trainers.week.tue">Martes</span>
-                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                  <span>3:00 PM – 7:00 PM</span>
                 </div>
                 <div class="week-row">
                   <span data-i18n="trainers.week.wed">Miércoles</span>
-                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                  <span>3:00 PM – 7:00 PM</span>
                 </div>
                 <div class="week-row">
                   <span data-i18n="trainers.week.thu">Jueves</span>
-                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                  <span>3:00 PM – 7:00 PM</span>
                 </div>
                 <div class="week-row">
                   <span data-i18n="trainers.week.fri">Viernes</span>
-                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                  <span>3:00 PM – 7:00 PM</span>
                 </div>
                 <div class="week-row">
                   <span data-i18n="trainers.week.sat">Sábado</span>
-                  <span data-i18n="trainers.week.tbc">Por confirmar</span>
+                  <span>7:00 AM – 11:00 AM</span>
                 </div>
               </div>
             </div>
@@ -2033,7 +2058,7 @@ transition-duration: 0.01ms !important;
               <button type="button" class="btn-card" data-open-profile="" data-i18n="trainers.card.viewProfile">
                 Ver perfil
               </button>
-              <a class="btn-card primary trainer-wa" href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20con%20Nombre%20del%20entrenador." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
+              <a class="btn-card primary trainer-wa" data-wa-es="Hola 3NA Fitness Studio, me gustaría recibir orientación y conocer más sobre los servicios de entrenamiento con Valarian Hollingsworth Santana." data-wa-en="Hello 3NA Fitness Studio, I would like guidance and more information about training services with Valarian Hollingsworth Santana." href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n%20y%20conocer%20m%C3%A1s%20sobre%20los%20servicios%20de%20entrenamiento%20con%20Valarian%20Hollingsworth%20Santana." target="_blank" rel="noopener noreferrer" data-i18n="trainers.card.request">
                 Solicitar orientación
               </a>
             </div>
@@ -2407,7 +2432,7 @@ transition-duration: 0.01ms !important;
 
             <div class="modal-section">
               <h4 data-i18n="trainers.modal.bioTitle">Biografía</h4>
-              <p data-i18n="trainers.modal.bio">
+              <p data-i18n="trainers.modal.bio" id="modal-bio">
                 Biografía completa (placeholder). Reemplazar con información
                 real del entrenador.
               </p>
@@ -2417,7 +2442,7 @@ transition-duration: 0.01ms !important;
               <h4 data-i18n="trainers.modal.specialtiesTitle">
                 Especialidades
               </h4>
-              <ul>
+              <ul id="modal-specialties">
                 <li data-i18n="trainers.modal.placeholderItem">
                   (Placeholder) Especialidad / enfoque
                 </li>
@@ -2429,7 +2454,7 @@ transition-duration: 0.01ms !important;
 
             <div class="modal-section">
               <h4 data-i18n="trainers.modal.experienceTitle">Experiencia</h4>
-              <p data-i18n="trainers.modal.experience">
+              <p data-i18n="trainers.modal.experience" id="modal-experience">
                 Experiencia (placeholder). No inventar años o historial;
                 reemplazar con datos reales.
               </p>
@@ -2437,7 +2462,7 @@ transition-duration: 0.01ms !important;
 
             <div class="modal-section">
               <h4 data-i18n="trainers.modal.certsTitle">Certificaciones</h4>
-              <p data-i18n="trainers.modal.certs">
+              <p data-i18n="trainers.modal.certs" id="modal-certs">
                 Certificaciones (placeholder). Reemplazar con las
                 certificaciones reales.
               </p>
@@ -2447,7 +2472,7 @@ transition-duration: 0.01ms !important;
               <h4 data-i18n="trainers.modal.approachTitle">
                 Enfoque de entrenamiento
               </h4>
-              <p data-i18n="trainers.modal.approach">
+              <p data-i18n="trainers.modal.approach" id="modal-approach">
                 Enfoque (placeholder). Reemplazar con la filosofía y metodología
                 real.
               </p>
@@ -2455,7 +2480,7 @@ transition-duration: 0.01ms !important;
 
             <div class="modal-section">
               <h4 data-i18n="trainers.availability.title">Disponibilidad</h4>
-              <div class="week-list">
+              <div class="week-list" id="modal-availability">
                 <div class="week-row">
                   <span data-i18n="trainers.week.mon">Lunes</span>
                   <span data-i18n="trainers.week.tbc">Por confirmar</span>
@@ -2591,520 +2616,520 @@ transition-duration: 0.01ms !important;
 
     <!-- ─── JAVASCRIPT ───────────────────────────────────────────────── -->
     <script>
-      // ── Translations ─────────────────────────────────────────────
-      const translations = {
-        es: {
-          'lang.ariaLabel': 'Cambiar idioma',
-          'nav.home': 'Inicio',
-          'nav.about': 'Sobre nosotros',
-          'nav.trainers': 'Entrenadores',
-          'nav.experience': 'Experiencia',
-          'nav.gallery': 'Galería',
-          'nav.memberships': 'Membresías',
-          'nav.contact': 'Contactar',
-          'nav.menuAria': 'Abrir menú',
+            // ── Translations ─────────────────────────────────────────────
+            const translations = {
+              es: {
+                'lang.ariaLabel': 'Cambiar idioma',
+                'nav.home': 'Inicio',
+                'nav.about': 'Sobre nosotros',
+                'nav.trainers': 'Entrenadores',
+                'nav.experience': 'Experiencia',
+                'nav.gallery': 'Galería',
+                'nav.memberships': 'Membresías',
+                'nav.contact': 'Contactar',
+                'nav.menuAria': 'Abrir menú',
 
-          'trainers.hero.label': 'CONOCE AL EQUIPO',
-          'trainers.hero.headingLine1': 'ELIGE QUIÉN TE ACOMPAÑA',
-          'trainers.hero.headingLine2': 'EN TU PROGRESO',
-          'trainers.hero.desc': 'Conoce a los entrenadores de 3NA Fitness Studio, descubre sus especialidades y encuentra la persona indicada para orientarte durante tu proceso.',
-          'trainers.hero.imgAlt': 'Entrenadores en el gimnasio',
+                'trainers.hero.label': 'CONOCE AL EQUIPO',
+                'trainers.hero.headingLine1': 'ELIGE QUIÉN TE ACOMPAÑA',
+                'trainers.hero.headingLine2': 'EN TU PROGRESO',
+                'trainers.hero.desc': 'Conoce a los entrenadores de 3NA Fitness Studio, descubre sus especialidades y encuentra la persona indicada para orientarte durante tu proceso.',
+                'trainers.hero.imgAlt': 'Entrenadores en el gimnasio',
 
-          'trainers.filters.aria': 'Filtros de entrenadores',
-          'trainers.filters.all': 'Todos',
-          'trainers.filters.strength': 'Fuerza',
-          'trainers.filters.muscle': 'Ganancia muscular',
-          'trainers.filters.fatloss': 'Pérdida de grasa',
-          'trainers.filters.mobility': 'Movilidad',
-          'trainers.filters.beginners': 'Principiantes',
+                'trainers.filters.aria': 'Filtros de entrenadores',
+                'trainers.filters.all': 'Todos',
+                'trainers.filters.strength': 'Fuerza',
+                'trainers.filters.muscle': 'Ganancia muscular',
+                'trainers.filters.fatloss': 'Pérdida de grasa',
+                'trainers.filters.mobility': 'Movilidad',
+                'trainers.filters.beginners': 'Principiantes',
 
-          'trainers.grid.aria': 'Entrenadores',
-          'trainers.card.photoAlt': 'Foto del entrenador',
-          'trainers.card.name': 'Nombre del entrenador',
-          'trainers.card.role': 'Rol / Puesto por confirmar',
-          'trainers.card.specialtiesAria': 'Especialidades',
-          'trainers.tags.specialty': 'Especialidad',
-          'trainers.card.desc': 'Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.',
-          'trainers.availability.title': 'Disponibilidad',
-          'trainers.week.mon': 'Lunes',
-          'trainers.week.tue': 'Martes',
-          'trainers.week.wed': 'Miércoles',
-          'trainers.week.thu': 'Jueves',
-          'trainers.week.fri': 'Viernes',
-          'trainers.week.sat': 'Sábado',
-          'trainers.week.tbc': 'Por confirmar',
-          'trainers.card.viewProfile': 'Ver perfil',
-          'trainers.card.request': 'Solicitar orientación',
+                'trainers.grid.aria': 'Entrenadores',
+                'trainers.card.photoAlt': 'Foto del entrenador',
+                'trainers.card.name': 'Nombre del entrenador',
+                'trainers.card.role': 'Rol / Puesto por confirmar',
+                'trainers.card.specialtiesAria': 'Especialidades',
+                'trainers.tags.specialty': 'Especialidad',
+                'trainers.card.desc': 'Descripción profesional (placeholder). Aquí irá un resumen corto del enfoque del entrenador.',
+                'trainers.availability.title': 'Disponibilidad',
+                'trainers.week.mon': 'Lunes',
+                'trainers.week.tue': 'Martes',
+                'trainers.week.wed': 'Miércoles',
+                'trainers.week.thu': 'Jueves',
+                'trainers.week.fri': 'Viernes',
+                'trainers.week.sat': 'Sábado',
+                'trainers.week.tbc': 'Por confirmar',
+                'trainers.card.viewProfile': 'Ver perfil',
+                'trainers.card.request': 'Solicitar orientación',
 
-          'trainers.cta.label': 'TE AYUDAMOS A ELEGIR',
-          'trainers.cta.headingLine1': '¿NO SABES QUÉ ENTRENADOR ES',
-          'trainers.cta.headingLine2': 'PARA TI?',
-          'trainers.cta.desc': 'Cuéntanos tus objetivos y te ayudaremos a encontrar el entrenador que mejor se adapte a tus necesidades.',
-          'trainers.cta.btn': 'Recibir orientación',
+                'trainers.cta.label': 'TE AYUDAMOS A ELEGIR',
+                'trainers.cta.headingLine1': '¿NO SABES QUÉ ENTRENADOR ES',
+                'trainers.cta.headingLine2': 'PARA TI?',
+                'trainers.cta.desc': 'Cuéntanos tus objetivos y te ayudaremos a encontrar el entrenador que mejor se adapte a tus necesidades.',
+                'trainers.cta.btn': 'Recibir orientación',
 
-          'trainers.modal.aria': 'Perfil del entrenador',
-          'trainers.modal.closeAria': 'Cerrar',
-          'trainers.modal.kicker': 'Perfil del entrenador',
-          'trainers.modal.bioTitle': 'Biografía',
-          'trainers.modal.bio': 'Biografía completa (placeholder). Reemplazar con información real del entrenador.',
-          'trainers.modal.specialtiesTitle': 'Especialidades',
-          'trainers.modal.placeholderItem': '(Placeholder) Especialidad / enfoque',
-          'trainers.modal.experienceTitle': 'Experiencia',
-          'trainers.modal.experience': 'Experiencia (placeholder). No inventar años o historial; reemplazar con datos reales.',
-          'trainers.modal.certsTitle': 'Certificaciones',
-          'trainers.modal.certs': 'Certificaciones (placeholder). Reemplazar con las certificaciones reales.',
-          'trainers.modal.approachTitle': 'Enfoque de entrenamiento',
-          'trainers.modal.approach': 'Enfoque (placeholder). Reemplazar con la filosofía y metodología real.',
-          'trainers.modal.requestBtn': 'Solicitar orientación',
+                'trainers.modal.aria': 'Perfil del entrenador',
+                'trainers.modal.closeAria': 'Cerrar',
+                'trainers.modal.kicker': 'Perfil del entrenador',
+                'trainers.modal.bioTitle': 'Biografía',
+                'trainers.modal.bio': 'Biografía completa (placeholder). Reemplazar con información real del entrenador.',
+                'trainers.modal.specialtiesTitle': 'Especialidades',
+                'trainers.modal.placeholderItem': '(Placeholder) Especialidad / enfoque',
+                'trainers.modal.experienceTitle': 'Experiencia',
+                'trainers.modal.experience': 'Experiencia (placeholder). No inventar años o historial; reemplazar con datos reales.',
+                'trainers.modal.certsTitle': 'Certificaciones',
+                'trainers.modal.certs': 'Certificaciones (placeholder). Reemplazar con las certificaciones reales.',
+                'trainers.modal.approachTitle': 'Enfoque de entrenamiento',
+                'trainers.modal.approach': 'Enfoque (placeholder). Reemplazar con la filosofía y metodología real.',
+                'trainers.modal.requestBtn': 'Solicitar orientación',
 
-          'footer.description': 'Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.',
-          'footer.linksTitle': 'Enlaces',
-          'footer.contactTitle': 'Contacto',
-          'footer.credit': 'Página web diseñada por',
-          'footer.copyright': '© {year} 3NA Fitness Studio. Todos los derechos reservados.',
-          'footer.terms': 'Términos de servicio',
-          'float.whatsappAria': 'Escríbenos por WhatsApp'
-        },
-        en: {
-          'lang.ariaLabel': 'Change language',
-          'nav.home': 'Home',
-          'nav.about': 'About Us',
-          'nav.trainers': 'Trainers',
-          'nav.experience': 'Experience',
-          'nav.gallery': 'Gallery',
-          'nav.memberships': 'Memberships',
-          'nav.contact': 'Contact',
-          'nav.menuAria': 'Open menu',
+                'footer.description': 'Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.',
+                'footer.linksTitle': 'Enlaces',
+                'footer.contactTitle': 'Contacto',
+                'footer.credit': 'Página web diseñada por',
+                'footer.copyright': '© {year} 3NA Fitness Studio. Todos los derechos reservados.',
+                'footer.terms': 'Términos de servicio',
+                'float.whatsappAria': 'Escríbenos por WhatsApp'
+              },
+              en: {
+                'lang.ariaLabel': 'Change language',
+                'nav.home': 'Home',
+                'nav.about': 'About Us',
+                'nav.trainers': 'Trainers',
+                'nav.experience': 'Experience',
+                'nav.gallery': 'Gallery',
+                'nav.memberships': 'Memberships',
+                'nav.contact': 'Contact',
+                'nav.menuAria': 'Open menu',
 
-          'trainers.hero.label': 'MEET THE TEAM',
-          'trainers.hero.headingLine1': 'CHOOSE WHO GUIDES YOU',
-          'trainers.hero.headingLine2': 'THROUGH YOUR PROGRESS',
-          'trainers.hero.desc': 'Meet the trainers at 3NA Fitness Studio, explore their specialties, and find the right person to guide you through your fitness journey.',
-          'trainers.hero.imgAlt': 'Trainers at the gym',
+                'trainers.hero.label': 'MEET THE TEAM',
+                'trainers.hero.headingLine1': 'CHOOSE WHO GUIDES YOU',
+                'trainers.hero.headingLine2': 'THROUGH YOUR PROGRESS',
+                'trainers.hero.desc': 'Meet the trainers at 3NA Fitness Studio, explore their specialties, and find the right person to guide you through your fitness journey.',
+                'trainers.hero.imgAlt': 'Trainers at the gym',
 
-          'trainers.filters.aria': 'Trainer filters',
-          'trainers.filters.all': 'All',
-          'trainers.filters.strength': 'Strength',
-          'trainers.filters.muscle': 'Muscle Gain',
-          'trainers.filters.fatloss': 'Fat Loss',
-          'trainers.filters.mobility': 'Mobility',
-          'trainers.filters.beginners': 'Beginners',
+                'trainers.filters.aria': 'Trainer filters',
+                'trainers.filters.all': 'All',
+                'trainers.filters.strength': 'Strength',
+                'trainers.filters.muscle': 'Muscle Gain',
+                'trainers.filters.fatloss': 'Fat Loss',
+                'trainers.filters.mobility': 'Mobility',
+                'trainers.filters.beginners': 'Beginners',
 
-          'trainers.grid.aria': 'Trainers',
-          'trainers.card.photoAlt': 'Trainer photo',
-          'trainers.card.name': 'Trainer name',
-          'trainers.card.role': 'Position / Title to be confirmed',
-          'trainers.card.specialtiesAria': 'Specialties',
-          'trainers.tags.specialty': 'Specialty',
-          'trainers.card.desc': 'Professional description (placeholder). This will be a short summary of the trainer\'s approach.',
-          'trainers.availability.title': 'Availability',
-          'trainers.week.mon': 'Monday',
-          'trainers.week.tue': 'Tuesday',
-          'trainers.week.wed': 'Wednesday',
-          'trainers.week.thu': 'Thursday',
-          'trainers.week.fri': 'Friday',
-          'trainers.week.sat': 'Saturday',
-          'trainers.week.tbc': 'To be confirmed',
-          'trainers.card.viewProfile': 'View profile',
-          'trainers.card.request': 'Request guidance',
+                'trainers.grid.aria': 'Trainers',
+                'trainers.card.photoAlt': 'Trainer photo',
+                'trainers.card.name': 'Trainer name',
+                'trainers.card.role': 'Position / Title to be confirmed',
+                'trainers.card.specialtiesAria': 'Specialties',
+                'trainers.tags.specialty': 'Specialty',
+                'trainers.card.desc': 'Professional description (placeholder). This will be a short summary of the trainer\'s approach.',
+                'trainers.availability.title': 'Availability',
+                'trainers.week.mon': 'Monday',
+                'trainers.week.tue': 'Tuesday',
+                'trainers.week.wed': 'Wednesday',
+                'trainers.week.thu': 'Thursday',
+                'trainers.week.fri': 'Friday',
+                'trainers.week.sat': 'Saturday',
+                'trainers.week.tbc': 'To be confirmed',
+                'trainers.card.viewProfile': 'View profile',
+                'trainers.card.request': 'Request guidance',
 
-          'trainers.cta.label': 'LET US HELP YOU CHOOSE',
-          'trainers.cta.headingLine1': 'NOT SURE WHICH TRAINER IS RIGHT',
-          'trainers.cta.headingLine2': 'FOR YOU?',
-          'trainers.cta.desc': 'Tell us about your goals and we will help you find the trainer who best fits your needs.',
-          'trainers.cta.btn': 'Get guidance',
+                'trainers.cta.label': 'LET US HELP YOU CHOOSE',
+                'trainers.cta.headingLine1': 'NOT SURE WHICH TRAINER IS RIGHT',
+                'trainers.cta.headingLine2': 'FOR YOU?',
+                'trainers.cta.desc': 'Tell us about your goals and we will help you find the trainer who best fits your needs.',
+                'trainers.cta.btn': 'Get guidance',
 
-          'trainers.modal.aria': 'Trainer profile',
-          'trainers.modal.closeAria': 'Close',
-          'trainers.modal.kicker': 'Trainer profile',
-          'trainers.modal.bioTitle': 'Biography',
-          'trainers.modal.bio': 'Full biography (placeholder). Replace with the trainer\'s real information.',
-          'trainers.modal.specialtiesTitle': 'Specialties',
-          'trainers.modal.placeholderItem': '(Placeholder) Specialty / focus',
-          'trainers.modal.experienceTitle': 'Experience',
-          'trainers.modal.experience': 'Experience (placeholder). Do not invent years or history; replace with real details.',
-          'trainers.modal.certsTitle': 'Certifications',
-          'trainers.modal.certs': 'Certifications (placeholder). Replace with real certifications.',
-          'trainers.modal.approachTitle': 'Training approach',
-          'trainers.modal.approach': 'Approach (placeholder). Replace with real philosophy and methodology.',
-          'trainers.modal.requestBtn': 'Request guidance',
+                'trainers.modal.aria': 'Trainer profile',
+                'trainers.modal.closeAria': 'Close',
+                'trainers.modal.kicker': 'Trainer profile',
+                'trainers.modal.bioTitle': 'Biography',
+                'trainers.modal.bio': 'Full biography (placeholder). Replace with the trainer\'s real information.',
+                'trainers.modal.specialtiesTitle': 'Specialties',
+                'trainers.modal.placeholderItem': '(Placeholder) Specialty / focus',
+                'trainers.modal.experienceTitle': 'Experience',
+                'trainers.modal.experience': 'Experience (placeholder). Do not invent years or history; replace with real details.',
+                'trainers.modal.certsTitle': 'Certifications',
+                'trainers.modal.certs': 'Certifications (placeholder). Replace with real certifications.',
+                'trainers.modal.approachTitle': 'Training approach',
+                'trainers.modal.approach': 'Approach (placeholder). Replace with real philosophy and methodology.',
+                'trainers.modal.requestBtn': 'Request guidance',
 
-          'footer.description': 'A premium fitness studio in San Juan, Puerto Rico. Train your DNA in a space designed for your progress.',
-          'footer.linksTitle': 'Links',
-          'footer.contactTitle': 'Contact',
-          'footer.credit': 'Website designed by',
-          'footer.copyright': '© {year} 3NA Fitness Studio. All rights reserved.',
-          'footer.terms': 'Terms of Service',
-          'float.whatsappAria': 'Message us on WhatsApp'
-        }
-      };
+                'footer.description': 'A premium fitness studio in San Juan, Puerto Rico. Train your DNA in a space designed for your progress.',
+                'footer.linksTitle': 'Links',
+                'footer.contactTitle': 'Contact',
+                'footer.credit': 'Website designed by',
+                'footer.copyright': '© {year} 3NA Fitness Studio. All rights reserved.',
+                'footer.terms': 'Terms of Service',
+                'float.whatsappAria': 'Message us on WhatsApp'
+              }
+            };
 
-      // ── WhatsApp / Trainers messaging ────────────────────────────
-      const WA_PHONE = '17876476721';
+            // ── WhatsApp / Trainers messaging ────────────────────────────
+            const WA_PHONE = '17876476721';
 
-      function buildTrainerWaUrl(lang, trainerName) {
-        const safeName = trainerName && trainerName.trim() ? trainerName.trim() : (lang === 'en' ? '[TRAINER NAME]' : '[NOMBRE DEL ENTRENADOR]');
-        const msg = (lang === 'en')
-          ? ('Hello 3NA Fitness Studio, I would like to receive guidance from ' + safeName + '.')
-          : ('Hola 3NA Fitness Studio, me gustaría recibir orientación con ' + safeName + '.');
-        return 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(msg);
+            function buildTrainerWaUrl(lang, trainerName) {
+              const safeName = trainerName && trainerName.trim() ? trainerName.trim() : (lang === 'en' ? '[TRAINER NAME]' : '[NOMBRE DEL ENTRENADOR]');
+              const msg = (lang === 'en')
+                ? ('Hello 3NA Fitness Studio, I would like to receive guidance from ' + safeName + '.')
+                : ('Hola 3NA Fitness Studio, me gustaría recibir orientación con ' + safeName + '.');
+              return 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(msg);
+            }
+
+            // Keep legacy waUrls for other wa-link elements
+            const waUrls = {
+              es: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hola 3NA Fitness Studio, me interesa recibir información sobre las membresías, horarios y servicios del gimnasio.'),
+              en: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hello 3NA Fitness Studio, I would like information about gym memberships, hours, and services.')
+            };
+
+            // ── setLanguage ──────────────────────────────────────────────
+            let currentLang = 'es';
+
+            function setLanguage(language) {
+              const t = translations[language];
+              if (!t) return;
+              currentLang = language;
+              const year = new Date().getFullYear();
+
+              document.querySelectorAll('[data-i18n]').forEach(function (el) {
+                const key = el.getAttribute('data-i18n');
+                if (t[key] !== undefined) el.textContent = t[key].replace('{year}', year);
+              });
+
+              document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+              });
+
+              document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+                const key = el.getAttribute('data-i18n-alt');
+                if (t[key] !== undefined) el.setAttribute('alt', t[key]);
+              });
+
+              document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
+                const key = el.getAttribute('data-i18n-aria-label');
+                if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+              });
+
+              const copyEl = document.getElementById('footer-copy');
+              if (copyEl && t['footer.copyright']) copyEl.textContent = t['footer.copyright'].replace('{year}', year);
+
+              // Update CTA WhatsApp (generic guidance)
+              const ctaWa = document.getElementById('trainers-cta-wa');
+              if (ctaWa) ctaWa.setAttribute('href', buildTrainerWaUrl(currentLang, currentLang === 'en' ? '[TRAINER NAME]' : '[NOMBRE DEL ENTRENADOR]'));
+
+              // Update trainer card WhatsApp links with each card's name
+              document.querySelectorAll('[data-trainer-card]').forEach(function(card){
+                const nameEl = card.querySelector('.trainer-name');
+                const name = nameEl ? nameEl.textContent : (card.getAttribute('data-trainer-name') || '');
+                const wa = card.querySelector('.trainer-wa');
+                if (wa) wa.setAttribute('href', buildTrainerWaUrl(currentLang, name));
+              });
+
+              // Fallback: update any remaining wa-link (e.g., floating button)
+              document.querySelectorAll('.wa-link').forEach(function (link) {
+                if (link && link.id === 'trainers-cta-wa') return;
+                if (link && link.classList.contains('trainer-wa')) return;
+                link.setAttribute('href', waUrls[language]);
+              });
+
+              document.querySelectorAll('.lang-btn').forEach(function (btn) {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === language);
+              });
+
+              document.documentElement.lang = language;
+              try { localStorage.setItem('3na-language', language); } catch (e) {}
+
+              // Optional SEO: update title/description on language change
+              if (language === 'en') {
+              document.title = '3NA Fitness Studio — Trainers in San Juan';
+              } else {
+              document.title = 'Entrenadores de 3NA Fitness Studio — San Juan';
+              }
+            }
+
+            // Bind all language buttons
+            document.querySelectorAll('.lang-btn').forEach(function (btn) {
+              btn.addEventListener('click', function () {
+                setLanguage(btn.getAttribute('data-lang'));
+              });
+            });
+
+            // Restore saved preference — default to Spanish
+            (function () {
+              let saved = null;
+              try { saved = localStorage.getItem('3na-language'); } catch (e) {}
+              setLanguage(saved === 'en' ? 'en' : 'es');
+            })();
+
+            // ── Mobile hamburger ─────────────────────────────────────────
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            function syncMobileMenuPosition() {
+            const mainNav =
+            document.getElementById('main-nav');
+
+            const mobileHeaderSpacer =
+            document.getElementById('mobile-header-spacer');
+
+            if (
+            !mainNav ||
+            !mobileMenu ||
+            window.innerWidth >= 992
+            ) {
+            return;
+            }
+
+            const navHeight = Math.ceil(
+            mainNav.getBoundingClientRect().height
+            );
+
+            document.documentElement.style.setProperty(
+            '--mobile-nav-height',
+            navHeight + 'px'
+            );
+
+            if (mobileHeaderSpacer) {
+            mobileHeaderSpacer.style.height =
+            navHeight + 'px';
+            }
+            }
+
+            requestAnimationFrame(syncMobileMenuPosition);
+            window.addEventListener('load', syncMobileMenuPosition);
+            window.addEventListener('resize', syncMobileMenuPosition);
+      window.addEventListener(
+      'orientationchange',
+      function () {
+      window.setTimeout(
+      syncMobileMenuPosition,
+      150
+      );
       }
+      );
 
-      // Keep legacy waUrls for other wa-link elements
-      const waUrls = {
-        es: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hola 3NA Fitness Studio, me interesa recibir información sobre las membresías, horarios y servicios del gimnasio.'),
-        en: 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent('Hello 3NA Fitness Studio, I would like information about gym memberships, hours, and services.')
-      };
+      const observedMobileNav =
+      document.getElementById('main-nav');
 
-      // ── setLanguage ──────────────────────────────────────────────
-      let currentLang = 'es';
-
-      function setLanguage(language) {
-        const t = translations[language];
-        if (!t) return;
-        currentLang = language;
-        const year = new Date().getFullYear();
-
-        document.querySelectorAll('[data-i18n]').forEach(function (el) {
-          const key = el.getAttribute('data-i18n');
-          if (t[key] !== undefined) el.textContent = t[key].replace('{year}', year);
-        });
-
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
-          const key = el.getAttribute('data-i18n-placeholder');
-          if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
-        });
-
-        document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
-          const key = el.getAttribute('data-i18n-alt');
-          if (t[key] !== undefined) el.setAttribute('alt', t[key]);
-        });
-
-        document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
-          const key = el.getAttribute('data-i18n-aria-label');
-          if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
-        });
-
-        const copyEl = document.getElementById('footer-copy');
-        if (copyEl && t['footer.copyright']) copyEl.textContent = t['footer.copyright'].replace('{year}', year);
-
-        // Update CTA WhatsApp (generic guidance)
-        const ctaWa = document.getElementById('trainers-cta-wa');
-        if (ctaWa) ctaWa.setAttribute('href', buildTrainerWaUrl(currentLang, currentLang === 'en' ? '[TRAINER NAME]' : '[NOMBRE DEL ENTRENADOR]'));
-
-        // Update trainer card WhatsApp links with each card's name
-        document.querySelectorAll('[data-trainer-card]').forEach(function(card){
-          const nameEl = card.querySelector('.trainer-name');
-          const name = nameEl ? nameEl.textContent : (card.getAttribute('data-trainer-name') || '');
-          const wa = card.querySelector('.trainer-wa');
-          if (wa) wa.setAttribute('href', buildTrainerWaUrl(currentLang, name));
-        });
-
-        // Fallback: update any remaining wa-link (e.g., floating button)
-        document.querySelectorAll('.wa-link').forEach(function (link) {
-          if (link && link.id === 'trainers-cta-wa') return;
-          if (link && link.classList.contains('trainer-wa')) return;
-          link.setAttribute('href', waUrls[language]);
-        });
-
-        document.querySelectorAll('.lang-btn').forEach(function (btn) {
-          btn.classList.toggle('active', btn.getAttribute('data-lang') === language);
-        });
-
-        document.documentElement.lang = language;
-        try { localStorage.setItem('3na-language', language); } catch (e) {}
-
-        // Optional SEO: update title/description on language change
-        if (language === 'en') {
-        document.title = '3NA Fitness Studio — Trainers in San Juan';
-        } else {
-        document.title = 'Entrenadores de 3NA Fitness Studio — San Juan';
-        }
-      }
-
-      // Bind all language buttons
-      document.querySelectorAll('.lang-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          setLanguage(btn.getAttribute('data-lang'));
-        });
+      if (
+      observedMobileNav &&
+      'ResizeObserver' in window
+      ) {
+      const mobileNavObserver =
+      new ResizeObserver(function () {
+      syncMobileMenuPosition();
       });
 
-      // Restore saved preference — default to Spanish
-      (function () {
-        let saved = null;
-        try { saved = localStorage.getItem('3na-language'); } catch (e) {}
-        setLanguage(saved === 'en' ? 'en' : 'es');
-      })();
+      mobileNavObserver.observe(
+      observedMobileNav
+      );
+      }
+            if (hamburger && mobileMenu) {
+              hamburger.addEventListener('click', function () {
+                syncMobileMenuPosition();
 
-      // ── Mobile hamburger ─────────────────────────────────────────
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobile-menu');
+                const isOpening = !mobileMenu.classList.contains('open');
 
-      function syncMobileMenuPosition() {
+                hamburger.classList.toggle('open', isOpening);
+                mobileMenu.classList.toggle('open', isOpening);
+                document.body.classList.toggle('mobile-menu-open', isOpening);
+
+                hamburger.setAttribute('aria-expanded', String(isOpening));
+                mobileMenu.setAttribute('aria-hidden', String(!isOpening));
+              });
+
+              document.querySelectorAll('.mobile-link').forEach(function (link) {
+                link.addEventListener('click', function () {
+                  hamburger.classList.remove('open');
+                  mobileMenu.classList.remove('open');
+                  document.body.classList.remove('mobile-menu-open');
+
+                  hamburger.setAttribute('aria-expanded', 'false');
+                  mobileMenu.setAttribute('aria-hidden', 'true');
+                });
+              });
+
+              window.addEventListener('keydown', function (event) {
+                if (event.key !== 'Escape') return;
+
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+                document.body.classList.remove('mobile-menu-open');
+
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+              });
+            }
+
+            // ── Mobile header hide/show on scroll ─────────────
+            let previousMobileScrollY = window.scrollY;
+            let mobileHeaderTicking = false;
+
+            function updateMobileHeaderVisibility() {
+            const mobileMainNav =
+            document.getElementById('main-nav');
+
+            if (
+            !mobileMainNav ||
+            window.innerWidth >= 992
+            ) {
+            return;
+            }
+
+            const currentScrollY =
+            Math.max(window.scrollY, 0);
+
+            const menuIsOpen =
+            document.body.classList.contains(
+            'mobile-menu-open'
+            );
+
+            if (menuIsOpen || currentScrollY < 40) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
+              mobileMainNav.classList.add( 'mobile-header-visible' ); previousMobileScrollY=currentScrollY; return; } const
+              scrollDifference=currentScrollY - previousMobileScrollY; if ( scrollDifference> 8 &&
+              currentScrollY > 120
+              ) {
+              mobileMainNav.classList.add(
+              'mobile-header-hidden'
+              );
+
+              mobileMainNav.classList.remove(
+              'mobile-header-visible'
+              );
+              } else if (scrollDifference < -8) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
+                mobileMainNav.classList.add( 'mobile-header-visible' ); } previousMobileScrollY=currentScrollY; }
+                window.addEventListener( 'scroll' , function () { if (mobileHeaderTicking) return; mobileHeaderTicking=true;
+                window.requestAnimationFrame( function () { updateMobileHeaderVisibility(); mobileHeaderTicking=false; } ); }, {
+                passive: true } ); window.addEventListener( 'pageshow' , function () { const
+                mobileMainNav=document.getElementById('main-nav'); if (!mobileMainNav) return;
+                mobileMainNav.classList.remove( 'mobile-header-hidden' ); mobileMainNav.classList.add( 'mobile-header-visible' ); }
+                );
+
+            // ── Nav scroll tint ─────────────────────────
       const mainNav =
-      document.getElementById('main-nav');
-      
-      const mobileHeaderSpacer =
-      document.getElementById('mobile-header-spacer');
-      
-      if (
-      !mainNav ||
-      !mobileMenu ||
-      window.innerWidth >= 992
-      ) {
-      return;
-      }
-      
-      const navHeight = Math.ceil(
-      mainNav.getBoundingClientRect().height
-      );
-      
-      document.documentElement.style.setProperty(
-      '--mobile-nav-height',
-      navHeight + 'px'
-      );
-      
-      if (mobileHeaderSpacer) {
-      mobileHeaderSpacer.style.height =
-      navHeight + 'px';
-      }
-      }
+        document.getElementById('main-nav');
 
-      requestAnimationFrame(syncMobileMenuPosition);
-      window.addEventListener('load', syncMobileMenuPosition);
-      window.addEventListener('resize', syncMobileMenuPosition);
-window.addEventListener(
-'orientationchange',
-function () {
-window.setTimeout(
-syncMobileMenuPosition,
-150
-);
-}
-);
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (!mainNav) return;
 
-const observedMobileNav =
-document.getElementById('main-nav');
+          if (window.innerWidth < 992) {
+            mainNav.style.background =
+              '#07090A';
 
-if (
-observedMobileNav &&
-'ResizeObserver' in window
-) {
-const mobileNavObserver =
-new ResizeObserver(function () {
-syncMobileMenuPosition();
-});
+            mainNav.style.backgroundColor =
+              '#07090A';
 
-mobileNavObserver.observe(
-observedMobileNav
-);
-}
-      if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', function () {
-          syncMobileMenuPosition();
-
-          const isOpening = !mobileMenu.classList.contains('open');
-
-          hamburger.classList.toggle('open', isOpening);
-          mobileMenu.classList.toggle('open', isOpening);
-          document.body.classList.toggle('mobile-menu-open', isOpening);
-
-          hamburger.setAttribute('aria-expanded', String(isOpening));
-          mobileMenu.setAttribute('aria-hidden', String(!isOpening));
-        });
-
-        document.querySelectorAll('.mobile-link').forEach(function (link) {
-          link.addEventListener('click', function () {
-            hamburger.classList.remove('open');
-            mobileMenu.classList.remove('open');
-            document.body.classList.remove('mobile-menu-open');
-
-            hamburger.setAttribute('aria-expanded', 'false');
-            mobileMenu.setAttribute('aria-hidden', 'true');
-          });
-        });
-
-        window.addEventListener('keydown', function (event) {
-          if (event.key !== 'Escape') return;
-
-          hamburger.classList.remove('open');
-          mobileMenu.classList.remove('open');
-          document.body.classList.remove('mobile-menu-open');
-
-          hamburger.setAttribute('aria-expanded', 'false');
-          mobileMenu.setAttribute('aria-hidden', 'true');
-        });
-      }
-
-      // ── Mobile header hide/show on scroll ─────────────
-      let previousMobileScrollY = window.scrollY;
-      let mobileHeaderTicking = false;
-      
-      function updateMobileHeaderVisibility() {
-      const mobileMainNav =
-      document.getElementById('main-nav');
-      
-      if (
-      !mobileMainNav ||
-      window.innerWidth >= 992
-      ) {
-      return;
-      }
-      
-      const currentScrollY =
-      Math.max(window.scrollY, 0);
-      
-      const menuIsOpen =
-      document.body.classList.contains(
-      'mobile-menu-open'
-      );
-      
-      if (menuIsOpen || currentScrollY < 40) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
-        mobileMainNav.classList.add( 'mobile-header-visible' ); previousMobileScrollY=currentScrollY; return; } const
-        scrollDifference=currentScrollY - previousMobileScrollY; if ( scrollDifference> 8 &&
-        currentScrollY > 120
-        ) {
-        mobileMainNav.classList.add(
-        'mobile-header-hidden'
-        );
-      
-        mobileMainNav.classList.remove(
-        'mobile-header-visible'
-        );
-        } else if (scrollDifference < -8) { mobileMainNav.classList.remove( 'mobile-header-hidden' );
-          mobileMainNav.classList.add( 'mobile-header-visible' ); } previousMobileScrollY=currentScrollY; }
-          window.addEventListener( 'scroll' , function () { if (mobileHeaderTicking) return; mobileHeaderTicking=true;
-          window.requestAnimationFrame( function () { updateMobileHeaderVisibility(); mobileHeaderTicking=false; } ); }, {
-          passive: true } ); window.addEventListener( 'pageshow' , function () { const
-          mobileMainNav=document.getElementById('main-nav'); if (!mobileMainNav) return;
-          mobileMainNav.classList.remove( 'mobile-header-hidden' ); mobileMainNav.classList.add( 'mobile-header-visible' ); }
-          );
-
-      // ── Nav scroll tint ─────────────────────────
-const mainNav =
-  document.getElementById('main-nav');
-
-window.addEventListener(
-  'scroll',
-  function () {
-    if (!mainNav) return;
-
-    if (window.innerWidth < 992) {
-      mainNav.style.background =
-        '#07090A';
-
-      mainNav.style.backgroundColor =
-        '#07090A';
-
-      return;
-    }
-
-    mainNav.style.background =
-      window.scrollY > 60
-        ? 'rgba(7,9,10,0.92)'
-        : 'rgba(7,9,10,0.72)';
-  },
-  { passive: true }
-);
-
-      // ── Reveal animations ────────────────────────────────────────
-      const revealObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
+            return;
           }
-        });
-      }, { threshold: 0.12 });
 
-      document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+          mainNav.style.background =
+            window.scrollY > 60
+              ? 'rgba(7,9,10,0.92)'
+              : 'rgba(7,9,10,0.72)';
+        },
+        { passive: true }
+      );
 
-      // ── Trainers: filters ────────────────────────────────────────
-      (function(){
-        const bar = document.querySelector('.filter-bar');
-        const cards = Array.prototype.slice.call(document.querySelectorAll('[data-trainer-card]'));
-        if (!bar || !cards.length) return;
+            // ── Reveal animations ────────────────────────────────────────
+            const revealObserver = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  revealObserver.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.12 });
 
-        function setActive(btn){
-          bar.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.toggle('active', b===btn); });
-        }
+            document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
 
-        function applyFilter(filter){
-          cards.forEach(function(card){
-            const tags = (card.getAttribute('data-tags') || '').split(',').map(function(s){ return s.trim(); }).filter(Boolean);
-            const show = filter === 'all' ? true : tags.indexOf(filter) !== -1;
-            card.style.display = show ? '' : 'none';
-          });
-        }
+            // ── Trainers: filters ────────────────────────────────────────
+            (function(){
+              const bar = document.querySelector('.filter-bar');
+              const cards = Array.prototype.slice.call(document.querySelectorAll('[data-trainer-card]'));
+              if (!bar || !cards.length) return;
 
-        bar.querySelectorAll('.filter-btn').forEach(function(btn){
-          btn.addEventListener('click', function(){
-            setActive(btn);
-            applyFilter(btn.getAttribute('data-filter') || 'all');
-          });
-        });
-      })();
+              function setActive(btn){
+                bar.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.toggle('active', b===btn); });
+              }
 
-      // ── Trainers: modal ──────────────────────────────────────────
-      (function(){
-        const modalOverlay = document.getElementById('trainer-modal');
-        const modalClose = document.getElementById('trainer-modal-close');
-        const modalName = document.getElementById('modal-name');
-        const modalRole = document.getElementById('modal-role');
-        const modalPhoto = document.getElementById('modal-photo');
-        const modalRequest = document.getElementById('modal-request');
+              function applyFilter(filter){
+                cards.forEach(function(card){
+                  const tags = (card.getAttribute('data-tags') || '').split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+                  const show = filter === 'all' ? true : tags.indexOf(filter) !== -1;
+                  card.style.display = show ? '' : 'none';
+                });
+              }
 
-        if (!modalOverlay || !modalClose || !modalName || !modalRole || !modalPhoto || !modalRequest) return;
+              bar.querySelectorAll('.filter-btn').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  setActive(btn);
+                  applyFilter(btn.getAttribute('data-filter') || 'all');
+                });
+              });
+            })();
 
-        let lastFocus = null;
+            // ── Trainers: modal ──────────────────────────────────────────
+            (function(){
+              const modalOverlay = document.getElementById('trainer-modal');
+              const modalClose = document.getElementById('trainer-modal-close');
+              const modalName = document.getElementById('modal-name');
+              const modalRole = document.getElementById('modal-role');
+              const modalPhoto = document.getElementById('modal-photo');
+              const modalRequest = document.getElementById('modal-request');
 
-        function openModal(fromCard){
-          lastFocus = document.activeElement;
+              if (!modalOverlay || !modalClose || !modalName || !modalRole || !modalPhoto || !modalRequest) return;
 
-          const nameTextEl = fromCard.querySelector('.trainer-name');
-          const titleTextEl = fromCard.querySelector('.trainer-title');
-          const imgEl = fromCard.querySelector('img');
+              let lastFocus = null;
 
-          modalName.textContent = nameTextEl ? nameTextEl.textContent : '';
-          modalRole.textContent = titleTextEl ? titleTextEl.textContent : '';
-          if (imgEl && imgEl.getAttribute('src')) modalPhoto.setAttribute('src', imgEl.getAttribute('src'));
+              function openModal(fromCard){
+                lastFocus = document.activeElement;
 
-          modalRequest.setAttribute('href', buildTrainerWaUrl(currentLang, modalName.textContent || ''));
+                const nameTextEl = fromCard.querySelector('.trainer-name');
+                const titleTextEl = fromCard.querySelector('.trainer-title');
+                const imgEl = fromCard.querySelector('img');
 
-          modalOverlay.classList.add('open');
-          modalOverlay.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
+                modalName.textContent = nameTextEl ? nameTextEl.textContent : '';
+                modalRole.textContent = titleTextEl ? titleTextEl.textContent : '';
+                if (imgEl && imgEl.getAttribute('src')) modalPhoto.setAttribute('src', imgEl.getAttribute('src'));
 
-          const modalPanel = modalOverlay.querySelector('.modal');
-          if (modalPanel) modalPanel.scrollTop = 0;
+                modalRequest.setAttribute('href', buildTrainerWaUrl(currentLang, modalName.textContent || ''));
 
-          modalClose.focus();
-        }
+                modalOverlay.classList.add('open');
+                modalOverlay.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
 
-        function closeModal(){
-          modalOverlay.classList.remove('open');
-          modalOverlay.setAttribute('aria-hidden', 'true');
-          document.body.style.overflow = '';
-          if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
-        }
+                const modalPanel = modalOverlay.querySelector('.modal');
+                if (modalPanel) modalPanel.scrollTop = 0;
 
-        document.querySelectorAll('[data-open-profile]').forEach(function(btn){
-          btn.addEventListener('click', function(){
-            const card = btn.closest('[data-trainer-card]');
-            if (card) openModal(card);
-          });
-        });
+                modalClose.focus();
+              }
 
-        modalClose.addEventListener('click', closeModal);
+              function closeModal(){
+                modalOverlay.classList.remove('open');
+                modalOverlay.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+              }
 
-        modalOverlay.addEventListener('click', function(e){
-          if (e.target === modalOverlay) closeModal();
-        });
+              document.querySelectorAll('[data-open-profile]').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  const card = btn.closest('[data-trainer-card]');
+                  if (card) openModal(card);
+                });
+              });
 
-        window.addEventListener('keydown', function(e){
-          if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
-        });
-      })();
+              modalClose.addEventListener('click', closeModal);
+
+              modalOverlay.addEventListener('click', function(e){
+                if (e.target === modalOverlay) closeModal();
+              });
+
+              window.addEventListener('keydown', function(e){
+                if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+              });
+            })();
     </script>
     <!-- Page blur transition -->
     <script>
@@ -3181,6 +3206,125 @@ window.addEventListener(
               showPage();
             });
           });
+    </script>
+
+    <script id="trainer-profiles-script">
+      (function(){
+        var WA_NUM = '17876476721';
+        var modal = document.getElementById('trainer-modal');
+        if (!modal) return;
+
+        var PROFILES = {
+          valarian: {
+            es: {
+              name: 'Valarian Hollingsworth Santana',
+              role: 'Entrenador Personal Certificado | Coach de Alto Rendimiento',
+              bio: 'Entrenador Personal Certificado por el Departamento de Recreación y Deportes (DRD), especializado en desarrollar fuerza, rendimiento deportivo y composición corporal mediante programas de entrenamiento personalizados.<br><br>Mi enfoque está dirigido a maximizar el potencial físico de cada persona, combinando entrenamiento basado en evidencia, disciplina y una planificación estratégica. Trabajo con personas de todos los niveles, desde quienes buscan mejorar su condición física hasta atletas que desean llevar su rendimiento al siguiente nivel.<br><br>Mi compromiso es ofrecer un entrenamiento profesional que genere resultados medibles y sostenibles.',
+              specialties: ['Preparación de jóvenes atletas de alto rendimiento','Hipertrofia (desarrollo de masa muscular)','Fuerza y potencia','Pérdida de grasa corporal','Acondicionamiento físico','Entrenamiento funcional','Programación personalizada','Coaching de rendimiento'],
+              experience: 'Desde 2025 me desempeño como entrenador personal, diseñando programas de entrenamiento personalizados para mejorar la fuerza, la composición corporal y el rendimiento deportivo. Mi experiencia incluye el trabajo con clientes de distintos niveles de condición física, utilizando metodologías enfocadas en la progresión, la técnica y el desarrollo integral del atleta.',
+              certs: 'Entrenador Personal Certificado<br>Departamento de Recreación y Deportes (DRD)',
+              approach: 'El alto rendimiento comienza con una planificación inteligente. Cada programa es diseñado según los objetivos, capacidades y necesidades específicas del atleta o cliente, priorizando una ejecución técnica correcta, la progresión constante y el desarrollo físico a largo plazo.<br><br>Creo en entrenar con propósito, disciplina y consistencia para construir un cuerpo fuerte, resistente y preparado para cualquier desafío, ya sea mejorar la salud, aumentar el rendimiento deportivo o alcanzar una transformación física.',
+              week: [['Lunes','3:00 PM – 7:00 PM'],['Martes','3:00 PM – 7:00 PM'],['Miércoles','3:00 PM – 7:00 PM'],['Jueves','3:00 PM – 7:00 PM'],['Viernes','3:00 PM – 7:00 PM'],['Sábado','7:00 AM – 11:00 AM']],
+              wa: 'Hola 3NA Fitness Studio, me gustaría recibir orientación y conocer más sobre los servicios de entrenamiento con Valarian Hollingsworth Santana.',
+              requestBtn: 'Solicitar orientación'
+            },
+            en: {
+              name: 'Valarian Hollingsworth Santana',
+              role: 'Certified Personal Trainer | High Performance Coach',
+              bio: 'Certified Personal Trainer through the Puerto Rico Department of Recreation and Sports (DRD), specializing in developing strength, athletic performance, and body composition through personalized training programs.<br><br>My approach focuses on maximizing each person’s physical potential by combining evidence-based training, discipline, and strategic planning. I work with people at every level, from individuals looking to improve their overall fitness to athletes who want to take their performance to the next level.<br><br>My commitment is to provide professional training that produces measurable and sustainable results.',
+              specialties: ['High-performance youth athlete preparation','Hypertrophy and muscle development','Strength and power','Body fat reduction','Physical conditioning','Functional training','Personalized programming','Performance coaching'],
+              experience: 'Since 2025, I have worked as a personal trainer designing personalized training programs to improve strength, body composition, and athletic performance. My experience includes working with clients of different fitness levels using methodologies focused on progression, technique, and overall athlete development.',
+              certs: 'Certified Personal Trainer<br>Puerto Rico Department of Recreation and Sports (DRD)',
+              approach: 'High performance begins with intelligent planning. Each program is designed according to the athlete’s or client’s specific goals, abilities, and needs, prioritizing proper technical execution, consistent progression, and long-term physical development.<br><br>I believe in training with purpose, discipline, and consistency to build a strong, resilient body prepared for any challenge, whether the goal is improving health, increasing athletic performance, or achieving a physical transformation.',
+              week: [['Monday','3:00 PM – 7:00 PM'],['Tuesday','3:00 PM – 7:00 PM'],['Wednesday','3:00 PM – 7:00 PM'],['Thursday','3:00 PM – 7:00 PM'],['Friday','3:00 PM – 7:00 PM'],['Saturday','7:00 AM – 11:00 AM']],
+              wa: 'Hello 3NA Fitness Studio, I would like guidance and more information about training services with Valarian Hollingsworth Santana.',
+              requestBtn: 'Request guidance'
+            }
+          }
+        };
+
+        var ids = ['modal-bio','modal-specialties','modal-experience','modal-certs','modal-approach','modal-availability'];
+        var defaults = {};
+        ids.forEach(function(id){ var el = document.getElementById(id); if (el) defaults[id] = el.innerHTML; });
+
+        function getLang(){ return (document.documentElement.lang === 'en') ? 'en' : 'es'; }
+
+        function waUrl(msg){ return 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(msg); }
+
+        function applyTrainerText(lang){
+          document.querySelectorAll('[data-t-es]').forEach(function(el){
+            var v = el.getAttribute(lang === 'en' ? 'data-t-en' : 'data-t-es');
+            if (v) el.textContent = v;
+          });
+          document.querySelectorAll('[data-wa-es]').forEach(function(el){
+            var m = el.getAttribute(lang === 'en' ? 'data-wa-en' : 'data-wa-es');
+            if (m) el.setAttribute('href', waUrl(m));
+          });
+        }
+
+        function renderProfile(key, lang){
+          var p = PROFILES[key] && PROFILES[key][lang];
+          if (!p) return;
+          var nameEl = document.getElementById('modal-name');
+          var roleEl = document.getElementById('modal-role');
+          if (nameEl) nameEl.textContent = p.name;
+          if (roleEl) roleEl.textContent = p.role;
+          var bio = document.getElementById('modal-bio');
+          if (bio) bio.innerHTML = p.bio;
+          var spec = document.getElementById('modal-specialties');
+          if (spec) spec.innerHTML = p.specialties.map(function(s){ return '<li>' + s + '</li>'; }).join('');
+          var exp = document.getElementById('modal-experience');
+          if (exp) exp.innerHTML = p.experience;
+          var certs = document.getElementById('modal-certs');
+          if (certs) certs.innerHTML = p.certs;
+          var appr = document.getElementById('modal-approach');
+          if (appr) appr.innerHTML = p.approach;
+          var week = document.getElementById('modal-availability');
+          if (week) week.innerHTML = p.week.map(function(r){ return '<div class="week-row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('');
+          var req = document.getElementById('modal-request');
+          if (req) {
+            req.setAttribute('href', waUrl(p.wa));
+            var sp = req.querySelector('span');
+            if (sp) sp.textContent = p.requestBtn;
+          }
+        }
+
+        function restoreDefaults(lang){
+          ids.forEach(function(id){
+            var el = document.getElementById(id);
+            if (el && typeof defaults[id] === 'string') el.innerHTML = defaults[id];
+          });
+          if (typeof baseSetLanguage === 'function') baseSetLanguage(lang);
+        }
+
+        var baseSetLanguage = window.setLanguage;
+        if (typeof baseSetLanguage === 'function') {
+          window.setLanguage = function(l){
+            baseSetLanguage(l);
+            var lang = (l === 'en') ? 'en' : 'es';
+            applyTrainerText(lang);
+            var key = modal.getAttribute('data-active-profile');
+            if (key) renderProfile(key, lang);
+          };
+        }
+
+        document.querySelectorAll('[data-open-profile]').forEach(function(btn){
+          btn.addEventListener('click', function(){
+            var card = btn.closest('[data-trainer-card]');
+            var key = card ? card.getAttribute('data-trainer-profile') : null;
+            var lang = getLang();
+            if (key && PROFILES[key]) {
+              modal.setAttribute('data-active-profile', key);
+              renderProfile(key, lang);
+            } else {
+              modal.removeAttribute('data-active-profile');
+              restoreDefaults(lang);
+            }
+          });
+        });
+
+        applyTrainerText(getLang());
+      })();
     </script>
   
 </body></html>

@@ -101,6 +101,7 @@ setPaused(event.data.paused);
 <meta name="apple-mobile-web-app-title" content="3NA Fitness Studio">
 <title>3NA Fitness Studio — Gimnasio Premium en San Juan</title>
 <meta name="description" content="Descubre 3NA Fitness Studio en San Juan: equipos premium, áreas de fuerza, cardio y movilidad, y un ambiente moderno diseñado para ayudarte a progresar.">
+<link rel="canonical" href="https://www.3nafitnesstudio.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
@@ -1307,10 +1308,6 @@ transition-duration: 0.01ms !important;
 }
 }
 </style>
-<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
-<style id="all-fonts-style-font-bricolage">
-.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
-</style>
 <style id="final-mobile-header-fix">
 #mobile-header-spacer {
 display: none;
@@ -1574,30 +1571,44 @@ grid-column: 1 / -1 !important;
 grid-template-columns: 1fr !important;
 }
 }
+</style>
+<style id="payment-btn-styles">
+#membresias .payment-btn, #membresias .payment-whatsapp-btn {
+width: 100% !important;
+justify-content: center !important;
+}
+@media (max-width: 575px) {
+#membresias .plan-card:not(:last-child) .payment-btn,
+#membresias .plan-card:not(:last-child) .payment-whatsapp-btn {
+min-height: 44px !important;
+padding: 8px 10px !important;
+font-size: 0.78rem !important;
+}
+#membresias .plan-card:last-child .payment-btn,
+#membresias .plan-card:last-child .payment-whatsapp-btn {
+min-height: 48px !important;
+padding: 11px 20px !important;
+}
+}
+</style>
+<link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
+.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
 </style></head>
-  <body class="">
+  <body class="page-ready">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
 
-    <nav class="" style="background: rgba(7, 9, 10, 0.72);" id="main-nav">
+    <nav class="" style="background: rgba(7, 9, 10, 0.92);" id="main-nav">
       <a href="#inicio" class="nav-logo">
         <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7df437ed-8951-4325-880e-6ea40980e94a_1600w.png" alt="3NA Fitness Studio" class="w-[140px] md:w-[145px] lg:w-[160px] h-auto object-contain">
       </a>
 
       <div class="nav-links">
         <a href="#inicio" data-i18n="nav.home" class="">Inicio</a>
-        <a href="sobre-nosotros.html" data-i18n="nav.about" class="">
-          Sobre nosotros
-        </a>
-        <a href="entrenadores.html" data-i18n="nav.trainers" class="">
-          Entrenadores
-        </a>
-        <a href="#experiencia" data-i18n="nav.experience" class="">
-          Experiencia
-        </a>
+        <a href="sobre-nosotros.html" data-i18n="nav.about" class="">Sobre nosotros</a>
+        <a href="entrenadores.html" data-i18n="nav.trainers" class="">Entrenadores</a>
+        <a href="#experiencia" data-i18n="nav.experience" class="">Experiencia</a>
         <a href="#galeria" data-i18n="nav.gallery" class="">Galería</a>
-        <a href="#membresias" data-i18n="nav.memberships" class="">
-          Membresías
-        </a>
+        <a href="#membresias" data-i18n="nav.memberships" class="">Membresías</a>
       </div>
 
       <div class="nav-cta">
@@ -1620,22 +1631,12 @@ grid-template-columns: 1fr !important;
     <!-- Mobile menu -->
     <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
       <a href="index.html" class="mobile-link active" data-i18n="nav.home">Inicio</a>
-      <a href="sobre-nosotros.html" class="mobile-link" data-i18n="nav.about">
-        Sobre nosotros
-      </a>
-      <a href="entrenadores.html" class="mobile-link" data-i18n="nav.trainers">
-        Entrenadores
-      </a>
-      <a href="index.html#experiencia" class="mobile-link" data-i18n="nav.experience">
-        Experiencia
-      </a>
+      <a href="sobre-nosotros.html" class="mobile-link" data-i18n="nav.about">Sobre nosotros</a>
+      <a href="entrenadores.html" class="mobile-link" data-i18n="nav.trainers">Entrenadores</a>
+      <a href="index.html#experiencia" class="mobile-link" data-i18n="nav.experience">Experiencia</a>
       <a href="galeria.html" class="mobile-link" data-i18n="nav.gallery">Galería</a>
-      <a href="index.html#membresias" class="mobile-link" data-i18n="nav.memberships">
-        Membresías
-      </a>
-      <a href="index.html#cta" class="mobile-link" data-i18n="nav.contact">
-        Contactar
-      </a>
+      <a href="index.html#membresias" class="mobile-link" data-i18n="nav.memberships">Membresías</a>
+      <a href="index.html#cta" class="mobile-link" data-i18n="nav.contact">Contactar</a>
 
       <div class="mobile-lang-row">
         <div class="lang-toggle" role="group" data-i18n-aria-label="lang.ariaLabel" aria-label="Cambiar idioma">
@@ -1647,7 +1648,7 @@ grid-template-columns: 1fr !important;
         </div>
       </div>
     </div>
-    <div id="mobile-header-spacer" aria-hidden="true"></div>
+    <div id="mobile-header-spacer" aria-hidden="true" style="height: 131px;"></div>
 
     <!-- ─── HERO ─────────────────────────────────────────────────────── -->
     <section id="inicio" class="">
@@ -1660,35 +1661,21 @@ grid-template-columns: 1fr !important;
         </div>
 
         <h1 class="hero-headline">
-          <span class="line-1 text-metallic text-center" data-i18n="hero.titleLine1">
-            ENTRENA
-          </span>
-          <span class="line-2 text-metallic text-center" data-i18n="hero.titleLine2">
-            TU
-          </span>
-          <span class="line-3 text-neon text-center" data-i18n="hero.titleLine3">
-            ADN
-          </span>
+          <span class="line-1 text-metallic text-center" data-i18n="hero.titleLine1">ENTRENA</span>
+          <span class="line-2 text-metallic text-center" data-i18n="hero.titleLine2">TU</span>
+          <span class="line-3 text-neon text-center" data-i18n="hero.titleLine3">ADN</span>
         </h1>
 
         <div class="hero-desc reveal text-center visible">
-          <p data-i18n="hero.description" class="">
-            Descubre una nueva manera de entrenar en San Juan. Equipos premium,
-            un ambiente relajado y una experiencia cercana para que puedas
-            enfocarte en tu progreso.
-          </p>
+          <p data-i18n="hero.description" class="">Descubre una nueva manera de entrenar en San Juan. Equipos premium, un ambiente relajado y una experiencia cercana para que puedas enfocarte en tu progreso.</p>
           <div class="hero-actions">
             <a href="#estudio" class="btn-primary">
-              <span data-i18n="hero.primaryBtn" class="">
-                Conoce el estudio
-              </span>
+              <span data-i18n="hero.primaryBtn" class="">Conoce el estudio</span>
               <iconify-icon icon="lucide:arrow-right" noobserver="" class=""></iconify-icon>
             </a>
             <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20las%20membres%C3%ADas%2C%20horarios%20y%20servicios%20del%20gimnasio." class="btn-ghost wa-link" target="_blank" rel="noopener">
               <iconify-icon icon="lucide:message-circle" noobserver="" class=""></iconify-icon>
-              <span data-i18n="hero.whatsappBtn" class="">
-                Escríbenos por WhatsApp
-              </span>
+              <span data-i18n="hero.whatsappBtn" class="">Escríbenos por WhatsApp</span>
             </a>
           </div>
         </div>
@@ -1709,19 +1696,9 @@ grid-template-columns: 1fr !important;
       <div class="studio-grid">
         <div class="studio-copy reveal visible">
           <span class="section-label" data-i18n="studio.label">El Estudio</span>
-          <h2 class="section-heading text-metallic !font-black !tracking-[-0.05em]" data-i18n="studio.heading">
-            Un espacio diseñado para tu progreso
-          </h2>
-          <p data-i18n="studio.paragraph1" class="">
-            3NA Fitness Studio nace con una idea clara: entrenar no debería
-            sentirse como una obligación. Creamos un espacio moderno en San Juan
-            donde el equipo, el ambiente y la atención están pensados para que
-            disfrutes cada sesión.
-          </p>
-          <p data-i18n="studio.paragraph2" class="">
-            Aquí no hay multitudes ni distracciones. Solo tú, tus metas y todo
-            lo que necesitas para alcanzarlas.
-          </p>
+          <h2 class="section-heading text-metallic !font-black !tracking-[-0.05em]" data-i18n="studio.heading">Un espacio diseñado para tu progreso</h2>
+          <p data-i18n="studio.paragraph1" class="">3NA Fitness Studio nace con una idea clara: entrenar no debería sentirse como una obligación. Creamos un espacio moderno en San Juan donde el equipo, el ambiente y la atención están pensados para que disfrutes cada sesión.</p>
+          <p data-i18n="studio.paragraph2" class="">Aquí no hay multitudes ni distracciones. Solo tú, tus metas y todo lo que necesitas para alcanzarlas.</p>
         </div>
         <div class="studio-img reveal visible">
           <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/fc12e5ad-40ba-4e46-8733-723dc3ac0760_1600w.png" data-i18n-alt="studio.imgAlt" alt="Interior del estudio con equipos premium" loading="lazy" class="">
@@ -1733,113 +1710,69 @@ grid-template-columns: 1fr !important;
           <div class="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-[150%] transition-transform duration-[1.2s] ease-in-out pointer-events-none z-0"></div>
 
           <div class="relative z-10 flex flex-col h-full mt-16">
-            <h3 data-i18n="benefits.premium.title" class="text-[1.1rem] text-[#f0f2f2] font-semibold tracking-tight">
-              Equipos premium
-            </h3>
+            <h3 data-i18n="benefits.premium.title" class="text-[1.1rem] text-[#f0f2f2] font-semibold tracking-tight">Equipos premium</h3>
             <div class="w-6 h-[2px] bg-[#2dd4bf] mt-3 mb-4 opacity-80"></div>
-            <p data-i18n="benefits.premium.desc" class="text-[0.9rem] leading-[1.8] text-[#8a9496] font-light">
-              Máquinas y pesos libres de última generación, seleccionados para
-              un entrenamiento seguro y efectivo.
-            </p>
+            <p data-i18n="benefits.premium.desc" class="text-[0.9rem] leading-[1.8] text-[#8a9496] font-light">Máquinas y pesos libres de última generación, seleccionados para un entrenamiento seguro y efectivo.</p>
           </div>
         </div>
         <div class="reveal group relative h-full w-full flex flex-col p-8 bg-gradient-to-b from-[#15191c] to-[#0a0d0f] rounded-[10px] border border-[#2a2e33] transition-all duration-300 md:hover:-translate-y-1 md:hover:border-[#2dd4bf]/40 md:hover:shadow-[0_0_24px_rgba(45,212,191,0.15)] overflow-hidden">
           <div class="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-[150%] transition-transform duration-[1.2s] ease-in-out pointer-events-none z-0"></div>
 
           <div class="relative z-10 flex flex-col h-full mt-16">
-            <h3 data-i18n="benefits.ambience.title" class="text-[1.1rem] text-[#f0f2f2] font-semibold tracking-tight">
-              Ambiente relajado
-            </h3>
+            <h3 data-i18n="benefits.ambience.title" class="text-[1.1rem] text-[#f0f2f2] font-semibold tracking-tight">Ambiente relajado</h3>
             <div class="w-6 h-[2px] bg-[#2dd4bf] mt-3 mb-4 opacity-80"></div>
-            <p data-i18n="benefits.ambience.desc" class="text-[0.9rem] leading-[1.8] text-[#8a9496] font-light">
-              Un espacio tranquilo y sin aglomeraciones donde puedes entrenar a
-              tu ritmo, sin presión.
-            </p>
+            <p data-i18n="benefits.ambience.desc" class="text-[0.9rem] leading-[1.8] text-[#8a9496] font-light">Un espacio tranquilo y sin aglomeraciones donde puedes entrenar a tu ritmo, sin presión.</p>
           </div>
         </div>
         <div class="reveal group relative h-full w-full flex flex-col p-8 bg-gradient-to-b from-[#15191c] to-[#0a0d0f] rounded-[10px] border border-[#2a2e33] transition-all duration-300 md:hover:-translate-y-1 md:hover:border-[#2dd4bf]/40 md:hover:shadow-[0_0_24px_rgba(45,212,191,0.15)] overflow-hidden">
           <div class="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-[150%] transition-transform duration-[1.2s] ease-in-out pointer-events-none z-0"></div>
 
           <div class="relative z-10 flex flex-col h-full mt-16">
-            <h3 data-i18n="benefits.attention.title" class="text-[1.1rem] text-[#f0f2f2] font-semibold tracking-tight">
-              Atención cercana
-            </h3>
+            <h3 data-i18n="benefits.attention.title" class="text-[1.1rem] text-[#f0f2f2] font-semibold tracking-tight">Atención cercana</h3>
             <div class="w-6 h-[2px] bg-[#2dd4bf] mt-3 mb-4 opacity-80"></div>
-            <p data-i18n="benefits.attention.desc" class="text-[0.9rem] leading-[1.8] text-[#8a9496] font-light">
-              Un trato personal y humano. Aquí no eres un número: conocemos tu
-              nombre y tus metas.
-            </p>
+            <p data-i18n="benefits.attention.desc" class="text-[0.9rem] leading-[1.8] text-[#8a9496] font-light">Un trato personal y humano. Aquí no eres un número: conocemos tu nombre y tus metas.</p>
           </div>
         </div>
         <div class="reveal group relative h-full w-full flex flex-col p-8 bg-gradient-to-b from-[#15191c] to-[#0a0d0f] rounded-[10px] border border-[#2a2e33] transition-all duration-300 md:hover:-translate-y-1 md:hover:border-[#2dd4bf]/40 md:hover:shadow-[0_0_24px_rgba(45,212,191,0.15)] overflow-hidden">
           <div class="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-[150%] transition-transform duration-[1.2s] ease-in-out pointer-events-none z-0"></div>
 
           <div class="relative z-10 flex flex-col h-full mt-16">
-            <h3 data-i18n="benefits.community.title" class="text-[1.1rem] text-[#f0f2f2] font-semibold tracking-tight">
-              Comunidad real
-            </h3>
+            <h3 data-i18n="benefits.community.title" class="text-[1.1rem] text-[#f0f2f2] font-semibold tracking-tight">Comunidad real</h3>
             <div class="w-6 h-[2px] bg-[#2dd4bf] mt-3 mb-4 opacity-80"></div>
-            <p data-i18n="benefits.community.desc" class="text-[0.9rem] leading-[1.8] text-[#8a9496] font-light">
-              Personas como tú que buscan progresar en un ambiente positivo y
-              motivador.
-            </p>
+            <p data-i18n="benefits.community.desc" class="text-[0.9rem] leading-[1.8] text-[#8a9496] font-light">Personas como tú que buscan progresar en un ambiente positivo y motivador.</p>
           </div>
         </div>
       </div>
-      <p class="benefits-swipe" data-i18n="gallery.swipe">
-        Desliza para ver más →
-      </p>
+      <p class="benefits-swipe" data-i18n="gallery.swipe">Desliza para ver más →</p>
     </section>
 
     <!-- ─── EXPERIENCE ───────────────────────────────────────────────── -->
     <section id="experiencia" class="">
       <div style="max-width:1000px;margin:0 auto;" class="">
-        <span class="section-label reveal" data-i18n="experience.label">
-          La Experiencia
-        </span>
-        <h2 class="section-heading reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="experience.heading">
-          Así se entrena en 3NA
-        </h2>
+        <span class="section-label reveal" data-i18n="experience.label">La Experiencia</span>
+        <h2 class="section-heading reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="experience.heading">Así se entrena en 3NA</h2>
       </div>
 
       <div class="exp-blocks">
         <div class="exp-block reveal">
           <div class="exp-num font-bricolage">01</div>
           <div class="exp-content">
-            <h3 data-i18n="experience.block1.title" class="">
-              Entrena a tu ritmo
-            </h3>
-            <p data-i18n="experience.block1.desc" class="">
-              Olvídate de esperar por máquinas o sentirte observado. Nuestro
-              espacio está diseñado para que entrenes con libertad y te
-              concentres en lo que importa: tu progreso.
-            </p>
+            <h3 data-i18n="experience.block1.title" class="">Entrena a tu ritmo</h3>
+            <p data-i18n="experience.block1.desc" class="">Olvídate de esperar por máquinas o sentirte observado. Nuestro espacio está diseñado para que entrenes con libertad y te concentres en lo que importa: tu progreso.</p>
           </div>
         </div>
         <div class="exp-block reveal">
           <div class="exp-num font-bricolage">02</div>
           <div class="exp-content">
-            <h3 data-i18n="experience.block2.title" class="">
-              Espacios pensados para ti
-            </h3>
-            <p data-i18n="experience.block2.desc" class="">
-              Cada área del estudio fue planificada con intención: zonas de
-              fuerza, cardio y movilidad organizadas para que tu sesión fluya de
-              principio a fin.
-            </p>
+            <h3 data-i18n="experience.block2.title" class="">Espacios pensados para ti</h3>
+            <p data-i18n="experience.block2.desc" class="">Cada área del estudio fue planificada con intención: zonas de fuerza, cardio y movilidad organizadas para que tu sesión fluya de principio a fin.</p>
           </div>
         </div>
         <div class="exp-block reveal">
           <div class="exp-num font-bricolage">03</div>
           <div class="exp-content">
-            <h3 data-i18n="experience.block3.title" class="">
-              Progreso que se siente
-            </h3>
-            <p data-i18n="experience.block3.desc" class="">
-              Con el ambiente correcto y las herramientas correctas, los
-              resultados llegan. Ven a descubrir de lo que eres capaz cuando
-              entrenas en el lugar indicado.
-            </p>
+            <h3 data-i18n="experience.block3.title" class="">Progreso que se siente</h3>
+            <p data-i18n="experience.block3.desc" class="">Con el ambiente correcto y las herramientas correctas, los resultados llegan. Ven a descubrir de lo que eres capaz cuando entrenas en el lugar indicado.</p>
           </div>
         </div>
       </div>
@@ -1850,21 +1783,15 @@ grid-template-columns: 1fr !important;
       <div class="video-frame reveal" style="cursor: default;">
         <video src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/61acbeb6-90fc-415a-b778-fad8709a64db_video.mp4" id="promo-video" aria-label="Video de 3NA" autoplay="" muted="" loop="" playsinline="" preload="auto" class="is-playing"></video>
 
-        <div class="video-caption" data-i18n="video.caption">
-          Un vistazo dentro de 3NA
-        </div>
+        <div class="video-caption" data-i18n="video.caption">Un vistazo dentro de 3NA</div>
       </div>
     </section>
 
     <!-- ─── GALLERY ──────────────────────────────────────────────────── -->
     <section id="galeria" class="">
       <div style="max-width:1200px;margin:0 auto;" class="">
-        <span class="section-label reveal" data-i18n="gallery.label">
-          Galería
-        </span>
-        <h2 class="section-heading reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="gallery.heading">
-          Conoce el estudio
-        </h2>
+        <span class="section-label reveal" data-i18n="gallery.label">Galería</span>
+        <h2 class="section-heading reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="gallery.heading">Conoce el estudio</h2>
       </div>
 
       <div class="gallery-grid reveal">
@@ -1887,15 +1814,11 @@ grid-template-columns: 1fr !important;
           <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/45f2082d-c18b-4957-92f6-5d5648dd5754_800w.png" data-i18n-alt="gallery.alt6" alt="Espacio de estiramiento" loading="lazy" class="">
         </div>
       </div>
-      <p class="gallery-swipe" data-i18n="gallery.swipe">
-        Desliza para ver más →
-      </p>
+      <p class="gallery-swipe" data-i18n="gallery.swipe">Desliza para ver más →</p>
       <div class="mt-4 md:mt-[36px] flex justify-center w-full reveal">
         <!-- Replace with the final gallery page or gallery section link -->
         <a href="galeria.html" class="btn-primary w-full sm:w-auto justify-center">
-          <span data-i18n="gallery.viewFull" class="">
-            Ver galería completa
-          </span>
+          <span data-i18n="gallery.viewFull" class="">Ver galería completa</span>
           <iconify-icon icon="lucide:arrow-right" noobserver=""></iconify-icon>
         </a>
       </div>
@@ -1903,21 +1826,14 @@ grid-template-columns: 1fr !important;
 
     <!-- ─── MEMBERSHIP ───────────────────────────────────────────────── -->
     <section class="" id="membresias" style="text-align: center;">
-      <div style="max-width:1200px;margin:0 auto;">
+      <div style="max-width:1200px;margin:0 auto;" class="">
         <div class="membership-badge reveal">
           <span class="hero-eyebrow-dot"></span>
           <span data-i18n="offers.limited">Tiempo limitado</span>
         </div>
-        <span class="section-label reveal" data-i18n="offers.label" style="display:block;">
-          Membresías
-        </span>
-        <h2 class="reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="offers.heading">
-          Ofertas de apertura
-        </h2>
-        <p class="reveal" data-i18n="offers.description">
-          Aprovecha nuestros precios especiales de pre-apertura y Grand Opening
-          antes de que entren en vigor las tarifas regulares.
-        </p>
+        <span class="section-label reveal" data-i18n="offers.label" style="display:block;">Membresías</span>
+        <h2 class="reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="offers.heading">Ofertas de apertura</h2>
+        <p class="reveal" data-i18n="offers.description">Aprovecha nuestros precios especiales de pre-apertura y Grand Opening antes de que entren en vigor las tarifas regulares.</p>
 
         <div class="reveal mx-auto flex flex-col sm:flex-row w-full max-w-[680px] rounded-[16px] border border-[var(--border-t)] bg-gradient-to-b from-[rgba(45,212,191,0.06)] to-[rgba(255,255,255,0.02)] shadow-[0_0_32px_rgba(45,212,191,0.1)] p-[18px] sm:p-[24px] mt-[32px] sm:mt-[38px] mb-[36px] sm:mb-[48px] text-left backdrop-blur-md">
           <div class="flex items-start gap-4 flex-1">
@@ -1925,12 +1841,8 @@ grid-template-columns: 1fr !important;
               <iconify-icon icon="lucide:calendar-check"></iconify-icon>
             </div>
             <div class="flex flex-col">
-              <span class="text-[0.7rem] uppercase tracking-[0.1em] text-[var(--teal)] font-semibold mb-1" data-i18n="offers.g1.title">
-                PRE-APERTURA
-              </span>
-              <span class="text-[0.95rem] font-bold text-[var(--text)] leading-snug" data-i18n="offers.g1.subtitle">
-                Válido hasta el 14 de agosto
-              </span>
+              <span class="text-[0.7rem] uppercase tracking-[0.1em] text-[var(--teal)] font-semibold mb-1" data-i18n="offers.g1.title">PRE-APERTURA</span>
+              <span class="text-[0.95rem] font-bold text-[var(--text)] leading-snug" data-i18n="offers.g1.subtitle">Válido hasta el 14 de agosto</span>
             </div>
           </div>
           <div class="w-full sm:w-[1px] h-[1px] sm:h-auto bg-[var(--border-s)] my-4 sm:my-0 sm:mx-6 flex-shrink-0"></div>
@@ -1939,153 +1851,135 @@ grid-template-columns: 1fr !important;
               <iconify-icon icon="lucide:party-popper"></iconify-icon>
             </div>
             <div class="flex flex-col">
-              <span class="text-[0.7rem] uppercase tracking-[0.1em] text-[var(--teal)] font-semibold mb-1" data-i18n="offers.g2.title">
-                GRAND OPENING
-              </span>
-              <span class="text-[0.95rem] font-bold text-[var(--text)] leading-snug" data-i18n="offers.g2.subtitle">
-                Solo 15 y 16 de agosto
-              </span>
+              <span class="text-[0.7rem] uppercase tracking-[0.1em] text-[var(--teal)] font-semibold mb-1" data-i18n="offers.g2.title">GRAND OPENING</span>
+              <span class="text-[0.95rem] font-bold text-[var(--text)] leading-snug" data-i18n="offers.g2.subtitle">Solo 15 y 16 de agosto</span>
             </div>
           </div>
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:left;" class="offers-groups">
           <div class="reveal offers-group" style="position:relative;padding:24px;border-radius:16px;border:1px solid var(--border-t);background:linear-gradient(180deg,rgba(45,212,191,0.05),rgba(255,255,255,0.02));box-shadow:0 0 32px rgba(45,212,191,0.1);">
-            <div style="position:absolute;top:16px;right:16px;font-size:0.62rem;font-weight:600;letter-spacing:0.12em;padding:5px 12px;border-radius:999px;border:1px solid var(--border-t);color:var(--teal-light);background:rgba(45,212,191,0.1);" data-i18n="offers.limitedBadge">
-              Tiempo limitado
-            </div>
-            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g1.title">
-              PRE-APERTURA
-            </h3>
-            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g1.subtitle">
-              Válido hasta el 14 de agosto
-            </p>
+            <div style="position:absolute;top:16px;right:16px;font-size:0.62rem;font-weight:600;letter-spacing:0.12em;padding:5px 12px;border-radius:999px;border:1px solid var(--border-t);color:var(--teal-light);background:rgba(45,212,191,0.1);" data-i18n="offers.limitedBadge">Tiempo limitado</div>
+            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g1.title">PRE-APERTURA</h3>
+            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g1.subtitle">Válido hasta el 14 de agosto</p>
 
             <div class="plan-card" style="position:relative;padding:22px 20px;border-radius:12px;border:1px solid var(--border-t);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="position:absolute;top:-10px;left:20px;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:4px 12px;border-radius:999px;color:#04201c;background:linear-gradient(135deg,var(--teal-deep),var(--teal));box-shadow:0 0 16px rgba(45,212,191,0.4);" data-i18n="offers.bestValue">
-                Mejor valor
-              </div>
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;margin-top:4px;" data-i18n="offers.p.12full">
-                12 meses — pago total
-              </div>
-              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+              <div style="position:absolute;top:-10px;left:20px;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:4px 12px;border-radius:999px;color:#04201c;background:linear-gradient(135deg,var(--teal-deep),var(--teal));box-shadow:0 0 16px rgba(45,212,191,0.4);" data-i18n="offers.bestValue">Mejor valor</div>
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;margin-top:4px;" data-i18n="offers.p.12full" class="">12 meses — pago total</div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;" class="">
                 $349
               </div>
-              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;" class="">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.12months">
-                    12 meses de membresía
-                  </span>
+                  <span data-i18n="offers.f.12months" class="">12 meses de membresía</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
-                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;" class=""></iconify-icon>
                   <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.firstOpen">
-                    Primer pago el día de apertura
-                  </span>
+                  <span class="">Pago anual</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.maint">
-                    Mantenimiento anual: $52
-                  </span>
+                  <span data-i18n="offers.f.maint" class="">Mantenimiento anual: $52</span>
                 </li>
               </ul>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="pre12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="https://buy.stripe.com/aFadR9gZJgy597b4bEejK02" class="btn-primary payment-btn" data-payment-plan="pre12" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px">
+                  <iconify-icon icon="lucide:credit-card" class=""></iconify-icon>
+                  <span data-i18n="offers.payNow" class="">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20la%20oferta%20de%20pre-apertura%20de%2012%20meses%20por%20%24349." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="pre12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp" class="">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
 
             <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full">
-                6 meses — pago total
-              </div>
-              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full" class="">6 meses — pago total</div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;" class="">
                 $199
               </div>
-              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;" class="">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
+                  <span data-i18n="offers.f.noEnroll" class="">Sin matrícula</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.maint">
-                    Mantenimiento anual: $52
-                  </span>
+                  <span data-i18n="offers.f.maint" class="">Mantenimiento anual: $52</span>
                 </li>
               </ul>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="pre6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="https://buy.stripe.com/9B6eVd38TbdLbfjfUmejK01" class="btn-primary payment-btn" data-payment-plan="pre6" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px">
+                  <iconify-icon icon="lucide:credit-card"></iconify-icon>
+                  <span data-i18n="offers.payNow">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20la%20oferta%20de%20pre-apertura%20de%206%20meses%20por%20%24199." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="pre6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
 
             <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.monthly">
-                Mensual
-              </div>
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.monthly">Mensual</div>
               <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
                 $36.95
-                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">
-                  / mes
-                </span>
+                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">/ mes</span>
               </div>
-              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;" class="">
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.debit">
-                    Débito directo obligatorio
-                  </span>
+                  <span data-i18n="offers.f.debit">Débito directo obligatorio</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.contract">
-                    Contrato de 12 meses
-                  </span>
+                  <span data-i18n="offers.f.contract">Contrato de 12 meses</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
                   <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.firstOpen">
-                    Primer pago el día de apertura
-                  </span>
+                  <span data-i18n="offers.f.firstOpen">Primer pago el día de apertura</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.maint">
-                    Mantenimiento anual: $52
-                  </span>
+                  <span data-i18n="offers.f.maint">Mantenimiento anual: $52</span>
                 </li>
               </ul>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="preM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="https://buy.stripe.com/fZu7sLdNx0z7837eQiejK00" class="btn-primary payment-btn" data-payment-plan="preM" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px">
+                  <iconify-icon icon="lucide:credit-card" class=""></iconify-icon>
+                  <span data-i18n="offers.payNow" class="">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20la%20oferta%20mensual%20de%20pre-apertura%20por%20%2436.95%20al%20mes." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="preM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
 
           <div class="reveal offers-group" style="padding:24px;border-radius:16px;border:1px solid var(--border-s);background:var(--glass);">
-            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g2.title">
-              GRAND OPENING
-            </h3>
-            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g2.subtitle">
-              Solo 15 y 16 de agosto
-            </p>
+            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g2.title">GRAND OPENING</h3>
+            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g2.subtitle">Solo 15 y 16 de agosto</p>
 
             <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.12full">
-                12 meses — pago total
-              </div>
-              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.12full" class="">12 meses — pago total</div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;" class="">
                 $399
               </div>
               <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
@@ -2095,64 +1989,66 @@ grid-template-columns: 1fr !important;
                 </li>
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.maint">
-                    Mantenimiento anual: $52
-                  </span>
+                  <span data-i18n="offers.f.maint">Mantenimiento anual: $52</span>
                 </li>
               </ul>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="go12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="#" class="btn-primary payment-btn" data-payment-plan="go12" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                  <iconify-icon icon="lucide:credit-card"></iconify-icon>
+                  <span data-i18n="offers.payNow">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20la%20oferta%20de%20Grand%20Opening%20de%2012%20meses%20por%20%24399." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="go12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp" class="">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
 
             <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full">
-                6 meses — pago total
-              </div>
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full">6 meses — pago total</div>
               <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
                 $224
               </div>
-              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;" class="">
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
                   <span data-i18n="offers.f.noEnroll">Sin matrícula</span>
                 </li>
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.maint">
-                    Mantenimiento anual: $52
-                  </span>
+                  <span data-i18n="offers.f.maint" class="">Mantenimiento anual: $52</span>
                 </li>
               </ul>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="go6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="#" class="btn-primary payment-btn" data-payment-plan="go6" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                  <iconify-icon icon="lucide:credit-card"></iconify-icon>
+                  <span data-i18n="offers.payNow" class="">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20la%20oferta%20de%20Grand%20Opening%20de%206%20meses%20por%20%24224." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="go6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp" class="">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
 
             <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.monthly">
-                Mensual
-              </div>
-              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.monthly" class="">Mensual</div>
+              <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;" class="">
                 $39.95
-                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">
-                  / mes
-                </span>
+                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">/ mes</span>
               </div>
-              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
-                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
-                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.debit">
-                    Débito directo obligatorio
-                  </span>
+              <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;" class="">
+                <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;" class="">
+                  <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;" class=""></iconify-icon>
+                  <span data-i18n="offers.f.debit">Débito directo obligatorio</span>
                 </li>
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.contract">
-                    Contrato de 12 meses
-                  </span>
+                  <span data-i18n="offers.f.contract">Contrato de 12 meses</span>
                 </li>
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
@@ -2160,48 +2056,42 @@ grid-template-columns: 1fr !important;
                 </li>
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.maint">
-                    Mantenimiento anual: $52
-                  </span>
+                  <span data-i18n="offers.f.maint">Mantenimiento anual: $52</span>
                 </li>
               </ul>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="goM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="#" class="btn-primary payment-btn" data-payment-plan="goM" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                  <iconify-icon icon="lucide:credit-card"></iconify-icon>
+                  <span data-i18n="offers.payNow">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20la%20oferta%20mensual%20de%20Grand%20Opening%20por%20%2439.95%20al%20mes." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="goM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
 
           <div class="reveal offers-group" style="padding:24px;border-radius:16px;border:1px solid var(--border-s);background:var(--glass);">
-            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g3.title">
-              DESPUÉS DEL 16 DE AGOSTO
-            </h3>
-            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g3.subtitle">
-              Tarifas regulares
-            </p>
+            <h3 class="text-metallic" style="font-size:1.35rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.g3.title">DESPUÉS DEL 16 DE AGOSTO</h3>
+            <p style="font-size:0.78rem;color:var(--teal);font-weight:500;margin-top:4px;margin-bottom:20px;" data-i18n="offers.g3.subtitle">Tarifas regulares</p>
 
             <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.regMonthly">
-                Mensual regular
-              </div>
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.regMonthly">Mensual regular</div>
               <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
                 $44.95
-                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">
-                  / mes
-                </span>
+                <span style="font-size:0.9rem;font-weight:400;color:var(--muted);" data-i18n="offers.perMonth">/ mes</span>
               </div>
               <ul style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.debit">
-                    Débito directo obligatorio
-                  </span>
+                  <span data-i18n="offers.f.debit">Débito directo obligatorio</span>
                 </li>
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.contract">
-                    Contrato de 12 meses
-                  </span>
+                  <span data-i18n="offers.f.contract">Contrato de 12 meses</span>
                 </li>
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
@@ -2209,108 +2099,113 @@ grid-template-columns: 1fr !important;
                 </li>
                 <li style="display:flex;gap:8px;font-size:0.8rem;color:var(--muted);font-weight:300;">
                   <iconify-icon icon="lucide:check" style="color:var(--teal);flex-shrink:0;margin-top:2px;"></iconify-icon>
-                  <span data-i18n="offers.f.maint">
-                    Mantenimiento anual: $52
-                  </span>
+                  <span data-i18n="offers.f.maint">Mantenimiento anual: $52</span>
                 </li>
               </ul>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="regM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="#" class="btn-primary payment-btn" data-payment-plan="regM" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                  <iconify-icon icon="lucide:credit-card"></iconify-icon>
+                  <span data-i18n="offers.payNow">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20la%20membres%C3%ADa%20mensual%20regular%20de%20%2444.95%20al%20mes." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="regM" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
 
             <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);margin-bottom:16px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full">
-                6 meses — pago total
-              </div>
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.6full">6 meses — pago total</div>
               <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
                 $259
               </div>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="reg6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;margin-top:4px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="#" class="btn-primary payment-btn" data-payment-plan="reg6" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                  <iconify-icon icon="lucide:credit-card"></iconify-icon>
+                  <span data-i18n="offers.payNow">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20el%20plan%20regular%20de%206%20meses%20por%20%24259." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="reg6" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
 
             <div class="plan-card" style="padding:22px 20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;">
-              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.12full">
-                12 meses — pago total
-              </div>
+              <div style="font-size:0.78rem;font-weight:600;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;" data-i18n="offers.p.12full">12 meses — pago total</div>
               <div style="font-size:2.4rem;font-weight:900;letter-spacing:-0.03em;color:var(--text);margin:6px 0 14px;">
                 $469
               </div>
-              <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="reg12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;margin-top:4px;">
-                <iconify-icon icon="lucide:message-circle"></iconify-icon>
-                <span data-i18n="offers.cta">Me interesa</span>
-              </a>
+              <div class="flex flex-col gap-2 w-full mt-auto">
+                <a href="#" class="btn-primary payment-btn" data-payment-plan="reg12" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;">
+                  <iconify-icon icon="lucide:credit-card"></iconify-icon>
+                  <span data-i18n="offers.payNow">Pagar ahora</span>
+                </a>
+                <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20el%20plan%20regular%20de%2012%20meses%20por%20%24469." class="btn-ghost payment-whatsapp-btn offer-wa" data-wa-key="reg12" target="_blank" rel="noopener" style="display:inline-flex;width:100%;justify-content:center;padding:11px 20px;font-size:0.8rem;border-color:var(--border-t);color:var(--teal-light);">
+                  <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+                  <span data-i18n="offers.askWhatsapp">
+                    Preguntar por WhatsApp
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="reveal" style="margin-top:28px;padding:28px 32px;border-radius:16px;border:1px solid var(--border-t);background:linear-gradient(120deg,rgba(45,212,191,0.06),rgba(255,255,255,0.02));box-shadow:0 0 32px rgba(45,212,191,0.1);display:flex;flex-wrap:wrap;align-items:center;gap:24px;text-align:left;justify-content:space-between;">
-          <div style="flex:1;min-width:240px;">
-            <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
-              <h3 class="text-metallic" style="font-size:1.3rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.oneday.title">
-                ONE DAY PASS
-              </h3>
+          <div style="flex:1;min-width:240px;" class="">
+            <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;" class="">
+              <h3 class="text-metallic" style="font-size:1.3rem;font-weight:900;letter-spacing:-0.03em;" data-i18n="offers.oneday.title">ONE DAY PASS</h3>
               <span style="font-size:1.9rem;font-weight:900;color:var(--text);">
                 $12
               </span>
             </div>
-            <p style="font-size:0.84rem;line-height:1.6;color:var(--muted);font-weight:300;margin-top:8px;max-width:560px;" data-i18n="offers.oneday.desc">
-              Acceso completo por un día. Si ese mismo día te inscribes, los $12
-              se acreditan a la matrícula o al primer pago.
-            </p>
+            <p style="font-size:0.84rem;line-height:1.6;color:var(--muted);font-weight:300;margin-top:8px;max-width:560px;" data-i18n="offers.oneday.desc">Acceso completo por un día. Si ese mismo día te inscribes, los $12 se acreditan a la matrícula o al primer pago.</p>
           </div>
-          <a href="https://wa.me/17876476721" class="btn-primary offer-wa" data-wa-key="oneday" target="_blank" rel="noopener" style="display:inline-flex;justify-content:center;padding:13px 26px;flex-shrink:0;">
-            <iconify-icon icon="lucide:ticket"></iconify-icon>
-            <span data-i18n="offers.oneday.cta">Quiero mi One Day Pass</span>
-          </a>
+          <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full sm:w-auto mt-4 sm:mt-0">
+            <a href="#" class="btn-primary payment-btn flex-1 sm:flex-none justify-center" data-payment-plan="oneday" style="padding:13px 26px;">
+              <iconify-icon icon="lucide:credit-card"></iconify-icon>
+              <span data-i18n="offers.payNow">Pagar ahora</span>
+            </a>
+            <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20el%20One%20Day%20Pass%20de%20%2412." class="btn-ghost payment-whatsapp-btn offer-wa flex-1 sm:flex-none justify-center" data-wa-key="oneday" target="_blank" rel="noopener" style="padding:13px 26px;border-color:var(--border-t);color:var(--teal-light);">
+              <iconify-icon icon="lucide:message-circle" style="color:var(--teal);"></iconify-icon>
+              <span data-i18n="offers.askWhatsapp">Preguntar por WhatsApp</span>
+            </a>
+          </div>
         </div>
 
         <div class="reveal" style="margin-top:40px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
           <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);">
             <iconify-icon icon="lucide:dumbbell" style="color:var(--teal);font-size:22px;"></iconify-icon>
-            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat1">
-              Equipos premium
-            </span>
+            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat1">Equipos premium</span>
           </div>
           <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);">
             <iconify-icon icon="lucide:sparkles" style="color:var(--teal);font-size:22px;"></iconify-icon>
-            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat2">
-              Ambiente moderno
-            </span>
+            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat2">Ambiente moderno</span>
           </div>
           <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);">
             <iconify-icon icon="lucide:heart-handshake" style="color:var(--teal);font-size:22px;"></iconify-icon>
-            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat3">
-              Atención real
-            </span>
+            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat3">Atención real</span>
           </div>
           <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:12px;border:1px solid var(--border-s);background:var(--glass);">
             <iconify-icon icon="lucide:trending-up" style="color:var(--teal);font-size:22px;"></iconify-icon>
-            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat4">
-              Resultados reales
-            </span>
+            <span style="font-size:0.82rem;color:var(--text);font-weight:400;" data-i18n="offers.feat4">Resultados reales</span>
           </div>
         </div>
 
-        <p class="reveal text-metallic" style="margin-top:44px;font-size:clamp(1.4rem,3vw,2rem);font-weight:900;letter-spacing:-0.04em;" data-i18n="offers.final">
-          No es solo un gimnasio, es tu ADN en acción.
-        </p>
+        <p class="reveal text-metallic" style="margin-top:44px;font-size:clamp(1.4rem,3vw,2rem);font-weight:900;letter-spacing:-0.04em;" data-i18n="offers.final">No es solo un gimnasio, es tu ADN en acción.</p>
       </div>
     </section>
 
     <!-- ─── LOCATION ─────────────────────────────────────────────────── -->
     <section id="ubicacion" class="">
       <div style="max-width:1100px;margin:0 auto;" class="">
-        <span class="section-label reveal" data-i18n="location.label">
-          Ubicación
-        </span>
-        <h2 class="section-heading reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="location.heading">
-          Visítanos en San Juan
-        </h2>
+        <span class="section-label reveal" data-i18n="location.label">Ubicación</span>
+        <h2 class="section-heading reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="location.heading">Visítanos en San Juan</h2>
       </div>
 
       <div class="location-grid">
@@ -2323,9 +2218,7 @@ grid-template-columns: 1fr !important;
 
           <h3 data-i18n="location.hoursLabel" class="">Horario</h3>
           <div class="hours-row">
-            <span data-i18n="location.hours.weekdays" class="">
-              Lunes a Viernes
-            </span>
+            <span data-i18n="location.hours.weekdays" class="">Lunes a Viernes</span>
             <span class="">5:00 AM – 9:00 PM</span>
           </div>
           <div class="hours-row">
@@ -2340,15 +2233,11 @@ grid-template-columns: 1fr !important;
           <div class="location-buttons">
             <a href="https://www.google.com/maps/search/?api=1&amp;query=1563%20Ave.%20Am%C3%A9rico%20Miranda%2C%20San%20Juan%2C%20PR" target="_blank" rel="noopener" class="btn-location">
               <iconify-icon icon="lucide:map" noobserver=""></iconify-icon>
-              <span data-i18n="location.btnMaps" class="">
-                Abrir en Google Maps
-              </span>
+              <span data-i18n="location.btnMaps" class="">Abrir en Google Maps</span>
             </a>
             <a href="tel:+17877838020" class="btn-location">
               <iconify-icon icon="lucide:phone" noobserver=""></iconify-icon>
-              <span data-i18n="location.btnCall" class="">
-                Llamar al gimnasio
-              </span>
+              <span data-i18n="location.btnCall" class="">Llamar al gimnasio</span>
             </a>
             <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20las%20membres%C3%ADas%2C%20horarios%20y%20servicios%20del%20gimnasio." class="btn-location wa-link" target="_blank" rel="noopener">
               <iconify-icon icon="lucide:message-circle" noobserver="" class=""></iconify-icon>
@@ -2366,30 +2255,20 @@ grid-template-columns: 1fr !important;
     <!-- ─── FAQ ──────────────────────────────────────────────────────── -->
     <section id="faq" class="">
       <div style="max-width:800px;margin:0 auto;" class="">
-        <span class="section-label reveal" data-i18n="faq.label">
-          Preguntas Frecuentes
-        </span>
-        <h2 class="section-heading reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="faq.heading">
-          Resolvemos tus dudas
-        </h2>
+        <span class="section-label reveal" data-i18n="faq.label">Preguntas Frecuentes</span>
+        <h2 class="section-heading reveal text-metallic !font-black !tracking-[-0.05em]" data-i18n="faq.heading">Resolvemos tus dudas</h2>
       </div>
 
       <div class="faq-list">
         <div class="faq-item reveal">
           <div class="faq-question">
-            <span data-i18n="faq.question1" class="">
-              ¿Cuándo abre 3NA Fitness Studio?
-            </span>
+            <span data-i18n="faq.question1" class="">¿Cuándo abre 3NA Fitness Studio?</span>
             <div class="faq-icon">
               <iconify-icon icon="lucide:plus" noobserver=""></iconify-icon>
             </div>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner" data-i18n="faq.answer1">
-              Estamos en la etapa final de preparación del estudio. Escríbenos
-              por WhatsApp y te avisaremos tan pronto tengamos la fecha oficial
-              de apertura, junto con ofertas exclusivas de preapertura.
-            </div>
+            <div class="faq-answer-inner" data-i18n="faq.answer1">Estamos en la etapa final de preparación del estudio. Escríbenos por WhatsApp y te avisaremos tan pronto tengamos la fecha oficial de apertura, junto con ofertas exclusivas de preapertura.</div>
           </div>
         </div>
         <div class="faq-item reveal">
@@ -2400,61 +2279,40 @@ grid-template-columns: 1fr !important;
             </div>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner" data-i18n="faq.answer2">
-              Las membresías incluirán acceso completo a todas las áreas del
-              estudio: fuerza, cardio y movilidad. Pronto anunciaremos los
-              planes disponibles con todos los detalles y precios.
-            </div>
+            <div class="faq-answer-inner" data-i18n="faq.answer2">Las membresías incluirán acceso completo a todas las áreas del estudio: fuerza, cardio y movilidad. Pronto anunciaremos los planes disponibles con todos los detalles y precios.</div>
           </div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-question">
-            <span data-i18n="faq.question3">
-              ¿Necesito experiencia previa para entrenar?
-            </span>
+            <span data-i18n="faq.question3">¿Necesito experiencia previa para entrenar?</span>
             <div class="faq-icon">
               <iconify-icon icon="lucide:plus" noobserver=""></iconify-icon>
             </div>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner" data-i18n="faq.answer3">
-              Para nada. 3NA está diseñado para todos los niveles, desde
-              principiantes hasta atletas avanzados. Nuestro ambiente relajado
-              es perfecto para dar tus primeros pasos con confianza.
-            </div>
+            <div class="faq-answer-inner" data-i18n="faq.answer3">Para nada. 3NA está diseñado para todos los niveles, desde principiantes hasta atletas avanzados. Nuestro ambiente relajado es perfecto para dar tus primeros pasos con confianza.</div>
           </div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-question">
-            <span data-i18n="faq.question4">
-              ¿Hay estacionamiento disponible?
-            </span>
+            <span data-i18n="faq.question4">¿Hay estacionamiento disponible?</span>
             <div class="faq-icon">
               <iconify-icon icon="lucide:plus" noobserver=""></iconify-icon>
             </div>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner" data-i18n="faq.answer4">
-              Sí, contamos con estacionamiento conveniente cerca del estudio
-              para que llegar a entrenar sea fácil y sin complicaciones.
-            </div>
+            <div class="faq-answer-inner" data-i18n="faq.answer4">Sí, contamos con estacionamiento conveniente cerca del estudio para que llegar a entrenar sea fácil y sin complicaciones.</div>
           </div>
         </div>
         <div class="faq-item reveal">
           <div class="faq-question">
-            <span data-i18n="faq.question5">
-              ¿Ofrecerán entrenamiento personal?
-            </span>
+            <span data-i18n="faq.question5">¿Ofrecerán entrenamiento personal?</span>
             <div class="faq-icon">
               <iconify-icon icon="lucide:plus" noobserver=""></iconify-icon>
             </div>
           </div>
           <div class="faq-answer">
-            <div class="faq-answer-inner" data-i18n="faq.answer5">
-              Sí, tendremos opciones de entrenamiento personal con profesionales
-              certificados. Contáctanos por WhatsApp para más información sobre
-              disponibilidad y precios.
-            </div>
+            <div class="faq-answer-inner" data-i18n="faq.answer5">Sí, tendremos opciones de entrenamiento personal con profesionales certificados. Contáctanos por WhatsApp para más información sobre disponibilidad y precios.</div>
           </div>
         </div>
       </div>
@@ -2463,16 +2321,11 @@ grid-template-columns: 1fr !important;
     <!-- ─── FINAL CTA ────────────────────────────────────────────────── -->
     <section id="cta" class="">
       <h2 class="cta-headline reveal hero-headline">
-        <span data-i18n="cta.headingLine1" class="text-metallic">
-          ¿Listo para entrenar
-        </span>
+        <span data-i18n="cta.headingLine1" class="text-metallic">¿Listo para entrenar</span>
         <br>
         <span class="text-neon" data-i18n="cta.headingLine2">tu ADN?</span>
       </h2>
-      <p class="reveal" data-i18n="cta.description">
-        Escríbenos hoy y sé de los primeros en formar parte de la comunidad 3NA.
-        Tu mejor versión te está esperando.
-      </p>
+      <p class="reveal" data-i18n="cta.description">Escríbenos hoy y sé de los primeros en formar parte de la comunidad 3NA. Tu mejor versión te está esperando.</p>
       <a href="https://wa.me/17876476721?text=Hola%203NA%20Fitness%20Studio%2C%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20las%20membres%C3%ADas%2C%20horarios%20y%20servicios%20del%20gimnasio." class="btn-primary wa-link reveal" target="_blank" rel="noopener" style="display:inline-flex;">
         <iconify-icon icon="lucide:message-circle" noobserver=""></iconify-icon>
         <span data-i18n="cta.whatsappBtn">Escríbenos por WhatsApp</span>
@@ -2486,10 +2339,7 @@ grid-template-columns: 1fr !important;
           <a href="#inicio" class="block mb-[18px]">
             <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_1600w.png" alt="3NA Fitness Studio" class="md:w-[240px] md:mx-0 w-[200px] h-auto object-contain mr-auto ml-auto -translate-x-16">
           </a>
-          <p data-i18n="footer.description" class="">
-            Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu
-            ADN en un espacio diseñado para tu progreso.
-          </p>
+          <p data-i18n="footer.description" class="">Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.</p>
           <div class="footer-social">
             <a href="https://www.instagram.com/3nafitnesstudio/" target="_blank" rel="noopener" aria-label="Instagram" class="">
               <iconify-icon icon="lucide:instagram" noobserver="" class=""></iconify-icon>
@@ -2504,9 +2354,7 @@ grid-template-columns: 1fr !important;
               <a href="#inicio" data-i18n="nav.home" class="">Inicio</a>
             </li>
             <li class="">
-              <a href="#experiencia" data-i18n="nav.experience" class="">
-                Experiencia
-              </a>
+              <a href="#experiencia" data-i18n="nav.experience" class="">Experiencia</a>
             </li>
             <li class="">
               <a href="galeria.html" data-i18n="nav.gallery" class="">Galería</a>
@@ -2535,13 +2383,9 @@ grid-template-columns: 1fr !important;
       </div>
 
       <div class="footer-bottom">
-        <span class="footer-copy" id="footer-copy">
-          © 2026 3NA Fitness Studio. Todos los derechos reservados.
-        </span>
+        <span class="footer-copy" id="footer-copy">© 2026 3NA Fitness Studio. Todos los derechos reservados.</span>
         <!-- TODO: Conectar URL de la página legal final aquí -->
-        <a href="#terms" class="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal-light)] transition-colors border border-[var(--border-s)] hover:border-[var(--border-t)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(45,212,191,0.06)] px-3 py-1.5 rounded-md" data-i18n="footer.terms">
-          Términos de servicio
-        </a>
+        <a href="#terms" class="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal-light)] transition-colors border border-[var(--border-s)] hover:border-[var(--border-t)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(45,212,191,0.06)] px-3 py-1.5 rounded-md" data-i18n="footer.terms">Términos de servicio</a>
         <span class="footer-credit">
           <span data-i18n="footer.credit">Página web diseñada por</span>
           <a href="#" target="_blank" rel="noopener">SC Web Studios</a>
@@ -3073,6 +2917,82 @@ grid-template-columns: 1fr !important;
 
     <script>
       (function(){var msgs={es:{pre12:'Hola 3NA Fitness Studio, me interesa la oferta de pre-apertura de 12 meses por $349.',pre6:'Hola 3NA Fitness Studio, me interesa la oferta de pre-apertura de 6 meses por $199.',preM:'Hola 3NA Fitness Studio, me interesa la oferta mensual de pre-apertura por $36.95 al mes.',go12:'Hola 3NA Fitness Studio, me interesa la oferta de Grand Opening de 12 meses por $399.',go6:'Hola 3NA Fitness Studio, me interesa la oferta de Grand Opening de 6 meses por $224.',goM:'Hola 3NA Fitness Studio, me interesa la oferta mensual de Grand Opening por $39.95 al mes.',regM:'Hola 3NA Fitness Studio, me interesa la membresía mensual regular de $44.95 al mes.',reg6:'Hola 3NA Fitness Studio, me interesa el plan regular de 6 meses por $259.',reg12:'Hola 3NA Fitness Studio, me interesa el plan regular de 12 meses por $469.',oneday:'Hola 3NA Fitness Studio, me interesa el One Day Pass de $12.'},en:{pre12:'Hello 3NA Fitness Studio, I am interested in the 12-month pre-opening offer for $349.',pre6:'Hello 3NA Fitness Studio, I am interested in the 6-month pre-opening offer for $199.',preM:'Hello 3NA Fitness Studio, I am interested in the monthly pre-opening offer for $36.95 per month.',go12:'Hello 3NA Fitness Studio, I am interested in the 12-month Grand Opening offer for $399.',go6:'Hello 3NA Fitness Studio, I am interested in the 6-month Grand Opening offer for $224.',goM:'Hello 3NA Fitness Studio, I am interested in the monthly Grand Opening offer for $39.95 per month.',regM:'Hello 3NA Fitness Studio, I am interested in the regular monthly membership for $44.95 per month.',reg6:'Hello 3NA Fitness Studio, I am interested in the regular 6-month plan for $259.',reg12:'Hello 3NA Fitness Studio, I am interested in the regular 12-month plan for $469.',oneday:'Hello 3NA Fitness Studio, I am interested in the $12 One Day Pass.'}};var offerT={es:{'offers.limited':'Tiempo limitado','offers.label':'Membresías','offers.heading':'Ofertas de apertura','offers.description':'Aprovecha nuestros precios especiales de pre-apertura y Grand Opening antes de que entren en vigor las tarifas regulares.','offers.date1':'Pre-apertura válida hasta el 14 de agosto','offers.date2':'Grand Opening: 15 y 16 de agosto','offers.limitedBadge':'Tiempo limitado','offers.bestValue':'Mejor valor','offers.g1.title':'PRE-APERTURA','offers.g1.subtitle':'Válido hasta el 14 de agosto','offers.g2.title':'GRAND OPENING','offers.g2.subtitle':'Solo 15 y 16 de agosto','offers.g3.title':'DESPUÉS DEL 16 DE AGOSTO','offers.g3.subtitle':'Tarifas regulares','offers.p.12full':'12 meses — pago total','offers.p.6full':'6 meses — pago total','offers.p.monthly':'Mensual','offers.p.regMonthly':'Mensual regular','offers.perMonth':'/ mes','offers.f.12months':'12 meses de membresía','offers.f.noEnroll':'Sin matrícula','offers.f.firstOpen':'Primer pago el día de apertura','offers.f.maint':'Mantenimiento anual: $52','offers.f.debit':'Débito directo obligatorio','offers.f.contract':'Contrato de 12 meses','offers.f.enroll':'Matrícula: $49','offers.cta':'Me interesa','offers.oneday.title':'ONE DAY PASS','offers.oneday.desc':'Acceso completo por un día. Si ese mismo día te inscribes, los $12 se acreditan a la matrícula o al primer pago.','offers.oneday.cta':'Quiero mi One Day Pass','offers.feat1':'Equipos premium','offers.feat2':'Ambiente moderno','offers.feat3':'Atención real','offers.feat4':'Resultados reales','offers.final':'No es solo un gimnasio, es tu ADN en acción.'},en:{'offers.limited':'Limited time','offers.label':'Memberships','offers.heading':'Opening Offers','offers.description':'Take advantage of our special pre-opening and Grand Opening pricing before regular membership rates begin.','offers.date1':'Pre-opening valid through August 14','offers.date2':'Grand Opening: August 15 and 16','offers.limitedBadge':'Limited time','offers.bestValue':'Best value','offers.g1.title':'PRE-OPENING','offers.g1.subtitle':'Valid through August 14','offers.g2.title':'GRAND OPENING','offers.g2.subtitle':'August 15 and 16 only','offers.g3.title':'AFTER AUGUST 16','offers.g3.subtitle':'Regular rates','offers.p.12full':'12 months — full payment','offers.p.6full':'6 months — full payment','offers.p.monthly':'Monthly','offers.p.regMonthly':'Regular monthly','offers.perMonth':'/ month','offers.f.12months':'12 months of membership','offers.f.noEnroll':'No enrollment fee','offers.f.firstOpen':'First payment due on opening day','offers.f.maint':'Annual maintenance: $52','offers.f.debit':'Direct debit required','offers.f.contract':'12-month contract','offers.f.enroll':'Enrollment fee: $49','offers.cta':"I'm interested",'offers.oneday.title':'ONE DAY PASS','offers.oneday.desc':'Full access for one day. If you sign up that same day, the $12 will be credited toward the enrollment fee or first payment.','offers.oneday.cta':'I want a One Day Pass','offers.feat1':'Premium equipment','offers.feat2':'Modern environment','offers.feat3':'Real support','offers.feat4':'Real results','offers.final':"It's not just a gym — it's your DNA in action."}};if(window.translations){Object.assign(window.translations.es,offerT.es);Object.assign(window.translations.en,offerT.en);}function applyOffers(lang){var t=offerT[lang]||offerT.es;document.querySelectorAll('#membresias [data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(t[k]!==undefined)el.textContent=t[k];});var m=msgs[lang]||msgs.es;document.querySelectorAll('.offer-wa').forEach(function(a){var k=a.getAttribute('data-wa-key');if(m[k])a.setAttribute('href','https://wa.me/17876476721?text='+encodeURIComponent(m[k]));});}var initLang='es';try{var s=localStorage.getItem('3na-language');if(s==='en')initLang='en';}catch(e){}applyOffers(document.documentElement.lang||initLang);document.querySelectorAll('.lang-btn').forEach(function(btn){btn.addEventListener('click',function(){applyOffers(btn.getAttribute('data-lang'));});});})();
+    </script>
+
+    <script>
+      const stripePaymentLinks = {
+        pre12: '',
+        pre6: '',
+        preM: '',
+        go12: '',
+        go6: '',
+        goM: '',
+        regM: '',
+        reg6: '',
+        reg12: '',
+        oneday: ''
+      };
+
+      function showPaymentToast() {
+        const lang = document.documentElement.lang || 'es';
+        let msg = 'Pago en línea próximamente';
+        if (window.translations && window.translations[lang] && window.translations[lang]['offers.paymentSoon']) {
+          msg = window.translations[lang]['offers.paymentSoon'];
+        }
+
+        let toast = document.getElementById('payment-toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'payment-toast';
+          toast.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(50px);background:rgba(7,9,10,0.95);backdrop-filter:blur(10px);border:1px solid var(--border-t);color:var(--text);padding:12px 24px;border-radius:999px;font-size:0.85rem;font-weight:500;z-index:99999;opacity:0;transition:all 0.4s cubic-bezier(0.22, 1, 0.36, 1);box-shadow:0 8px 32px rgba(45,212,191,0.25);display:flex;align-items:center;gap:10px;pointer-events:none;white-space:nowrap;';
+          toast.innerHTML = '<iconify-icon icon="lucide:info" style="color:var(--teal);font-size:18px;"></iconify-icon> <span></span>';
+          document.body.appendChild(toast);
+        }
+        toast.querySelector('span').textContent = msg;
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+        toast.style.opacity = '1';
+
+        if (window.paymentToastTimeout) clearTimeout(window.paymentToastTimeout);
+        window.paymentToastTimeout = setTimeout(() => {
+          toast.style.transform = 'translateX(-50%) translateY(50px)';
+          toast.style.opacity = '0';
+        }, 3000);
+      }
+
+      document.addEventListener('click', e => {
+        const btn = e.target.closest('.payment-btn');
+        if(btn) {
+          e.preventDefault();
+          const plan = btn.getAttribute('data-payment-plan');
+          const link = stripePaymentLinks[plan];
+          if(link) {
+            window.location.href = link;
+          } else {
+            showPaymentToast();
+          }
+        }
+      });
+
+      if(window.translations) {
+        if(window.translations.es) {
+          window.translations.es['offers.payNow'] = 'Pagar ahora';
+          window.translations.es['offers.askWhatsapp'] = 'Preguntar por WhatsApp';
+          window.translations.es['offers.paymentSoon'] = 'Pago en línea próximamente';
+        }
+        if(window.translations.en) {
+          window.translations.en['offers.payNow'] = 'Pay Now';
+          window.translations.en['offers.askWhatsapp'] = 'Ask on WhatsApp';
+          window.translations.en['offers.paymentSoon'] = 'Online payment coming soon';
+        }
+
+        const currentLang = document.documentElement.lang || 'es';
+        document.querySelectorAll('.payment-btn span').forEach(el => {
+          el.textContent = window.translations[currentLang]['offers.payNow'];
+        });
+        document.querySelectorAll('.payment-whatsapp-btn span').forEach(el => {
+          el.textContent = window.translations[currentLang]['offers.askWhatsapp'];
+        });
+      }
     </script>
   
 </body></html>
