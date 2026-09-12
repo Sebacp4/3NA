@@ -2303,10 +2303,12 @@ padding: 11px 20px !important;
 
           <h3 data-i18n="location.hoursLabel" class="">Horario</h3>
           <div class="hours-row">
-            <span data-i18n="location.hours.weekdays" class="">
-              Lunes a Viernes
-            </span>
-            <span class="">5:00 AM – 9:00 PM</span>
+            <span data-hours-label="monThu">Lunes a Jueves</span>
+            <span>5:00 AM – 9:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span data-hours-label="friday">Viernes</span>
+            <span>5:00 AM – 8:00 PM</span>
           </div>
           <div class="hours-row">
             <span data-i18n="location.hours.saturday" class="">Sábado</span>
@@ -3132,6 +3134,10 @@ padding: 11px 20px !important;
           el.textContent = window.translations[currentLang]['offers.askWhatsapp'];
         });
       }
+    </script>
+
+    <script>
+      (function(){var L={es:{monThu:'Lunes a Jueves',friday:'Viernes'},en:{monThu:'Monday to Thursday',friday:'Friday'}};function a(l){var t=L[l]||L.es;document.querySelectorAll('[data-hours-label]').forEach(function(el){var k=el.getAttribute('data-hours-label');if(t[k])el.textContent=t[k];});}var i='es';try{if(localStorage.getItem('3na-language')==='en')i='en';}catch(e){}a(document.documentElement.lang||i);document.querySelectorAll('.lang-btn').forEach(function(b){b.addEventListener('click',function(){a(b.getAttribute('data-lang'));});});})();
     </script>
   
 </body></html>

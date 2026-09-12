@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="es"><head><script id="aura-preview-performance-controller">
+(function() {
+if (window.__auraPreviewPerformanceController) return;
+const nativeRequestAnimationFrame = window.requestAnimationFrame
+? window.requestAnimationFrame.bind(window)
+: function(callback) { return window.setTimeout(function() { callback(Date.now()); }, 16); };
+const nativeCancelAnimationFrame = window.cancelAnimationFrame
+? window.cancelAnimationFrame.bind(window)
+: window.clearTimeout.bind(window);
+const nativeSetInterval = window.setInterval.bind(window);
+let paused = false;
+let nextFrameId = 1;
+const frameRecords = new Map();
+const pausedFrameCallbacks = new Map();
+const style = document.createElement('style');
+style.id = 'aura-preview-performance-style';
+style.textContent = [
+'html[data-aura-preview-paused="true"] *,',
+'html[data-aura-preview-paused="true"] *::before,',
+'html[data-aura-preview-paused="true"] *::after {',
+'  animation-play-state: paused !important;',
+'  transition-duration: 0s !important;',
+'  scroll-behavior: auto !important;',
+'}'
+].join('\n');
+document.head.appendChild(style);
+window.requestAnimationFrame = function(callback) {
+const frameId = nextFrameId++;
+if (paused) {
+pausedFrameCallbacks.set(frameId, callback);
+frameRecords.set(frameId, { paused: true });
+return frameId;
+}
+const nativeFrameId = nativeRequestAnimationFrame(function(timestamp) {
+frameRecords.delete(frameId);
+callback(timestamp);
+});
+frameRecords.set(frameId, { nativeFrameId: nativeFrameId });
+return frameId;
+};
+window.cancelAnimationFrame = function(frameId) {
+const record = frameRecords.get(frameId);
+pausedFrameCallbacks.delete(frameId);
+if (record && typeof record.nativeFrameId !== 'undefined') {
+nativeCancelAnimationFrame(record.nativeFrameId);
+}
+frameRecords.delete(frameId);
+};
+window.setInterval = function(callback, delay) {
+const args = Array.prototype.slice.call(arguments, 2);
+return nativeSetInterval(function() {
+if (paused) return;
+callback.apply(this, args);
+}, delay);
+};
+const flushPausedFrames = function() {
+const callbacks = Array.from(pausedFrameCallbacks.entries());
+pausedFrameCallbacks.clear();
+callbacks.forEach(function(entry) {
+const frameId = entry[0];
+const callback = entry[1];
+const nativeFrameId = nativeRequestAnimationFrame(function(timestamp) {
+frameRecords.delete(frameId);
+callback(timestamp);
+});
+frameRecords.set(frameId, { nativeFrameId: nativeFrameId });
+});
+};
+const setPaused = function(nextPaused) {
+const shouldPause = Boolean(nextPaused);
+if (paused === shouldPause) return;
+paused = shouldPause;
+document.documentElement.toggleAttribute('data-aura-preview-paused', paused);
+if (!paused) {
+flushPausedFrames();
+}
+};
+window.__auraPreviewPerformanceController = {
+setPaused: setPaused,
+get paused() {
+return paused;
+}
+};
+window.addEventListener('message', function(event) {
+if (event.source !== window.parent) return;
+if (!event.data || event.data.type !== 'aura-preview-performance-mode') return;
+setPaused(event.data.paused);
+});
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#07090A">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="icon" href="/favicon.ico?v=1" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=1">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=1">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1">
+<link rel="manifest" href="/site.webmanifest?v=1">
+<meta name="apple-mobile-web-app-title" content="3NA Fitness Studio">
+<title>Galería | 3NA Fitness Studio</title>
+<meta name="description" content="Explora la galería de 3NA Fitness Studio en San Juan y conoce nuestras instalaciones, equipos premium, entrenamientos y comunidad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--bg-0: #07090A;
+--bg-1: #0B0E10;
+--bg-2: #101416;
+--teal: #2DD4BF;
+--teal-light: #5EEAD4;
+--teal-deep: #14B8A6;
+--text: #f0f2f2;
+--muted: #8a9496;
+--glass: rgba(255,255,255,0.03);
+--border-t: rgba(45,212,191,0.15);
+--border-s: rgba(255,255,255,0.06);
+}
+html { scroll-behavior: smooth; }
+body {
+font-family: 'Inter', system-ui, -apple-system, sans-serif;
+background: var(--bg-0);
+color: var(--text);
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+/* Page transition */
+opacity: 0;
+transition: opacity 400ms ease;
+}
+body.page-ready {
+opacity: 1;
+}
+body.page-exit {
+opacity: 0;
+}
+/* Blur layer used during page transitions */
+html::after {
+content: '';
+position: fixed;
+inset: 0;
+z-index: 99999;
+pointer-events: none;
+background: rgba(7, 9, 10, 0.01);
+backdrop-filter: blur(14px);
+-webkit-backdrop-filter: blur(14px);
+opacity: 1;
+transition: opacity 400ms ease;
+}
+html.page-ready::after {
+opacity: 0;
+}
+html.page-exit::after {
+opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+body,
+html::after {
+transition-duration: 0.01ms !important;
+}
+html::after {
+backdrop-filter: none;
+-webkit-backdrop-filter: none;
+}
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
+.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+/* ─── Grain overlay ────────────────────────────────────────── */
+body::before {
+content: '';
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 9998;
+opacity: 0.035;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size: 180px 180px;
+}
+/* ─── Typography & Effects ─────────────────────────────────── */
+.section-label {
+font-size: 0.72rem;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--teal);
+font-weight: 500;
+}
+.text-metallic {
+background-image:
+radial-gradient(circle at 40px 25%, rgba(0,0,0,0.8) 1.5px, rgba(255,255,255,0.5) 3px, transparent 4px),
+radial-gradient(circle at 40px 75%, rgba(0,0,0,0.8) 1.5px, rgba(255,255,255,0.5) 3px, transparent 4px),
+repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 1px, transparent 1px, transparent 5px),
+repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 2px, transparent 2px, transparent 8px),
+linear-gradient(180deg, #f0f2f5 0%, #a8b0b8 40%, #596168 50%, #9ba3a9 100%) !important;
+background-size: 80px 100%, 80px 100%, 100% 100%, 100% 100%, 100% 100% !important;
+background-position: 0 0, 0 0, 0 0, 0 0, 0 0 !important;
+-webkit-background-clip: text !important;
+-webkit-text-fill-color: transparent !important;
+background-clip: text !important;
+color: transparent !important;
+filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.8)) !important;
+}
+.text-neon {
+color: #ffffff !important;
+background: none !important;
+-webkit-text-fill-color: #ffffff !important;
+text-shadow:
+0 0 5px #ffffff,
+0 0 10px #ffffff,
+0 0 20px var(--teal),
+0 0 40px var(--teal),
+0 0 60px var(--teal-deep),
+0 0 80px var(--teal-deep) !important;
+filter: drop-shadow(0px 0px 10px rgba(45,212,191,0.6)) !important;
+}
+/* ─── NAV ──────────────────────────────────────────────────── */
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 1000;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 10px 48px;
+background: rgba(7,9,10,0.72);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border-bottom: 1px solid var(--border-s);
+transition: background 0.3s;
+}
+.nav-logo { display: inline-flex; align-items: baseline; gap: 8px; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a {
+font-size: 0.82rem;
+font-weight: 400;
+color: var(--muted);
+letter-spacing: -0.01em;
+transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active {
+color: var(--text);
+position: relative;
+}
+.nav-links a.active::after {
+content: '';
+position: absolute;
+bottom: -6px;
+left: 0;
+width: 100%;
+height: 1.5px;
+background: var(--teal);
+box-shadow: 0 0 8px rgba(45,212,191,0.5);
+}
+.nav-cta { display: flex; align-items: center; gap: 16px; }
+.btn-nav {
+font-size: 0.8rem;
+font-weight: 500;
+padding: 8px 20px;
+border-radius: 999px;
+background: rgba(45,212,191,0.06);
+border: 1px solid var(--border-t);
+color: var(--teal-light);
+cursor: pointer;
+transition: background 0.2s, box-shadow 0.2s;
+box-shadow: 0 0 12px rgba(45,212,191,0.1);
+}
+.btn-nav:hover { background: rgba(45,212,191,0.12); box-shadow: 0 0 16px rgba(45,212,191,0.25); }
+.lang-toggle {
+display: flex; align-items: center; gap: 2px;
+padding: 3px; border-radius: 999px; border: 1px solid var(--border-s);
+background: rgba(255,255,255,0.03);
+}
+.lang-btn {
+font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em;
+padding: 5px 12px; border-radius: 999px; border: none;
+background: transparent; color: var(--muted); cursor: pointer;
+transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.lang-btn:hover { color: var(--text); }
+.lang-btn.active {
+background: rgba(45,212,191,0.12); color: var(--teal-light);
+box-shadow: 0 0 12px rgba(45,212,191,0.2), inset 0 0 0 1px rgba(45,212,191,0.3);
+}
+.hamburger {
+display: none; flex-direction: column; gap: 5px; cursor: pointer;
+padding: 4px; background: none; border: none;
+}
+.hamburger span {
+display: block; width: 22px; height: 1.5px; background: var(--text);
+transition: transform 0.3s, opacity 0.3s; transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu {
+display: none; position: fixed; top: 53px; left: 0; right: 0;
+background: rgba(7,9,10,0.97); backdrop-filter: blur(20px);
+border-bottom: 1px solid var(--border-s); padding: 24px 24px 32px;
+z-index: 999; flex-direction: column; gap: 4px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+font-size: 1rem; color: var(--muted); letter-spacing: -0.02em;
+padding: 12px 0; border-bottom: 1px solid var(--border-s); transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--text); }
+.mobile-menu a.active { color: var(--teal-light); }
+/* ─── Buttons ──────────────────────────────────────────────── */
+.btn-primary {
+display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+padding: 14px 28px; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em;
+cursor: pointer; border: none; border-radius: 4px;
+color: #04201c; background: linear-gradient(135deg, var(--teal-deep), var(--teal));
+box-shadow: 0 4px 20px rgba(45,212,191,0.3), 0 0 0 1px rgba(94,234,212,0.2);
+transition: box-shadow 0.3s, transform 0.3s;
+}
+.btn-primary:hover { box-shadow: 0 8px 32px rgba(45,212,191,0.45); transform: translateY(-1px); }
+.btn-ghost {
+display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+padding: 14px 24px; font-size: 0.85rem; font-weight: 400; border-radius: 4px;
+color: var(--muted); background: rgba(255,255,255,0.03); border: 1px solid var(--border-s);
+cursor: pointer; transition: color 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
+backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+color: var(--text); border-color: rgba(45,212,191,0.2); background: rgba(45,212,191,0.04);
+box-shadow: 0 4px 24px rgba(45,212,191,0.1);
+}
+.btn-ghost iconify-icon { color: var(--teal); }
+/* ─── Gallery Hero ─────────────────────────────────────────── */
+.hero-gallery {
+position: relative;
+padding: 160px 48px 80px;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+overflow: hidden;
+border-bottom: 1px solid var(--border-s);
+}
+.hero-mesh {
+position: absolute; inset: 0; z-index: 0;
+background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(45,212,191,0.06) 0%, transparent 60%);
+}
+.hero-grid-lines {
+position: absolute; inset: 0; z-index: 0;
+background-image: linear-gradient(rgba(45,212,191,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(45,212,191,0.03) 1px, transparent 1px);
+background-size: 60px 60px;
+mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 60%, transparent 100%);
+}
+.hero-gallery-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-headline {
+font-size: clamp(2.5rem, 6vw, 4.5rem);
+font-weight: 900;
+letter-spacing: -0.04em;
+line-height: 0.95;
+text-transform: uppercase;
+margin: 20px 0;
+}
+/* ─── Gallery Filters ──────────────────────────────────────── */
+.filter-bar {
+position: relative; z-index: 10;
+display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+padding: 0 24px; margin-top: -24px; margin-bottom: 48px;
+}
+.filter-btn {
+font-size: 0.8rem; font-weight: 400; color: var(--muted);
+padding: 10px 20px; border-radius: 999px;
+background: rgba(7,9,10,0.8); backdrop-filter: blur(12px);
+border: 1px solid var(--border-s); cursor: pointer;
+transition: all 0.3s ease;
+}
+.filter-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); }
+.filter-btn.active {
+color: var(--teal-light); border-color: var(--border-t);
+background: rgba(45,212,191,0.08); box-shadow: 0 0 16px rgba(45,212,191,0.15);
+}
+/* ─── Masonry Grid ─────────────────────────────────────────── */
+.gallery-container {
+padding: 0 48px 100px;
+max-width: 1400px; margin: 0 auto;
+}
+.featured-row {
+margin-bottom: 24px;
+position: relative;
+border-radius: 12px;
+overflow: hidden;
+border: 1px solid var(--border-s);
+height: 500px;
+}
+.featured-badge {
+position: absolute; top: 20px; left: 20px; z-index: 2;
+background: rgba(7,9,10,0.8); backdrop-filter: blur(8px);
+border: 1px solid var(--border-t); color: var(--teal);
+font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em;
+padding: 6px 12px; border-radius: 999px; text-transform: uppercase;
+}
+.masonry-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-auto-rows: 240px;
+gap: 16px;
+}
+.grid-item {
+position: relative; border-radius: 10px; overflow: hidden;
+background: var(--bg-1); border: 1px solid var(--border-s);
+cursor: pointer; transition: border-color 0.4s, opacity 0.4s, transform 0.4s;
+}
+/* Grid Spans for Editorial Layout */
+.col-span-2 { grid-column: span 2; }
+.row-span-2 { grid-row: span 2; }
+.grid-item img, .featured-row img {
+width: 100%; height: 100%; object-fit: cover;
+filter: saturate(0.85) contrast(1.1); transition: transform 0.7s ease, filter 0.5s ease;
+}
+.grid-item::after, .featured-row::after {
+content: ''; position: absolute; inset: 0;
+background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%);
+opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+}
+.grid-item:hover { border-color: rgba(45,212,191,0.3); }
+.grid-item:hover img { transform: scale(1.05); filter: saturate(1.1) contrast(1.05); }
+.grid-item:hover::after { opacity: 1; }
+.item-overlay {
+position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; z-index: 2;
+display: flex; justify-content: space-between; align-items: flex-end;
+opacity: 0; transform: translateY(10px); transition: all 0.4s ease; pointer-events: none;
+}
+.grid-item:hover .item-overlay { opacity: 1; transform: translateY(0); }
+.item-label {
+font-size: 0.75rem; color: var(--text); font-weight: 500;
+}
+.item-icon {
+width: 32px; height: 32px; border-radius: 50%;
+background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);
+display: flex; align-items: center; justify-content: center;
+color: var(--teal-light); border: 1px solid rgba(255,255,255,0.2);
+}
+/* Video specific */
+.video-indicator {
+position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+width: 54px; height: 54px; border-radius: 50%;
+background: rgba(45,212,191,0.2); backdrop-filter: blur(8px);
+border: 1px solid rgba(45,212,191,0.5); display: flex; align-items: center; justify-content: center;
+color: var(--text); font-size: 24px; z-index: 2; transition: transform 0.3s;
+}
+.grid-item:hover .video-indicator { transform: translate(-50%, -50%) scale(1.1); }
+/* Item filtering/loading */
+.grid-item.hidden-item { display: none; }
+.grid-item.fade-in { animation: fadeIn 0.5s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.load-more-container { text-align: center; margin-top: 48px; }
+/* ─── Lightbox ─────────────────────────────────────────────── */
+#lightbox {
+position: fixed; inset: 0; z-index: 9999;
+background: rgba(0,0,0,0.9); backdrop-filter: blur(16px);
+display: flex; align-items: center; justify-content: center;
+opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+#lightbox.active { opacity: 1; pointer-events: auto; }
+.lb-content {
+position: relative; width: 90%; max-width: 1200px; max-height: 90vh;
+display: flex; align-items: center; justify-content: center;
+}
+.lb-content img, .lb-content video {
+max-width: 100%; max-height: 90vh; object-fit: contain;
+border-radius: 8px; box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+}
+.lb-close {
+position: absolute; top: -40px; right: 0; background: none; border: none;
+color: var(--muted); font-size: 28px; cursor: pointer; transition: color 0.2s;
+padding: 8px; z-index: 10001;
+}
+.lb-close:hover { color: var(--text); }
+.lb-nav {
+position: absolute; top: 50%; transform: translateY(-50%);
+width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.1); color: var(--text); font-size: 24px;
+display: flex; align-items: center; justify-content: center; cursor: pointer;
+transition: background 0.2s, transform 0.2s; backdrop-filter: blur(4px);
+}
+.lb-nav:hover { background: rgba(255,255,255,0.15); transform: translateY(-50%) scale(1.05); }
+.lb-prev { left: -64px; }
+.lb-next { right: -64px; }
+.lb-info {
+position: absolute; bottom: -40px; left: 0; width: 100%;
+display: flex; justify-content: space-between; align-items: center;
+color: var(--muted); font-size: 0.85rem;
+}
+/* ─── Final CTA ────────────────────────────────────────────── */
+#cta {
+padding: 120px 48px;
+background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(45,212,191,0.07) 0%, transparent 70%), var(--bg-1);
+position: relative; text-align: center; border-top: 1px solid var(--border-s);
+}
+#cta h2 { margin: 20px 0; }
+#cta p { font-size: 0.88rem; color: var(--muted); font-weight: 300; max-width: 460px; margin: 0 auto 36px; line-height: 1.7; }
+/* ─── Footer ───────────────────────────────────────────────── */
+footer {
+background: var(--bg-0); border-top: 1px solid var(--border-s);
+padding: 64px 48px 36px; position: relative;
+}
+footer::before {
+content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+background: linear-gradient(90deg, transparent, rgba(45,212,191,0.25), transparent);
+}
+.footer-grid {
+display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px;
+margin-bottom: 56px; max-width: 1200px; margin-left: auto; margin-right: auto;
+}
+.footer-brand p { font-size: 0.78rem; line-height: 1.65; color: var(--muted); font-weight: 300; max-width: 240px; }
+.footer-social { display: flex; gap: 10px; margin-top: 20px; }
+.footer-social a {
+width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+border: 1px solid var(--border-s); border-radius: 8px; color: var(--muted);
+transition: color 0.2s, border-color 0.2s, background 0.2s; font-size: 14px; background: rgba(255,255,255,0.02);
+}
+.footer-social a:hover { color: var(--teal-light); border-color: var(--border-t); background: rgba(45,212,191,0.06); }
+.footer-col h4 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); margin-bottom: 16px; }
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a, .footer-col ul li span { font-size: 0.8rem; color: var(--muted); font-weight: 300; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--text); }
+.footer-bottom {
+display: flex; align-items: center; justify-content: space-between;
+padding-top: 28px; border-top: 1px solid var(--border-s); max-width: 1200px; margin: 0 auto; gap: 12px; flex-wrap: wrap;
+}
+.footer-copy, .footer-credit { font-size: 0.75rem; color: var(--muted); font-weight: 300; }
+.footer-credit a { color: var(--teal); }
+/* ─── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+.masonry-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 991px) {
+nav { padding: 10px 24px; }
+.nav-links, .nav-cta { display: none; }
+.hamburger { display: flex; }
+.hero-gallery { padding: 130px 24px 60px; }
+.gallery-container { padding: 0 24px 80px; }
+.masonry-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
+.featured-row { height: 400px; }
+.filter-bar { overflow-x: auto; flex-wrap: nowrap; padding: 0 24px 10px; justify-content: flex-start; scrollbar-width: none; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-btn { white-space: nowrap; flex-shrink: 0; }
+.lb-prev { left: 10px; } .lb-next { right: 10px; }
+.lb-close { right: 10px; top: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding: 0; }
+.footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+.footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+}
+@media (max-width: 575px) {
+.hero-headline { font-size: clamp(2rem, 8vw, 3rem); }
+.footer-grid { grid-template-columns: 1fr; gap: 28px; }
+footer { padding: 40px 20px 24px; }
+#cta { padding: 80px 24px; }
+/* Mobile Gallery Changes */
+.gallery-container {
+padding: 0 14px 70px;
+width: 100%;
+max-width: none;
+}
+.featured-row {
+width: 100%;
+height: auto;
+aspect-ratio: 4 / 3;
+margin-bottom: 10px;
+border-radius: 14px;
+}
+.featured-row img {
+width: 100%;
+height: 100%;
+display: block;
+object-fit: cover;
+object-position: center;
+}
+.masonry-grid {
+display: block;
+column-count: 2;
+column-gap: 10px;
+grid-template-columns: none;
+grid-auto-rows: unset;
+}
+.grid-item {
+display: inline-block;
+width: 100%;
+height: auto;
+min-height: 0;
+margin: 0 0 10px;
+break-inside: avoid;
+-webkit-column-break-inside: avoid;
+page-break-inside: avoid;
+grid-column: auto !important;
+grid-row: auto !important;
+border-radius: 14px;
+vertical-align: top;
+}
+.grid-item.row-span-2 img {
+width: 100%;
+height: auto;
+aspect-ratio: 3 / 4;
+object-fit: cover;
+}
+.grid-item.col-span-2 img {
+width: 100%;
+height: auto;
+aspect-ratio: 4 / 3;
+object-fit: cover;
+}
+.grid-item:not(.row-span-2):not(.col-span-2) img {
+width: 100%;
+height: auto;
+aspect-ratio: 4 / 5;
+object-fit: cover;
+}
+.grid-item img {
+display: block;
+object-position: center;
+}
+.item-overlay {
+display: none;
+}
+.video-indicator {
+width: 42px;
+height: 42px;
+font-size: 19px;
+}
+.lb-close,
+.lb-prev,
+.lb-next {
+z-index: 10002;
+}
+}
+</style>
+<style id="mobile-menu-animation">
+:root {
+--mobile-nav-height: 74px;
+}
+@media (max-width: 991px) {
+#mobile-menu {
+display: flex !important;
+position: fixed !important;
+top: var(--mobile-nav-height) !important;
+right: 0 !important;
+bottom: 0 !important;
+left: 0 !important;
+width: 100% !important;
+height: calc(100dvh - var(--mobile-nav-height)) !important;
+max-height: none !important;
+z-index: 999;
+flex-direction: column;
+gap: 4px;
+padding: 12px 24px 32px !important;
+background: rgba(7, 9, 10, 0.98);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-left: 1px solid var(--border-s);
+border-bottom: none;
+opacity: 0;
+visibility: hidden;
+pointer-events: none;
+transform: translateX(100%);
+transform-origin: right center;
+transition:
+transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+opacity 0.25s ease,
+visibility 0s linear 0.42s;
+overflow-y: auto;
+overflow-x: hidden;
+overscroll-behavior: contain;
+-webkit-overflow-scrolling: touch;
+will-change: transform, opacity;
+}
+#mobile-menu.open {
+opacity: 1;
+visibility: visible;
+pointer-events: auto;
+transform: translateX(0);
+transition:
+transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+opacity 0.25s ease,
+visibility 0s linear 0s;
+}
+#mobile-menu > .mobile-link {
+display: block;
+width: 100%;
+margin: 0;
+padding: 14px 0;
+font-size: 1rem;
+line-height: 1.4;
+color: var(--muted);
+letter-spacing: -0.02em;
+border-bottom: 1px solid var(--border-s);
+transition: color 0.2s;
+}
+#mobile-menu > .mobile-link:first-child {
+display: block !important;
+visibility: visible !important;
+opacity: 1 !important;
+margin: 0 !important;
+padding-top: 14px !important;
+}
+#mobile-menu > .mobile-link:hover,
+#mobile-menu > .mobile-link.active,
+#mobile-menu > .mobile-link.nav-active {
+color: var(--text);
+}
+#mobile-menu .mobile-lang-row {
+display: flex;
+justify-content: flex-start;
+padding-top: 20px;
+}
+body.mobile-menu-open {
+overflow: hidden;
+touch-action: none;
+}
+}
+@media (min-width: 992px) {
+#mobile-menu {
+display: none !important;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+#mobile-menu,
+#mobile-menu.open {
+transition-duration: 0.01ms !important;
+}
+}
+</style>
+<style id="ios-fixed-top-cover-fix">
+#ios-top-cover {
+display: none;
+}
+@media (max-width: 991px) {
+:root {
+--mobile-nav-height: 140px;
+}
+html,
+body {
+width: 100%;
+min-height: 100%;
+margin: 0 !important;
+padding: 0 !important;
+background: #07090A !important;
+background-color: #07090A !important;
+}
+html {
+overscroll-behavior-y: none;
+}
+#ios-top-cover {
+display: block !important;
+position: fixed !important;
+top: 0 !important;
+left: 0 !important;
+right: 0 !important;
+width: 100% !important;
+height: var(--mobile-nav-height, 140px) !important;
+margin: 0 !important;
+padding: 0 !important;
+background: #07090A !important;
+background-color: #07090A !important;
+z-index: 9999 !important;
+pointer-events: none !important;
+transform: translateZ(0);
+-webkit-transform: translateZ(0);
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
+}
+#main-nav {
+position: fixed !important;
+top: 0 !important;
+left: 0 !important;
+right: 0 !important;
+width: 100% !important;
+min-height: calc(
+74px + env(safe-area-inset-top)
+) !important;
+margin: 0 !important;
+padding-top: calc(
+12px + env(safe-area-inset-top)
+) !important;
+padding-right: 24px !important;
+padding-bottom: 12px !important;
+padding-left: 24px !important;
+background: #07090A !important;
+background-color: #07090A !important;
+backdrop-filter: none !important;
+-webkit-backdrop-filter: none !important;
+border-bottom: 1px solid var(--border-s) !important;
+box-sizing: border-box !important;
+z-index: 10001 !important;
+isolation: isolate;
+}
+#mobile-menu {
+top: var(--mobile-nav-height, 140px) !important;
+height: calc(
+100dvh - var(--mobile-nav-height, 140px)
+) !important;
+z-index: 10000 !important;
+}
+}
+@media (min-width: 992px) {
+#ios-top-cover {
+display: none !important;
+}
+}
+</style>
+<style id="gallery-lightbox-zindex-fix">
+#lightbox{z-index:20000;}.lb-close,.lb-prev,.lb-next{z-index:20002;}
+</style></head>
+  <body class="">
+    <div id="ios-top-cover" aria-hidden="true"></div>
+    <!-- ─── NAV ──────────────────────────────────────────────────────── -->
+    <nav id="main-nav" style="background: rgba(7, 9, 10, 0.72);" class="">
+      <a href="index.html" class="nav-logo">
+        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_800w.png" alt="3NA Fitness Studio" class="w-[140px] md:w-[145px] lg:w-[160px] h-auto object-contain cursor-pointer" onclick="window.location.href='index.html'" role="button">
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html" data-i18n="nav.home" class="">Inicio</a>
+        <a href="sobre-nosotros.html" data-i18n="nav.about" class="">
+          Sobre nosotros
+        </a>
+        <a href="entrenadores.html" data-i18n="nav.trainers" class="">
+          Entrenadores
+        </a>
+        <a href="index.html#experiencia" data-i18n="nav.experience" class="">
+          Experiencia
+        </a>
+        <a href="galeria.html" data-i18n="nav.gallery" class="active">Galería</a>
+        <a href="index.html#membresias" data-i18n="nav.memberships" class="">
+          Membresías
+        </a>
+      </div>
+
+      <div class="nav-cta">
+        <div class="lang-toggle" role="group" data-i18n-aria-label="lang.ariaLabel" aria-label="Change language">
+          <button type="button" class="lang-btn active" data-lang="es">
+            ES
+          </button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="index.html#cta" class="btn-nav" data-i18n="nav.contact">
+          Contactar
+        </a>
+      </div>
+
+      <button type="button" class="hamburger" id="hamburger" data-i18n-aria-label="nav.menuAria" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="index.html" class="mobile-link" data-i18n="nav.home">Inicio</a>
+      <a href="sobre-nosotros.html" class="mobile-link" data-i18n="nav.about">
+        Sobre nosotros
+      </a>
+      <a href="entrenadores.html" class="mobile-link" data-i18n="nav.trainers">
+        Entrenadores
+      </a>
+      <a href="index.html#experiencia" class="mobile-link" data-i18n="nav.experience">
+        Experiencia
+      </a>
+      <a href="galeria.html" class="mobile-link active" data-i18n="nav.gallery">
+        Galería
+      </a>
+      <a href="index.html#membresias" class="mobile-link" data-i18n="nav.memberships">
+        Membresías
+      </a>
+      <a href="index.html#cta" class="mobile-link" data-i18n="nav.contact">
+        Contactar
+      </a>
+      <div class="mobile-lang-row">
+        <div class="lang-toggle" role="group" data-i18n-aria-label="lang.ariaLabel" aria-label="Cambiar idioma">
+          <button type="button" class="lang-btn active" data-lang="es">
+            ES
+          </button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+    <header class="hero-gallery">
+      <div class="hero-mesh"></div>
+      <div class="hero-grid-lines"></div>
+      <div class="hero-gallery-content">
+        <span class="section-label" data-i18n="hero.label">GALERÍA 3NA</span>
+        <h1 class="hero-headline">
+          <span class="block text-metallic" data-i18n="hero.titleLine1">
+            MOMENTOS QUE DEFINEN
+          </span>
+          <span class="block text-neon" data-i18n="hero.titleLine2">
+            NUESTRA ENERGÍA
+          </span>
+        </h1>
+        <p class="text-[0.9rem] text-[var(--muted)] font-light max-w-[500px] mx-auto leading-relaxed" data-i18n="hero.description">
+          Explora el espacio, los equipos y la comunidad que forman parte de la
+          experiencia 3NA Fitness Studio.
+        </p>
+      </div>
+    </header>
+
+    <!-- ─── FILTERS ──────────────────────────────────────────────────── -->
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all" data-i18n="filter.all">
+        Todas
+      </button>
+      <button class="filter-btn" data-filter="gym" data-i18n="filter.gym">
+        El gimnasio
+      </button>
+      <button class="filter-btn" data-filter="equipment" data-i18n="filter.equipment">
+        Equipos
+      </button>
+      <button class="filter-btn" data-filter="training" data-i18n="filter.training">
+        Entrenamientos
+      </button>
+      <button class="filter-btn" data-filter="community" data-i18n="filter.community">
+        Comunidad
+      </button>
+      <button class="filter-btn" data-filter="video" data-i18n="filter.videos">
+        Videos
+      </button>
+    </div>
+
+    <!-- ─── MAIN GALLERY ─────────────────────────────────────────────── -->
+    <main class="gallery-container">
+      <!-- Featured Row -->
+      <div class="featured-row cursor-pointer" data-category="gym" data-type="image" onclick="openLightbox(this)">
+        <span class="featured-badge" data-i18n="gallery.featured">
+          DESTACADO
+        </span>
+        <!-- Replace with official wide featured photo -->
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&amp;q=80&amp;auto=format&amp;fit=crop" alt="3NA Fitness Studio Interior" class="">
+        <div class="item-overlay">
+          <span class="item-label text-lg">3NA Fitness Studio</span>
+          <div class="item-icon">
+            <iconify-icon icon="lucide:maximize"></iconify-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- Masonry Grid -->
+      <div class="masonry-grid" id="gallery-grid">
+        <!-- Replace with official equipment photo (Tall) -->
+        <div class="grid-item row-span-2 gallery-item" data-category="equipment" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Free weights area">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img1">
+              Pesas libres
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official training photo -->
+        <div class="grid-item gallery-item" data-category="training" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Functional training">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img2">
+              Zona funcional
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official video -->
+        <div class="grid-item col-span-2 gallery-item" data-category="video" data-type="video" data-src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/61acbeb6-90fc-415a-b778-fad8709a64db_video.mp4" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Studio tour video">
+          <div class="video-indicator">
+            <iconify-icon icon="lucide:play"></iconify-icon>
+          </div>
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img3">
+              Dentro de 3NA
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:play"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official gym interior photo -->
+        <div class="grid-item col-span-2 gallery-item" data-category="gym" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1000&amp;q=80&amp;auto=format&amp;fit=crop" alt="Cardio equipment" class="">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img4">
+              Espacio de cardio
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official community photo -->
+        <div class="grid-item gallery-item" data-category="community" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Community training">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img5">Comunidad</span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official training photo (Tall) -->
+        <div class="grid-item row-span-2 gallery-item" data-category="training" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Strength training">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img6">Fuerza</span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official equipment photo -->
+        <div class="grid-item gallery-item" data-category="equipment" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Mobility area" loading="lazy">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img7">
+              Área de movilidad
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official community photo -->
+        <div class="grid-item gallery-item" data-category="community" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Stretching space" loading="lazy" class="">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img8">
+              Estiramiento
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official trainer photo -->
+        <div class="grid-item gallery-item" data-category="training" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Trainer assisting" loading="lazy">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img9">
+              Entrenamiento personal
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hidden items for Load More -->
+        <!-- Replace with official gym photo -->
+        <div class="grid-item col-span-2 hidden-item gallery-item loadable" data-category="gym" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=1000&amp;q=80&amp;auto=format&amp;fit=crop" alt="Gym overview" loading="lazy">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img10">
+              Vista del gimnasio
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official training photo -->
+        <div class="grid-item hidden-item gallery-item loadable" data-category="training" data-type="image" onclick="openLightbox(this)">
+          <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Heavy lifting" loading="lazy">
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img11">
+              Levantamiento
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:maximize"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Replace with official video -->
+        <div class="grid-item hidden-item gallery-item loadable" data-category="video" data-type="video" data-src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/61acbeb6-90fc-415a-b778-fad8709a64db_video.mp4" onclick="openLightbox(this)">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="Workout highlight" loading="lazy">
+          <div class="video-indicator">
+            <iconify-icon icon="lucide:play"></iconify-icon>
+          </div>
+          <div class="item-overlay">
+            <span class="item-label" data-i18n="gallery.img12">
+              Momento de entrenamiento
+            </span>
+            <div class="item-icon">
+              <iconify-icon icon="lucide:play"></iconify-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="load-more-container" id="load-more-btn">
+        <button class="btn-ghost" onclick="loadMore()">
+          <iconify-icon icon="lucide:plus"></iconify-icon>
+          <span data-i18n="gallery.loadMore">Ver más contenido</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- ─── LIGHTBOX ─────────────────────────────────────────────────── -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Image gallery view" style="z-index: 20000;">
+      <div class="lb-content" id="lb-content-box">
+        <button class="lb-close" id="lb-close" aria-label="Close lightbox">
+          <iconify-icon icon="lucide:x"></iconify-icon>
+        </button>
+        <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous image">
+          <iconify-icon icon="lucide:chevron-left"></iconify-icon>
+        </button>
+
+        <!-- Media Container -->
+        <div id="lb-media-container" class="w-full flex justify-center items-center">
+          <img id="lb-image" src="" alt="Gallery Image" class="hidden">
+          <video id="lb-video" src="" controls="" playsinline="" preload="metadata" class="hidden w-full max-w-[1000px] rounded-lg"></video>
+        </div>
+
+        <button class="lb-nav lb-next" id="lb-next" aria-label="Next image">
+          <iconify-icon icon="lucide:chevron-right"></iconify-icon>
+        </button>
+        <div class="lb-info">
+          <span id="lb-counter">1 / 12</span>
+          <span id="lb-caption" class="text-white font-medium ml-4"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CTA ──────────────────────────────────────────────────────── -->
+    <section id="cta" class="">
+      <span class="section-label" data-i18n="cta.label">
+        VIVE LA EXPERIENCIA
+      </span>
+      <h2 class="hero-headline">
+        <span class="block text-metallic" data-i18n="cta.headingLine1">
+          TU PRÓXIMO MOMENTO
+        </span>
+        <span class="block text-neon" data-i18n="cta.headingLine2">
+          PUEDE COMENZAR AQUÍ
+        </span>
+      </h2>
+      <p data-i18n="cta.description" class="">
+        Conoce 3NA Fitness Studio y forma parte de una comunidad enfocada en
+        progresar.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="entrenadores.html" class="btn-primary">
+          <span data-i18n="cta.btnTrainers">Conoce a los entrenadores</span>
+          <iconify-icon icon="lucide:users"></iconify-icon>
+        </a>
+        <a href="https://wa.me/17877838020" class="btn-ghost" target="_blank" rel="noopener">
+          <iconify-icon icon="lucide:message-circle"></iconify-icon>
+          <span data-i18n="cta.btnWhatsapp" class="">
+            Escríbenos por WhatsApp
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ───────────────────────────────────────────────────── -->
+    <footer class="">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="block mb-[18px]">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/8499c063-6662-49fe-87c3-46c11fe0f8e0_800w.png" alt="3NA Fitness Studio" class="md:w-[240px] md:mx-0 w-[200px] h-auto object-contain mr-auto ml-auto -translate-x-16 cursor-pointer" onclick="window.location.href='index.html'" role="button">
+          </a>
+          <p data-i18n="footer.description">
+            Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu
+            ADN en un espacio diseñado para tu progreso.
+          </p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/3nafitnesstudio/" target="_blank" rel="noopener" aria-label="Instagram" class="">
+              <iconify-icon icon="lucide:instagram"></iconify-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.linksTitle" class="">Enlaces</h4>
+          <ul class="">
+            <li class="">
+              <a href="index.html" data-i18n="nav.home" class="">Inicio</a>
+            </li>
+            <li class="">
+              <a href="index.html#experiencia" data-i18n="nav.experience" class="">
+                Experiencia
+              </a>
+            </li>
+            <li class="">
+              <a href="galeria.html" data-i18n="nav.gallery" class="">Galería</a>
+            </li>
+            <li class="">
+              <a href="index.html#membresias" data-i18n="nav.memberships" class="">
+                Membresías
+              </a>
+            </li>
+            <li class="">
+              <a href="index.html#cta" data-i18n="nav.contact" class="">
+                Contactar
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.contactTitle">Contacto</h4>
+          <ul class="">
+            <li><a href="tel:+17877838020">+1 787-783-8020</a></li>
+            <li>
+              <a href="mailto:info@3nafitness.com">info@3nafitness.com</a>
+            </li>
+            <li class="">
+              <span class="">1563 Ave. Américo Miranda, San Juan, PR</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy" id="footer-copy">
+          © 2026 3NA Fitness Studio. Todos los derechos reservados.
+        </span>
+        <a href="#terms" class="text-[0.75rem] text-[var(--muted)] hover:text-[var(--teal-light)] transition-colors border border-[var(--border-s)] hover:bg-[rgba(45,212,191,0.06)] px-3 py-1.5 rounded-md" data-i18n="footer.terms">
+          Términos de servicio
+        </a>
+        <span class="footer-credit">
+          <span data-i18n="footer.credit">Página web diseñada por</span>
+          <a href="#" target="_blank" rel="noopener">SC Web Studios</a>
+        </span>
+      </div>
+    </footer>
+
+    <!-- ─── SCRIPTS ──────────────────────────────────────────────────── -->
+    <script>
+      // ── Translations ─────────────────────────────────────────────
+      const translations = {
+        es: {
+          'lang.ariaLabel': 'Cambiar idioma',
+          'nav.home': 'Inicio',
+          'nav.about': 'Sobre nosotros',
+          'nav.trainers': 'Entrenadores',
+          'nav.experience': 'Experiencia',
+          'nav.gallery': 'Galería',
+          'nav.memberships': 'Membresías',
+          'nav.contact': 'Contactar',
+          'nav.menuAria': 'Abrir menú',
+          'hero.label': 'GALERÍA 3NA',
+          'hero.titleLine1': 'MOMENTOS QUE DEFINEN',
+          'hero.titleLine2': 'NUESTRA ENERGÍA',
+          'hero.description': 'Explora el espacio, los equipos y la comunidad que forman parte de la experiencia 3NA Fitness Studio.',
+          'filter.all': 'Todas',
+          'filter.gym': 'El gimnasio',
+          'filter.equipment': 'Equipos',
+          'filter.training': 'Entrenamientos',
+          'filter.community': 'Comunidad',
+          'filter.videos': 'Videos',
+          'gallery.featured': 'DESTACADO',
+          'gallery.loadMore': 'Ver más contenido',
+          'gallery.img1': 'Pesas libres',
+          'gallery.img2': 'Zona funcional',
+          'gallery.img3': 'Dentro de 3NA',
+          'gallery.img4': 'Espacio de cardio',
+          'gallery.img5': 'Comunidad',
+          'gallery.img6': 'Fuerza',
+          'gallery.img7': 'Área de movilidad',
+          'gallery.img8': 'Estiramiento',
+          'gallery.img9': 'Entrenamiento personal',
+          'gallery.img10': 'Vista del gimnasio',
+          'gallery.img11': 'Levantamiento',
+          'gallery.img12': 'Momento de entrenamiento',
+          'cta.label': 'VIVE LA EXPERIENCIA',
+          'cta.headingLine1': 'TU PRÓXIMO MOMENTO',
+          'cta.headingLine2': 'PUEDE COMENZAR AQUÍ',
+          'cta.description': 'Conoce 3NA Fitness Studio y forma parte de una comunidad enfocada en progresar.',
+          'cta.btnTrainers': 'Conoce a los entrenadores',
+          'cta.btnWhatsapp': 'Escríbenos por WhatsApp',
+          'footer.description': 'Un estudio de fitness premium en San Juan, Puerto Rico. Entrena tu ADN en un espacio diseñado para tu progreso.',
+          'footer.linksTitle': 'Enlaces',
+          'footer.contactTitle': 'Contacto',
+          'footer.credit': 'Página web diseñada por',
+          'footer.copyright': '© {year} 3NA Fitness Studio. Todos los derechos reservados.',
+          'footer.terms': 'Términos de servicio'
+        },
+        en: {
+          'lang.ariaLabel': 'Change language',
+          'nav.home': 'Home',
+          'nav.about': 'About Us',
+          'nav.trainers': 'Trainers',
+          'nav.experience': 'Experience',
+          'nav.gallery': 'Gallery',
+          'nav.memberships': 'Memberships',
+          'nav.contact': 'Contact',
+          'nav.menuAria': 'Open menu',
+          'hero.label': '3NA GALLERY',
+          'hero.titleLine1': 'MOMENTS THAT DEFINE',
+          'hero.titleLine2': 'OUR ENERGY',
+          'hero.description': 'Explore the space, equipment, and community that make up the 3NA Fitness Studio experience.',
+          'filter.all': 'All',
+          'filter.gym': 'The Gym',
+          'filter.equipment': 'Equipment',
+          'filter.training': 'Training',
+          'filter.community': 'Community',
+          'filter.videos': 'Videos',
+          'gallery.featured': 'FEATURED',
+          'gallery.loadMore': 'View more',
+          'gallery.img1': 'Free Weights',
+          'gallery.img2': 'Functional Zone',
+          'gallery.img3': 'Inside 3NA',
+          'gallery.img4': 'Cardio Space',
+          'gallery.img5': 'Community',
+          'gallery.img6': 'Strength',
+          'gallery.img7': 'Mobility Area',
+          'gallery.img8': 'Stretching',
+          'gallery.img9': 'Personal Training',
+          'gallery.img10': 'Gym Overview',
+          'gallery.img11': 'Heavy Lifting',
+          'gallery.img12': 'Workout Highlight',
+          'cta.label': 'EXPERIENCE 3NA',
+          'cta.headingLine1': 'YOUR NEXT MOMENT',
+          'cta.headingLine2': 'CAN START HERE',
+          'cta.description': 'Discover 3NA Fitness Studio and become part of a community focused on progress.',
+          'cta.btnTrainers': 'Meet the trainers',
+          'cta.btnWhatsapp': 'Message us on WhatsApp',
+          'footer.description': 'A premium fitness studio in San Juan, Puerto Rico. Train your DNA in a space designed for your progress.',
+          'footer.linksTitle': 'Links',
+          'footer.contactTitle': 'Contact',
+          'footer.credit': 'Website designed by',
+          'footer.copyright': '© {year} 3NA Fitness Studio. All rights reserved.',
+          'footer.terms': 'Terms of Service'
+        }
+      };
+
+      let currentLang = 'es';
+
+      function setLanguage(language) {
+        const t = translations[language];
+        if (!t) return;
+        currentLang = language;
+        const year = new Date().getFullYear();
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (t[key]) el.textContent = t[key].replace('{year}', year);
+        });
+
+        const copyEl = document.getElementById('footer-copy');
+        if (copyEl) copyEl.textContent = t['footer.copyright'].replace('{year}', year);
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === language);
+        });
+
+        document.documentElement.lang = language;
+        try { localStorage.setItem('3na-language', language); } catch (e) {}
+
+        updateLightboxInfo();
+      }
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+      });
+
+      (function () {
+        let saved = null;
+        try { saved = localStorage.getItem('3na-language'); } catch (e) {}
+        setLanguage(saved === 'en' ? 'en' : 'es');
+      })();
+
+      // ── Mobile hamburger ─────────────────────────────────────────
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      function syncMobileMenuPosition() {
+        const mainNav = document.getElementById('main-nav');
+
+        if (!mainNav || !mobileMenu || window.innerWidth >= 992) return;
+
+        const navHeight = Math.ceil(mainNav.getBoundingClientRect().height);
+
+        document.documentElement.style.setProperty(
+          '--mobile-nav-height',
+          navHeight + 'px'
+        );
+      }
+
+      requestAnimationFrame(syncMobileMenuPosition);
+      window.addEventListener('load', syncMobileMenuPosition);
+      window.addEventListener('resize', syncMobileMenuPosition);
+
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function () {
+          syncMobileMenuPosition();
+
+          const isOpening = !mobileMenu.classList.contains('open');
+
+          hamburger.classList.toggle('open', isOpening);
+          mobileMenu.classList.toggle('open', isOpening);
+          document.body.classList.toggle('mobile-menu-open', isOpening);
+
+          hamburger.setAttribute('aria-expanded', String(isOpening));
+          mobileMenu.setAttribute('aria-hidden', String(!isOpening));
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(function (link) {
+          link.addEventListener('click', function () {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            document.body.classList.remove('mobile-menu-open');
+
+            hamburger.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+          });
+        });
+
+        window.addEventListener('keydown', function (event) {
+          if (event.key !== 'Escape') return;
+
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          document.body.classList.remove('mobile-menu-open');
+
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+        });
+      }
+
+      // ── Nav scroll ───────────────────────────────────────────────
+      const mainNav = document.getElementById('main-nav');
+      window.addEventListener('scroll', () => {
+        if (mainNav) {
+          mainNav.style.background = window.scrollY > 60 ? 'rgba(7,9,10,0.92)' : 'rgba(7,9,10,0.72)';
+        }
+      }, { passive: true });
+
+      // ── Gallery Logic (Filters & Load More) ──────────────────────
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const allItems = Array.from(document.querySelectorAll('.gallery-item, .featured-row'));
+      const loadMoreBtn = document.getElementById('load-more-btn');
+      let currentFilter = 'all';
+      let loadedAll = false;
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.getAttribute('data-filter');
+
+          allItems.forEach(item => {
+            const match = currentFilter === 'all' || item.getAttribute('data-category') === currentFilter;
+            if (match) {
+              if (currentFilter !== 'all') {
+                item.style.display = '';
+                item.classList.remove('hidden-item');
+                item.classList.add('fade-in');
+              } else {
+                if (!item.classList.contains('loadable') || loadedAll) {
+                  item.style.display = '';
+                  item.classList.remove('hidden-item');
+                  item.classList.add('fade-in');
+                } else {
+                  item.classList.add('hidden-item');
+                }
+              }
+            } else {
+              item.style.display = 'none';
+            }
+          });
+
+          if (currentFilter === 'all' && !loadedAll) {
+            loadMoreBtn.style.display = 'block';
+          } else {
+            loadMoreBtn.style.display = 'none';
+          }
+          buildLightboxArray();
+        });
+      });
+
+      window.loadMore = function() {
+        loadedAll = true;
+        const loadableItems = document.querySelectorAll('.loadable');
+        loadableItems.forEach(item => {
+          item.classList.remove('hidden-item');
+          item.classList.add('fade-in');
+        });
+        loadMoreBtn.style.display = 'none';
+        buildLightboxArray();
+      };
+
+      // ── Lightbox Logic ───────────────────────────────────────────
+      const lightbox = document.getElementById('lightbox');
+      const lbImage = document.getElementById('lb-image');
+      const lbVideo = document.getElementById('lb-video');
+      const lbCounter = document.getElementById('lb-counter');
+      const lbCaption = document.getElementById('lb-caption');
+      const lbClose = document.getElementById('lb-close');
+      const lbPrev = document.getElementById('lb-prev');
+      const lbNext = document.getElementById('lb-next');
+
+      let lightboxItems = [];
+      let currentIndex = 0;
+
+      function buildLightboxArray() {
+        lightboxItems = allItems.filter(item =>
+          item.style.display !== 'none' && !item.classList.contains('hidden-item')
+        );
+      }
+
+      window.openLightbox = function(element) {
+        buildLightboxArray();
+        currentIndex = lightboxItems.indexOf(element);
+        if (currentIndex === -1) currentIndex = 0;
+        updateLightboxView();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      };
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        stopVideo();
+      }
+
+      function stopVideo() {
+        lbVideo.pause();
+        lbVideo.currentTime = 0;
+      }
+
+      function updateLightboxView() {
+        stopVideo();
+        const item = lightboxItems[currentIndex];
+        if (!item) return;
+
+        const type = item.getAttribute('data-type');
+        const labelEl = item.querySelector('.item-label');
+
+        lbCounter.textContent = `${currentIndex + 1} / ${lightboxItems.length}`;
+        lbCaption.textContent = labelEl ? labelEl.textContent : '';
+        if(labelEl && labelEl.hasAttribute('data-i18n')) {
+             lbCaption.setAttribute('data-i18n', labelEl.getAttribute('data-i18n'));
+        } else {
+             lbCaption.removeAttribute('data-i18n');
+        }
+
+        if (type === 'video') {
+          const vidSrc = item.getAttribute('data-src');
+          lbImage.classList.add('hidden');
+          lbVideo.src = vidSrc;
+          lbVideo.classList.remove('hidden');
+          lbVideo.play().catch(e => console.log('Autoplay prevented'));
+        } else {
+          const imgSrc = item.querySelector('img').src;
+          lbVideo.classList.add('hidden');
+          lbImage.src = imgSrc;
+          lbImage.classList.remove('hidden');
+        }
+      }
+
+      function updateLightboxInfo() {
+        const captionElement = document.getElementById('lb-caption');
+
+        if (!captionElement) return;
+
+        if (captionElement.hasAttribute('data-i18n')) {
+          const key = captionElement.getAttribute('data-i18n');
+
+          if (
+            translations[currentLang] &&
+            translations[currentLang][key]
+          ) {
+            captionElement.textContent = translations[currentLang][key];
+          }
+        }
+      }
+
+      function nextImage() {
+        if (lightboxItems.length === 0) return;
+        currentIndex = (currentIndex + 1) % lightboxItems.length;
+        updateLightboxView();
+      }
+
+      function prevImage() {
+        if (lightboxItems.length === 0) return;
+        currentIndex = (currentIndex - 1 + lightboxItems.length) % lightboxItems.length;
+        updateLightboxView();
+      }
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbNext.addEventListener('click', nextImage);
+      lbPrev.addEventListener('click', prevImage);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || e.target.id === 'lb-content-box' || e.target.id === 'lb-media-container') {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+      });
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      lightbox.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, {passive: true});
+
+      lightbox.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, {passive: true});
+
+      function handleSwipe() {
+        const threshold = 50;
+        if (touchEndX < touchStartX - threshold) nextImage();
+        if (touchEndX > touchStartX + threshold) prevImage();
+      }
+
+      buildLightboxArray();
+    </script>
+    <!-- Page blur transition -->
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+            const root = document.documentElement;
+            const body = document.body;
+
+            const prefersReducedMotion = window.matchMedia(
+              '(prefers-reduced-motion: reduce)'
+            ).matches;
+
+            const transitionDuration = prefersReducedMotion ? 0 : 400;
+
+            function showPage() {
+              root.classList.remove('page-exit');
+              body.classList.remove('page-exit');
+
+              requestAnimationFrame(function () {
+                root.classList.add('page-ready');
+                body.classList.add('page-ready');
+              });
+            }
+
+            showPage();
+
+            document.querySelectorAll('a[href]').forEach(function (link) {
+              link.addEventListener('click', function (event) {
+                if (
+                  event.defaultPrevented ||
+                  event.button !== 0 ||
+                  event.metaKey ||
+                  event.ctrlKey ||
+                  event.shiftKey ||
+                  event.altKey ||
+                  link.hasAttribute('download')
+                ) {
+                  return;
+                }
+
+                const url = new URL(link.href, window.location.href);
+
+                const isSameSite =
+                  url.origin === window.location.origin;
+
+                const isNewTab =
+                  link.target && link.target !== '_self';
+
+                const isSamePageHash =
+                  url.pathname === window.location.pathname &&
+                  url.search === window.location.search &&
+                  Boolean(url.hash);
+
+                if (!isSameSite || isNewTab || isSamePageHash) {
+                  return;
+                }
+
+                event.preventDefault();
+
+                root.classList.remove('page-ready');
+                body.classList.remove('page-ready');
+
+                root.classList.add('page-exit');
+                body.classList.add('page-exit');
+
+                window.setTimeout(function () {
+                  window.location.href = url.href;
+                }, transitionDuration);
+              });
+            });
+
+            window.addEventListener('pageshow', function () {
+              showPage();
+            });
+          });
+    </script>
+  
+</body></html>
