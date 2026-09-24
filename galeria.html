@@ -812,7 +812,19 @@ display: none !important;
 </style>
 <style id="gallery-lightbox-zindex-fix">
 #lightbox{z-index:20000;}.lb-close,.lb-prev,.lb-next{z-index:20002;}
-</style></head>
+</style>
+<script>document.addEventListener('click', event => {
+const anchor = event.target.closest?.('a[href]');
+const href = anchor?.getAttribute('href');
+if (event.defaultPrevented || !href?.startsWith('#')) return;
+event.preventDefault();
+if (href === '#') { window.scrollTo({top: 0, behavior: 'smooth'}); return; }
+try {
+const id = decodeURIComponent(href.slice(1));
+const target = document.getElementById(id) || document.getElementsByName(id)[0];
+target?.scrollIntoView({behavior: 'smooth', block: 'start'});
+} catch { /* Invalid fragments remain in the saved document. */ }
+});</script></head>
   <body class="">
     <div id="ios-top-cover" aria-hidden="true"></div>
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->

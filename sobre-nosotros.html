@@ -871,7 +871,19 @@ transform: none !important;
 transition-duration: 0.01ms !important;
 }
 }
-</style></head>
+</style>
+<script>document.addEventListener('click', event => {
+const anchor = event.target.closest?.('a[href]');
+const href = anchor?.getAttribute('href');
+if (event.defaultPrevented || !href?.startsWith('#')) return;
+event.preventDefault();
+if (href === '#') { window.scrollTo({top: 0, behavior: 'smooth'}); return; }
+try {
+const id = decodeURIComponent(href.slice(1));
+const target = document.getElementById(id) || document.getElementsByName(id)[0];
+target?.scrollIntoView({behavior: 'smooth', block: 'start'});
+} catch { /* Invalid fragments remain in the saved document. */ }
+});</script></head>
   <body class="">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
 

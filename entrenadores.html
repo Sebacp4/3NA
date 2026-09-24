@@ -1891,7 +1891,19 @@ object-position: center top !important;
 <link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap">
 <style id="all-fonts-style-font-bricolage">
 .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
-</style></head>
+</style>
+<script>document.addEventListener('click', event => {
+const anchor = event.target.closest?.('a[href]');
+const href = anchor?.getAttribute('href');
+if (event.defaultPrevented || !href?.startsWith('#')) return;
+event.preventDefault();
+if (href === '#') { window.scrollTo({top: 0, behavior: 'smooth'}); return; }
+try {
+const id = decodeURIComponent(href.slice(1));
+const target = document.getElementById(id) || document.getElementsByName(id)[0];
+target?.scrollIntoView({behavior: 'smooth', block: 'start'});
+} catch { /* Invalid fragments remain in the saved document. */ }
+});</script></head>
   <body class="page-ready">
     <!-- ─── NAV ──────────────────────────────────────────────────────── -->
     <nav id="main-nav" class="" style="background: rgba(7, 9, 10, 0.92);">
